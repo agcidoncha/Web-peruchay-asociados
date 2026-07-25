@@ -81,7 +81,8 @@ Una perspectiva joven incorporada al trabajo del equipo, participando y aprendie
 
 - 4-5 preguntas breves, tipo: "¿Necesito cambiar de asesoría para trabajar con vosotros?", "¿Trabajáis con autónomos y pymes?", "¿Cómo es el proceso de incorporación?"
 - Objetivo: captar búsquedas de cola larga y optar a resultados destacados de Google (featured snippets).
-- *Pendiente: hay un borrador de 5 preguntas y respuestas generado en Claude Design (cómo empieza la colaboración, si trabajáis con cualquier sector, si hay que contratar las 3 áreas, cómo es la comunicación, dónde estáis ubicados) — sin confirmar por el usuario todavía.*
+- Contenido real (37 preguntas en 5 bloques) ya redactado en `faqs-pya.md`.
+- *Pendiente: decidir si el FAQ completo se reparte por página (Bloque 1 en Home, Bloque 2 en Control de Gestión, Bloque 3 en Contabilidad y Fiscalidad, Bloques 4-5 en Digitalización y Automatización) o se deja todo en la Home — propuesta hecha, sin confirmar.*
 
 ### 6. Diagnóstico rápido *(nuevo — propuesta)*
 
