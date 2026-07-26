@@ -61,7 +61,7 @@ Sin repetir el listado de áreas.
 
 ### 4. Equipo
 
-Sección de la Home (no es una página aparte). 4 tarjetas breves (nombre/rol + 2-3 líneas de trayectoria):
+Sección de la Home (no es una página aparte). 4 tarjetas breves (nombre/rol + 2-3 líneas de trayectoria), puramente informativas — no enlazan a ningún sitio (no hay página de Equipo ni páginas individuales por persona).
 
 **Perfil 1 — Bebo**
 FP&A y Control de Gestión · Perfil senior
