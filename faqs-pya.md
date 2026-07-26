@@ -245,3 +245,53 @@ Sí. Estudiamos cómo incorporar herramientas de Inteligencia Artificial que apo
 ### ¿Qué diferencia hay entre digitalizar y automatizar un proceso?
 
 Digitalizar consiste en convertir procesos manuales en procesos digitales. Automatizar supone un paso más: conseguir que determinadas tareas se ejecuten automáticamente, reduciendo tiempos, errores y trabajo repetitivo.
+
+---
+
+## Bloque 6 – Colaboración y Contratación *(destinado a la Home)*
+
+### ¿Cómo puedo solicitar un presupuesto?
+
+Puedes ponerte en contacto con nosotros a través del formulario de la web, por teléfono o por correo electrónico. Tras una primera conversación para conocer tu empresa y tus necesidades, prepararemos una propuesta adaptada a tu proyecto.
+
+---
+
+### ¿La primera reunión tiene algún coste?
+
+La primera toma de contacto tiene como objetivo conocer tu empresa, entender tus necesidades y valorar cómo podemos ayudarte. A partir de esa información te indicaremos la solución que mejor se adapte a tu situación.
+
+---
+
+### ¿Cómo calculáis el precio de vuestros servicios?
+
+Cada empresa es diferente. El presupuesto se elabora teniendo en cuenta el alcance del proyecto, el volumen de trabajo, la complejidad de los servicios contratados y el nivel de acompañamiento requerido. Nuestro objetivo es ofrecer una propuesta personalizada y ajustada a las necesidades reales de cada cliente.
+
+---
+
+### ¿Trabajáis con cuotas mensuales o por proyectos?
+
+Depende del servicio contratado. Algunos servicios, como la contabilidad, la fiscalidad o el control de gestión, suelen prestarse de forma periódica mediante una cuota mensual. Otros, como la digitalización o la automatización de procesos, se desarrollan habitualmente como proyectos con un alcance previamente definido.
+
+---
+
+### ¿Puedo ampliar los servicios más adelante?
+
+Sí. Muchos clientes comienzan contratando un único servicio y, a medida que evolucionan sus necesidades, incorporan nuevas áreas de colaboración. Nuestra forma de trabajar es flexible y se adapta al crecimiento de cada empresa.
+
+---
+
+### ¿Firmáis acuerdos de confidencialidad?
+
+Sí. Toda la información de nuestros clientes se trata con absoluta confidencialidad. Cuando el proyecto lo requiere, podemos formalizar un acuerdo de confidencialidad (NDA) para ofrecer mayores garantías y proteger la información compartida durante la colaboración.
+
+---
+
+### ¿Cómo es el proceso de incorporación como cliente?
+
+Comenzamos con una reunión inicial para conocer la empresa, sus necesidades y objetivos. A continuación, definimos el alcance del servicio, presentamos una propuesta personalizada y, una vez aceptada, planificamos la puesta en marcha del proyecto para que la incorporación sea ágil y ordenada.
+
+---
+
+### ¿Existe un periodo mínimo de permanencia?
+
+Depende del tipo de servicio contratado. Los servicios recurrentes se regulan mediante las condiciones acordadas con cada cliente, mientras que los proyectos tienen una duración vinculada a los objetivos y al alcance definidos en la propuesta.

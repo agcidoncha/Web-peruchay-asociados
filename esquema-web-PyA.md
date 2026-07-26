@@ -81,8 +81,8 @@ Una perspectiva joven incorporada al trabajo del equipo, participando y aprendie
 
 - 4-5 preguntas breves, tipo: "¿Necesito cambiar de asesoría para trabajar con vosotros?", "¿Trabajáis con autónomos y pymes?", "¿Cómo es el proceso de incorporación?"
 - Objetivo: captar búsquedas de cola larga y optar a resultados destacados de Google (featured snippets).
-- Contenido real (37 preguntas en 5 bloques) ya redactado en `faqs-pya.md`.
-- *Pendiente: decidir si el FAQ completo se reparte por página (Bloque 1 en Home, Bloque 2 en Control de Gestión, Bloque 3 en Contabilidad y Fiscalidad, Bloques 4-5 en Digitalización y Automatización) o se deja todo en la Home — propuesta hecha, sin confirmar.*
+- Contenido real (45 preguntas en 6 bloques) ya redactado en `faqs-pya.md`. El Bloque 6 (Colaboración y Contratación) está marcado explícitamente como destinado a la Home.
+- *Pendiente: decidir si el resto se reparte por página (Bloque 1 en Home, Bloque 2 en Control de Gestión, Bloque 3 en Contabilidad y Fiscalidad, Bloques 4-5 en Digitalización y Automatización) o se deja todo en la Home — propuesta hecha, sin confirmar.*
 
 ### 6. Diagnóstico rápido *(nuevo — propuesta)*
 
