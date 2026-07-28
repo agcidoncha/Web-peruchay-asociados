@@ -18,7 +18,8 @@ Documento único de referencia: estructura, contenido y estado de cada página. 
 ## Reglas de contenido
 
 - No repetir la misma idea o frase en más de un punto de la web.
-- Se eliminan de esta versión: Constitución de empresas, Soporte empresarial integral, Imagen corporativa (servicios de la web actual que ya no aplican).
+- Se eliminan de esta versión: Constitución de empresas, Soporte empresarial integral (servicios de la web actual que ya no aplican).
+- Imagen corporativa **se reincorpora**, pero no como servicio independiente: pasa a ser un servicio dentro de Digitalización y Automatización ("Identidad visual e imagen corporativa"), encaja con el perfil de diseño/desarrollo de esa área.
 
 ---
 
@@ -139,13 +140,17 @@ _Pendiente: redactar el hero propio (título + descripción breve). Definir la l
 
 ### C. Digitalización y Automatización
 
-Sin contenido reaprovechable de la web actual (es un área nueva). Contenido definido a partir del perfil de 20 años de experiencia en diseño y desarrollo:
+Sin contenido reaprovechable de la web actual (es un área nueva). Contenido definido a partir del perfil de 20 años de experiencia en diseño y desarrollo. Contenido ampliado en Claude Design a 7 servicios (detalle completo en `diseno-claude-design/uploads/digitalizacion-y-automatizacion.md`):
 
 - Hero: "Automatización de procesos con inteligencia artificial, desarrollo web y diseño visual, con el respaldo de más de 20 años de experiencia en diseño y desarrollo."
 - Servicios:
-  - **Automatización de procesos con IA** — Identificamos tareas repetitivas en tu empresa y las automatizamos con herramientas de inteligencia artificial, para liberar tiempo del equipo hacia lo que realmente aporta valor.
-  - **Desarrollo web** — Diseño y desarrollo de páginas web a medida, adaptadas a las necesidades de cada negocio.
-  - **Diseño visual y maquetación** — Diseño gráfico, identidad visual y maquetación de materiales digitales e impresos.
+  - **Identidad visual e imagen corporativa** — logotipo, paleta, tipografías, manuales de marca, materiales digitales e impresos. *(reincorporado — ver Reglas de contenido)*
+  - **Diseño y desarrollo web** — webs corporativas, landing pages, portales privados, catálogos/tiendas online, intranets, rediseños, SEO técnico.
+  - **Herramientas y desarrollos a medida** — paneles de control, aplicaciones internas, formularios, generadores de informes, calculadoras y configuradores.
+  - **Digitalización de procesos** — gestión documental, facturación, seguimiento de clientes, centralización de datos.
+  - **Automatización de tareas y flujos de trabajo** — introducción de datos, generación de documentos, notificaciones, actualización de registros.
+  - **Inteligencia artificial aplicada a la empresa** — clasificación de documentos, asistentes internos, generación asistida de materiales.
+  - **Integraciones entre herramientas** — CRM, facturación, correo, hojas de cálculo, APIs.
 - Bloque de credibilidad: "Más de 20 años de experiencia como diseñador, desarrollador y maquetador" (dato exclusivo de esta página, igual que el "+30 años" en Contabilidad y Fiscalidad).
 
 **Herramienta interactiva — Estimador de horas ahorradas con automatización** _(nuevo — propuesta)_
