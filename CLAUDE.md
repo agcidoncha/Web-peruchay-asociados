@@ -4,7 +4,7 @@ Rediseño de peruchayasociados.com. Antes de tocar contenido o código, revisar:
 
 - `esquema-web-PyA.md` — documento único de referencia: estructura, contenido y estado de cada página
 - `paleta-colores-pya.md` — colores exactos de la marca
-- `faqs-pya.md` — banco completo de preguntas frecuentes
+- `faqs-pya-categorizadas.md` — banco completo de preguntas frecuentes, ya organizado por página/categoría
 
 No dupliques contenido de estos documentos en otro sitio (ni en este archivo, ni en uno nuevo) — si algo cambia, se actualiza en el documento correspondiente.
 

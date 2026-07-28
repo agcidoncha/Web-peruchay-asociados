@@ -82,8 +82,8 @@ _Pendiente: formato de presentación de las tarjetas (tamaño, si se amplían al
 
 - 4-5 preguntas breves, tipo: "¿Necesito cambiar de asesoría para trabajar con vosotros?", "¿Trabajáis con autónomos y pymes?", "¿Cómo es el proceso de incorporación?"
 - Objetivo: captar búsquedas de cola larga y optar a resultados destacados de Google (featured snippets).
-- Contenido real (45 preguntas en 6 bloques) ya redactado en `faqs-pya.md`. El Bloque 6 (Colaboración y Contratación) está marcado explícitamente como destinado a la Home.
-- _Pendiente: decidir si el resto se reparte por página (Bloque 1 en Home, Bloque 2 en Finanzas y Control, Bloque 3 en Contabilidad y Fiscalidad, Bloques 4-5 en Digitalización y Automatización) o se deja todo en la Home — propuesta hecha, sin confirmar._
+- Contenido real (47 preguntas) ya redactado y organizado por página/categoría en `faqs-pya-categorizadas.md` — documento oficial de FAQ, sustituye a `faqs-pya.md`.
+- Reparto por página confirmado: Home (Información general + Colaboración y contratación), Finanzas y Control (Control de gestión + Planificación financiera), Contabilidad y Fiscalidad (Contabilidad + Fiscalidad), Digitalización y Automatización (Digitalización + Automatización + Inteligencia Artificial). Ya implementado en las 4 páginas de Claude Design.
 
 ### 6. Diagnóstico rápido _(nuevo — propuesta)_
 
