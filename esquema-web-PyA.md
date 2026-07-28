@@ -212,5 +212,5 @@ El SEO es un objetivo importantísimo del proyecto, no un añadido opcional. Cua
 - Campos exactos del formulario de contacto
 - Teléfono de contacto para el NAP del footer (ya tenemos la ubicación: Villaviciosa de Odón, Madrid)
 - Estilo visual definitivo (en curso en Claude Design)
-- Coherencia del nombre "Finanzas y Control": actualizar el archivo `Control de Gestion.dc.html`, el footer y cualquier título de sección que aún diga "Control de Gestión" en Claude Design (detectado sin actualizar todavía)
+- ~~Coherencia del nombre "Finanzas y Control" en el footer y la etiqueta del hero~~ — corregido en las 4 páginas de Claude Design. Queda sin cambiar el nombre del archivo (`Control de Gestion.dc.html`) y la URL, a propósito.
 - Decidir si la URL `/control-de-gestion` cambia a `/finanzas-y-control` o se mantiene por SEO (de momento se mantiene)
