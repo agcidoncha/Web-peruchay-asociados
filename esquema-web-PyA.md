@@ -9,7 +9,7 @@ Documento único de referencia: estructura, contenido y estado de cada página. 
    - Áreas
    - Equipo
    - Contacto
-2. **Control de Gestión** (`/control-de-gestion`) — página independiente
+2. **Finanzas y Control** *(antes "Control de Gestión")* (`/control-de-gestion` — URL sin cambiar de momento) — página independiente
 3. **Contabilidad y Fiscalidad** (`/contabilidad-y-fiscalidad`) — página independiente
 4. **Digitalización y Automatización** (`/digitalizacion-y-automatizacion`) — página independiente
 
@@ -32,14 +32,14 @@ Documento único de referencia: estructura, contenido y estado de cada página. 
 
 Muy visual, breve, sin bloques de texto largos. Único lugar donde aparece el resumen de las 3 áreas en una frase — no se repite en ningún otro punto de la home.
 
-*Pendiente: si lleva foto (equipo/oficina) o se queda solo tipográfico; si se añade algún dato de refuerzo (ej. "+30 años") — no decidido.*
+_Pendiente: si lleva foto (equipo/oficina) o se queda solo tipográfico; si se añade algún dato de refuerzo (ej. "+30 años") — no decidido._
 
 ### 2. Áreas
 
 - Título: **¿En qué podemos ayudarte?**
 - Tres tarjetas/bloques, solo titular + una frase + enlace "Conocer el área" (nada de detalle de servicios aquí — el detalle vive en la página de cada área):
 
-  **Control de Gestión y planificación y análisis financiero**
+  **Finanzas y Control**
   Información, análisis y control para conocer mejor el negocio y tomar decisiones con fundamento.
   → Conocer el área
 
@@ -64,32 +64,32 @@ Sin repetir el listado de áreas.
 Sección de la Home (no es una página aparte). 4 tarjetas breves (nombre/rol + 2-3 líneas de trayectoria), puramente informativas — no enlazan a ningún sitio (no hay página de Equipo ni páginas individuales por persona).
 
 **Perfil 1 — Bebo**
-FP&A y Control de Gestión · Perfil senior
+FP&A y Finanzas y Control · Perfil senior *(texto redundante tras el cambio de nombre del área — revisar redacción)*
 Experiencia en planificación financiera, presupuestos y forecast, análisis de costes y rentabilidad, reporting, KPIs y control de desviaciones, trabajando tanto en entornos multinacionales como en pymes.
 
-**Perfil 2 — Sobrina** *(nombre real pendiente de confirmar — "Sobrina" es una nota interna, no un nombre para publicar)*
+**Perfil 2 — Sobrina** _(nombre real pendiente de confirmar — "Sobrina" es una nota interna, no un nombre para publicar)_
 Talento joven · Perfil universitario en formación
 Una perspectiva joven incorporada al trabajo del equipo, participando y aprendiendo en diferentes áreas según las necesidades de cada proyecto. Aporta una mirada actual, familiaridad con nuevos entornos y herramientas y una visión complementaria a la experiencia de los perfiles senior.
 
-**Perfil 3** — *posible candidato: el perfil de 20 años de diseño/desarrollo/maquetación de Digitalización y Automatización (ver página C) — pendiente de confirmar si es la misma persona.*
+**Perfil 3** — _posible candidato: el perfil de 20 años de diseño/desarrollo/maquetación de Digitalización y Automatización (ver página C) — pendiente de confirmar si es la misma persona._
 
-**Perfil 4** — *pendiente, sin datos.*
+**Perfil 4** — _pendiente, sin datos._
 
-*Pendiente: formato de presentación de las tarjetas (tamaño, si se amplían al hacer clic, etc.) — quedó sin decidir en una conversación anterior.*
+_Pendiente: formato de presentación de las tarjetas (tamaño, si se amplían al hacer clic, etc.) — quedó sin decidir en una conversación anterior._
 
-### 5. Preguntas frecuentes (FAQ) *(nuevo — propuesta SEO)*
+### 5. Preguntas frecuentes (FAQ) _(nuevo — propuesta SEO)_
 
 - 4-5 preguntas breves, tipo: "¿Necesito cambiar de asesoría para trabajar con vosotros?", "¿Trabajáis con autónomos y pymes?", "¿Cómo es el proceso de incorporación?"
 - Objetivo: captar búsquedas de cola larga y optar a resultados destacados de Google (featured snippets).
 - Contenido real (45 preguntas en 6 bloques) ya redactado en `faqs-pya.md`. El Bloque 6 (Colaboración y Contratación) está marcado explícitamente como destinado a la Home.
-- *Pendiente: decidir si el resto se reparte por página (Bloque 1 en Home, Bloque 2 en Control de Gestión, Bloque 3 en Contabilidad y Fiscalidad, Bloques 4-5 en Digitalización y Automatización) o se deja todo en la Home — propuesta hecha, sin confirmar.*
+- _Pendiente: decidir si el resto se reparte por página (Bloque 1 en Home, Bloque 2 en Finanzas y Control, Bloque 3 en Contabilidad y Fiscalidad, Bloques 4-5 en Digitalización y Automatización) o se deja todo en la Home — propuesta hecha, sin confirmar._
 
-### 6. Diagnóstico rápido *(nuevo — propuesta)*
+### 6. Diagnóstico rápido _(nuevo — propuesta)_
 
-- Mini-cuestionario de 4-5 preguntas ("¿Qué necesita tu empresa?") que recomienda al final qué área contratar (Control de Gestión / Contabilidad y Fiscalidad / Digitalización), o una combinación.
+- Mini-cuestionario de 4-5 preguntas ("¿Qué necesita tu empresa?") que recomienda al final qué área contratar (Finanzas y Control / Contabilidad y Fiscalidad / Digitalización), o una combinación.
 - Termina enlazando al formulario de Contacto, idealmente con la recomendación ya indicada para que el usuario no parta de cero.
 - Objetivo: responder de forma interactiva a la duda ya recogida en el FAQ ("¿puedo contratar solo un área?") y mejorar la conversión frente a un formulario en frío.
-- *Pendiente: redactar las preguntas y la lógica de recomendación con el usuario.*
+- _Pendiente: redactar las preguntas y la lógica de recomendación con el usuario._
 
 ### 7. Contacto
 
@@ -97,7 +97,7 @@ Una perspectiva joven incorporada al trabajo del equipo, participando y aprendie
 - Texto de acompañamiento "Lo que recibirá" (Claridad / Rigor / Acción), trasladado aquí desde la web actual — una sola vez, no se repite en las páginas de área.
 - El formulario envía los datos a un backend propio en PHP + MariaDB (hosting ya contratado), no a un servicio externo.
 
-### Footer *(transversal, no es una sección de scroll)*
+### Footer _(transversal, no es una sección de scroll)_
 
 - Datos NAP visibles (Nombre, Villaviciosa de Odón - Madrid, teléfono) — no solo dentro del formulario de contacto. Clave para SEO local y coherencia con la ficha de Google Business Profile.
 - Tagline de LinkedIn "Tu visión, nuestra dedicación."
@@ -109,7 +109,7 @@ Una perspectiva joven incorporada al trabajo del equipo, participando y aprendie
 
 Cada una necesita, como mínimo: hero propio (título + breve descripción), detalle de servicios concretos, CTA final hacia Contacto, enlace de vuelta a la principal.
 
-### A. Control de Gestión
+### A. Finanzas y Control *(antes "Control de Gestión")*
 
 Contenido reaprovechado de la web actual (servicio "Control de gestión" + el bloque "Cómo trabajamos", que encaja de forma natural con esta área):
 
@@ -118,10 +118,10 @@ Contenido reaprovechado de la web actual (servicio "Control de gestión" + el bl
 - Información organizada para decisiones rápidas y fundamentadas
 - Método de trabajo en 3 pasos: recogemos datos → reportamos claro → recomendamos acción (único lugar de la web donde aparece este método paso a paso)
 
-**Herramienta interactiva — Calculadora de punto de equilibrio** *(nuevo — propuesta)*
+**Herramienta interactiva — Calculadora de punto de equilibrio** _(nuevo — propuesta)_
 Con costes fijos, coste variable por unidad y precio de venta, calcula cuántas ventas necesita hacer la empresa para empezar a ganar dinero. Cifra orientativa, no un cálculo exacto. Conecta con "análisis de costes y rentabilidad" (perfil de Bebo) e "informes claros sobre ingresos, costes y márgenes". Termina con CTA a Contacto.
 
-*Pendiente: redactar el hero propio (título + descripción breve) — puede usar como base la frase ya definida en la sección Áreas de la Home. Definir la lógica exacta de la calculadora.*
+_Pendiente: redactar el hero propio (título + descripción breve) — puede usar como base la frase ya definida en la sección Áreas de la Home. Definir la lógica exacta de la calculadora._
 
 ### B. Contabilidad y Fiscalidad
 
@@ -132,10 +132,10 @@ Fusión de los dos servicios actuales "Contabilidad completa" y "Gestión fiscal
 - Recomendaciones de optimización fiscal
 - Mención del respaldo de +30 años de experiencia profesional (dato que solo aparece aquí, no en la home ni en las otras áreas)
 
-**Herramienta interactiva — Simulador de ahorro fiscal / "autónomo vs sociedad"** *(nuevo — propuesta)*
+**Herramienta interactiva — Simulador de ahorro fiscal / "autónomo vs sociedad"** _(nuevo — propuesta)_
 Cifra orientativa (no un cálculo exacto) sobre qué opción sale mejor fiscalmente. Es una de las búsquedas más habituales en Google ("calculadora autónomo sociedad"), así que además de captar contacto ayuda al SEO de esta página. Termina con CTA a Contacto.
 
-*Pendiente: redactar el hero propio (título + descripción breve). Definir la lógica exacta del simulador.*
+_Pendiente: redactar el hero propio (título + descripción breve). Definir la lógica exacta del simulador._
 
 ### C. Digitalización y Automatización
 
@@ -148,12 +148,12 @@ Sin contenido reaprovechable de la web actual (es un área nueva). Contenido def
   - **Diseño visual y maquetación** — Diseño gráfico, identidad visual y maquetación de materiales digitales e impresos.
 - Bloque de credibilidad: "Más de 20 años de experiencia como diseñador, desarrollador y maquetador" (dato exclusivo de esta página, igual que el "+30 años" en Contabilidad y Fiscalidad).
 
-**Herramienta interactiva — Estimador de horas ahorradas con automatización** *(nuevo — propuesta)*
+**Herramienta interactiva — Estimador de horas ahorradas con automatización** _(nuevo — propuesta)_
 Preguntas tipo "¿cuántas horas al mes dedicáis a tareas repetitivas (facturación manual, introducir datos, etc.)?" y da una cifra orientativa de horas y coste ahorrable automatizando. Sirve de gancho de entrada para la página que menos contenido propio tenía. Termina con CTA a Contacto.
 
-*Pendiente: definir la lógica exacta del estimador.*
+_Pendiente: definir la lógica exacta del estimador._
 
-*Pendiente de confirmar: si el perfil de 20 años es uno de los 2 perfiles de equipo aún vacíos (3 o 4) — si es así, se reutiliza ahí con nombre y foto (ver sección 4. Equipo).*
+_Pendiente de confirmar: si el perfil de 20 años es uno de los 2 perfiles de equipo aún vacíos (3 o 4) — si es así, se reutiliza ahí con nombre y foto (ver sección 4. Equipo)._
 
 ---
 
@@ -198,12 +198,14 @@ El SEO es un objetivo importantísimo del proyecto, no un añadido opcional. Cua
 - Nombre real del Perfil 2 (actualmente solo "Sobrina", nota interna)
 - Formato de las tarjetas de Equipo (tamaño, expandibles, etc.)
 - Hero de la Home: foto sí/no, datos de refuerzo sí/no
-- Hero propio de Control de Gestión y de Contabilidad y Fiscalidad (título + descripción breve)
+- Hero propio de Finanzas y Control y de Contabilidad y Fiscalidad (título + descripción breve)
 - Preguntas y respuestas definitivas del FAQ (hay borrador sin confirmar)
 - Preguntas y lógica de recomendación del Diagnóstico rápido (Home)
-- Lógica de la Calculadora de punto de equilibrio (Control de Gestión)
+- Lógica de la Calculadora de punto de equilibrio (Finanzas y Control)
 - Lógica del Simulador de ahorro fiscal / autónomo vs sociedad (Contabilidad y Fiscalidad)
 - Lógica del Estimador de horas ahorradas con automatización (Digitalización y Automatización)
 - Campos exactos del formulario de contacto
 - Teléfono de contacto para el NAP del footer (ya tenemos la ubicación: Villaviciosa de Odón, Madrid)
 - Estilo visual definitivo (en curso en Claude Design)
+- Coherencia del nombre "Finanzas y Control": actualizar el archivo `Control de Gestion.dc.html`, el footer y cualquier título de sección que aún diga "Control de Gestión" en Claude Design (detectado sin actualizar todavía)
+- Decidir si la URL `/control-de-gestion` cambia a `/finanzas-y-control` o se mantiene por SEO (de momento se mantiene)

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/classical-7b19a4ef-b24a-456a-8119-11bc83c08b9b/styles.css">
+  <script src="_ds/classical-7b19a4ef-b24a-456a-8119-11bc83c08b9b/_ds_bundle.js"></script>
+  <script src="./image-slot.js"></script>
+  <style>
+    :root{
+      --color-bg:#faf9fe;
+      --color-surface:#f6f7fb;
+      --color-text:#1f2937;
+      --color-accent:#70698a;
+      --color-divider: color-mix(in srgb, #1f2937 12%, transparent);
+      --color-accent-100:#f4f2fa;
+      --color-accent-200:#ece5f8;
+      --color-accent-300:#c4b5fd;
+      --color-accent-600:#5c5570;
+      --color-accent-700:#4a4460;
+      --color-accent-800:#3d3752;
+      --color-accent-900:#2a2636;
+    }
+    html{ scroll-behavior:smooth; }
+    body{ margin:0; }
+    a{ color:var(--color-accent); }
+    .hover-lift{ transition:transform 0.2s ease,box-shadow 0.2s ease; }
+    .hover-lift:hover{ transform:translateY(-3px); box-shadow:var(--shadow-lg); }
+  </style>
+</helmet>
+
+<div style="background:var(--color-bg);min-height:100vh;">
+
+  <header style="position:sticky;top:0;z-index:40;background:#ffffff;border-bottom:1px solid var(--color-divider);">
+    <div style="max-width:1180px;margin:0 auto;padding:0 32px;height:76px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:24px;">
+      <a href="Home.dc.html" style="flex:0 0 auto;display:flex;align-items:center;grid-column:1;"><img src="uploads/logo-simplificado.png" alt="Perucha y Asociados" style="height:40px;width:auto;display:block;"></img></a>
+
+      <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+        <nav style="display:flex;align-items:center;justify-content:center;gap:40px;grid-column:2;">
+          <a href="Control de Gestion.dc.html" style="flex:0 0 auto;font-family:var(--font-body);font-size:15px;font-weight:600;color:var(--color-accent-800);border-bottom:2px solid var(--color-accent);text-decoration:none;padding-bottom:6px;white-space:nowrap;">Finanzas y Control</a>
+          <a href="Contabilidad y Fiscalidad.dc.html" style="flex:0 0 auto;font-family:var(--font-body);font-size:15px;color:var(--color-text);text-decoration:none;white-space:nowrap;" style-hover="color:var(--color-accent);">Contabilidad y Fiscalidad</a>
+          <a href="Digitalizacion y Automatizacion.dc.html" style="flex:0 0 auto;font-family:var(--font-body);font-size:15px;color:var(--color-text);text-decoration:none;white-space:nowrap;" style-hover="color:var(--color-accent);">Digitalización y Automatización</a>
+
+        </nav>
+      </sc-if>
+
+      <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+        <div style="grid-column:3;display:flex;align-items:center;gap:10px;">
+          <button onClick="{{ toggleSims }}" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;box-sizing:border-box;height:44px;font-family:var(--font-body);font-weight:600;font-size:14px;line-height:1;color:var(--color-accent-900);background:var(--color-accent-200);border:none;border-radius:999px;padding:0 20px;cursor:pointer;white-space:nowrap;" style-hover="background:var(--color-accent-300);">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"></line><circle cx="9" cy="6" r="2" fill="currentColor" stroke="none"></circle><line x1="4" y1="12" x2="20" y2="12"></line><circle cx="16" cy="12" r="2" fill="currentColor" stroke="none"></circle><line x1="4" y1="18" x2="20" y2="18"></line><circle cx="11" cy="18" r="2" fill="currentColor" stroke="none"></circle></svg>
+            Simuladores
+          </button>
+          <a href="Home.dc.html#contacto" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;box-sizing:border-box;height:44px;font-family:var(--font-body);font-weight:600;font-size:14px;line-height:1;color:#ffffff;background:var(--color-accent-900);border-radius:999px;padding:0 22px;text-decoration:none;white-space:nowrap;" style-hover="background:var(--color-accent-800);">
+            Hablemos
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"></path><path d="M7 7h10v10"></path></svg>
+          </a>
+        </div>
+      </sc-if>
+
+<sc-if value="{{ simsOpen }}" hint-placeholder-val="{{ false }}">
+        <div onClick="{{ closeSims }}" style="position:fixed;inset:0;background:rgba(31,41,55,0.55);z-index:100;display:flex;align-items:center;justify-content:center;padding:24px;">
+          <div onClick="{{ stopSims }}" style="background:#ffffff;border-radius:24px;border:1px solid var(--color-divider);box-shadow:var(--shadow-lg);max-width:520px;width:100%;padding:36px;">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:20px;">
+              <div>
+                <p style="margin:0 0 6px;font-family:var(--font-body);font-weight:600;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-accent-700);">Simuladores</p>
+                <h3 style="margin:0;font-family:var(--font-heading);font-weight:600;font-size:28px;color:var(--color-text);">Elige una herramienta</h3>
+              </div>
+              <button onClick="{{ closeSims }}" aria-label="Cerrar" style="flex:0 0 auto;width:40px;height:40px;border-radius:12px;border:1px solid var(--color-divider);background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--color-text);">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18"></path><path d="M6 6l12 12"></path></svg>
+              </button>
+            </div>
+            <div style="border-top:1px solid var(--color-divider);margin:22px 0 0;display:flex;flex-direction:column;">
+        <a href="Home.dc.html#contacto" onClick="{{ closeSims }}" style="display:flex;align-items:center;gap:16px;padding:18px 0;border-bottom:1px solid var(--color-divider);text-decoration:none;color:inherit;">
+          <span style="width:42px;height:42px;border-radius:12px;background:var(--color-accent-100);display:flex;align-items:center;justify-content:center;flex:0 0 auto;color:var(--color-accent-800);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12l3-3"></path><path d="M4.6 15A9 9 0 1 1 19.4 15"></path><path d="M12 5v2"></path></svg></span>
+          <span>
+            <span style="display:block;font-family:var(--font-heading);font-weight:600;font-size:16px;color:var(--color-text);">Diagnóstico rápido</span>
+            <span style="display:block;font-family:var(--font-body);font-size:13px;color:#6b7280;margin-top:2px;">Evalúa en minutos el estado general de tu empresa.</span>
+          </span>
+        </a>
+        <a href="Control de Gestion.dc.html#simulador" onClick="{{ closeSims }}" style="display:flex;align-items:center;gap:16px;padding:18px 0;border-bottom:1px solid var(--color-divider);text-decoration:none;color:inherit;">
+          <span style="width:42px;height:42px;border-radius:12px;background:var(--color-accent-100);display:flex;align-items:center;justify-content:center;flex:0 0 auto;color:var(--color-accent-800);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"></path><path d="M5 7l-2 5a3 3 0 0 0 6 0z"></path><path d="M19 7l-2 5a3 3 0 0 0 6 0z"></path><path d="M5 7h14"></path><path d="M8 21h8"></path></svg></span>
+          <span>
+            <span style="display:block;font-family:var(--font-heading);font-weight:600;font-size:16px;color:var(--color-text);">Punto de equilibrio</span>
+            <span style="display:block;font-family:var(--font-body);font-size:13px;color:#6b7280;margin-top:2px;">Calcula cuántas ventas necesitas para cubrir tus costes.</span>
+          </span>
+        </a>
+        <a href="Contabilidad y Fiscalidad.dc.html#simulador" onClick="{{ closeSims }}" style="display:flex;align-items:center;gap:16px;padding:18px 0;border-bottom:1px solid var(--color-divider);text-decoration:none;color:inherit;">
+          <span style="width:42px;height:42px;border-radius:12px;background:var(--color-accent-100);display:flex;align-items:center;justify-content:center;flex:0 0 auto;color:var(--color-accent-800);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"></circle><path d="M2 20c0-3.3 3-5 7-5s7 1.7 7 5"></path><path d="M17 8a3 3 0 1 1 0 6"></path><path d="M22 20c0-2.7-1.8-4.2-4-4.7"></path></svg></span>
+          <span>
+            <span style="display:block;font-family:var(--font-heading);font-weight:600;font-size:16px;color:var(--color-text);">Autónomo vs. sociedad</span>
+            <span style="display:block;font-family:var(--font-body);font-size:13px;color:#6b7280;margin-top:2px;">Compara la carga fiscal de cada forma de trabajar.</span>
+          </span>
+        </a>
+        <a href="Digitalizacion y Automatizacion.dc.html#simulador" onClick="{{ closeSims }}" style="display:flex;align-items:center;gap:16px;padding:18px 0;text-decoration:none;color:inherit;">
+          <span style="width:42px;height:42px;border-radius:12px;background:var(--color-accent-100);display:flex;align-items:center;justify-content:center;flex:0 0 auto;color:var(--color-accent-800);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span>
+          <span>
+            <span style="display:block;font-family:var(--font-heading);font-weight:600;font-size:16px;color:var(--color-text);">Horas ahorradas</span>
+            <span style="display:block;font-family:var(--font-body);font-size:13px;color:#6b7280;margin-top:2px;">Estima el tiempo que puedes recuperar automatizando.</span>
+          </span>
+        </a>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ toggleMobile }}" aria-label="Abrir menú" style="grid-column:3;background:transparent;border:1px solid var(--color-divider);border-radius:var(--radius-md);width:44px;height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;flex:0 0 auto;">
+          <sc-if value="{{ mobileOpen }}" hint-placeholder-val="{{ false }}">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-text)" stroke-width="1.6" stroke-linecap="round"><path d="M5 5l14 14"></path><path d="M19 5L5 19"></path></svg>
+          </sc-if>
+          <sc-if value="{{ mobileClosed }}" hint-placeholder-val="{{ true }}">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-text)" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg>
+          </sc-if>
+        </button>
+      </sc-if>
+    </div>
+
+    <sc-if value="{{ showMobileMenu }}" hint-placeholder-val="{{ false }}">
+      <div style="border-top:1px solid var(--color-divider);background:#ffffff;padding:24px 32px 32px;display:flex;flex-direction:column;gap:4px;">
+        <a href="Control de Gestion.dc.html" onClick="{{ closeMobile }}" style="font-family:var(--font-body);font-size:17px;font-weight:600;color:var(--color-accent-800);text-decoration:none;padding:12px 0;border-bottom:1px solid var(--color-divider);">Finanzas y Control</a>
+        <a href="Contabilidad y Fiscalidad.dc.html" onClick="{{ closeMobile }}" style="font-family:var(--font-body);font-size:17px;color:var(--color-text);text-decoration:none;padding:12px 0;border-bottom:1px solid var(--color-divider);" style-hover="color:var(--color-accent);">Contabilidad y Fiscalidad</a>
+        <a href="Digitalizacion y Automatizacion.dc.html" onClick="{{ closeMobile }}" style="font-family:var(--font-body);font-size:17px;color:var(--color-text);text-decoration:none;padding:12px 0;border-bottom:1px solid var(--color-divider);" style-hover="color:var(--color-accent);">Digitalización y Automatización</a>
+        <p style="margin:18px 0 2px;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:#9ca3af;">Simuladores</p>
+        <a href="Home.dc.html#contacto" onClick="{{ closeMobile }}" style="font-family:var(--font-body);font-size:16px;color:var(--color-text);text-decoration:none;padding:10px 0;display:flex;align-items:center;gap:10px;" style-hover="color:var(--color-accent);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12l3-3"></path><path d="M4.6 15A9 9 0 1 1 19.4 15"></path><path d="M12 5v2"></path></svg>Diagnóstico rápido</a>
+        <a href="Control de Gestion.dc.html#simulador" onClick="{{ closeMobile }}" style="font-family:var(--font-body);font-size:16px;color:var(--color-text);text-decoration:none;padding:10px 0;display:flex;align-items:center;gap:10px;" style-hover="color:var(--color-accent);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"></path><path d="M5 7l-2 5a3 3 0 0 0 6 0z"></path><path d="M19 7l-2 5a3 3 0 0 0 6 0z"></path><path d="M5 7h14"></path><path d="M8 21h8"></path></svg>Punto de equilibrio</a>
+        <a href="Contabilidad y Fiscalidad.dc.html#simulador" onClick="{{ closeMobile }}" style="font-family:var(--font-body);font-size:16px;color:var(--color-text);text-decoration:none;padding:10px 0;display:flex;align-items:center;gap:10px;" style-hover="color:var(--color-accent);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"></circle><path d="M2 20c0-3.3 3-5 7-5s7 1.7 7 5"></path><path d="M17 8a3 3 0 1 1 0 6"></path><path d="M22 20c0-2.7-1.8-4.2-4-4.7"></path></svg>Autónomo vs. sociedad</a>
+        <a href="Digitalizacion y Automatizacion.dc.html#simulador" onClick="{{ closeMobile }}" style="font-family:var(--font-body);font-size:16px;color:var(--color-text);text-decoration:none;padding:10px 0;display:flex;align-items:center;gap:10px;" style-hover="color:var(--color-accent);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>Horas ahorradas</a>
+        <a href="Home.dc.html#contacto" onClick="{{ closeMobile }}" class="btn btn-primary" style="font-size:15px;padding:12px 24px;margin-top:16px;justify-content:center;">Hablemos</a>
+      </div>
+    </sc-if>
+  </header>
+
+  <section style="background:var(--color-accent-100);">
+    <div style="max-width:1180px;margin:0 auto;padding:88px 32px;display:grid;grid-template-columns:1.05fr 0.95fr;gap:64px;align-items:center;">
+      <div>
+        <span style="display:inline-block;font-family:var(--font-body);font-size:13.5px;color:var(--color-accent-800);background:#ffffff;padding:7px 16px;border-radius:8px;margin:0 0 26px;">Control de Gestión, Planificación y Análisis Financiero</span>
+        <h1 style="font-family:var(--font-heading);font-weight:700;font-size:clamp(34px,4vw,50px);line-height:1.12;letter-spacing:-0.01em;color:var(--color-accent-900);margin:0 0 10px;">Finanzas y Control, para decidir con seguridad</h1>
+        <p style="margin:0 0 26px;font-size:13px;color:var(--color-accent-700);font-style:italic;">Título provisional — pendiente de confirmar.</p>
+        <p style="font-family:var(--font-body);font-size:18px;line-height:1.65;color:#4a4460;max-width:520px;margin:0 0 12px;">Transformamos la información económica de tu empresa en una herramienta útil para planificar, controlar la rentabilidad y tomar decisiones con mayor confianza.</p>
+        <p style="margin:0 0 36px;font-size:13px;color:var(--color-accent-700);font-style:italic;">Descripción provisional — pendiente de confirmar.</p>
+        <a href="Home.dc.html#contacto" style="display:inline-flex;align-items:center;gap:16px;font-family:var(--font-body);font-weight:600;font-size:15px;color:#ffffff;background:var(--color-accent-900);padding:6px 6px 6px 24px;border-radius:999px;text-decoration:none;transition:transform 0.2s ease,box-shadow 0.2s ease;" style-hover="background:var(--color-accent-800);transform:translateY(-3px);box-shadow:var(--shadow-lg);">
+          Hablemos
+          <span style="width:38px;height:38px;border-radius:50%;background:#ffffff;display:flex;align-items:center;justify-content:center;color:var(--color-accent-900);flex:0 0 auto;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"></path><path d="M7 7h10v10"></path></svg>
+          </span>
+        </a>
+      </div>
+      <div class="plate" style="aspect-ratio:4/5;width:100%;">
+        <image-slot id="cg-hero-photo" shape="rect" placeholder="Foto: análisis financiero / reunión" style="width:100%;height:100%;"></image-slot>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:100px 32px;background:var(--color-bg);">
+    <div style="max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:64px;">
+
+      <h2 style="font-family:var(--font-heading);font-weight:600;font-size:clamp(28px,3.2vw,36px);text-align:center;color:var(--color-text);margin:0;">Los tres pilares de una gestión financiera eficaz.</h2>
+
+      <div style="display:grid;grid-template-columns:0.5fr 1fr;gap:48px;">
+        <h2 style="font-family:var(--font-heading);font-weight:600;font-size:30px;color:var(--color-text);margin:0;">Control de Gestión</h2>
+        <div>
+          <p style="font-family:var(--font-body);font-size:17px;line-height:1.7;color:#4a4460;margin:0 0 16px;">El control de gestión convierte los datos económicos de la empresa en información útil para facilitar la toma de decisiones. Permite conocer la evolución del negocio, identificar desviaciones y actuar con mayor rapidez.</p>
+          <p style="font-family:var(--font-body);font-size:17px;line-height:1.7;color:#4a4460;margin:0;">Ayuda a conocer mejor la rentabilidad del negocio, controlar costes, identificar oportunidades de mejora y tomar decisiones basadas en datos objetivos.</p>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:0.5fr 1fr;gap:48px;border-top:1px solid var(--color-divider);padding-top:56px;">
+        <h2 style="font-family:var(--font-heading);font-weight:600;font-size:30px;color:var(--color-text);margin:0;">Planificación financiera</h2>
+        <div>
+          <p style="font-family:var(--font-body);font-size:17px;line-height:1.7;color:#4a4460;margin:0 0 16px;">La planificación financiera permite anticipar la evolución económica de la empresa mediante presupuestos, previsiones y distintos escenarios. Su objetivo es facilitar la toma de decisiones y reducir la incertidumbre.</p>
+          <p style="font-family:var(--font-body);font-size:17px;line-height:1.7;color:#4a4460;margin:0;">El presupuesto marca los objetivos; el forecast adapta esas previsiones conforme evoluciona el negocio, permitiendo reaccionar antes ante posibles desviaciones.</p>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:0.5fr 1fr;gap:48px;border-top:1px solid var(--color-divider);padding-top:56px;">
+        <h2 style="font-family:var(--font-heading);font-weight:600;font-size:30px;color:var(--color-text);margin:0;">Análisis financiero</h2>
+        <div>
+          <p style="font-family:var(--font-body);font-size:17px;line-height:1.7;color:#4a4460;margin:0 0 16px;">El análisis financiero evalúa la rentabilidad, la liquidez, la solvencia y la capacidad de crecimiento para conocer la situación económica de la empresa.</p>
+          <p style="font-family:var(--font-body);font-size:17px;line-height:1.7;color:#4a4460;margin:0;">También permite valorar inversiones, analizar la generación de caja y comprobar si el crecimiento del negocio es sostenible.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section style="padding:110px 32px;background:var(--color-surface);">
+    <div style="max-width:960px;margin:0 auto;">
+      <h2 style="font-family:var(--font-heading);font-weight:600;font-size:clamp(30px,3.6vw,42px);text-align:center;color:var(--color-text);margin:0 0 56px;">Cómo trabajamos</h2>
+      <div style="display:flex;flex-direction:column;">
+        <div style="display:flex;gap:24px;padding:24px 0;border-bottom:1px solid var(--color-divider);">
+          <span style="font-family:var(--font-heading);font-weight:600;font-size:24px;color:var(--color-accent-300);flex:0 0 44px;">01</span>
+          <div><h4 style="margin:0 0 6px;font-family:var(--font-heading);font-weight:600;font-size:19px;color:var(--color-text);">Recogemos los datos</h4><p style="margin:0;font-size:15px;color:#6b7280;line-height:1.6;">Organizamos la información económica necesaria para conocer la situación real de la empresa.</p></div>
+        </div>
+        <div style="display:flex;gap:24px;padding:24px 0;border-bottom:1px solid var(--color-divider);">
+          <span style="font-family:var(--font-heading);font-weight:600;font-size:24px;color:var(--color-accent-300);flex:0 0 44px;">02</span>
+          <div><h4 style="margin:0 0 6px;font-family:var(--font-heading);font-weight:600;font-size:19px;color:var(--color-text);">Reportamos con claridad</h4><p style="margin:0;font-size:15px;color:#6b7280;line-height:1.6;">Elaboramos informes comprensibles sobre ingresos, costes, márgenes, rentabilidad, previsiones e indicadores clave.</p></div>
+        </div>
+        <div style="display:flex;gap:24px;padding:24px 0;">
+          <span style="font-family:var(--font-heading);font-weight:600;font-size:24px;color:var(--color-accent-300);flex:0 0 44px;">03</span>
+          <div><h4 style="margin:0 0 6px;font-family:var(--font-heading);font-weight:600;font-size:19px;color:var(--color-text);">Recomendamos acciones</h4><p style="margin:0;font-size:15px;color:#6b7280;line-height:1.6;">Identificamos desviaciones, áreas de mejora y medidas concretas que faciliten la toma de decisiones.</p></div>
+        </div>
+      </div>
+      <p style="margin:0;text-align:center;font-size:15px;color:#6b7280;line-height:1.6;max-width:720px;margin-left:auto;margin-right:auto;">Adaptamos el nivel de análisis a las necesidades reales de cada empresa. Desde informes periódicos hasta apoyo puntual para decisiones concretas, sin necesidad de incorporar un controller en plantilla.</p>
+    </div>
+  </section>
+
+  <section id="simulador" style="padding:80px 32px;background:var(--color-bg);">
+    <div style="max-width:900px;margin:0 auto;background:var(--color-accent-100);border:1px dashed var(--color-accent-300);border-radius:24px;padding:44px 40px;text-align:center;">
+      <span style="display:inline-block;font-family:var(--font-body);font-size:12.5px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--color-accent-700);background:#ffffff;padding:6px 14px;border-radius:999px;margin:0 0 20px;">Propuesta pendiente de confirmar</span>
+      <h3 style="margin:0 0 14px;font-family:var(--font-heading);font-weight:600;font-size:26px;color:var(--color-text);">Calculadora de punto de equilibrio</h3>
+      <p style="margin:0 auto 20px;font-size:15px;line-height:1.65;color:#6b7280;max-width:620px;">A partir de costes fijos, coste variable por unidad y precio de venta, ofrecería de forma orientativa cuántas ventas necesita tu empresa para empezar a obtener beneficios. Lógica, campos y textos legales pendientes de definir.</p>
+      <a href="Home.dc.html#contacto" style="display:inline-flex;align-items:center;font-family:var(--font-heading);font-weight:600;font-size:14px;color:var(--color-accent-800);border:1.5px solid var(--color-accent-800);border-radius:999px;padding:10px 22px;text-decoration:none;" style-hover="background:var(--color-accent-800);color:#ffffff;">Hablar sobre tus números</a>
+    </div>
+  </section>
+
+  <section id="faq" style="padding:110px 32px;background:var(--color-surface);">
+    <div style="max-width:1180px;margin:0 auto;display:grid;grid-template-columns:0.85fr 1.15fr;gap:40px;align-items:start;">
+
+      <div>
+        <p style="display:flex;align-items:center;gap:8px;font-family:var(--font-heading);font-weight:600;font-size:14px;letter-spacing:0.04em;color:var(--color-accent-700);margin:0 0 20px;">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--color-accent-700);display:inline-block;"></span>
+          FAQ
+        </p>
+        <h2 style="font-family:var(--font-heading);font-weight:600;font-size:clamp(32px,4vw,46px);line-height:1.1;color:var(--color-text);margin:0 0 40px;">Preguntas frecuentes</h2>
+
+        <div style="background:#ffffff;border:1px solid var(--color-divider);border-radius:24px;padding:36px 32px;transition:transform 0.2s ease,box-shadow 0.2s ease;" style-hover="transform:translateY(-3px);box-shadow:var(--shadow-lg);">
+          <img src="uploads/logo-simplificado.png" alt="Perucha y Asociados" style="height:40px;width:auto;display:block;margin-bottom:24px;">
+          <h3 style="font-family:var(--font-heading);font-weight:600;font-size:24px;color:var(--color-text);margin:0 0 12px;">Reserva una llamada de 15 min</h3>
+          <p style="font-family:var(--font-body);font-size:15px;line-height:1.6;color:#6b7280;margin:0 0 28px;">Si tienes alguna duda, reserva una llamada de 15 minutos con nosotros antes de empezar.</p>
+          <a href="Home.dc.html#contacto" style="display:flex;align-items:center;justify-content:center;font-family:var(--font-heading);font-weight:600;font-size:15px;color:#ffffff;background:var(--color-accent-800);padding:15px 28px;border-radius:999px;text-decoration:none;" style-hover="background:var(--color-accent-900);">Reservar llamada</a>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div style="display:flex;flex-wrap:wrap;gap:10px;margin:0 0 8px;">
+          <sc-for list="{{ faqCategories }}" as="cat" hint-placeholder-count="2">
+            <button onClick="{{ cat.select }}" style="{{ cat.style }}">{{ cat.name }}</button>
+          </sc-for>
+        </div>
+        <sc-for list="{{ faqs }}" as="item" hint-placeholder-count="6">
+          <div class="hover-lift" style="background:#ffffff;border:1px solid var(--color-divider);border-radius:18px;padding:22px 26px;box-shadow:var(--shadow-sm);">
+            <button onClick="{{ item.toggle }}" style="width:100%;background:transparent;border:none;padding:0;display:flex;align-items:center;justify-content:space-between;gap:20px;cursor:pointer;text-align:left;">
+              <span style="font-family:var(--font-heading);font-weight:600;font-size:17px;color:var(--color-text);">{{ item.q }}</span>
+              <span style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;">
+                <sc-if value="{{ item.open }}" hint-placeholder-val="{{ false }}">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-800)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"></path><path d="M6 6l12 12"></path></svg>
+                </sc-if>
+                <sc-if value="{{ item.closed }}" hint-placeholder-val="{{ true }}">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-800)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+                </sc-if>
+              </span>
+            </button>
+            <sc-if value="{{ item.open }}" hint-placeholder-val="{{ false }}">
+              <p style="margin:16px 0 0;font-family:var(--font-body);font-size:14.5px;line-height:1.6;color:#6b7280;">{{ item.a }}</p>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+
+    </div>
+  </section>
+
+  <section style="background:var(--color-accent-900);padding:120px 32px;text-align:center;">
+    <div style="max-width:680px;margin:0 auto;">
+      <h2 style="font-family:var(--font-heading);font-weight:600;font-size:clamp(28px,3.6vw,40px);line-height:1.2;color:#ffffff;margin:0 0 10px;">¿Quieres conocer mejor los números de tu empresa?</h2>
+      <p style="margin:0 0 28px;font-size:13px;color:var(--color-accent-300);font-style:italic;">Título del CTA final provisional — texto definitivo pendiente de confirmar.</p>
+      <p style="font-family:var(--font-body);font-size:16px;line-height:1.65;color:rgba(255,255,255,0.75);margin:0 0 36px;">Cuéntanos tu situación y valoraremos cómo podemos ayudarte a tomar decisiones con más información.</p>
+      <a href="Home.dc.html#contacto" style="display:inline-flex;align-items:center;font-family:var(--font-heading);font-weight:600;font-size:15px;color:var(--color-accent-900);background:#ffffff;padding:16px 34px;border-radius:999px;text-decoration:none;" style-hover="background:var(--color-accent-200);">Hablemos</a>
+    </div>
+  </section>
+
+  <footer style="background:var(--color-accent-900);padding:64px 32px 40px;">
+    <div style="max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.3fr 1fr;gap:48px;">
+      <div>
+        <p style="font-family:var(--font-heading);font-weight:600;font-size:20px;color:#ffffff;margin:0 0 10px;">Perucha y Asociados</p>
+        <p style="margin:0 0 4px;font-size:14px;color:rgba(255,255,255,0.7);">Villaviciosa de Odón, Madrid</p>
+        <p style="margin:0 0 24px;font-size:14px;color:rgba(255,255,255,0.45);font-style:italic;">Teléfono próximamente</p>
+        <p style="font-family:var(--font-heading);font-size:16px;color:rgba(255,255,255,0.85);margin:0;">Tu visión, nuestra dedicación.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <p style="margin:0 0 4px;font-size:12px;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.45);">Áreas</p>
+        <a href="Control de Gestion.dc.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:15px;" style-hover="color:#ffffff;">Control de Gestión</a>
+        <a href="Contabilidad y Fiscalidad.dc.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:15px;" style-hover="color:#ffffff;">Contabilidad y Fiscalidad</a>
+        <a href="Digitalizacion y Automatizacion.dc.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:15px;" style-hover="color:#ffffff;">Digitalización y Automatización</a>
+      </div>
+    </div>
+    <div style="max-width:1180px;margin:40px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,0.12);font-size:13px;color:rgba(255,255,255,0.4);">
+      © 2026 Perucha y Asociados
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { openFaq: 0, mobileOpen: false, width: typeof window !== 'undefined' ? window.innerWidth : 1200, simsOpen: false, faqCategory: 'Control de gestión' };
+
+  componentDidMount() {
+    this._onResize = () => this.setState({ width: window.innerWidth });
+    window.addEventListener('resize', this._onResize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._onResize);
+  }
+
+  faqCategories = ['Control de gestión', 'Planificación financiera'];
+
+  faqData = [
+    { cat: 'Control de gestión', q: '¿Qué es el control de gestión?', a: 'El control de gestión convierte los datos económicos de la empresa en información útil para facilitar la toma de decisiones. Permite conocer la evolución del negocio, identificar desviaciones y actuar con mayor rapidez.' },
+    { cat: 'Control de gestión', q: '¿En qué puede ayudar a mi empresa?', a: 'Ayuda a conocer mejor la rentabilidad del negocio, controlar costes, identificar oportunidades de mejora y tomar decisiones basadas en datos objetivos.' },
+    { cat: 'Control de gestión', q: '¿Es lo mismo que llevar la contabilidad?', a: 'No. La contabilidad registra la actividad económica y cumple las obligaciones legales. El control de gestión utiliza esa información para analizar el negocio y ayudar en la toma de decisiones.' },
+    { cat: 'Control de gestión', q: '¿Qué información se analiza?', a: 'Ingresos, costes, márgenes, rentabilidad, presupuestos, previsiones, indicadores clave (KPI) y desviaciones respecto a los objetivos establecidos.' },
+    { cat: 'Control de gestión', q: '¿Puedo saber qué productos o servicios son más rentables?', a: 'Sí. Analizamos costes, ingresos y márgenes para identificar qué líneas de negocio generan mayor rentabilidad y cuáles requieren mejoras.' },
+    { cat: 'Control de gestión', q: '¿Cómo trabajáis el control de gestión?', a: 'Organizamos la información económica, elaboramos informes claros y proponemos acciones concretas para mejorar los resultados del negocio.' },
+    { cat: 'Planificación financiera', q: '¿Qué es la planificación financiera?', a: 'Consiste en anticipar la evolución económica de la empresa mediante presupuestos, previsiones y distintos escenarios para facilitar la toma de decisiones y reducir la incertidumbre.' },
+    { cat: 'Planificación financiera', q: '¿Qué es el análisis financiero?', a: 'Es el estudio de la situación económica y financiera de la empresa para evaluar su rentabilidad, liquidez, solvencia y capacidad de crecimiento.' },
+    { cat: 'Planificación financiera', q: '¿Qué diferencia hay entre un presupuesto y un forecast?', a: 'El presupuesto establece los objetivos al inicio del ejercicio. El forecast actualiza esas previsiones según la evolución real del negocio para anticipar desviaciones.' },
+    { cat: 'Planificación financiera', q: '¿Podéis ayudarme a preparar un presupuesto anual?', a: 'Sí. Elaboramos presupuestos económicos y financieros adaptados a cada empresa, incluyendo previsiones, escenarios y objetivos.' },
+    { cat: 'Planificación financiera', q: '¿Qué indicadores financieros son los más importantes?', a: 'Depende de cada empresa, pero habitualmente analizamos indicadores como rentabilidad, márgenes, EBITDA, liquidez, generación de caja y endeudamiento.' },
+    { cat: 'Planificación financiera', q: '¿También realizáis análisis de inversiones?', a: 'Sí. Evaluamos inversiones mediante herramientas como ROI, Payback y otros indicadores financieros que ayudan a valorar su rentabilidad y riesgo.' },
+    { cat: 'Planificación financiera', q: '¿Cómo puedo saber si mi empresa está creciendo de forma rentable?', a: 'Analizamos la evolución de las ventas, los costes, los márgenes y la generación de caja para comprobar si el crecimiento es sostenible y realmente aporta valor.' },
+    { cat: 'Planificación financiera', q: '¿Con qué frecuencia debería revisar la situación financiera de mi empresa?', a: 'Lo recomendable es realizar un seguimiento periódico. Un análisis mensual permite detectar desviaciones con tiempo suficiente para tomar decisiones.' },
+  ];
+
+  renderVals() {
+    const isMobile = this.state.width < 1320;
+    return {
+      isDesktop: !isMobile,
+      simsOpen: this.state.simsOpen,
+      toggleSims: () => this.setState(s => ({ simsOpen: !s.simsOpen })),
+      closeSims: () => this.setState({ simsOpen: false }),
+      stopSims: (e) => e.stopPropagation(),
+      isMobile: isMobile,
+      mobileOpen: this.state.mobileOpen,
+      mobileClosed: !this.state.mobileOpen,
+      showMobileMenu: isMobile && this.state.mobileOpen,
+      toggleMobile: () => this.setState(s => ({ mobileOpen: !s.mobileOpen })),
+      closeMobile: () => this.setState({ mobileOpen: false }),
+      faqCategories: this.faqCategories.map(c => {
+        const active = this.state.faqCategory === c;
+        return {
+          name: c,
+          style: `font-family:var(--font-body);font-size:14px;font-weight:600;padding:9px 18px;border-radius:999px;cursor:pointer;white-space:nowrap;border:1.5px solid ${active ? 'var(--color-accent-800)' : 'var(--color-divider)'};color:${active ? '#ffffff' : 'var(--color-text)'};background:${active ? 'var(--color-accent-800)' : '#ffffff'};`,
+          select: () => this.setState({ faqCategory: c, openFaq: -1 }),
+        };
+      }),
+      faqs: this.faqData.filter(f => f.cat === this.state.faqCategory).map((f, i) => ({
+        q: f.q,
+        a: f.a,
+        open: this.state.openFaq === i,
+        closed: this.state.openFaq !== i,
+        toggle: () => this.setState(s => ({ openFaq: s.openFaq === i ? -1 : i })),
+      })),
+    };
+  }
+}
+</script>
+</body>
+</html>
