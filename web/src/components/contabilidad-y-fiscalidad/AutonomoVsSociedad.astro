@@ -135,9 +135,16 @@
 								</select>
 							</div>
 							<div class="field" data-edades-hijos hidden>
-								<label for="avs-edades-hijos">Edades de los hijos</label>
-								<input type="text" id="avs-edades-hijos" placeholder="7 y 12 años" autocomplete="off" aria-describedby="avs-edades-hijos-help" />
-								<p class="field-help" id="avs-edades-hijos-help">Indica la edad de cada hijo.</p>
+								<label for="avs-hijos-menores-3">¿Cuántos de tus hijos son menores de 3 años?</label>
+								<select id="avs-hijos-menores-3" aria-describedby="avs-hijos-menores-3-help">
+									<option value="0" selected>0</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+								</select>
+								<p class="field-help" id="avs-hijos-menores-3-help">Da derecho a un mínimo familiar adicional.</p>
 							</div>
 						</div>
 
@@ -225,68 +232,29 @@
 						</div>
 
 						<div class="field">
-							<label for="avs-costes">Costes adicionales anuales de la sociedad</label>
-							<input type="text" inputmode="decimal" id="avs-costes" placeholder="3.000 €" autocomplete="off" aria-describedby="avs-costes-help" />
-							<p class="field-help" id="avs-costes-help">Gestoría, contabilidad, obligaciones mercantiles y otros costes.</p>
+							<label for="avs-tipo-is">Tipo del Impuesto sobre Sociedades</label>
+							<select id="avs-tipo-is" aria-describedby="avs-tipo-is-help">
+								<option value="" selected disabled>Selecciona un tipo</option>
+								<option value="15">15 %</option>
+								<option value="20">20 %</option>
+								<option value="23">23 %</option>
+								<option value="25">25 %</option>
+							</select>
+							<p class="field-help" id="avs-tipo-is-help">
+								Si no sabes cuál te corresponde, selecciona el 25 %. Durante el asesoramiento
+								revisaremos si puedes aplicar un tipo inferior.
+							</p>
 						</div>
 
-						<div class="checklist-box">
-							<p class="checklist-title">Comprobación guiada del tipo reducido del 15 %</p>
-							<p class="checklist-subtitle">Responde para comprobar si podría aplicarse a una entidad de nueva creación.</p>
-
-							<div class="checklist-rows" data-checklist>
-								<div class="checklist-row" data-check-row="0">
-									<span>¿La sociedad todavía no existe o acaba de constituirse?</span>
-									<div class="pill-toggle pill-toggle-sm" role="group" aria-label="La sociedad todavía no existe o acaba de constituirse" data-check="0">
-										<button type="button" class="pill-btn" data-value="si" aria-pressed="false">Sí</button>
-										<button type="button" class="pill-btn" data-value="no" aria-pressed="false">No</button>
-									</div>
-								</div>
-								<div class="checklist-row" data-check-row="1">
-									<span>¿Realizará una actividad económica real?</span>
-									<div class="pill-toggle pill-toggle-sm" role="group" aria-label="Realizará una actividad económica real" data-check="1">
-										<button type="button" class="pill-btn" data-value="si" aria-pressed="false">Sí</button>
-										<button type="button" class="pill-btn" data-value="no" aria-pressed="false">No</button>
-									</div>
-								</div>
-								<div class="checklist-row" data-check-row="2">
-									<span>¿La actividad procede de otra empresa vinculada?</span>
-									<div class="pill-toggle pill-toggle-sm" role="group" aria-label="La actividad procede de otra empresa vinculada" data-check="2">
-										<button type="button" class="pill-btn" data-value="si" aria-pressed="false">Sí</button>
-										<button type="button" class="pill-btn" data-value="no" aria-pressed="false">No</button>
-									</div>
-								</div>
-								<div class="checklist-row" data-check-row="3">
-									<span>¿Has realizado personalmente esta misma actividad durante el último año?</span>
-									<div class="pill-toggle pill-toggle-sm" role="group" aria-label="Has realizado personalmente esta misma actividad durante el último año" data-check="3">
-										<button type="button" class="pill-btn" data-value="si" aria-pressed="false">Sí</button>
-										<button type="button" class="pill-btn" data-value="no" aria-pressed="false">No</button>
-									</div>
-								</div>
-								<div class="checklist-row" data-check-row="4">
-									<span>¿Tendrías más del 50 % de la sociedad?</span>
-									<div class="pill-toggle pill-toggle-sm" role="group" aria-label="Tendrías más del 50 por ciento de la sociedad" data-check="4">
-										<button type="button" class="pill-btn" data-value="si" aria-pressed="false">Sí</button>
-										<button type="button" class="pill-btn" data-value="no" aria-pressed="false">No</button>
-									</div>
-								</div>
-								<div class="checklist-row" data-check-row="5">
-									<span>¿Se dedicará principalmente a gestionar patrimonio?</span>
-									<div class="pill-toggle pill-toggle-sm" role="group" aria-label="Se dedicará principalmente a gestionar patrimonio" data-check="5">
-										<button type="button" class="pill-btn" data-value="si" aria-pressed="false">Sí</button>
-										<button type="button" class="pill-btn" data-value="no" aria-pressed="false">No</button>
-									</div>
-								</div>
-								<div class="checklist-row" data-check-row="6">
-									<span>¿Formará parte de un grupo empresarial?</span>
-									<div class="pill-toggle pill-toggle-sm" role="group" aria-label="Formará parte de un grupo empresarial" data-check="6">
-										<button type="button" class="pill-btn" data-value="si" aria-pressed="false">Sí</button>
-										<button type="button" class="pill-btn" data-value="no" aria-pressed="false">No</button>
-									</div>
-								</div>
-							</div>
-
-							<p class="checklist-result" data-checklist-result hidden></p>
+						<div class="field">
+							<label for="avs-costes">Costes adicionales por tener una sociedad</label>
+							<input type="text" inputmode="decimal" id="avs-costes" placeholder="3.000 €" autocomplete="off" aria-describedby="avs-costes-help" />
+							<p class="field-help" id="avs-costes-help">
+								Incluye únicamente los costes derivados de la forma jurídica (Registro Mercantil,
+								depósito de cuentas, certificado digital y otras obligaciones mercantiles). No
+								incluyas los gastos de la actividad, ya que se han introducido anteriormente como
+								gastos deducibles.
+							</p>
 						</div>
 
 						<p class="form-error" data-error="3" role="alert" hidden></p>
@@ -298,9 +266,9 @@
 							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h12a1 1 0 0 1 1 1v3"></path><path d="M3 7v11a2 2 0 0 0 2 2h14a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1h-4a2 2 0 0 0 0 4h5"></path></svg></span>Cómo recibirías el dinero</li>
 							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V7l7-4 7 4v14"></path><path d="M3 21h18"></path></svg></span>Costes de mantener la sociedad</li>
 							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span>Beneficio que quedaría en la empresa</li>
-							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v4H4z"></path><path d="M4 4l8 8 8-8"></path></svg></span>Posible aplicación del tipo reducido</li>
+							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v4H4z"></path><path d="M4 4l8 8 8-8"></path></svg></span>El tipo del Impuesto sobre Sociedades que aplicarías</li>
 						</ul>
-						<p class="info-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8h.01"></path><path d="M11 11.5h1v4.5h1"></path></svg>Crear una sociedad nueva no garantiza por sí solo el tipo reducido.</p>
+						<p class="info-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8h.01"></path><path d="M11 11.5h1v4.5h1"></path></svg>Si no conoces tu tipo exacto, indica el 25 % — lo revisaremos contigo durante el asesoramiento.</p>
 					</div>
 				</div>
 
@@ -328,19 +296,24 @@
 						<p class="result-headline-text" data-result-text></p>
 					</div>
 
+					<p class="aviso-capacidad" data-aviso-capacidad hidden>
+						Con estos datos, la sociedad no genera beneficio suficiente para cubrir toda la retirada
+						solicitada. No quedaría dinero disponible dentro de la empresa.
+					</p>
+
 					<div class="result-columns">
 						<div class="result-card">
 							<h4>Autónomo</h4>
-							<div class="result-row"><span>Dinero personal disponible</span><strong data-r-auto-disponible></strong></div>
+							<div class="result-row"><span>Beneficio de la actividad</span><strong data-r-auto-beneficio></strong></div>
 							<div class="result-row"><span>Impuestos y cotizaciones</span><strong data-r-auto-carga></strong></div>
-							<div class="result-row"><span>Costes adicionales</span><strong data-r-auto-costes></strong></div>
+							<div class="result-row"><span>Dinero personal disponible</span><strong data-r-auto-disponible></strong></div>
 						</div>
 						<div class="result-card">
 							<h4>Sociedad</h4>
+							<div class="result-row"><span>Beneficio de la actividad</span><strong data-r-soc-beneficio></strong></div>
 							<div class="result-row"><span>Dinero personal disponible</span><strong data-r-soc-disponible></strong></div>
-							<div class="result-row"><span>Impuestos y cotizaciones</span><strong data-r-soc-carga></strong></div>
-							<div class="result-row"><span>Costes adicionales</span><strong data-r-soc-costes></strong></div>
-							<div class="result-row"><span>Dinero que queda en la empresa</span><strong data-r-soc-retenido></strong></div>
+							<div class="result-row"><span>Impuesto sobre Sociedades</span><strong data-r-soc-is></strong></div>
+							<div class="result-row"><span>Beneficio que permanece en la empresa</span><strong data-r-soc-retenido></strong></div>
 						</div>
 					</div>
 
@@ -357,9 +330,10 @@
 						<summary>Simplificaciones aplicadas en este cálculo</summary>
 						<ul>
 							<li>Se aplican los mínimos personales y familiares propios de cada comunidad autónoma cuando existen (8 de las 17 los tienen para 2025); el resto usa el mínimo estatal.</li>
-							<li>El Impuesto sobre Sociedades usa el tipo general (25 %) o el reducido de nueva creación (15 %); no distingue aún microempresa o entidad de reducida dimensión, que dependen de la cifra de negocio del ejercicio anterior.</li>
-							<li>En "Combinación" (retribución y dividendos), el reparto se ha simplificado al 50 % / 50 %.</li>
-							<li>No se aplica la reducción por declaración conjunta ni los incrementos de mínimo por ascendientes mayores de 75 años o hijos menores de 3 años.</li>
+							<li>El tipo del Impuesto sobre Sociedades lo indicas tú directamente; no se calcula automáticamente a partir de la situación de la empresa.</li>
+							<li>En "Combinación" (retribución y dividendos), el reparto se ha simplificado al 50 % / 50 %. Solo la parte de retribución se ajusta para que el neto coincida con el dinero personal solicitado; la de dividendos se calcula como cifra bruta directa.</li>
+							<li>Si tienes otros ingresos personales, se descuentan del dinero que la sociedad necesita darte como retribución, ya que esa parte de tu necesidad ya está cubierta.</li>
+							<li>No se aplica la reducción por declaración conjunta ni el incremento de mínimo por ascendientes mayores de 75 años.</li>
 						</ul>
 					</details>
 				</div>
@@ -580,64 +554,23 @@
 		color: #fff;
 	}
 
-	.pill-toggle-sm {
-		flex: 0 0 auto;
-		width: 128px;
+	.aviso-capacidad[hidden] {
+		display: none;
 	}
 
-	.checklist-box {
-		margin: 4px 0 20px;
-		background: var(--color-accent-100);
-		border-radius: 16px;
-		padding: 22px 24px;
-	}
-
-	.checklist-title {
-		margin: 0 0 4px;
-		font-family: var(--font-heading);
-		font-weight: 600;
-		font-size: 15.5px;
-		color: var(--color-text);
-	}
-
-	.checklist-subtitle {
-		margin: 0 0 18px;
+	.aviso-capacidad {
+		display: flex;
+		align-items: flex-start;
+		gap: 10px;
+		background: #fff3e8;
+		border: 1px solid #fed7aa;
+		color: #9a3412;
+		border-radius: 12px;
+		padding: 14px 18px;
 		font-family: var(--font-body);
 		font-size: 13.5px;
-		color: var(--color-accent-700);
-	}
-
-	.checklist-rows {
-		display: flex;
-		flex-direction: column;
-		gap: 10px;
-	}
-
-	.checklist-row {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 16px;
-		background: #fff;
-		border-radius: 10px;
-		padding: 10px 14px;
-	}
-
-	.checklist-row span {
-		font-family: var(--font-body);
-		font-size: 14px;
-		color: var(--color-text);
-	}
-
-	.checklist-result {
-		margin: 16px 0 0;
-		background: #fff;
-		border-radius: 10px;
-		padding: 12px 16px;
-		font-family: var(--font-body);
-		font-weight: 600;
-		font-size: 14px;
-		color: var(--color-accent-800);
+		line-height: 1.55;
+		margin: 0 0 24px;
 	}
 
 	.form-error {
@@ -1021,9 +954,6 @@
 			retirada: "",
 		};
 
-		const checklist: (boolean | null)[] = [null, null, null, null, null, null, null];
-		let tipoReducidoResultado: "quince" | "no" | "revision" = "revision";
-
 		function bindPillToggle(container: Element, onChange: (value: string) => void) {
 			const buttons = Array.from(container.querySelectorAll<HTMLButtonElement>(".pill-btn"));
 			buttons.forEach((btn) => {
@@ -1045,43 +975,22 @@
 			});
 		});
 
-		section.querySelectorAll<HTMLElement>("[data-check]").forEach((group) => {
-			const idx = Number(group.dataset.check);
-			bindPillToggle(group, (value) => {
-				checklist[idx] = value === "si";
-				evaluateChecklist();
-			});
-		});
-
 		const hijosSelect = section.querySelector<HTMLSelectElement>("#avs-hijos");
+		const hijosMenores3Select = section.querySelector<HTMLSelectElement>("#avs-hijos-menores-3");
 		hijosSelect?.addEventListener("change", () => {
-			const hasHijos = Number(hijosSelect.value) > 0;
+			const numHijos = Number(hijosSelect.value);
+			const hasHijos = numHijos > 0;
 			const edadesField = section.querySelector<HTMLElement>("[data-edades-hijos]");
 			const discapacidadField = section.querySelector<HTMLElement>("[data-hijo-discapacidad]");
 			if (edadesField) edadesField.hidden = !hasHijos;
 			if (discapacidadField) discapacidadField.hidden = !hasHijos;
+			if (hijosMenores3Select) {
+				Array.from(hijosMenores3Select.options).forEach((opt) => {
+					opt.disabled = Number(opt.value) > numHijos;
+				});
+				if (Number(hijosMenores3Select.value) > numHijos) hijosMenores3Select.value = String(numHijos);
+			}
 		});
-
-		function evaluateChecklist() {
-			const result = section?.querySelector<HTMLElement>("[data-checklist-result]");
-			if (!result) return;
-			if (checklist.some((v) => v === null)) {
-				result.hidden = true;
-				return;
-			}
-			const [nueva, actividadReal, vinculada, mismaActividad, mayoritario, patrimonial, grupo] = checklist as boolean[];
-			result.hidden = false;
-			if (nueva && actividadReal && !vinculada && !mismaActividad && mayoritario && !patrimonial && !grupo) {
-				tipoReducidoResultado = "quince";
-				result.textContent = "Resultado provisional: podría aplicar el 15 %.";
-			} else if (!nueva || !actividadReal || vinculada || mismaActividad || patrimonial) {
-				tipoReducidoResultado = "no";
-				result.textContent = "Resultado provisional: no parece cumplir los requisitos.";
-			} else {
-				tipoReducidoResultado = "revision";
-				result.textContent = "Resultado provisional: la aplicación del tipo reducido necesita revisión profesional.";
-			}
-		}
 
 		function parseEsNumber(raw: string): number | null {
 			let s = raw.trim().replace(/€/g, "").replace(/\s/g, "");
@@ -1185,8 +1094,13 @@
 		function validateStep3(): boolean {
 			clearError(3);
 			const costes = parseEsNumber((section?.querySelector<HTMLInputElement>("#avs-costes"))?.value ?? "");
+			const tipoIs = (section?.querySelector<HTMLSelectElement>("#avs-tipo-is"))?.value;
 			if (!pillGroups.retirada) {
 				showError(3, "Indica cómo retirarías el dinero.");
+				return false;
+			}
+			if (!tipoIs) {
+				showError(3, "Selecciona el tipo del Impuesto sobre Sociedades.");
 				return false;
 			}
 			if (costes === null) {
@@ -1195,10 +1109,6 @@
 			}
 			if (costes < 0) {
 				showError(3, "Los costes no pueden ser negativos.");
-				return false;
-			}
-			if (checklist.some((v) => v === null)) {
-				showError(3, "Responde a las 7 preguntas de la comprobación guiada del tipo reducido.");
 				return false;
 			}
 			return true;
@@ -1247,13 +1157,15 @@
 						: 0,
 				edad: parseEsNumber((section.querySelector<HTMLInputElement>("#avs-edad"))?.value ?? "") ?? 0,
 				hijos: Number((section.querySelector<HTMLSelectElement>("#avs-hijos"))?.value ?? "0"),
+				hijosMenoresDe3: Number((section.querySelector<HTMLSelectElement>("#avs-hijos-menores-3"))?.value ?? "0"),
 				hijoDiscapacidad: pillGroups["hijo-discapacidad"] === "si",
 				discapacidad: pillGroups.discapacidad === "si",
 				ascendientes: Number((section.querySelector<HTMLSelectElement>("#avs-ascendientes"))?.value ?? "0"),
 				dineroPersonal: parseEsNumber((section.querySelector<HTMLInputElement>("#avs-dinero-personal"))?.value ?? "") ?? 0,
 				retirada: (pillGroups.retirada || "combinacion") as EntradaSimulador["retirada"],
 				costesAdicionales: parseEsNumber((section.querySelector<HTMLInputElement>("#avs-costes"))?.value ?? "") ?? 0,
-				tipoReducido: tipoReducidoResultado,
+				tipoReducido: "no",
+				tipoImpuestoSociedadesPct: Number((section.querySelector<HTMLSelectElement>("#avs-tipo-is"))?.value ?? "25"),
 			};
 
 			const resultado = calcular(input);
@@ -1274,17 +1186,17 @@
 			setText("[data-result-title]", resultado.tituloResultado);
 			setText("[data-result-text]", resultado.textoResultado);
 
-			setText("[data-r-auto-disponible]", `${formatEs(resultado.autonomo.dineroPersonalDisponible)} €`);
+			setText("[data-r-auto-beneficio]", `${formatEs(resultado.autonomo.beneficioAntesImpuestos)} €`);
 			setText("[data-r-auto-carga]", `${formatEs(resultado.autonomo.cotizaciones + resultado.autonomo.irpf)} €`);
-			setText("[data-r-auto-costes]", `${formatEs(resultado.autonomo.costesAdicionales)} €`);
+			setText("[data-r-auto-disponible]", `${formatEs(resultado.autonomo.dineroPersonalDisponible)} €`);
 
+			setText("[data-r-soc-beneficio]", `${formatEs(resultado.sociedad.beneficioAntesImpuestos)} €`);
 			setText("[data-r-soc-disponible]", `${formatEs(resultado.sociedad.dineroPersonalDisponible)} €`);
-			setText(
-				"[data-r-soc-carga]",
-				`${formatEs(resultado.sociedad.cotizaciones + resultado.sociedad.irpf + resultado.sociedad.impuestoSociedades)} €`,
-			);
-			setText("[data-r-soc-costes]", `${formatEs(resultado.sociedad.costesAdicionales)} €`);
+			setText("[data-r-soc-is]", `${formatEs(resultado.sociedad.impuestoSociedades)} €`);
 			setText("[data-r-soc-retenido]", `${formatEs(resultado.sociedad.dineroQuePermaneceEnEmpresa ?? 0)} €`);
+
+			const avisoEl = section.querySelector<HTMLElement>("[data-aviso-capacidad]");
+			if (avisoEl) avisoEl.hidden = !resultado.sociedad.retiradaSuperaCapacidadSociedad;
 
 			const porqueList = section.querySelector<HTMLElement>("[data-result-porque]");
 			if (porqueList) {

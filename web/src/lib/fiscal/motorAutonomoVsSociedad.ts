@@ -55,6 +55,7 @@ export interface EntradaSimulador {
 	otrosIngresos: number;
 	edad: number;
 	hijos: number;
+	hijosMenoresDe3?: number;
 	hijoDiscapacidad: boolean;
 	discapacidad: boolean;
 	ascendientes: number;
@@ -62,6 +63,7 @@ export interface EntradaSimulador {
 	retirada: "retribucion" | "dividendos" | "combinacion";
 	costesAdicionales: number;
 	tipoReducido: "quince" | "no" | "revision";
+	tipoImpuestoSociedadesPct?: number;
 }
 
 export interface DesgloseEscenario {
@@ -72,6 +74,7 @@ export interface DesgloseEscenario {
 	costesAdicionales: number;
 	dineroPersonalDisponible: number;
 	dineroQuePermaneceEnEmpresa: number | null;
+	retiradaSuperaCapacidadSociedad: boolean;
 	cargaTotal: number;
 }
 
@@ -114,7 +117,13 @@ function cuotaConMinimo(base: number, minimo: number, tramos: Tramo[]): number {
 
 interface BloqueMinimos {
 	minimo_contribuyente: { general_euros: number; incremento_mayor_65_euros: number; incremento_adicional_mayor_75_euros: number };
-	minimo_por_descendientes_euros: { primero: number; segundo: number; tercero: number; cuarto_y_siguientes: number };
+	minimo_por_descendientes_euros: {
+		primero: number;
+		segundo: number;
+		tercero: number;
+		cuarto_y_siguientes: number;
+		incremento_menor_de_3_anos: number;
+	};
 	minimo_por_discapacidad_euros: { grado_igual_o_superior_33_por_ciento: number };
 	minimo_por_ascendientes_euros: { general_por_cada_ascendiente: number };
 }
@@ -132,6 +141,7 @@ function minimoConBloque(input: EntradaSimulador, m: BloqueMinimos): number {
 	for (let i = 0; i < input.hijos; i++) {
 		total += i < 3 ? porOrden[i] : m.minimo_por_descendientes_euros.cuarto_y_siguientes;
 	}
+	total += Math.min(input.hijosMenoresDe3 ?? 0, input.hijos) * m.minimo_por_descendientes_euros.incremento_menor_de_3_anos;
 
 	if (input.discapacidad) total += m.minimo_por_discapacidad_euros.grado_igual_o_superior_33_por_ciento;
 	if (input.hijoDiscapacidad) total += m.minimo_por_discapacidad_euros.grado_igual_o_superior_33_por_ciento;
@@ -219,27 +229,63 @@ export function calcular(input: EntradaSimulador): ResultadoComparacion | null {
 		costesAdicionales: 0,
 		dineroPersonalDisponible: disponibleAutonomo,
 		dineroQuePermaneceEnEmpresa: null,
+		retiradaSuperaCapacidadSociedad: false,
 		cargaTotal: cotizacionAutonomo + irpfAutonomo,
 	};
 
 	// --- Escenario B: Sociedad limitada unipersonal ---
 	const resultadoPrevio = input.ingresos - input.gastos - input.costesAdicionales;
 
+	// La retribución representa el salario neto que el socio necesita para vivir, así que se calcula
+	// al revés: dado el neto objetivo, se busca por aproximación sucesiva el bruto que, tras cotizaciones
+	// e IRPF (progresivos, no invertibles con una fórmula directa), produce ese neto. Los dividendos no
+	// son una nómina sino una retirada puntual, así que se mantienen como cifra bruta directa.
+	function netoTrasImpuestosRetribucion(bruto: number): number {
+		const cotiz = cotizacionRetaAnual(bruto / 12);
+		const baseGeneral = Math.max(0, bruto - cotiz) + input.otrosIngresos;
+		const irpf = irpfSobreBaseGeneral(baseGeneral, minimoEst, minimoAuto, escalaEstatal, escalaAutonomica);
+		return bruto - cotiz - irpf;
+	}
+
+	function brutoParaNetoObjetivo(netoObjetivo: number): number {
+		if (netoObjetivo <= 0) return 0;
+		let hi = Math.max(netoObjetivo * 1.8, 1000);
+		let expansiones = 0;
+		while (netoTrasImpuestosRetribucion(hi) < netoObjetivo && expansiones < 40) {
+			hi *= 2;
+			expansiones++;
+		}
+		let lo = 0;
+		for (let i = 0; i < 50; i++) {
+			const mid = (lo + hi) / 2;
+			if (netoTrasImpuestosRetribucion(mid) < netoObjetivo) lo = mid;
+			else hi = mid;
+		}
+		return hi;
+	}
+
 	let retribucionBruta = 0;
 	let dividendosBrutos = 0;
 	if (input.retirada === "retribucion") {
-		retribucionBruta = input.dineroPersonal;
+		const netoObjetivo = Math.max(0, input.dineroPersonal - input.otrosIngresos);
+		retribucionBruta = brutoParaNetoObjetivo(netoObjetivo);
 	} else if (input.retirada === "dividendos") {
 		dividendosBrutos = input.dineroPersonal;
 	} else {
-		retribucionBruta = input.dineroPersonal / 2;
+		const netoObjetivoMitad = Math.max(0, input.dineroPersonal / 2 - input.otrosIngresos);
+		retribucionBruta = brutoParaNetoObjetivo(netoObjetivoMitad);
 		dividendosBrutos = input.dineroPersonal / 2;
 	}
 
 	const cotizacionSocio = cotizacionRetaAnual(retribucionBruta / 12);
 	const baseOrientativaSociedad = resultadoPrevio - retribucionBruta;
 
-	const tipoIS = input.tipoReducido === "quince" ? 0.15 : fiscal2025.impuesto_sobre_sociedades.tipo_general_pct / 100;
+	const tipoIS =
+		input.tipoImpuestoSociedadesPct != null
+			? input.tipoImpuestoSociedadesPct / 100
+			: input.tipoReducido === "quince"
+				? 0.15
+				: fiscal2025.impuesto_sobre_sociedades.tipo_general_pct / 100;
 	const impuestoSociedades = Math.max(0, baseOrientativaSociedad) * tipoIS;
 	const beneficioDespuesIS = baseOrientativaSociedad - impuestoSociedades;
 
@@ -252,7 +298,9 @@ export function calcular(input: EntradaSimulador): ResultadoComparacion | null {
 	const disponibleRetribucion = retribucionBruta - cotizacionSocio - irpfRetribucion;
 
 	const dineroPersonalDisponibleSociedad = disponibleRetribucion + disponibleDividendos;
-	const dineroQuePermaneceEnEmpresa = beneficioDespuesIS - dividendosEfectivos;
+	const dineroQuePermaneceEnEmpresaBruto = beneficioDespuesIS - dividendosEfectivos;
+	const dineroQuePermaneceEnEmpresa = Math.max(0, dineroQuePermaneceEnEmpresaBruto);
+	const retiradaSuperaCapacidadSociedad = dineroQuePermaneceEnEmpresaBruto < 0;
 
 	const sociedad: DesgloseEscenario = {
 		beneficioAntesImpuestos: resultadoPrevio,
@@ -262,6 +310,7 @@ export function calcular(input: EntradaSimulador): ResultadoComparacion | null {
 		costesAdicionales: input.costesAdicionales,
 		dineroPersonalDisponible: dineroPersonalDisponibleSociedad,
 		dineroQuePermaneceEnEmpresa,
+		retiradaSuperaCapacidadSociedad,
 		cargaTotal: cotizacionSocio + irpfRetribucion + irpfDividendos + impuestoSociedades + input.costesAdicionales,
 	};
 

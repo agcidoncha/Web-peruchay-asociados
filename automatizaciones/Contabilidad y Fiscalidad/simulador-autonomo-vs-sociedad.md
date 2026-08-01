@@ -95,39 +95,17 @@ Será la primera que se diseñará y desarrollará. Pedirá los datos necesarios
 
 Esta versión utilizará la configuración fiscal correspondiente a cada territorio y mostrará una estimación detallada, siempre sujeta a revisión profesional.
 
-### 5.2. Versión simplificada
+### 5.2. Orden de desarrollo
 
-Después se creará una versión más corta para usuarios que quieran una primera orientación sin introducir tantos datos personales.
-
-Pedirá únicamente:
-
-- Comunidad autónoma o territorio fiscal.
-- Beneficio anual aproximado de la actividad.
-- Dinero que necesitaría retirar cada año para uso personal.
-
-Al no conocer toda la situación personal y familiar, esta versión no mostrará una cifra cerrada ni aparentará una precisión que no tiene. Ofrecerá:
-
-- Un **intervalo orientativo**.
-- Los factores que podrían cambiar el resultado.
-- Una indicación de si merece la pena realizar el simulador completo.
-- Un enlace para pasar a la versión completa conservando los datos ya introducidos.
-- Un botón para solicitar una revisión profesional.
-
-### 5.3. Orden de desarrollo
-
-1. Crear y validar el motor de cálculo completo.
-2. Desarrollar la interfaz de la versión completa.
+1. Crear y validar el motor de cálculo.
+2. Desarrollar la interfaz.
 3. Comprobar sus resultados mediante casos de prueba objetivos y herramientas oficiales.
-4. Crear la versión simplificada reutilizando el mismo motor.
-5. Probar que ambas versiones son coherentes entre sí.
-
-No se crearán dos motores fiscales independientes. Las dos interfaces utilizarán la misma configuración y las mismas reglas de cálculo para evitar duplicidades y resultados contradictorios.
 
 ---
 
 ## 6. Alcance funcional
 
-Las dos versiones compararán únicamente estos dos casos:
+El simulador comparará únicamente estos dos casos:
 
 1. **Empresario individual o profesional autónomo en estimación directa.**
 2. **Sociedad limitada unipersonal**, en la que la misma persona es propietaria, trabaja en la actividad y ejerce el control efectivo.
@@ -172,8 +150,6 @@ El menú **Simuladores** enlazará directamente a:
 
 `/contabilidad-y-fiscalidad#autonomo-vs-sociedad`
 
-Las dos versiones podrán convivir dentro de esta misma sección y utilizar el mismo enlace. No necesitan páginas independientes.
-
 ---
 
 ## 8. Presentación inicial
@@ -198,14 +174,7 @@ Introduce algunos datos básicos y obtén una comparación orientativa de los im
 
 ## 9. Funcionamiento de la interfaz
 
-La sección permitirá elegir entre:
-
-- **Comparación completa:** estimación más personalizada.
-- **Comparación rápida:** menos preguntas y resultado mediante intervalo.
-
-La web explicará claramente la diferencia antes de empezar. La versión simplificada no se presentará como equivalente a la completa.
-
-### 9.1. Flujo de la versión completa
+### 9.1. Flujo de la interfaz
 
 Para no mostrar un formulario largo y complicado, la información se solicitará en **cuatro pasos**.
 
@@ -233,15 +202,6 @@ La interfaz mostrará:
 - Resumen editable antes de calcular.
 - Resultado sin recargar la página.
 - Botón para modificar los datos.
-
-### 9.2. Flujo de la versión simplificada
-
-La versión simplificada tendrá un máximo de **dos pasos**:
-
-1. Comunidad autónoma o territorio fiscal y beneficio anual aproximado.
-2. Dinero que necesita retirar para uso personal y resultado orientativo.
-
-El resultado deberá invitar a completar la versión detallada cuando las circunstancias personales puedan cambiar de forma relevante la comparación.
 
 ---
 
@@ -329,7 +289,7 @@ El simulador deberá advertir que no todos los ingresos tributan de la misma for
 
 ### 10.6. Situación personal y familiar
 
-La **versión completa** contemplará:
+El simulador contemplará:
 
 - Edad.
 - Estado civil y situación familiar relevante para el cálculo.
@@ -340,8 +300,6 @@ La **versión completa** contemplará:
 - Declaración individual o conjunta, cuando proceda.
 
 Solo se pedirán datos que tengan una función concreta dentro del cálculo. Cada campo explicará de forma sencilla por qué se solicita.
-
-La **versión simplificada** no pedirá estos datos personales y familiares. Por ese motivo mostrará un **intervalo orientativo** y explicará que hijos, discapacidad, ascendientes, estado civil y tipo de declaración pueden modificar el IRPF.
 
 ### 10.7. Dinero que necesita para uso personal
 
@@ -635,12 +593,10 @@ El margen del 5 % quedará guardado en la configuración fiscal y podrá ajustar
 
 ## 15.1. Presentación de las cifras
 
-Las dos versiones mostrarán:
+El simulador mostrará:
 
 - Una **estimación central** fácil de comparar.
 - Un **intervalo orientativo** que refleje la variación posible del resultado.
-
-La versión completa utilizará un intervalo más estrecho porque conocerá más datos personales y familiares. La versión simplificada utilizará un intervalo más amplio porque trabajará con menos información.
 
 La estimación central nunca se presentará como una cantidad garantizada.
 
@@ -985,15 +941,11 @@ No se enviarán a analítica:
 - Errores asociados al campo correcto.
 - Retroceso entre pasos sin perder datos.
 - Reinicio completo.
-- Cambio entre versión simplificada y completa sin perder los datos compatibles.
 
-### Pruebas de coherencia entre versiones
+### Pruebas de coherencia
 
 - Los mismos datos de partida utilizan siempre el mismo motor fiscal.
-- La versión simplificada no ofrece una precisión mayor que la versión completa.
-- El intervalo simplificado contiene resultados razonables para diferentes situaciones personales compatibles.
-- La recomendación simplificada explica qué datos faltan y por qué pueden cambiar el resultado.
-- Los cambios anuales de configuración se aplican a las dos versiones.
+- Los cambios anuales de configuración se aplican correctamente.
 
 ### Comprobación objetiva de los cálculos
 
@@ -1048,15 +1000,11 @@ Los enlaces sirven como punto de partida. En cada actualización deberán compro
 ## 29. Decisiones cerradas antes del desarrollo
 
 1. El simulador servirá para residentes fiscales de toda España e incluirá un selector territorial.
-2. Se crearán una versión completa y otra simplificada.
-3. La versión completa contemplará comunidad autónoma, estado civil, hijos, discapacidad, ascendientes, declaración y los demás datos necesarios definidos en este documento.
-4. La versión simplificada pedirá menos datos y mostrará un intervalo más amplio.
-5. Primero se desarrollará el motor completo y después se reutilizará para la versión simplificada.
-6. La forma de retirar el dinero tendrá únicamente tres opciones: retribución, dividendos o combinación.
-7. El tipo reducido de una entidad de nueva creación se comprobará mediante un cuestionario guiado.
-8. Una diferencia inferior al 5 % se considerará insuficiente para destacar una opción.
-9. El beneficio admitido será de 0 € a 1.000.000 €; los casos superiores requerirán un estudio personalizado.
-10. Los costes adicionales no tendrán un máximo fijo. Los importes anormalmente elevados pedirán confirmación.
+2. El simulador contemplará comunidad autónoma, estado civil, hijos, discapacidad, ascendientes, declaración y los demás datos necesarios definidos en este documento.
+3. La forma de retirar el dinero tendrá únicamente tres opciones: retribución, dividendos o combinación.
+4. Una diferencia inferior al 5 % se considerará insuficiente para destacar una opción.
+5. El beneficio admitido será de 0 € a 1.000.000 €; los casos superiores requerirán un estudio personalizado.
+6. Los costes adicionales no tendrán un máximo fijo. Los importes anormalmente elevados pedirán confirmación.
 11. Las dos versiones mostrarán una estimación central y un intervalo orientativo.
 12. El aviso legal será visible junto al resultado e indicará que la simulación es orientativa y no vinculante.
 13. Se mostrará la frase: **«Cálculos orientativos basados en normativa y datos oficiales vigentes consultados en junio de 2026»**.
