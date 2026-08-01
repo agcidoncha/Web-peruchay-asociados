@@ -8,6 +8,7 @@ import AreaHero from "../components/AreaHero.astro";
 import ProcessSteps from "../components/ProcessSteps.astro";
 import Pillars from "../components/finanzas-y-control/Pillars.astro";
 import Calculadora from "../components/finanzas-y-control/Calculadora.astro";
+import RelatedAreas from "../components/RelatedAreas.astro";
 
 const steps = [
 	{
@@ -141,6 +142,16 @@ const faqSchema = {
 		/>
 		<Calculadora />
 		<Faq categories={faqCategories} faqs={faqs} />
+		<RelatedAreas
+			title="¿Necesitas también apoyo contable o fiscal?"
+			areas={[
+				{
+					href: "/contabilidad-y-fiscalidad",
+					title: "Contabilidad y Fiscalidad",
+					text: "Gestión contable y fiscal rigurosa, con el respaldo de más de 30 años de experiencia profesional.",
+				},
+			]}
+		/>
 		<ClosingCta
 			title="¿Quieres conocer mejor los números de tu empresa?"
 			text="Cuéntanos tu situación y valoraremos cómo podemos ayudarte a tomar decisiones con más información."

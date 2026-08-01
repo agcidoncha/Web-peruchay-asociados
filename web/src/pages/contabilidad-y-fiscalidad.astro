@@ -10,6 +10,7 @@ import NumberedServices from "../components/NumberedServices.astro";
 import Experience from "../components/contabilidad-y-fiscalidad/Experience.astro";
 import HowItWorks from "../components/contabilidad-y-fiscalidad/HowItWorks.astro";
 import AutonomoVsSociedad from "../components/contabilidad-y-fiscalidad/AutonomoVsSociedad.astro";
+import RelatedAreas from "../components/RelatedAreas.astro";
 
 const introParagraphs = [
 	"La contabilidad y la fiscalidad forman parte de la gestión diaria de cualquier empresa, pero cada empresa tiene necesidades diferentes, por eso ambos servicios pueden prestarse de forma conjunta o independiente, según la estructura, los recursos y las necesidades de cada organización.",
@@ -156,6 +157,16 @@ const faqSchema = {
 		<HowItWorks />
 		<AutonomoVsSociedad />
 		<Faq categories={faqCategories} faqs={faqs} />
+		<RelatedAreas
+			title="¿Buscas también análisis y control de gestión?"
+			areas={[
+				{
+					href: "/finanzas-y-control",
+					title: "Finanzas y Control",
+					text: "Información, análisis y control para conocer mejor el negocio y tomar decisiones con fundamento.",
+				},
+			]}
+		/>
 		<ClosingCta
 			title="¿Necesitas revisar o mejorar la gestión contable y fiscal de tu empresa?"
 			text="Cuéntanos cuál es vuestra situación actual y qué servicio necesitáis. Estudiaremos el caso para definir una propuesta adaptada al alcance y a las obligaciones de la empresa."

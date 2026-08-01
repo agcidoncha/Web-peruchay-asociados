@@ -12,6 +12,7 @@ import SolutionsGrid from "../components/digitalizacion-y-automatizacion/Solutio
 import ExperienceColumns from "../components/digitalizacion-y-automatizacion/ExperienceColumns.astro";
 import ExampleQuotes from "../components/digitalizacion-y-automatizacion/ExampleQuotes.astro";
 import EstimadorHoras from "../components/digitalizacion-y-automatizacion/EstimadorHoras.astro";
+import RelatedAreas from "../components/RelatedAreas.astro";
 
 const introParagraphs = [
 	"No todas las empresas necesitan una solución estándar ni contratar una estructura externa completa. A veces necesitan un profesional con una visión amplia que pueda entender el objetivo, conectar distintas disciplinas y convertir una necesidad concreta en una solución funcional.",
@@ -259,6 +260,21 @@ const faqSchema = {
 		<ExampleQuotes />
 		<EstimadorHoras />
 		<Faq categories={faqCategories} faqs={faqs} />
+		<RelatedAreas
+			title="La automatización también puede aplicarse a estas áreas"
+			areas={[
+				{
+					href: "/finanzas-y-control",
+					title: "Finanzas y Control",
+					text: "Información, análisis y control para conocer mejor el negocio y tomar decisiones con fundamento.",
+				},
+				{
+					href: "/contabilidad-y-fiscalidad",
+					title: "Contabilidad y Fiscalidad",
+					text: "Gestión contable y fiscal rigurosa, con el respaldo de más de 30 años de experiencia profesional.",
+				},
+			]}
+		/>
 		<ClosingCta
 			title="¿Tienes una necesidad digital y no encuentras una solución que encaje?"
 			text="Cuéntanos cómo trabajáis actualmente, qué problema queréis resolver y qué resultado necesitáis. Analizaremos el caso para proponeros una solución proporcionada, viable y adaptada a vuestra empresa."
