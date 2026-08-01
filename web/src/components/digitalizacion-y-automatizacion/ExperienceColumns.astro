@@ -1,0 +1,91 @@
+---
+const columns = [
+	{
+		title: "Una visión conjunta",
+		text: "La experiencia en diseño, maquetación, desarrollo y gestión de proyectos evita que cada disciplina se plantee de forma independiente.",
+	},
+	{
+		title: "Un interlocutor directo",
+		text: "Quien analiza la necesidad participa también en la definición y ejecución de la solución, reduciendo intermediarios.",
+	},
+	{
+		title: "Tecnología con un propósito",
+		text: "No digitalizamos ni automatizamos por moda. Primero se valora si la solución aportará una mejora real.",
+	},
+];
+---
+
+<section class="experience">
+	<div class="wrap">
+		<p class="eyebrow">Un perfil, una visión completa</p>
+		<h2>Más de 20 años conectando diseño y tecnología</h2>
+		<div class="grid">
+			{columns.map((col) => (
+				<div>
+					<h4>{col.title}</h4>
+					<p>{col.text}</p>
+				</div>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.experience {
+		background: var(--color-accent-900);
+		padding: 90px 24px;
+	}
+
+	.wrap {
+		max-width: 1180px;
+		margin: 0 auto;
+	}
+
+	.eyebrow {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 13px;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--color-accent-300);
+		text-align: center;
+		margin: 0 0 20px;
+	}
+
+	h2 {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: clamp(24px, 3.2vw, 34px);
+		text-align: center;
+		color: #fff;
+		margin: 0 0 48px;
+	}
+
+	.grid {
+		display: grid;
+		gap: 28px;
+	}
+
+	.grid h4 {
+		margin: 0 0 10px;
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 18px;
+		color: #fff;
+	}
+
+	.grid p {
+		margin: 0;
+		font-family: var(--font-body);
+		font-size: 15px;
+		line-height: 1.6;
+		color: rgba(255, 255, 255, 0.72);
+	}
+
+	@media (min-width: 700px) {
+		.grid {
+			grid-template-columns: repeat(3, 1fr);
+			gap: 32px;
+		}
+	}
+</style>

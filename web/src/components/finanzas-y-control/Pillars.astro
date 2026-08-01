@@ -1,0 +1,105 @@
+---
+const pillars = [
+	{
+		title: "Control de Gestión",
+		paragraphs: [
+			"El control de gestión convierte los datos económicos de la empresa en información útil para facilitar la toma de decisiones. Permite conocer la evolución del negocio, identificar desviaciones y actuar con mayor rapidez.",
+			"Ayuda a conocer mejor la rentabilidad del negocio, controlar costes, identificar oportunidades de mejora y tomar decisiones basadas en datos objetivos.",
+		],
+	},
+	{
+		title: "Planificación financiera",
+		paragraphs: [
+			"La planificación financiera permite anticipar la evolución económica de la empresa mediante presupuestos, previsiones y distintos escenarios. Su objetivo es facilitar la toma de decisiones y reducir la incertidumbre.",
+			"El presupuesto marca los objetivos; el forecast adapta esas previsiones conforme evoluciona el negocio, permitiendo reaccionar antes ante posibles desviaciones.",
+		],
+	},
+	{
+		title: "Análisis financiero",
+		paragraphs: [
+			"El análisis financiero evalúa la rentabilidad, la liquidez, la solvencia y la capacidad de crecimiento para conocer la situación económica de la empresa.",
+			"También permite valorar inversiones, analizar la generación de caja y comprobar si el crecimiento del negocio es sostenible.",
+		],
+	},
+];
+---
+
+<section class="pillars">
+	<div class="wrap">
+		<h2>Los tres pilares de una gestión financiera eficaz.</h2>
+
+		{pillars.map((pillar) => (
+			<div class="row">
+				<h3>{pillar.title}</h3>
+				<div class="text">
+					{pillar.paragraphs.map((p) => (
+						<p>{p}</p>
+					))}
+				</div>
+			</div>
+		))}
+	</div>
+</section>
+
+<style>
+	.pillars {
+		padding: 72px 24px;
+		background: var(--color-bg);
+	}
+
+	.wrap {
+		max-width: 1180px;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		gap: 48px;
+	}
+
+	h2 {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: clamp(24px, 3.2vw, 32px);
+		text-align: center;
+		color: var(--color-text);
+		margin: 0;
+	}
+
+	.row {
+		display: grid;
+		gap: 20px;
+		border-top: 1px solid var(--color-divider);
+		padding-top: 40px;
+	}
+
+	.row:first-of-type {
+		border-top: none;
+		padding-top: 0;
+	}
+
+	h3 {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 24px;
+		color: var(--color-text);
+		margin: 0;
+	}
+
+	.text p {
+		font-family: var(--font-body);
+		font-size: 16px;
+		line-height: 1.65;
+		color: var(--color-accent-700);
+		margin: 0 0 14px;
+	}
+
+	.text p:last-child {
+		margin-bottom: 0;
+	}
+
+	@media (min-width: 900px) {
+		.row {
+			grid-template-columns: 0.5fr 1fr;
+			gap: 48px;
+		}
+	}
+</style>

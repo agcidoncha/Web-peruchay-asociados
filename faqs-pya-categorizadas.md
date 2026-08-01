@@ -42,7 +42,7 @@ La comunicación es directa, clara y orientada a la toma de decisiones. La frecu
 
 ### ¿Dónde estáis ubicados?
 
-Perucha y Asociados desarrolla su actividad desde Villaviciosa de Odón (Madrid), prestando servicios a empresas y profesionales de toda la Comunidad de Madrid. Trabajamos de forma telemática, presencial o mediante un modelo híbrido, adaptándonos a las necesidades de cada proyecto. Cuando es necesario, nos desplazamos a las instalaciones del cliente para ofrecer un servicio más cercano y eficaz.
+Perucha y Asociados presta servicios a empresas y profesionales de toda la Comunidad de Madrid. Trabajamos de forma telemática, presencial o mediante un modelo híbrido, adaptándonos a las necesidades de cada proyecto. Cuando es necesario, nos desplazamos a las instalaciones del cliente para ofrecer un servicio más cercano y eficaz.
 
 ---
 

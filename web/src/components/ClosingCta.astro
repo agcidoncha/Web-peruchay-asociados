@@ -1,0 +1,73 @@
+---
+interface Props {
+	title: string;
+	titleNote?: string;
+	text: string;
+	ctaLabel: string;
+}
+
+const { title, titleNote, text, ctaLabel } = Astro.props;
+---
+
+<section class="closing-cta">
+	<div class="wrap">
+		<h2>{title}</h2>
+		{titleNote && <p class="note">{titleNote}</p>}
+		<p class="text">{text}</p>
+		<a href="/#contacto" class="cta">{ctaLabel}</a>
+	</div>
+</section>
+
+<style>
+	.closing-cta {
+		background: var(--color-accent-900);
+		padding: 100px 24px;
+		text-align: center;
+	}
+
+	.wrap {
+		max-width: 640px;
+		margin: 0 auto;
+	}
+
+	h2 {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: clamp(24px, 3.6vw, 36px);
+		line-height: 1.2;
+		color: #fff;
+		margin: 0 0 10px;
+	}
+
+	.note {
+		margin: 0 0 24px;
+		font-size: 13px;
+		color: var(--color-accent-300);
+		font-style: italic;
+	}
+
+	.text {
+		font-family: var(--font-body);
+		font-size: 16px;
+		line-height: 1.65;
+		color: rgba(255, 255, 255, 0.75);
+		margin: 0 0 32px;
+	}
+
+	.cta {
+		display: inline-flex;
+		align-items: center;
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 15px;
+		color: var(--color-accent-900);
+		background: #fff;
+		padding: 15px 30px;
+		border-radius: 999px;
+		text-decoration: none;
+	}
+
+	.cta:hover {
+		background: var(--color-accent-200);
+	}
+</style>

@@ -1,0 +1,152 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Faq from "../components/Faq.astro";
+import ClosingCta from "../components/ClosingCta.astro";
+import AreaHero from "../components/AreaHero.astro";
+import ProcessSteps from "../components/ProcessSteps.astro";
+import Pillars from "../components/finanzas-y-control/Pillars.astro";
+import Calculadora from "../components/finanzas-y-control/Calculadora.astro";
+
+const steps = [
+	{
+		n: "01",
+		title: "Recogemos los datos",
+		text: "Organizamos la información económica necesaria para conocer la situación real de la empresa.",
+	},
+	{
+		n: "02",
+		title: "Reportamos con claridad",
+		text: "Elaboramos informes comprensibles sobre ingresos, costes, márgenes, rentabilidad, previsiones e indicadores clave.",
+	},
+	{
+		n: "03",
+		title: "Recomendamos acciones",
+		text: "Identificamos desviaciones, áreas de mejora y medidas concretas que faciliten la toma de decisiones.",
+	},
+];
+
+const faqCategories = ["Control de gestión", "Planificación financiera"];
+
+const faqs = [
+	{
+		cat: "Control de gestión",
+		q: "¿Qué es el control de gestión?",
+		a: "El control de gestión convierte los datos económicos de la empresa en información útil para facilitar la toma de decisiones. Permite conocer la evolución del negocio, identificar desviaciones y actuar con mayor rapidez.",
+	},
+	{
+		cat: "Control de gestión",
+		q: "¿En qué puede ayudar a mi empresa?",
+		a: "Ayuda a conocer mejor la rentabilidad del negocio, controlar costes, identificar oportunidades de mejora y tomar decisiones basadas en datos objetivos.",
+	},
+	{
+		cat: "Control de gestión",
+		q: "¿Es lo mismo que llevar la contabilidad?",
+		a: "No. La contabilidad registra la actividad económica y cumple las obligaciones legales. El control de gestión utiliza esa información para analizar el negocio y ayudar en la toma de decisiones.",
+	},
+	{
+		cat: "Control de gestión",
+		q: "¿Qué información se analiza?",
+		a: "Ingresos, costes, márgenes, rentabilidad, presupuestos, previsiones, indicadores clave (KPI) y desviaciones respecto a los objetivos establecidos.",
+	},
+	{
+		cat: "Control de gestión",
+		q: "¿Puedo saber qué productos o servicios son más rentables?",
+		a: "Sí. Analizamos costes, ingresos y márgenes para identificar qué líneas de negocio generan mayor rentabilidad y cuáles requieren mejoras.",
+	},
+	{
+		cat: "Control de gestión",
+		q: "¿Cómo trabajáis el control de gestión?",
+		a: "Organizamos la información económica, elaboramos informes claros y proponemos acciones concretas para mejorar los resultados del negocio.",
+	},
+	{
+		cat: "Planificación financiera",
+		q: "¿Qué es la planificación financiera?",
+		a: "Consiste en anticipar la evolución económica de la empresa mediante presupuestos, previsiones y distintos escenarios para facilitar la toma de decisiones y reducir la incertidumbre.",
+	},
+	{
+		cat: "Planificación financiera",
+		q: "¿Qué es el análisis financiero?",
+		a: "Es el estudio de la situación económica y financiera de la empresa para evaluar su rentabilidad, liquidez, solvencia y capacidad de crecimiento.",
+	},
+	{
+		cat: "Planificación financiera",
+		q: "¿Qué diferencia hay entre un presupuesto y un forecast?",
+		a: "El presupuesto establece los objetivos al inicio del ejercicio. El forecast actualiza esas previsiones según la evolución real del negocio para anticipar desviaciones.",
+	},
+	{
+		cat: "Planificación financiera",
+		q: "¿Podéis ayudarme a preparar un presupuesto anual?",
+		a: "Sí. Elaboramos presupuestos económicos y financieros adaptados a cada empresa, incluyendo previsiones, escenarios y objetivos.",
+	},
+	{
+		cat: "Planificación financiera",
+		q: "¿Qué indicadores financieros son los más importantes?",
+		a: "Depende de cada empresa, pero habitualmente analizamos indicadores como rentabilidad, márgenes, EBITDA, liquidez, generación de caja y endeudamiento.",
+	},
+	{
+		cat: "Planificación financiera",
+		q: "¿También realizáis análisis de inversiones?",
+		a: "Sí. Evaluamos inversiones mediante herramientas como ROI, Payback y otros indicadores financieros que ayudan a valorar su rentabilidad y riesgo.",
+	},
+	{
+		cat: "Planificación financiera",
+		q: "¿Cómo puedo saber si mi empresa está creciendo de forma rentable?",
+		a: "Analizamos la evolución de las ventas, los costes, los márgenes y la generación de caja para comprobar si el crecimiento es sostenible y realmente aporta valor.",
+	},
+	{
+		cat: "Planificación financiera",
+		q: "¿Con qué frecuencia debería revisar la situación financiera de mi empresa?",
+		a: "Lo recomendable es realizar un seguimiento periódico. Un análisis mensual permite detectar desviaciones con tiempo suficiente para tomar decisiones.",
+	},
+];
+
+const faqSchema = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: faqs.map((faq) => ({
+		"@type": "Question",
+		name: faq.q,
+		acceptedAnswer: {
+			"@type": "Answer",
+			text: faq.a,
+		},
+	})),
+};
+---
+
+<Layout
+	title="Finanzas y Control | Perucha y Asociados — Control de gestión y planificación financiera"
+	description="Control de gestión, planificación financiera y análisis financiero para empresas: informes claros, presupuestos y previsiones para decidir con más seguridad."
+>
+	<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+	<Header active="finanzas-y-control" />
+
+	<main>
+		<AreaHero
+			eyebrow="Finanzas y Control"
+			title="Finanzas y Control, para decidir con seguridad"
+			description="Transformamos la información económica de tu empresa en una herramienta útil para planificar, controlar la rentabilidad y tomar decisiones con mayor confianza."
+			ctaLabel="Hablemos"
+			photoLabel="Foto: análisis financiero / reunión"
+			image="/images/hero-pages/finanzas-y-control-hero-page.webp"
+			imageAlt="Finanzas y Control — análisis financiero y planificación"
+		/>
+		<Pillars />
+		<ProcessSteps
+			title="Cómo trabajamos"
+			steps={steps}
+			closing="Adaptamos el nivel de análisis a las necesidades reales de cada empresa. Desde informes periódicos hasta apoyo puntual para decisiones concretas, sin necesidad de incorporar un controller en plantilla."
+		/>
+		<Calculadora />
+		<Faq categories={faqCategories} faqs={faqs} />
+		<ClosingCta
+			title="¿Quieres conocer mejor los números de tu empresa?"
+			text="Cuéntanos tu situación y valoraremos cómo podemos ayudarte a tomar decisiones con más información."
+			ctaLabel="Hablemos"
+		/>
+	</main>
+
+	<Footer />
+</Layout>

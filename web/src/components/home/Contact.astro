@@ -1,0 +1,417 @@
+---
+---
+
+<section id="contacto" class="contact">
+	<div class="wrap">
+		<div class="intro">
+			<h2>Hablemos de tu empresa.</h2>
+			<p class="lead">Cuéntanos tu situación y te responderemos a la mayor brevedad.</p>
+
+			<p class="eyebrow">Lo que recibirá</p>
+			<div class="receives">
+				<div>
+					<p class="item-title">Claridad</p>
+					<p class="item-text">Información ordenada y sin tecnicismos.</p>
+				</div>
+				<div>
+					<p class="item-title">Rigor</p>
+					<p class="item-text">Cumplimiento normativo y precisión.</p>
+				</div>
+				<div>
+					<p class="item-title">Acción</p>
+					<p class="item-text">Recomendaciones concretas, no solo datos.</p>
+				</div>
+			</div>
+		</div>
+
+		<form class="form" id="contact-form" method="POST" action="/contacto.php" enctype="multipart/form-data" novalidate>
+			<div class="row">
+				<div class="field">
+					<label for="nombre">Nombre</label>
+					<input id="nombre" name="nombre" type="text" placeholder="Tu nombre" required />
+				</div>
+				<div class="field">
+					<label for="empresa">Empresa</label>
+					<input id="empresa" name="empresa" type="text" placeholder="Nombre de tu empresa" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="field">
+					<label for="email">Email</label>
+					<input id="email" name="email" type="email" placeholder="tu@empresa.com" required />
+				</div>
+				<div class="field">
+					<label for="telefono">Teléfono</label>
+					<input id="telefono" name="telefono" type="tel" placeholder="Teléfono de contacto" />
+				</div>
+			</div>
+			<div class="field" data-simulacion-field hidden>
+				<label for="datos-simulacion">Datos de la simulación</label>
+				<textarea id="datos-simulacion" name="datos_simulacion" rows="4" readonly tabindex="-1"></textarea>
+			</div>
+			<div class="field">
+				<label for="mensaje">Mensaje</label>
+				<textarea id="mensaje" name="mensaje" rows="4" placeholder="Cuéntanos brevemente tu situación" required></textarea>
+			</div>
+			<div class="field">
+				<label for="archivo">Adjuntar archivo (opcional)</label>
+				<input id="archivo" name="archivo" type="file" accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.txt" />
+				<p class="field-hint">Máx. 8 MB. PDF, Word, Excel, imagen o texto.</p>
+			</div>
+			<div class="honeypot" aria-hidden="true">
+				<label for="web">No rellenar este campo</label>
+				<input id="web" name="web" type="text" tabindex="-1" autocomplete="off" />
+			</div>
+
+			<button type="button" class="privacy-toggle" data-privacy-toggle aria-expanded="false" aria-controls="privacy-layer-content">
+				<span>Ver información sobre el tratamiento de tus datos</span>
+				<svg class="privacy-toggle-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
+			</button>
+			<div class="privacy-layer" id="privacy-layer-content" hidden>
+				<p><strong>Responsable:</strong> MEPERMO S.L. (Perucha y Asociados).</p>
+				<p><strong>Finalidad:</strong> atender tu consulta o solicitud de presupuesto y mantener las comunicaciones relacionadas.</p>
+				<p><strong>Legitimación:</strong> medidas precontractuales solicitadas por ti y, cuando corresponda, consentimiento.</p>
+				<p><strong>Destinatarios:</strong> no se comunicarán datos salvo obligación legal o proveedores necesarios que actúen por cuenta del responsable.</p>
+				<p><strong>Derechos:</strong> puedes acceder, rectificar y suprimir tus datos, así como ejercer otros derechos, escribiendo a info@peruchayasociados.com.</p>
+				<p><strong>Más información:</strong> consulta la <a href="/politica-privacidad" target="_blank" rel="noopener">Política de privacidad</a>.</p>
+			</div>
+
+			<div class="field field-checkbox">
+				<input id="privacidad" name="privacidad" type="checkbox" required />
+				<label for="privacidad">He leído la <a href="/politica-privacidad" target="_blank" rel="noopener">Política de privacidad</a>.</label>
+			</div>
+
+			<button type="submit" class="submit">Enviar mensaje</button>
+			<p class="form-status" data-form-status role="status" aria-live="polite"></p>
+		</form>
+	</div>
+</section>
+
+<script>
+	try {
+		const resumenKeys = ["diagnosticoResumen", "calculadoraResumen", "autonomoSociedadResumen", "estimadorHorasResumen"];
+		const field = document.querySelector<HTMLElement>("#contacto [data-simulacion-field]");
+		const textarea = document.querySelector<HTMLTextAreaElement>("#contacto #datos-simulacion");
+		const key = resumenKeys.find((k) => sessionStorage.getItem(k));
+		if (key && field && textarea && !textarea.value) {
+			textarea.value = sessionStorage.getItem(key) ?? "";
+			field.hidden = false;
+			sessionStorage.removeItem(key);
+		}
+	} catch {
+		/* sessionStorage no disponible: se omite el prellenado */
+	}
+
+	const form = document.querySelector<HTMLFormElement>("#contact-form");
+	const statusEl = document.querySelector<HTMLElement>("[data-form-status]");
+	const submitBtn = form?.querySelector<HTMLButtonElement>(".submit");
+
+	const privacyToggle = document.querySelector<HTMLButtonElement>("[data-privacy-toggle]");
+	const privacyContent = document.querySelector<HTMLElement>("#privacy-layer-content");
+	privacyToggle?.addEventListener("click", () => {
+		const isOpen = privacyToggle.getAttribute("aria-expanded") === "true";
+		privacyToggle.setAttribute("aria-expanded", String(!isOpen));
+		if (privacyContent) privacyContent.hidden = isOpen;
+	});
+
+	form?.addEventListener("submit", async (event) => {
+		event.preventDefault();
+		if (!statusEl || !submitBtn) return;
+
+		statusEl.textContent = "";
+		statusEl.classList.remove("success", "error");
+		submitBtn.disabled = true;
+		const textoOriginal = submitBtn.textContent;
+		submitBtn.textContent = "Enviando…";
+
+		try {
+			const formData = new FormData(form);
+			const response = await fetch("/contacto.php", { method: "POST", body: formData });
+			const data = await response.json();
+
+			if (response.ok && data.success) {
+				form.reset();
+				const simField = document.querySelector<HTMLElement>("[data-simulacion-field]");
+				if (simField) simField.hidden = true;
+				statusEl.textContent = data.message || "Mensaje enviado. Te responderemos a la mayor brevedad.";
+				statusEl.classList.add("success");
+			} else {
+				statusEl.textContent = data.message || "No se ha podido enviar el mensaje. Inténtalo de nuevo.";
+				statusEl.classList.add("error");
+			}
+		} catch {
+			statusEl.textContent = "No se ha podido enviar el mensaje. Comprueba tu conexión e inténtalo de nuevo.";
+			statusEl.classList.add("error");
+		} finally {
+			submitBtn.disabled = false;
+			submitBtn.textContent = textoOriginal;
+		}
+	});
+</script>
+
+<style>
+	.contact {
+		background: var(--color-accent-100);
+		padding: 80px 24px;
+	}
+
+	.wrap {
+		max-width: 1180px;
+		margin: 0 auto;
+		display: grid;
+		gap: 48px;
+	}
+
+	.wrap > * {
+		min-width: 0;
+	}
+
+	h2 {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: clamp(26px, 3.6vw, 38px);
+		line-height: 1.15;
+		color: var(--color-text);
+		margin: 0 0 16px;
+	}
+
+	.lead {
+		font-family: var(--font-body);
+		font-size: 16px;
+		line-height: 1.6;
+		color: var(--color-muted);
+		margin: 0 0 40px;
+	}
+
+	.eyebrow {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 13px;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--color-accent-700);
+		margin: 0 0 20px;
+	}
+
+	.receives {
+		display: flex;
+		flex-direction: column;
+		gap: 22px;
+	}
+
+	.receives > div {
+		border-top: 1px solid var(--color-divider);
+		padding-top: 16px;
+	}
+
+	.item-title {
+		margin: 0 0 4px;
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 17px;
+		color: var(--color-text);
+	}
+
+	.item-text {
+		margin: 0;
+		font-size: 14.5px;
+		color: var(--color-muted);
+	}
+
+	.form {
+		background: #fff;
+		border: 1px solid var(--color-divider);
+		border-radius: 22px;
+		padding: 32px;
+		display: flex;
+		flex-direction: column;
+		gap: 18px;
+	}
+
+	.row {
+		display: grid;
+		gap: 18px;
+	}
+
+	.field {
+		display: flex;
+		flex-direction: column;
+		gap: 7px;
+	}
+
+	.field[hidden] {
+		display: none;
+	}
+
+	label {
+		font-family: var(--font-body);
+		font-size: 13px;
+		color: var(--color-muted);
+	}
+
+	input,
+	textarea {
+		background: var(--color-bg);
+		border: 1px solid var(--color-divider);
+		border-radius: 10px;
+		padding: 12px 14px;
+		color: var(--color-text);
+		font-family: var(--font-body);
+		font-size: 15px;
+		outline: none;
+	}
+
+	input:focus,
+	textarea:focus {
+		border-color: var(--color-accent);
+	}
+
+	textarea {
+		resize: vertical;
+	}
+
+	textarea[readonly] {
+		resize: none;
+		background: var(--color-accent-100);
+		color: var(--color-muted);
+		cursor: default;
+	}
+
+	textarea[readonly]:focus {
+		border-color: var(--color-divider);
+	}
+
+	.submit {
+		margin-top: 4px;
+		background: var(--color-accent-dark);
+		color: #fff;
+		border: none;
+		border-radius: 10px;
+		padding: 15px;
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 15px;
+		cursor: pointer;
+	}
+
+	.submit:hover {
+		background: var(--color-accent-900);
+	}
+
+	.field-hint {
+		margin: 6px 0 0;
+		font-size: 12.5px;
+		color: var(--color-muted);
+	}
+
+	.honeypot {
+		position: absolute;
+		left: -9999px;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+	}
+
+	.privacy-toggle {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		background: none;
+		border: none;
+		padding: 0;
+		font-family: var(--font-body);
+		font-size: 12.5px;
+		font-weight: 600;
+		color: var(--color-accent-dark);
+		cursor: pointer;
+		align-self: flex-start;
+	}
+
+	.privacy-toggle:hover {
+		text-decoration: underline;
+	}
+
+	.privacy-toggle-icon {
+		flex: 0 0 auto;
+		transition: transform 0.2s ease;
+	}
+
+	.privacy-toggle[aria-expanded="true"] .privacy-toggle-icon {
+		transform: rotate(180deg);
+	}
+
+	.privacy-layer {
+		background: var(--color-bg);
+		border-radius: 10px;
+		padding: 14px 16px;
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+	}
+
+	.privacy-layer[hidden] {
+		display: none;
+	}
+
+	.privacy-layer p {
+		margin: 0;
+		font-size: 12.5px;
+		line-height: 1.5;
+		color: var(--color-muted);
+	}
+
+	.privacy-layer strong {
+		color: var(--color-text);
+	}
+
+	.privacy-layer a {
+		color: var(--color-accent-dark);
+	}
+
+	.field-checkbox {
+		flex-direction: row;
+		align-items: flex-start;
+		gap: 10px;
+	}
+
+	.field-checkbox input {
+		margin-top: 3px;
+		width: 16px;
+		height: 16px;
+		flex: 0 0 auto;
+	}
+
+	.field-checkbox label {
+		font-size: 13.5px;
+		color: var(--color-text);
+	}
+
+	.field-checkbox a {
+		color: var(--color-accent-dark);
+	}
+
+	.form-status {
+		margin: 0;
+		font-size: 14px;
+		min-height: 1.4em;
+	}
+
+	.form-status.success {
+		color: #166534;
+	}
+
+	.form-status.error {
+		color: #b91c1c;
+	}
+
+	@media (min-width: 900px) {
+		.wrap {
+			grid-template-columns: 0.8fr 1.2fr;
+			gap: 64px;
+		}
+
+		.row {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+</style>

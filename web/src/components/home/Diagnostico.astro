@@ -1,0 +1,701 @@
+---
+---
+
+<section id="diagnostico" class="diagnostico">
+	<div class="wrap">
+		<p class="eyebrow">Diagnóstico rápido</p>
+		<h2>Descubre qué necesita tu empresa</h2>
+		<p class="subtitle">Responde 5 preguntas y obtén una orientación en menos de un minuto.</p>
+		<p class="disclaimer">Resultado orientativo: no sustituye un análisis profesional de la situación concreta de tu empresa.</p>
+
+		<div class="card">
+			<div class="top-row">
+				<span data-step-label>Pregunta 1 de 5</span>
+				<span data-step-percent>20 % completado</span>
+			</div>
+			<div class="progress-track">
+				<div class="progress-fill" data-progress-fill></div>
+			</div>
+
+			<div data-question-view>
+				<fieldset class="question">
+					<legend data-question-text></legend>
+					<div class="options" data-options></div>
+				</fieldset>
+
+				<div class="bottom-row">
+					<p class="privacy-note">
+						<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+						No se solicitan datos personales
+					</p>
+					<div class="nav-buttons">
+						<button type="button" class="btn-back" data-back hidden>Volver</button>
+						<button type="button" class="btn-continue" data-continue disabled>Continuar</button>
+					</div>
+				</div>
+			</div>
+
+			<div data-result-view hidden>
+				<div class="result-icon" data-result-icon></div>
+				<p class="result-eyebrow" data-result-eyebrow>Área principal recomendada</p>
+				<h3 data-result-title></h3>
+				<p class="result-text" data-result-text></p>
+
+				<div class="also-check" data-also-check hidden>
+					<p class="also-check-label" data-also-check-label>También conviene revisar</p>
+					<div class="also-check-items" data-also-check-items></div>
+				</div>
+
+				<div class="bottom-row">
+					<p class="privacy-note">
+						<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+						Resultado orientativo y sin datos personales
+					</p>
+					<div class="nav-buttons">
+						<button type="button" class="btn-back" data-restart>Repetir diagnóstico</button>
+						<a class="btn-continue" data-result-cta href="/#contacto">Solicitar una valoración</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.diagnostico {
+		padding: 88px 24px;
+		background: var(--color-bg);
+	}
+
+	.wrap {
+		max-width: 760px;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	.eyebrow {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 13px;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--color-accent);
+		margin: 0 0 18px;
+	}
+
+	h2 {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: clamp(28px, 3.6vw, 40px);
+		color: var(--color-text);
+		margin: 0 0 14px;
+	}
+
+	.subtitle {
+		font-family: var(--font-body);
+		font-size: 16px;
+		color: var(--color-muted);
+		margin: 0 0 10px;
+	}
+
+	.disclaimer {
+		font-family: var(--font-body);
+		font-size: 13px;
+		font-style: italic;
+		color: var(--color-accent-700);
+		margin: 0 0 40px;
+	}
+
+	.card {
+		text-align: left;
+		background: #fff;
+		border: 1px solid var(--color-divider);
+		border-radius: 24px;
+		box-shadow: var(--shadow-sm);
+		padding: 40px;
+	}
+
+	.top-row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		font-family: var(--font-body);
+		margin: 0 0 14px;
+	}
+
+	.top-row [data-step-label] {
+		font-weight: 600;
+		color: var(--color-text);
+		font-size: 15px;
+	}
+
+	.top-row [data-step-percent] {
+		color: var(--color-muted);
+		font-size: 14px;
+	}
+
+	.progress-track {
+		height: 6px;
+		border-radius: 3px;
+		background: var(--color-accent-200);
+		overflow: hidden;
+		margin: 0 0 32px;
+	}
+
+	.progress-fill {
+		height: 100%;
+		width: 20%;
+		border-radius: 3px;
+		background: var(--color-accent);
+		transition: width 0.35s ease;
+	}
+
+	.question {
+		border: none;
+		padding: 0;
+		margin: 0 0 28px;
+	}
+
+	.question legend {
+		padding: 0;
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 19px;
+		line-height: 1.4;
+		color: var(--color-text);
+		margin: 0 0 20px;
+	}
+
+	.options {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+
+	:global(#diagnostico .option) {
+		position: relative;
+		display: flex;
+		align-items: center;
+		gap: 16px;
+		border: 1.5px solid var(--color-divider);
+		border-radius: 14px;
+		padding: 16px 18px;
+		cursor: pointer;
+		transition: border-color 0.2s ease, background 0.2s ease;
+	}
+
+	:global(#diagnostico .option:hover) {
+		border-color: var(--color-accent-300);
+		background: var(--color-accent-100);
+	}
+
+	:global(#diagnostico .option input) {
+		position: absolute;
+		opacity: 0;
+		width: 1px;
+		height: 1px;
+	}
+
+	:global(#diagnostico .option input:focus-visible ~ .option-icon) {
+		outline: 2px solid var(--color-accent);
+		outline-offset: 2px;
+	}
+
+	:global(#diagnostico .option-icon) {
+		flex: 0 0 auto;
+		width: 38px;
+		height: 38px;
+		border-radius: 10px;
+		background: var(--color-accent-100);
+		color: var(--color-accent-800);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	:global(#diagnostico .option-icon svg) {
+		width: 60%;
+		height: 60%;
+	}
+
+	:global(#diagnostico .option-text) {
+		flex: 1;
+		font-family: var(--font-body);
+		font-size: 15.5px;
+		color: var(--color-text);
+	}
+
+	:global(#diagnostico .option-check) {
+		flex: 0 0 auto;
+		width: 26px;
+		height: 26px;
+		border-radius: 50%;
+		background: var(--color-accent);
+		color: #fff;
+		display: none;
+		align-items: center;
+		justify-content: center;
+	}
+
+	:global(#diagnostico .option.selected) {
+		border-color: var(--color-accent);
+		background: var(--color-accent-100);
+	}
+
+	:global(#diagnostico .option.selected .option-check) {
+		display: flex;
+	}
+
+	.bottom-row {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 16px;
+		padding-top: 24px;
+		border-top: 1px solid var(--color-divider);
+	}
+
+	.privacy-note {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		font-family: var(--font-body);
+		font-size: 13.5px;
+		color: var(--color-muted);
+		margin: 0;
+	}
+
+	.nav-buttons {
+		display: flex;
+		gap: 12px;
+		margin-left: auto;
+	}
+
+	.btn-back {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 14.5px;
+		color: var(--color-text);
+		background: transparent;
+		border: 1.5px solid var(--color-divider);
+		border-radius: 999px;
+		padding: 11px 22px;
+		cursor: pointer;
+		text-decoration: none;
+		display: inline-flex;
+		align-items: center;
+	}
+
+	.btn-back:hover {
+		border-color: var(--color-accent-300);
+	}
+
+	.btn-continue {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 14.5px;
+		color: #fff;
+		background: var(--color-accent-900);
+		border: none;
+		border-radius: 999px;
+		padding: 12px 24px;
+		cursor: pointer;
+		text-decoration: none;
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+	}
+
+	.btn-continue:hover {
+		background: var(--color-accent-800);
+	}
+
+	.btn-continue:disabled {
+		background: var(--color-accent-300);
+		cursor: not-allowed;
+	}
+
+	[data-result-view] {
+		text-align: center;
+	}
+
+	.result-icon {
+		width: 72px;
+		height: 72px;
+		border-radius: 50%;
+		background: var(--color-accent-900);
+		color: #fff;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 4px auto 22px;
+	}
+
+	:global(#diagnostico .result-icon svg) {
+		width: 30px;
+		height: 30px;
+	}
+
+	.result-eyebrow {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 12.5px;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--color-accent);
+		margin: 0 0 10px;
+	}
+
+	[data-result-title] {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 28px;
+		color: var(--color-text);
+		margin: 0 0 16px;
+	}
+
+	.result-text {
+		font-family: var(--font-body);
+		font-size: 15.5px;
+		line-height: 1.65;
+		color: var(--color-muted);
+		max-width: 520px;
+		margin: 0 auto 28px;
+	}
+
+	.also-check {
+		background: var(--color-accent-100);
+		border-radius: 16px;
+		padding: 20px 24px;
+		margin: 0 0 28px;
+	}
+
+	.also-check-label {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 13px;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--color-accent-700);
+		text-align: center;
+		margin: 0 0 14px;
+	}
+
+	.also-check-items {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 24px;
+	}
+
+	:global(#diagnostico .also-check-item) {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		font-family: var(--font-body);
+		font-size: 14.5px;
+		color: var(--color-text);
+	}
+
+	:global(#diagnostico .also-check-item .option-icon) {
+		width: 30px;
+		height: 30px;
+	}
+
+	[data-result-view] .bottom-row {
+		text-align: left;
+	}
+
+	@media (min-width: 640px) {
+		.options {
+			flex-direction: column;
+		}
+	}
+</style>
+
+<script>
+	type AreaKey = "gestion" | "contabilidad" | "digitalizacion";
+
+	const icons: Record<string, string> = {
+		chart: '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M7 15l4-4 3 3 5-6"></path></svg>',
+		document: '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6"></path><path d="M9 15l2 2 4-4"></path></svg>',
+		clock: '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>',
+		grid: '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect></svg>',
+		search: '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>',
+		bolt: '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"></path></svg>',
+		gear: '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>',
+		question: '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M9.1 9a3 3 0 1 1 5.8 1c0 2-3 2-3 4"></path><path d="M12 17h.01"></path></svg>',
+		monitor: '<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"></rect><path d="M8 21h8"></path><path d="M12 17v4"></path></svg>',
+		layers: '<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 5-9 5-9-5 9-5z"></path><path d="M3 12l9 5 9-5"></path><path d="M3 17l9 5 9-5"></path></svg>',
+	};
+
+	const areas: Record<AreaKey, { name: string; href: string; icon: string }> = {
+		gestion: { name: "Finanzas y Control", href: "/finanzas-y-control", icon: "chart" },
+		contabilidad: { name: "Contabilidad y Fiscalidad", href: "/contabilidad-y-fiscalidad", icon: "document" },
+		digitalizacion: { name: "Digitalización y Automatización", href: "/digitalizacion-y-automatizacion", icon: "monitor" },
+	};
+
+	const resultTexts: Record<AreaKey, string> = {
+		gestion: "Tus respuestas indican que necesitas conocer mejor los costes, márgenes, rentabilidad o evolución del negocio. Organizar y analizar esta información puede ayudarte a detectar desviaciones y tomar decisiones con mayor fundamento.",
+		contabilidad: "Tus respuestas muestran que la organización contable, las obligaciones tributarias o la revisión de la situación fiscal requieren atención. Una valoración permitirá comprobar las necesidades concretas y definir el alcance del servicio.",
+		digitalizacion: "Tus respuestas indican que las tareas manuales, la duplicidad de información o la falta de conexión entre herramientas están consumiendo tiempo. Revisar los procesos actuales permitirá detectar qué partes pueden digitalizarse o automatizarse.",
+	};
+
+	const combinedText = "Tus respuestas muestran necesidades relacionadas con más de un área. Antes de aplicar una solución aislada, conviene ordenar las prioridades y valorar cómo se relacionan la gestión, la contabilidad y los procesos internos.";
+
+	const adaptationPhrases: Record<string, string> = {
+		A: "El primer paso sería revisar la situación actual y definir mejoras concretas.",
+		B: "La colaboración podría plantearse como una intervención concreta, con un alcance previamente definido.",
+		C: "La solución podría incluir la implantación y un acompañamiento adaptado a su funcionamiento.",
+		D: "Una primera conversación permitirá concretar la necesidad y decidir por dónde empezar.",
+	};
+
+	const helpLabels: Record<string, string> = {
+		A: "Analizar la situación y definir mejoras concretas",
+		B: "Resolver una necesidad puntual",
+		C: "Implantar una solución y acompañar su funcionamiento",
+		D: "Todavía no lo tengo claro",
+	};
+
+	type OptionKey = "A" | "B" | "C" | "D";
+	interface Option {
+		key: OptionKey;
+		text: string;
+		icon: string;
+	}
+	interface Question {
+		text: string;
+		options: Option[];
+	}
+
+	const questions: Question[] = [
+		{
+			text: "¿Cuál de estas situaciones preocupa más actualmente en tu empresa?",
+			options: [
+				{ key: "A", text: "No tenemos suficiente control sobre costes, márgenes o rentabilidad.", icon: "chart" },
+				{ key: "B", text: "Necesitamos mejorar la gestión contable o fiscal.", icon: "document" },
+				{ key: "C", text: "Perdemos demasiado tiempo en tareas manuales o repetitivas.", icon: "clock" },
+				{ key: "D", text: "Tenemos varios de estos problemas.", icon: "grid" },
+			],
+		},
+		{
+			text: "¿Qué aspecto tienes menos controlado actualmente?",
+			options: [
+				{ key: "A", text: "Costes, márgenes y rentabilidad.", icon: "chart" },
+				{ key: "B", text: "Contabilidad, impuestos y obligaciones.", icon: "document" },
+				{ key: "C", text: "Procesos internos, herramientas y automatizaciones.", icon: "clock" },
+				{ key: "D", text: "Varios de los anteriores.", icon: "grid" },
+			],
+		},
+		{
+			text: "¿Qué tareas consumen más tiempo en tu empresa?",
+			options: [
+				{ key: "A", text: "Preparar informes y revisar datos financieros.", icon: "chart" },
+				{ key: "B", text: "Gestionar facturas, contabilidad e impuestos.", icon: "document" },
+				{ key: "C", text: "Repetir tareas manuales entre diferentes herramientas.", icon: "clock" },
+				{ key: "D", text: "Varias de las anteriores.", icon: "grid" },
+			],
+		},
+		{
+			text: "¿Qué mejora tendría mayor impacto en tu empresa?",
+			options: [
+				{ key: "A", text: "Tomar mejores decisiones con datos claros.", icon: "chart" },
+				{ key: "B", text: "Tener la contabilidad y fiscalidad mejor organizadas.", icon: "document" },
+				{ key: "C", text: "Automatizar procesos y ahorrar tiempo.", icon: "clock" },
+				{ key: "D", text: "Mejorar varios de estos aspectos.", icon: "grid" },
+			],
+		},
+		{
+			text: "¿Qué tipo de ayuda necesitas?",
+			options: [
+				{ key: "A", text: "Analizar la situación y definir mejoras concretas.", icon: "search" },
+				{ key: "B", text: "Resolver una necesidad puntual.", icon: "bolt" },
+				{ key: "C", text: "Implantar una solución y acompañar su funcionamiento.", icon: "gear" },
+				{ key: "D", text: "Todavía no lo tengo claro.", icon: "question" },
+			],
+		},
+	];
+
+	const root = document.querySelector("#diagnostico");
+	if (root) {
+		const stepLabel = root.querySelector("[data-step-label]") as HTMLElement;
+		const stepPercent = root.querySelector("[data-step-percent]") as HTMLElement;
+		const progressFill = root.querySelector("[data-progress-fill]") as HTMLElement;
+		const questionView = root.querySelector("[data-question-view]") as HTMLElement;
+		const resultView = root.querySelector("[data-result-view]") as HTMLElement;
+		const questionText = root.querySelector("[data-question-text]") as HTMLElement;
+		const optionsContainer = root.querySelector("[data-options]") as HTMLElement;
+		const backBtn = root.querySelector("[data-back]") as HTMLButtonElement;
+		const continueBtn = root.querySelector("[data-continue]") as HTMLButtonElement;
+		const restartBtn = root.querySelector("[data-restart]") as HTMLButtonElement;
+		const resultIcon = root.querySelector("[data-result-icon]") as HTMLElement;
+		const resultEyebrow = root.querySelector("[data-result-eyebrow]") as HTMLElement;
+		const resultTitle = root.querySelector("[data-result-title]") as HTMLElement;
+		const resultText = root.querySelector("[data-result-text]") as HTMLElement;
+		const alsoCheck = root.querySelector("[data-also-check]") as HTMLElement;
+		const alsoCheckLabel = root.querySelector("[data-also-check-label]") as HTMLElement;
+		const alsoCheckItems = root.querySelector("[data-also-check-items]") as HTMLElement;
+		const resultCta = root.querySelector("[data-result-cta]") as HTMLAnchorElement;
+
+		let step = 0;
+		const answers: (OptionKey | null)[] = [null, null, null, null, null];
+
+		function renderStep(index: number) {
+			const q = questions[index];
+			stepLabel.textContent = `Pregunta ${index + 1} de 5`;
+			stepPercent.textContent = `${Math.round(((index + 1) / 5) * 100)} % completado`;
+			progressFill.style.width = `${Math.round(((index + 1) / 5) * 100)}%`;
+			questionText.textContent = q.text;
+			backBtn.hidden = index === 0;
+			continueBtn.textContent = index === 4 ? "Ver resultado" : "Continuar";
+			continueBtn.disabled = !answers[index];
+
+			optionsContainer.innerHTML = "";
+			q.options.forEach((opt) => {
+				const label = document.createElement("label");
+				label.className = "option" + (answers[index] === opt.key ? " selected" : "");
+				label.innerHTML = `
+					<input type="radio" name="diagnostico-option" value="${opt.key}" ${answers[index] === opt.key ? "checked" : ""} />
+					<span class="option-icon">${icons[opt.icon]}</span>
+					<span class="option-text">${opt.text}</span>
+					<span class="option-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></span>
+				`;
+				const input = label.querySelector("input") as HTMLInputElement;
+				input.addEventListener("change", () => {
+					answers[index] = opt.key;
+					optionsContainer.querySelectorAll(".option").forEach((el) => el.classList.remove("selected"));
+					label.classList.add("selected");
+					continueBtn.disabled = false;
+				});
+				optionsContainer.appendChild(label);
+			});
+		}
+
+		function computeResult() {
+			const scores: Record<AreaKey, number> = { gestion: 0, contabilidad: 0, digitalizacion: 0 };
+			let dCount = 0;
+			for (let i = 0; i < 4; i++) {
+				const a = answers[i];
+				if (a === "A") scores.gestion++;
+				else if (a === "B") scores.contabilidad++;
+				else if (a === "C") scores.digitalizacion++;
+				else if (a === "D") dCount++;
+			}
+
+			const entries = Object.entries(scores) as [AreaKey, number][];
+			const maxScore = Math.max(...entries.map(([, s]) => s));
+			const threeWayTie = scores.gestion === scores.contabilidad && scores.contabilidad === scores.digitalizacion;
+			const isCombined = threeWayTie || dCount >= 2;
+			const helpKey = (answers[4] ?? "D") as OptionKey;
+			const adaptation = adaptationPhrases[helpKey];
+
+			if (isCombined) {
+				const sorted = [...entries].sort((a, b) => b[1] - a[1]);
+				const relevant: AreaKey[] = threeWayTie ? sorted.map(([k]) => k) : sorted.slice(0, 2).map(([k]) => k);
+				renderCombinedResult(relevant, adaptation);
+			} else {
+				const priority: AreaKey[] = ["gestion", "contabilidad", "digitalizacion"];
+				const primary = priority.find((k) => scores[k] === maxScore) as AreaKey;
+				const secondary = priority.filter((k) => k !== primary);
+				renderSingleResult(primary, secondary, adaptation);
+			}
+		}
+
+		function renderSingleResult(primary: AreaKey, secondary: AreaKey[], adaptation: string) {
+			resultIcon.innerHTML = icons[areas[primary].icon];
+			resultEyebrow.textContent = "Área principal recomendada";
+			resultTitle.textContent = areas[primary].name;
+			resultText.textContent = `${resultTexts[primary]} ${adaptation}`;
+			resultCta.href = "/#contacto";
+
+			alsoCheck.hidden = false;
+			alsoCheckLabel.textContent = "También conviene revisar";
+			alsoCheckItems.innerHTML = "";
+			secondary.forEach((key) => {
+				const item = document.createElement("span");
+				item.className = "also-check-item";
+				item.innerHTML = `<span class="option-icon">${icons[areas[key].icon]}</span> ${areas[key].name}`;
+				alsoCheckItems.appendChild(item);
+			});
+
+			storeSummary(`Resultado del diagnóstico: ${areas[primary].name}.\nÁrea complementaria: ${secondary.map((k) => areas[k].name).join(", ")}.\nTipo de ayuda: ${helpLabels[answers[4] ?? "D"]}.`);
+		}
+
+		function renderCombinedResult(relevant: AreaKey[], adaptation: string) {
+			resultIcon.innerHTML = icons.layers;
+			resultEyebrow.textContent = "Recomendación";
+			resultTitle.textContent = "Una solución combinada";
+			resultText.textContent = `${combinedText} ${adaptation}`;
+
+			alsoCheck.hidden = false;
+			alsoCheckLabel.textContent = "Áreas relacionadas";
+			alsoCheckItems.innerHTML = "";
+			relevant.forEach((key) => {
+				const item = document.createElement("span");
+				item.className = "also-check-item";
+				item.innerHTML = `<span class="option-icon">${icons[areas[key].icon]}</span> ${areas[key].name}`;
+				alsoCheckItems.appendChild(item);
+			});
+
+			resultCta.href = "/#contacto";
+			storeSummary(`Resultado del diagnóstico: necesidad combinada (${relevant.map((k) => areas[k].name).join(", ")}).\nTipo de ayuda: ${helpLabels[answers[4] ?? "D"]}.`);
+		}
+
+		function storeSummary(text: string) {
+			try {
+				sessionStorage.setItem("diagnosticoResumen", text);
+			} catch {
+				/* sessionStorage no disponible: se omite el prellenado del formulario */
+			}
+		}
+
+		function showResult() {
+			questionView.hidden = true;
+			resultView.hidden = false;
+			stepLabel.textContent = "Diagnóstico completado";
+			stepPercent.textContent = "100 % completado";
+			progressFill.style.width = "100%";
+			computeResult();
+		}
+
+		function restart() {
+			answers.fill(null);
+			step = 0;
+			questionView.hidden = false;
+			resultView.hidden = true;
+			renderStep(0);
+		}
+
+		backBtn.addEventListener("click", () => {
+			if (step > 0) {
+				step--;
+				renderStep(step);
+			}
+		});
+
+		continueBtn.addEventListener("click", () => {
+			if (!answers[step]) return;
+			if (step < 4) {
+				step++;
+				renderStep(step);
+			} else {
+				showResult();
+			}
+		});
+
+		restartBtn.addEventListener("click", restart);
+
+		resultCta.addEventListener("click", () => {
+			const field = document.querySelector<HTMLElement>("#contacto [data-simulacion-field]");
+			const textarea = document.querySelector<HTMLTextAreaElement>("#contacto #datos-simulacion");
+			const resumen = sessionStorage.getItem("diagnosticoResumen");
+			if (field && textarea && resumen && !textarea.value) {
+				textarea.value = resumen;
+				field.hidden = false;
+			}
+		});
+
+		renderStep(0);
+	}
+</script>

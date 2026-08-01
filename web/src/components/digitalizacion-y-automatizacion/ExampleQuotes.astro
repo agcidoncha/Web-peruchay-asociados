@@ -1,0 +1,72 @@
+---
+const examples = [
+	"Nuestra imagen corporativa se ha quedado anticuada y no es coherente entre departamentos.",
+	"Necesitamos una nueva web, pero también que se conecte con nuestros sistemas.",
+	"El equipo dedica demasiadas horas a copiar datos de una herramienta a otra.",
+	"Generamos los mismos informes manualmente todos los meses.",
+	"Tenemos documentos e información repartidos en distintos lugares.",
+	"Necesitamos una aplicación interna, pero ninguna solución estándar se adapta al proceso.",
+	"Queremos incorporar inteligencia artificial, pero no sabemos en qué proceso puede aportar valor.",
+	"Nuestro departamento tiene el proyecto definido, pero necesita apoyo especializado para diseñarlo y desarrollarlo.",
+	"Queremos probar una idea con un prototipo antes de invertir en el desarrollo completo.",
+];
+---
+
+<section class="examples">
+	<div class="wrap">
+		<h2>Ejemplos de necesidades que podemos resolver</h2>
+		<p class="subtitle">Orientativos — cada proyecto se estudia de forma individual.</p>
+		<div class="list">
+			{examples.map((example) => (
+				<p class="quote">"{example}"</p>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.examples {
+		padding: 88px 24px;
+		background: var(--color-surface);
+	}
+
+	.wrap {
+		max-width: 900px;
+		margin: 0 auto;
+	}
+
+	h2 {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: clamp(24px, 3.2vw, 34px);
+		text-align: center;
+		color: var(--color-text);
+		margin: 0 0 14px;
+	}
+
+	.subtitle {
+		font-family: var(--font-body);
+		font-size: 15px;
+		text-align: center;
+		color: var(--color-muted);
+		margin: 0 0 44px;
+	}
+
+	.list {
+		display: flex;
+		flex-direction: column;
+		gap: 14px;
+	}
+
+	.quote {
+		background: #fff;
+		border: 1px solid var(--color-divider);
+		border-radius: 14px;
+		padding: 18px 22px;
+		margin: 0;
+		font-family: var(--font-body);
+		font-size: 15px;
+		font-style: italic;
+		color: var(--color-accent-700);
+	}
+</style>

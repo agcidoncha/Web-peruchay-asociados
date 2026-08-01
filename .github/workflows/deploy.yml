@@ -37,3 +37,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./web/dist/
           server-dir: ./www/
+          # config.php contiene las credenciales reales de la base de datos y se sube a mano,
+          # una sola vez, directamente al hosting — nunca debe tocarlo el despliegue automático.
+          exclude: |
+            **/config.php

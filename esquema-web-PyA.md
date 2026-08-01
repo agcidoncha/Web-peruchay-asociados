@@ -9,7 +9,7 @@ Documento único de referencia: estructura, contenido y estado de cada página. 
    - Áreas
    - Equipo
    - Contacto
-2. **Finanzas y Control** *(antes "Control de Gestión")* (`/control-de-gestion` — URL sin cambiar de momento) — página independiente
+2. **Finanzas y Control** (`/finanzas-y-control`) — página independiente
 3. **Contabilidad y Fiscalidad** (`/contabilidad-y-fiscalidad`) — página independiente
 4. **Digitalización y Automatización** (`/digitalizacion-y-automatizacion`) — página independiente
 
@@ -30,10 +30,11 @@ Documento único de referencia: estructura, contenido y estado de cada página. 
 - Título: **Soluciones para tu empresa.**
 - Subtítulo: Experiencia en control de gestión, planificación y análisis financiero, contabilidad y fiscalidad, digitalización y automatización, adaptada a las necesidades de cada empresa.
 - CTA: **[Hablemos]** → ancla a Contacto
+- Datos de refuerzo bajo los CTA (decidido): "Más de 30 años de experiencia" / "Trato cercano" / "Rigor profesional"
 
 Muy visual, breve, sin bloques de texto largos. Único lugar donde aparece el resumen de las 3 áreas en una frase — no se repite en ningún otro punto de la home.
 
-_Pendiente: si lleva foto (equipo/oficina) o se queda solo tipográfico; si se añade algún dato de refuerzo (ej. "+30 años") — no decidido._
+_Pendiente: si lleva foto (equipo/oficina) o se queda solo tipográfico — no decidido._
 
 ### 2. Áreas
 
@@ -85,12 +86,13 @@ _Pendiente: formato de presentación de las tarjetas (tamaño, si se amplían al
 - Contenido real (47 preguntas) ya redactado y organizado por página/categoría en `faqs-pya-categorizadas.md` — documento oficial de FAQ, sustituye a `faqs-pya.md`.
 - Reparto por página confirmado: Home (Información general + Colaboración y contratación), Finanzas y Control (Control de gestión + Planificación financiera), Contabilidad y Fiscalidad (Contabilidad + Fiscalidad), Digitalización y Automatización (Digitalización + Automatización + Inteligencia Artificial). Ya implementado en las 4 páginas de Claude Design.
 
-### 6. Diagnóstico rápido _(nuevo — propuesta)_
+### 6. Diagnóstico rápido — implementado (2026-07-29)
 
-- Mini-cuestionario de 4-5 preguntas ("¿Qué necesita tu empresa?") que recomienda al final qué área contratar (Finanzas y Control / Contabilidad y Fiscalidad / Digitalización), o una combinación.
-- Termina enlazando al formulario de Contacto, idealmente con la recomendación ya indicada para que el usuario no parta de cero.
+- Cuestionario de 5 preguntas que recomienda al final una o varias áreas (Finanzas y Control / Contabilidad y Fiscalidad / Digitalización y Automatización), o una solución combinada.
+- Termina enlazando al formulario de Contacto con la recomendación ya incorporada al campo de mensaje (sin enviar nada hasta que el usuario confirme el formulario).
 - Objetivo: responder de forma interactiva a la duda ya recogida en el FAQ ("¿puedo contratar solo un área?") y mejorar la conversión frente a un formulario en frío.
-- _Pendiente: redactar las preguntas y la lógica de recomendación con el usuario._
+- Especificación completa (preguntas, opciones, lógica de puntuación y textos de resultado): `automatizaciones/diagnostico rapido/diagnostico-rapido.md` — documento oficial para este componente, no se duplica aquí.
+- Ubicado en la Home, justo después de "¿En qué podemos ayudarte?".
 
 ### 7. Contacto
 
@@ -100,7 +102,7 @@ _Pendiente: formato de presentación de las tarjetas (tamaño, si se amplían al
 
 ### Footer _(transversal, no es una sección de scroll)_
 
-- Datos NAP visibles (Nombre, Villaviciosa de Odón - Madrid, teléfono) — no solo dentro del formulario de contacto. Clave para SEO local y coherencia con la ficha de Google Business Profile.
+- Datos visibles: Nombre y teléfono. **Decisión 2026-07-30: la ubicación (Villaviciosa de Odón, Madrid) se retira intencionadamente de todo el sitio por privacidad** — footer, datos estructurados (schema.org), meta descripciones y la FAQ "¿Dónde estáis ubicados?" ya no la mencionan. Esto reduce el SEO local (NAP incompleto), asumido conscientemente por el usuario.
 - Tagline de LinkedIn "Tu visión, nuestra dedicación."
 - Enlaces a las 3 páginas de área.
 
@@ -110,7 +112,7 @@ _Pendiente: formato de presentación de las tarjetas (tamaño, si se amplían al
 
 Cada una necesita, como mínimo: hero propio (título + breve descripción), detalle de servicios concretos, CTA final hacia Contacto, enlace de vuelta a la principal.
 
-### A. Finanzas y Control *(antes "Control de Gestión")*
+### A. Finanzas y Control
 
 Contenido reaprovechado de la web actual (servicio "Control de gestión" + el bloque "Cómo trabajamos", que encaja de forma natural con esta área):
 
@@ -122,7 +124,7 @@ Contenido reaprovechado de la web actual (servicio "Control de gestión" + el bl
 **Herramienta interactiva — Calculadora de punto de equilibrio** _(nuevo — propuesta)_
 Con costes fijos, coste variable por unidad y precio de venta, calcula cuántas ventas necesita hacer la empresa para empezar a ganar dinero. Cifra orientativa, no un cálculo exacto. Conecta con "análisis de costes y rentabilidad" (perfil de Bebo) e "informes claros sobre ingresos, costes y márgenes". Termina con CTA a Contacto.
 
-_Pendiente: redactar el hero propio (título + descripción breve) — puede usar como base la frase ya definida en la sección Áreas de la Home. Definir la lógica exacta de la calculadora._
+~~Pendiente: redactar el hero propio. Definir la lógica exacta de la calculadora.~~ — cerrado: hero y calculadora implementados y verificados.
 
 ### B. Contabilidad y Fiscalidad
 
@@ -136,7 +138,7 @@ Fusión de los dos servicios actuales "Contabilidad completa" y "Gestión fiscal
 **Herramienta interactiva — Simulador de ahorro fiscal / "autónomo vs sociedad"** _(nuevo — propuesta)_
 Cifra orientativa (no un cálculo exacto) sobre qué opción sale mejor fiscalmente. Es una de las búsquedas más habituales en Google ("calculadora autónomo sociedad"), así que además de captar contacto ayuda al SEO de esta página. Termina con CTA a Contacto.
 
-_Pendiente: redactar el hero propio (título + descripción breve). Definir la lógica exacta del simulador._
+~~Pendiente: redactar el hero propio. Definir la lógica exacta del simulador.~~ — cerrado: hero y motor de cálculo implementados; queda solo el contraste final con Renta/Sociedades WEB Open, el calendario 2026-2029 de Sociedades y la regla de redondeo antes de publicarse (ver "Pendientes para cerrar el esquema").
 
 ### C. Digitalización y Automatización
 
@@ -156,7 +158,7 @@ Sin contenido reaprovechable de la web actual (es un área nueva). Contenido def
 **Herramienta interactiva — Estimador de horas ahorradas con automatización** _(nuevo — propuesta)_
 Preguntas tipo "¿cuántas horas al mes dedicáis a tareas repetitivas (facturación manual, introducir datos, etc.)?" y da una cifra orientativa de horas y coste ahorrable automatizando. Sirve de gancho de entrada para la página que menos contenido propio tenía. Termina con CTA a Contacto.
 
-_Pendiente: definir la lógica exacta del estimador._
+~~Pendiente: definir la lógica exacta del estimador.~~ — cerrado: implementado y verificado.
 
 _Pendiente de confirmar: si el perfil de 20 años es uno de los 2 perfiles de equipo aún vacíos (3 o 4) — si es así, se reutiliza ahí con nombre y foto (ver sección 4. Equipo)._
 
@@ -189,7 +191,7 @@ El SEO es un objetivo importantísimo del proyecto, no un añadido opcional. Cua
 - **Un único `<h1>` por página**, jerarquía correcta de encabezados (`h2`/`h3` por sección, sin saltarse niveles).
 - **HTML semántico**: `<header>`, `<nav>`, `<main>`, `<section>`, `<footer>`, no `<div>` genéricos donde exista una etiqueta semántica.
 - **Sitemap.xml y robots.txt** generados automáticamente (Astro lo permite con la integración `@astrojs/sitemap`).
-- **URLs limpias**: las ya definidas en el mapa del sitio (`/control-de-gestion`, etc.), sin parámetros ni mayúsculas.
+- **URLs limpias**: las ya definidas en el mapa del sitio (`/finanzas-y-control`, etc.), sin parámetros ni mayúsculas.
 - **Rendimiento**: aprovechar que Astro genera HTML estático (sin JS innecesario) para mantener buenos Core Web Vitals — imágenes optimizadas y con `alt` descriptivo siempre.
 - **Datos estructurados (schema.org)**: marcado `LocalBusiness` o `ProfessionalService` en la Home, con NAP (nombre, dirección, teléfono) — refuerza el SEO local ya priorizado en el footer.
 - **Open Graph / Twitter Cards**: imagen y descripción al compartir cualquier página en redes.
@@ -202,15 +204,16 @@ El SEO es un objetivo importantísimo del proyecto, no un añadido opcional. Cua
 - Perfiles 3 y 4 del equipo (confirmar si el perfil 3 es el de Digitalización y Automatización; datos del perfil 4)
 - Nombre real del Perfil 2 (actualmente solo "Sobrina", nota interna)
 - Formato de las tarjetas de Equipo (tamaño, expandibles, etc.)
-- Hero de la Home: foto sí/no, datos de refuerzo sí/no
-- Hero propio de Finanzas y Control y de Contabilidad y Fiscalidad (título + descripción breve)
-- Preguntas y respuestas definitivas del FAQ (hay borrador sin confirmar)
-- Preguntas y lógica de recomendación del Diagnóstico rápido (Home)
-- Lógica de la Calculadora de punto de equilibrio (Finanzas y Control)
-- Lógica del Simulador de ahorro fiscal / autónomo vs sociedad (Contabilidad y Fiscalidad)
-- Lógica del Estimador de horas ahorradas con automatización (Digitalización y Automatización)
+- Hero de la Home: foto sí/no (datos de refuerzo ya decididos, ver sección Inicio)
+- ~~Hero propio de Finanzas y Control y de Contabilidad y Fiscalidad (título + descripción breve)~~ — cerrado 2026-07-30, textos ya en las páginas.
+- ~~Preguntas y respuestas definitivas del FAQ~~ — cerrado: `faqs-pya-categorizadas.md` es el banco oficial y ya está implementado en las 4 páginas.
+- ~~Preguntas y lógica de recomendación del Diagnóstico rápido (Home)~~ — implementado, ver sección "6. Diagnóstico rápido"
+- ~~Lógica de la Calculadora de punto de equilibrio (Finanzas y Control)~~ — implementada y verificada.
+- ~~Lógica del Simulador de ahorro fiscal / autónomo vs sociedad (Contabilidad y Fiscalidad)~~ — motor implementado y verificado; pendiente de contraste final con Renta/Sociedades WEB Open antes de publicar (ver `web/src/data/fiscal/2025.json`).
+- ~~Lógica del Estimador de horas ahorradas con automatización (Digitalización y Automatización)~~ — implementada y verificada.
 - Campos exactos del formulario de contacto
-- Teléfono de contacto para el NAP del footer (ya tenemos la ubicación: Villaviciosa de Odón, Madrid)
+- ~~Teléfono de contacto para el NAP del footer~~ — 639 00 38 17, ya en el footer y en el dato estructurado de la Home.
+- ~~Ubicación en el footer y datos estructurados~~ — retirada a petición del usuario por privacidad (ver sección Footer más arriba), no es un pendiente sino una decisión tomada.
 - Estilo visual definitivo (en curso en Claude Design)
-- ~~Coherencia del nombre "Finanzas y Control" en el footer y la etiqueta del hero~~ — corregido en las 4 páginas de Claude Design. Queda sin cambiar el nombre del archivo (`Control de Gestion.dc.html`) y la URL, a propósito.
-- Decidir si la URL `/control-de-gestion` cambia a `/finanzas-y-control` o se mantiene por SEO (de momento se mantiene)
+- ~~Coherencia del nombre "Finanzas y Control" en el footer y la etiqueta del hero~~ — corregido en las 4 páginas de Claude Design.
+- ~~Decidir si la URL `/control-de-gestion` cambia a `/finanzas-y-control`~~ — decidido: cambia a `/finanzas-y-control`. Es una web nueva, sin URLs antiguas que preservar. El archivo de diseño de Claude Design (`Control de Gestion.dc.html`) conserva su nombre original solo como referencia interna, no afecta a la web.

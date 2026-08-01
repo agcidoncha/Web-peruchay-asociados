@@ -1,0 +1,86 @@
+---
+---
+
+<section class="transition">
+	<div class="wrap">
+		<p class="eyebrow">Nuestro equipo</p>
+		<h2>Experiencia que sigue evolucionando.</h2>
+		<p class="text">
+			Un equipo de perfiles complementarios, con una amplia trayectoria profesional y una forma
+			de trabajar práctica, cercana y actual.
+		</p>
+		<a href="#equipo" class="cta" id="show-team">Conoce al equipo</a>
+	</div>
+</section>
+
+<script>
+	const link = document.querySelector("#show-team");
+	const team = document.querySelector("#equipo");
+
+	link?.addEventListener("click", (e) => {
+		if (!team) return;
+		e.preventDefault();
+		team.hidden = false;
+		team.scrollIntoView({ behavior: "smooth" });
+	});
+
+	if (team && window.location.hash === "#equipo") {
+		team.hidden = false;
+	}
+</script>
+
+<style>
+	.transition {
+		background: var(--color-accent-dark);
+		padding: 80px 24px;
+		text-align: center;
+	}
+
+	.wrap {
+		max-width: 680px;
+		margin: 0 auto;
+	}
+
+	.eyebrow {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 13px;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--color-accent-light);
+		margin: 0 0 18px;
+	}
+
+	h2 {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: clamp(26px, 4vw, 38px);
+		line-height: 1.15;
+		color: #fff;
+		margin: 0 0 20px;
+	}
+
+	.text {
+		font-family: var(--font-body);
+		font-size: 16px;
+		line-height: 1.6;
+		color: rgba(255, 255, 255, 0.8);
+		margin: 0 0 32px;
+	}
+
+	.cta {
+		display: inline-flex;
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 15px;
+		color: var(--color-accent-900);
+		background: #fff;
+		padding: 14px 30px;
+		border-radius: 999px;
+		text-decoration: none;
+	}
+
+	.cta:hover {
+		background: var(--color-accent-200);
+	}
+</style>

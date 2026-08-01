@@ -1,0 +1,39 @@
+---
+interface Props {
+	paragraphs: string[];
+}
+
+const { paragraphs } = Astro.props;
+---
+
+<section class="intro">
+	<div class="wrap">
+		{paragraphs.map((p) => (
+			<p>{p}</p>
+		))}
+	</div>
+</section>
+
+<style>
+	.intro {
+		padding: 72px 24px;
+		background: var(--color-bg);
+	}
+
+	.wrap {
+		max-width: 720px;
+		margin: 0 auto;
+	}
+
+	p {
+		font-family: var(--font-body);
+		font-size: 17px;
+		line-height: 1.7;
+		color: var(--color-accent-700);
+		margin: 0 0 20px;
+	}
+
+	p:last-child {
+		margin-bottom: 0;
+	}
+</style>

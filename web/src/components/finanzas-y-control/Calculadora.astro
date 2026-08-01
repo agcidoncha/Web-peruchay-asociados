@@ -1,0 +1,627 @@
+---
+---
+
+<section id="simulador" class="calculadora">
+	<div class="wrap">
+		<h2>Calculadora de punto de equilibrio</h2>
+		<p class="subtitle">Descubre cuántas ventas necesitas para cubrir tus costes y empezar a obtener beneficio.</p>
+		<p class="disclaimer">El resultado es una estimación orientativa y no sustituye un análisis financiero adaptado a tu empresa.</p>
+
+		<div class="card">
+			<div class="card-grid">
+				<div class="form-col">
+					<div class="period-toggle" role="group" aria-label="Periodo de los costes fijos">
+						<button type="button" class="period-btn" data-period="mensual" aria-pressed="true">Mensual</button>
+						<button type="button" class="period-btn" data-period="anual" aria-pressed="false">Anual</button>
+					</div>
+
+					<div class="field">
+						<div class="field-label">
+							<label for="cf">Costes fijos <span data-period-word>mensuales</span></label>
+							<button type="button" class="info-btn" data-info-toggle="cf" aria-expanded="false" aria-controls="help-cf" aria-label="Qué son los costes fijos">i</button>
+						</div>
+						<p class="field-help" id="help-cf" hidden>Son los gastos que tienes aunque no vendas nada: alquiler, seguros, gestoría, salarios fijos o programas informáticos.</p>
+						<input type="text" inputmode="decimal" id="cf" name="cf" placeholder="5.000 €" autocomplete="off" />
+					</div>
+
+					<div class="field">
+						<div class="field-label">
+							<label for="pv">Precio de venta por unidad</label>
+							<button type="button" class="info-btn" data-info-toggle="pv" aria-expanded="false" aria-controls="help-pv" aria-label="Qué es el precio de venta">i</button>
+						</div>
+						<p class="field-help" id="help-pv" hidden>El importe que cobras al cliente por una unidad, pedido o servicio, sin IVA.</p>
+						<input type="text" inputmode="decimal" id="pv" name="pv" placeholder="50 €" autocomplete="off" />
+					</div>
+
+					<div class="field">
+						<div class="field-label">
+							<label for="cv">Coste variable por unidad</label>
+							<button type="button" class="info-btn" data-info-toggle="cv" aria-expanded="false" aria-controls="help-cv" aria-label="Qué es el coste variable">i</button>
+						</div>
+						<p class="field-help" id="help-cv" hidden>El gasto que aparece cada vez que vendes: materiales, embalaje, transporte, comisiones o mano de obra directa.</p>
+						<input type="text" inputmode="decimal" id="cv" name="cv" placeholder="20 €" autocomplete="off" />
+					</div>
+
+					<p class="form-error" data-form-error role="alert" hidden></p>
+
+					<button type="button" class="btn-calcular" data-calcular>Calcular punto de equilibrio</button>
+				</div>
+
+				<div class="result-col">
+					<div data-result-empty class="result-empty">
+						<p>Introduce tus datos y pulsa "Calcular punto de equilibrio" para ver tu resultado aquí.</p>
+					</div>
+
+					<div data-result-filled hidden>
+						<p class="result-label">Tu punto de equilibrio</p>
+						<p class="result-number"><span data-result-units>0</span> ventas</p>
+						<p class="result-desc" data-result-desc></p>
+
+						<div class="result-rows">
+							<div class="result-row">
+								<span>Facturación mínima</span>
+								<strong data-result-fm></strong>
+							</div>
+							<div class="result-row">
+								<span>Margen por venta</span>
+								<strong data-result-mc></strong>
+							</div>
+						</div>
+
+						<p class="result-note" data-result-note></p>
+					</div>
+				</div>
+			</div>
+
+			<div class="bottom-row" data-bottom-row hidden>
+				<p class="privacy-note">
+					<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+					No se guardan ni se envían tus datos
+				</p>
+				<div class="nav-buttons">
+					<button type="button" class="btn-back" data-probar-otros>Probar otros datos</button>
+					<a class="btn-continue" data-cta-analisis href="/#contacto">Solicitar un análisis</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="info-block">
+			<h3>¿Qué es el punto de equilibrio?</h3>
+			<p>Es el nivel de ventas en el que el dinero obtenido cubre justo todos los costes. Antes de alcanzarlo la empresa pierde dinero; a partir de ahí empieza a obtener beneficio.</p>
+			<h3>Costes fijos y costes variables</h3>
+			<p>Los costes fijos existen aunque no vendas nada (alquiler, seguros, salarios fijos). Los costes variables aparecen cada vez que realizas una venta (materiales, comisiones, transporte).</p>
+			<h3>Margen de contribución</h3>
+			<p>Es lo que queda de cada venta, una vez descontado su coste variable, para pagar los costes fijos. Cuanto mayor sea, menos ventas necesitas para cubrir tus costes.</p>
+		</div>
+	</div>
+</section>
+
+<style>
+	.calculadora {
+		padding: 88px 24px;
+		background: var(--color-surface);
+	}
+
+	.wrap {
+		max-width: 980px;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	h2 {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: clamp(28px, 3.6vw, 40px);
+		color: var(--color-text);
+		margin: 0 0 14px;
+	}
+
+	.subtitle {
+		font-family: var(--font-body);
+		font-size: 16px;
+		color: var(--color-muted);
+		margin: 0 0 10px;
+	}
+
+	.disclaimer {
+		font-family: var(--font-body);
+		font-size: 13px;
+		font-style: italic;
+		color: var(--color-accent-700);
+		margin: 0 0 40px;
+	}
+
+	.card {
+		text-align: left;
+		background: #fff;
+		border: 1px solid var(--color-divider);
+		border-radius: 24px;
+		box-shadow: var(--shadow-sm);
+		padding: 40px;
+	}
+
+	.card-grid {
+		display: grid;
+		gap: 32px;
+	}
+
+	.period-toggle {
+		display: inline-flex;
+		gap: 8px;
+		margin: 0 0 24px;
+	}
+
+	.period-btn {
+		font-family: var(--font-body);
+		font-size: 13.5px;
+		font-weight: 600;
+		padding: 8px 16px;
+		border-radius: 999px;
+		cursor: pointer;
+		border: 1.5px solid var(--color-divider);
+		color: var(--color-text);
+		background: #fff;
+	}
+
+	.period-btn[aria-pressed="true"] {
+		border-color: var(--color-accent-800);
+		background: var(--color-accent-800);
+		color: #fff;
+	}
+
+	.field {
+		margin: 0 0 22px;
+	}
+
+	.field-label {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		margin: 0 0 8px;
+	}
+
+	.field-label label {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 15px;
+		color: var(--color-text);
+	}
+
+	.info-btn {
+		width: 18px;
+		height: 18px;
+		border-radius: 50%;
+		border: 1.5px solid var(--color-accent-300);
+		background: transparent;
+		color: var(--color-accent-700);
+		font-family: var(--font-body);
+		font-size: 11px;
+		font-style: italic;
+		line-height: 1;
+		cursor: pointer;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0;
+	}
+
+	.info-btn:hover,
+	.info-btn[aria-expanded="true"] {
+		border-color: var(--color-accent);
+		color: var(--color-accent);
+	}
+
+	.field-help {
+		margin: -2px 0 10px;
+		font-family: var(--font-body);
+		font-size: 13px;
+		line-height: 1.5;
+		color: var(--color-muted);
+		background: var(--color-bg);
+		border-radius: 10px;
+		padding: 10px 14px;
+	}
+
+	.field input {
+		width: 100%;
+		background: var(--color-bg);
+		border: 1px solid var(--color-divider);
+		border-radius: 12px;
+		padding: 13px 16px;
+		color: var(--color-text);
+		font-family: var(--font-body);
+		font-size: 16px;
+		outline: none;
+	}
+
+	.field input:focus {
+		border-color: var(--color-accent);
+	}
+
+	.form-error {
+		margin: 0 0 18px;
+		font-family: var(--font-body);
+		font-size: 14px;
+		line-height: 1.5;
+		color: #9a3412;
+		background: #fff3e8;
+		border: 1px solid #fed7aa;
+		border-radius: 10px;
+		padding: 12px 16px;
+	}
+
+	.btn-calcular {
+		width: 100%;
+		background: var(--color-accent-900);
+		color: #fff;
+		border: none;
+		border-radius: 12px;
+		padding: 15px;
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 15.5px;
+		cursor: pointer;
+	}
+
+	.btn-calcular:hover {
+		background: var(--color-accent-800);
+	}
+
+	.result-col {
+		background: var(--color-accent-100);
+		border-radius: 18px;
+		padding: 32px 28px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	.result-empty p {
+		margin: 0;
+		font-family: var(--font-body);
+		font-size: 15px;
+		line-height: 1.6;
+		color: var(--color-accent-700);
+	}
+
+	.result-label {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 17px;
+		color: var(--color-accent-800);
+		margin: 0 0 6px;
+	}
+
+	.result-number {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: clamp(36px, 5vw, 48px);
+		color: var(--color-accent-900);
+		margin: 0 0 14px;
+		line-height: 1;
+	}
+
+	.result-desc {
+		font-family: var(--font-body);
+		font-size: 14.5px;
+		line-height: 1.55;
+		color: var(--color-accent-700);
+		margin: 0 0 22px;
+	}
+
+	.result-rows {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+		margin: 0 0 20px;
+	}
+
+	.result-row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		font-family: var(--font-body);
+		font-size: 14.5px;
+		color: var(--color-text);
+		border-top: 1px solid var(--color-accent-300);
+		padding-top: 12px;
+	}
+
+	.result-row strong {
+		font-family: var(--font-heading);
+		font-size: 16px;
+		color: var(--color-accent-900);
+	}
+
+	.result-note {
+		margin: 0;
+		padding: 12px 14px;
+		border-left: 3px solid #e8734a;
+		background: #fff;
+		border-radius: 0 8px 8px 0;
+		font-family: var(--font-body);
+		font-size: 13.5px;
+		line-height: 1.5;
+		color: var(--color-text);
+	}
+
+	.bottom-row {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 16px;
+		margin-top: 32px;
+		padding-top: 24px;
+		border-top: 1px solid var(--color-divider);
+	}
+
+	.privacy-note {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		font-family: var(--font-body);
+		font-size: 13.5px;
+		color: var(--color-muted);
+		margin: 0;
+	}
+
+	.nav-buttons {
+		display: flex;
+		gap: 12px;
+		margin-left: auto;
+	}
+
+	.btn-back {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 14.5px;
+		color: var(--color-text);
+		background: transparent;
+		border: 1.5px solid var(--color-divider);
+		border-radius: 999px;
+		padding: 11px 22px;
+		cursor: pointer;
+		text-decoration: none;
+		display: inline-flex;
+		align-items: center;
+	}
+
+	.btn-back:hover {
+		border-color: var(--color-accent-300);
+	}
+
+	.btn-continue {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 14.5px;
+		color: #fff;
+		background: var(--color-accent-900);
+		border: none;
+		border-radius: 999px;
+		padding: 12px 24px;
+		cursor: pointer;
+		text-decoration: none;
+		display: inline-flex;
+		align-items: center;
+	}
+
+	.btn-continue:hover {
+		background: var(--color-accent-800);
+	}
+
+	.info-block {
+		text-align: left;
+		margin-top: 48px;
+		padding-top: 40px;
+		border-top: 1px solid var(--color-divider);
+		display: grid;
+		gap: 24px;
+	}
+
+	.info-block h3 {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 18px;
+		color: var(--color-text);
+		margin: 0 0 8px;
+	}
+
+	.info-block p {
+		font-family: var(--font-body);
+		font-size: 14.5px;
+		line-height: 1.6;
+		color: var(--color-muted);
+		margin: 0;
+	}
+
+	@media (min-width: 800px) {
+		.card-grid {
+			grid-template-columns: 1fr 1fr;
+		}
+
+		.info-block {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+</style>
+
+<script>
+	const section = document.querySelector("#simulador.calculadora");
+	if (section) {
+		const cfInput = section.querySelector<HTMLInputElement>("#cf");
+		const pvInput = section.querySelector<HTMLInputElement>("#pv");
+		const cvInput = section.querySelector<HTMLInputElement>("#cv");
+		const calcularBtn = section.querySelector<HTMLButtonElement>("[data-calcular]");
+		const formError = section.querySelector<HTMLElement>("[data-form-error]");
+		const resultEmpty = section.querySelector<HTMLElement>("[data-result-empty]");
+		const resultFilled = section.querySelector<HTMLElement>("[data-result-filled]");
+		const resultUnits = section.querySelector<HTMLElement>("[data-result-units]");
+		const resultDesc = section.querySelector<HTMLElement>("[data-result-desc]");
+		const resultFm = section.querySelector<HTMLElement>("[data-result-fm]");
+		const resultMc = section.querySelector<HTMLElement>("[data-result-mc]");
+		const resultNote = section.querySelector<HTMLElement>("[data-result-note]");
+		const bottomRow = section.querySelector<HTMLElement>("[data-bottom-row]");
+		const probarOtrosBtn = section.querySelector<HTMLButtonElement>("[data-probar-otros]");
+		const ctaAnalisis = section.querySelector<HTMLAnchorElement>("[data-cta-analisis]");
+		const periodBtns = Array.from(section.querySelectorAll<HTMLButtonElement>(".period-btn"));
+		const periodWord = section.querySelector<HTMLElement>("[data-period-word]");
+
+		let period: "mensual" | "anual" = "mensual";
+
+		periodBtns.forEach((btn) => {
+			btn.addEventListener("click", () => {
+				period = btn.dataset.period === "anual" ? "anual" : "mensual";
+				periodBtns.forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+				if (periodWord) periodWord.textContent = period === "anual" ? "anuales" : "mensuales";
+			});
+		});
+
+		section.querySelectorAll<HTMLButtonElement>("[data-info-toggle]").forEach((btn) => {
+			btn.addEventListener("click", () => {
+				const help = document.getElementById(btn.getAttribute("aria-controls") ?? "");
+				if (!help) return;
+				const isOpen = btn.getAttribute("aria-expanded") === "true";
+				btn.setAttribute("aria-expanded", String(!isOpen));
+				help.hidden = isOpen;
+			});
+		});
+
+		function parseEsNumber(raw: string): number | null {
+			let s = raw.trim().replace(/€/g, "").replace(/\s/g, "");
+			if (!s) return null;
+			const hasComma = s.includes(",");
+			const hasDot = s.includes(".");
+			if (hasComma && hasDot) {
+				s = s.replace(/\./g, "").replace(",", ".");
+			} else if (hasComma) {
+				s = s.replace(",", ".");
+			} else if (hasDot) {
+				const parts = s.split(".");
+				const lastPart = parts[parts.length - 1];
+				if (parts.length > 1 && lastPart.length === 3) {
+					s = parts.join("");
+				}
+			}
+			const n = Number(s);
+			return Number.isFinite(n) ? n : null;
+		}
+
+		function formatEs(n: number): string {
+			return new Intl.NumberFormat("es-ES", { maximumFractionDigits: 2, useGrouping: true }).format(n);
+		}
+
+		function showError(message: string) {
+			if (!formError) return;
+			formError.textContent = message;
+			formError.hidden = false;
+			resultFilled?.setAttribute("hidden", "");
+			if (resultEmpty) resultEmpty.hidden = false;
+			bottomRow?.setAttribute("hidden", "");
+		}
+
+		function clearError() {
+			if (!formError) return;
+			formError.hidden = true;
+			formError.textContent = "";
+		}
+
+		function showInfo(message: string) {
+			if (!formError) return;
+			formError.textContent = message;
+			formError.hidden = false;
+		}
+
+		function calcular() {
+			clearError();
+			const cf = cfInput ? parseEsNumber(cfInput.value) : null;
+			const pv = pvInput ? parseEsNumber(pvInput.value) : null;
+			const cv = cvInput ? parseEsNumber(cvInput.value) : null;
+
+			if (cf === null || pv === null || cv === null) {
+				showError("Introduce los tres datos para realizar el cálculo.");
+				return;
+			}
+			if (cf < 0 || pv < 0 || cv < 0) {
+				showError("Los importes no pueden ser negativos.");
+				return;
+			}
+			if (pv === 0) {
+				showError("El precio de venta debe ser mayor que cero.");
+				return;
+			}
+			if (cf > 100000000 || pv > 10000000 || cv > 10000000) {
+				showError("Revisa la cantidad introducida. Parece demasiado elevada para este cálculo.");
+				return;
+			}
+			if (cv === pv) {
+				showError("Cada venta cuesta lo mismo que ingresas por ella. Con estos datos, ninguna venta aporta dinero para cubrir los costes fijos.");
+				return;
+			}
+			if (cv > pv) {
+				showError("El coste de cada venta es superior a su precio. Antes de calcular el punto de equilibrio, revisa el precio o reduce el coste variable.");
+				return;
+			}
+
+			const mc = pv - cv;
+			const peExacto = cf / mc;
+			const peUnidades = Math.ceil(peExacto);
+			const fm = peUnidades * pv;
+			const mcPorcentaje = (mc / pv) * 100;
+			const periodoLabel = period === "anual" ? "año" : "mes";
+
+			if (resultUnits) resultUnits.textContent = formatEs(peUnidades);
+			if (resultDesc) {
+				resultDesc.textContent = `Necesitas realizar ${formatEs(peUnidades)} ventas al ${periodoLabel} para cubrir todos tus costes.`;
+			}
+			if (resultFm) resultFm.textContent = `${formatEs(fm)} €`;
+			if (resultMc) resultMc.textContent = `${formatEs(mc)} € (${formatEs(mcPorcentaje)} %)`;
+			if (resultNote) {
+				resultNote.textContent = `A partir de la venta ${formatEs(peUnidades + 1)} empezarías a obtener beneficio.`;
+			}
+
+			if (cf === 0) {
+				showInfo("Según los datos introducidos, no existen costes fijos que cubrir. Revisa la cantidad si este resultado no refleja tu situación.");
+			}
+
+			if (resultEmpty) resultEmpty.hidden = true;
+			if (resultFilled) resultFilled.hidden = false;
+			if (bottomRow) bottomRow.hidden = false;
+
+			ctaAnalisis?.setAttribute("href", "/#contacto");
+			try {
+				sessionStorage.setItem(
+					"calculadoraResumen",
+					`Resultado de la calculadora de punto de equilibrio:\nPeriodo: ${period}.\nCostes fijos: ${formatEs(cf)} €.\nPrecio de venta: ${formatEs(pv)} €.\nCoste variable: ${formatEs(cv)} €.\nMargen por venta: ${formatEs(mc)} €.\nPunto de equilibrio: ${formatEs(peUnidades)} ventas.\nFacturación mínima: ${formatEs(fm)} €.`,
+				);
+			} catch {
+				/* sessionStorage no disponible: se omite el prellenado del formulario */
+			}
+		}
+
+		calcularBtn?.addEventListener("click", calcular);
+
+		probarOtrosBtn?.addEventListener("click", () => {
+			cfInput?.focus();
+		});
+
+		ctaAnalisis?.addEventListener("click", () => {
+			const field = document.querySelector<HTMLElement>("#contacto [data-simulacion-field]");
+			const textarea = document.querySelector<HTMLTextAreaElement>("#contacto #datos-simulacion");
+			const resumen = sessionStorage.getItem("calculadoraResumen");
+			if (field && textarea && resumen && !textarea.value) {
+				textarea.value = resumen;
+				field.hidden = false;
+			}
+		});
+
+		[cfInput, pvInput, cvInput].forEach((input) => {
+			input?.addEventListener("keydown", (e) => {
+				if (e.key === "Enter") {
+					e.preventDefault();
+					calcular();
+				}
+			});
+		});
+	}
+</script>

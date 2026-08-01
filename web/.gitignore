@@ -17,6 +17,14 @@ pnpm-debug.log*
 .env
 .env.production
 
+# credenciales reales del backend del formulario de contacto — se suben a mano al hosting,
+# nunca por git ni por el despliegue automático (ver public/config.example.php)
+public/config.php
+
+# archivos subidos por el formulario de contacto en desarrollo local
+public/uploads/contacto/*
+!public/uploads/contacto/.htaccess
+
 # macOS-specific files
 .DS_Store
 

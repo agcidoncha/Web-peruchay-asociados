@@ -1,0 +1,1158 @@
+---
+---
+
+<section id="simulador" class="estimador">
+	<div class="wrap">
+		<p class="eyebrow">Estimador de automatización</p>
+		<h2>¿Cuánto tiempo podría recuperar tu equipo?</h2>
+		<p class="subtitle">Analiza una tarea manual y repetitiva para estimar cuánto tiempo podría liberarse al automatizar parte del proceso.</p>
+
+		<div class="card">
+			<p class="step-caption" data-step-caption>Paso 1 de 3 · La tarea</p>
+			<div class="stepper" data-stepper>
+				<div class="stepper-item" data-stepper-item="1">
+					<span class="stepper-circle" data-stepper-circle>1</span>
+					<span class="stepper-label">La tarea</span>
+				</div>
+				<div class="stepper-line" data-stepper-line="1"></div>
+				<div class="stepper-item" data-stepper-item="2">
+					<span class="stepper-circle" data-stepper-circle>2</span>
+					<span class="stepper-label">Tiempo y frecuencia</span>
+				</div>
+				<div class="stepper-line" data-stepper-line="2"></div>
+				<div class="stepper-item" data-stepper-item="3">
+					<span class="stepper-circle" data-stepper-circle>3</span>
+					<span class="stepper-label">Automatización</span>
+				</div>
+			</div>
+
+			<!-- Paso 1 — La tarea -->
+			<div data-step="1" class="step-view">
+				<div class="step-grid">
+					<div class="form-col">
+						<h3>Cuéntanos qué tarea quieres analizar</h3>
+
+						<div class="field">
+							<label for="est-tipo">¿Qué tarea repetitiva quieres analizar?</label>
+							<select id="est-tipo">
+								<option value="" selected disabled>Selecciona un tipo de tarea</option>
+								<option value="datos">Introducción o traslado de datos</option>
+								<option value="documentos">Generación o envío de documentos</option>
+								<option value="informes">Preparación de informes</option>
+								<option value="avisos">Avisos o notificaciones</option>
+								<option value="formularios">Tratamiento de formularios</option>
+								<option value="archivos">Organización de archivos</option>
+								<option value="registros">Actualización de registros</option>
+								<option value="intercambio">Intercambio de información entre herramientas</option>
+								<option value="otro">Otro proceso administrativo</option>
+							</select>
+						</div>
+
+						<div class="field">
+							<label for="est-personas">¿Cuántas personas realizan esta tarea?</label>
+							<div class="field-unit">
+								<input type="text" inputmode="numeric" id="est-personas" placeholder="Ej. 3" autocomplete="off" />
+								<span class="unit">personas</span>
+							</div>
+							<p class="field-help">Incluye solo a quienes dedican tiempo directo a completar o revisar la tarea.</p>
+						</div>
+
+						<div class="field">
+							<label for="est-descripcion">Describe brevemente la tarea (opcional)</label>
+							<textarea id="est-descripcion" rows="3" placeholder="Ej. Copiar los pedidos recibidos por correo al programa de gestión."></textarea>
+						</div>
+
+						<p class="form-error" data-error="1" role="alert" hidden></p>
+					</div>
+
+					<div class="info-col">
+						<h4>¿Qué vamos a calcular?</h4>
+						<ul class="info-list">
+							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span>Tiempo manual actual</li>
+							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"></path><path d="M3 4v5h5"></path><path d="M12 7v5l3 2"></path></svg></span>Horas que podrían recuperarse</li>
+							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4 4-6 8-6s8 2 8 6"></path></svg></span>Tiempo que seguiría siendo humano</li>
+							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M7 15l4-4 3 3 5-6"></path></svg></span>Proyección mensual y anual</li>
+						</ul>
+						<p class="info-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8h.01"></path><path d="M11 11.5h1v4.5h1"></path></svg>El resultado será orientativo y dependerá del proceso, sus excepciones y las herramientas utilizadas.</p>
+					</div>
+				</div>
+
+				<div class="bottom-row">
+					<p class="privacy-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>Tus datos no se guardan.</p>
+					<div class="nav-buttons">
+						<button type="button" class="btn-continue" data-continue="1">Continuar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></button>
+					</div>
+				</div>
+			</div>
+
+			<!-- Paso 2 — Tiempo y frecuencia -->
+			<div data-step="2" class="step-view" hidden>
+				<div class="step-grid">
+					<div class="form-col">
+						<h3>¿Cuánto tiempo ocupa actualmente?</h3>
+
+						<div class="field">
+							<label for="est-frecuencia">¿Cuántas veces se realiza esta tarea al mes?</label>
+							<div class="field-unit">
+								<input type="text" inputmode="numeric" id="est-frecuencia" placeholder="Ej. 120" autocomplete="off" />
+								<span class="unit">veces al mes</span>
+							</div>
+							<p class="field-help">Indica el número total de repeticiones mensuales de esta tarea.</p>
+						</div>
+
+						<div class="field">
+							<label for="est-tiempo">¿Cuánto tarda cada persona en completar una repetición?</label>
+							<div class="field-unit">
+								<input type="text" inputmode="decimal" id="est-tiempo" placeholder="Ej. 15" autocomplete="off" />
+								<span class="unit">minutos</span>
+							</div>
+							<p class="field-help">Introduce el tiempo medio por persona para completar o revisar una repetición.</p>
+						</div>
+
+						<p class="form-error" data-error="2" role="alert" hidden></p>
+					</div>
+
+					<div class="info-col">
+						<h4>¿Qué vamos a calcular?</h4>
+						<ul class="info-list">
+							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span>Tiempo manual actual</li>
+							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"></path><path d="M3 4v5h5"></path><path d="M12 7v5l3 2"></path></svg></span>Horas que podrían recuperarse</li>
+							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4 4-6 8-6s8 2 8 6"></path></svg></span>Tiempo que seguiría siendo humano</li>
+							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M7 15l4-4 3 3 5-6"></path></svg></span>Proyección mensual y anual</li>
+						</ul>
+						<p class="info-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8h.01"></path><path d="M11 11.5h1v4.5h1"></path></svg>El resultado será orientativo y dependerá del proceso, sus excepciones y las herramientas utilizadas.</p>
+					</div>
+				</div>
+
+				<div class="bottom-row">
+					<p class="privacy-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>Tus datos no se guardan.</p>
+					<div class="nav-buttons">
+						<button type="button" class="btn-back" data-back="2">Volver</button>
+						<button type="button" class="btn-continue" data-continue="2">Continuar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></button>
+					</div>
+				</div>
+			</div>
+
+			<!-- Paso 3 — Automatización -->
+			<div data-step="3" class="step-view" hidden>
+				<div class="step-grid">
+					<div class="form-col">
+						<h3>¿Qué parte podría automatizarse?</h3>
+
+						<div class="field">
+							<span class="toggle-label" id="est-pct-label">¿Qué parte de la tarea crees que podría realizarse automáticamente?</span>
+							<div class="pct-grid" role="group" aria-labelledby="est-pct-label" data-pct-grid>
+								<button type="button" class="pct-btn" data-pct="25">
+									<span class="pct-value">25 %</span>
+									<span class="pct-desc">Una parte pequeña</span>
+								</button>
+								<button type="button" class="pct-btn" data-pct="50">
+									<span class="pct-value">50 %</span>
+									<span class="pct-desc">Aproximadamente la mitad</span>
+								</button>
+								<button type="button" class="pct-btn" data-pct="75">
+									<span class="pct-value">75 %</span>
+									<span class="pct-desc">La mayor parte</span>
+								</button>
+								<button type="button" class="pct-btn" data-pct="90">
+									<span class="pct-value">90 %</span>
+									<span class="pct-desc">Casi todo, con revisión humana</span>
+								</button>
+							</div>
+							<button type="button" class="pct-custom-toggle" data-pct-custom-toggle aria-expanded="false">Personalizado · Introducir otro porcentaje</button>
+							<div class="field field-custom" data-pct-custom-field hidden>
+								<label for="est-pct-custom">Porcentaje automatizable</label>
+								<div class="field-unit">
+									<input type="text" inputmode="numeric" id="est-pct-custom" placeholder="Ej. 60" autocomplete="off" />
+									<span class="unit">%</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="field">
+							<span class="toggle-label" id="est-coste-label">¿Quieres estimar también el valor económico de ese tiempo?</span>
+							<p class="field-help field-help-top">Opcional</p>
+							<div class="pill-toggle" role="group" aria-labelledby="est-coste-label" data-toggle="mostrar-coste">
+								<button type="button" class="pill-btn" data-value="no" aria-pressed="true">No</button>
+								<button type="button" class="pill-btn" data-value="si" aria-pressed="false">Sí</button>
+							</div>
+						</div>
+
+						<div class="field" data-coste-field hidden>
+							<label for="est-coste">Coste aproximado por hora</label>
+							<div class="field-unit">
+								<input type="text" inputmode="decimal" id="est-coste" placeholder="Ej. 22" autocomplete="off" />
+								<span class="unit">€/hora</span>
+							</div>
+							<p class="field-help">Puedes utilizar una estimación del coste laboral total por hora.</p>
+						</div>
+
+						<p class="form-error" data-error="3" role="alert" hidden></p>
+					</div>
+
+					<div class="info-col">
+						<h4>Antes de calcular</h4>
+						<ul class="info-list">
+							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8h.01"></path><path d="M11 11.5h1v4.5h1"></path></svg></span>El porcentaje es una estimación, no una garantía.</li>
+							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4 4-6 8-6s8 2 8 6"></path></svg></span>Las revisiones y excepciones seguirán necesitando intervención humana.</li>
+							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M8 12h8"></path><path d="M12 8v8"></path></svg></span>El coste por hora es opcional.</li>
+						</ul>
+						<p class="info-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8h.01"></path><path d="M11 11.5h1v4.5h1"></path></svg>No mostramos el 100 % como opción rápida porque normalmente siguen existiendo controles y excepciones.</p>
+					</div>
+				</div>
+
+				<div class="bottom-row">
+					<p class="privacy-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>Tus datos no se guardan.</p>
+					<div class="nav-buttons">
+						<button type="button" class="btn-back" data-back="3">Volver</button>
+						<button type="button" class="btn-continue" data-continue="3">Calcular resultado <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></button>
+					</div>
+				</div>
+			</div>
+
+			<!-- Paso 4 — Resultado -->
+			<div data-step="4" class="step-view" hidden>
+				<h3>Tu estimación</h3>
+				<p class="result-tarea">Tarea analizada: <strong data-result-tarea></strong></p>
+
+				<div class="stat-grid">
+					<div class="stat-card stat-primary">
+						<p class="stat-value"><span data-result-ha></span> h</p>
+						<p class="stat-label">recuperables al mes</p>
+					</div>
+					<div class="stat-card">
+						<p class="stat-value"><span data-result-haa></span> h</p>
+						<p class="stat-label">recuperables al año</p>
+					</div>
+					<div class="stat-card">
+						<p class="stat-value"><span data-result-hm></span> h</p>
+						<p class="stat-label">trabajo actual al mes</p>
+					</div>
+					<div class="stat-card">
+						<p class="stat-value"><span data-result-hr></span> h</p>
+						<p class="stat-label">seguirían necesitando intervención humana</p>
+					</div>
+				</div>
+
+				<div class="time-bar-box">
+					<div class="time-bar-labels">
+						<span>Tiempo actual <strong data-result-hm-label></strong></span>
+						<span>Tiempo automatizable <strong data-result-ha-label></strong></span>
+						<span>Intervención humana <strong data-result-hr-label></strong></span>
+					</div>
+					<div class="time-bar-track">
+						<div class="time-bar-fill" data-time-bar-fill></div>
+					</div>
+				</div>
+
+				<div class="valor-economico" data-valor-economico hidden>
+					<p class="valor-label">Valor económico orientativo</p>
+					<p class="valor-numbers"><span data-result-ve-m></span> €/mes <strong>·</strong> <span data-result-ve-a></span> €/año</p>
+					<p class="valor-nota">Calculado con un coste estimado de <span data-result-coste-hora></span> €/hora. Tiempo liberado no significa automáticamente ahorro económico.</p>
+				</div>
+
+				<p class="legal-note">
+					Esta estimación parte del porcentaje de automatización que has indicado. Antes de confirmar el ahorro
+					real habría que revisar las reglas del proceso, sus excepciones, las herramientas actuales, la
+					calidad de los datos y el tiempo de supervisión necesario.
+				</p>
+
+				<div class="bottom-row">
+					<p class="privacy-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>Tus datos no se guardan.</p>
+					<div class="nav-buttons">
+						<button type="button" class="btn-back" data-modificar>Modificar datos</button>
+						<a class="btn-continue" data-cta-analizar href="/#contacto">Analizar este proceso</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<p class="fiscal-note">La estimación no confirma que el proceso pueda automatizarse.</p>
+	</div>
+</section>
+
+<style>
+	.estimador {
+		padding: 88px 24px;
+		background: var(--color-bg);
+	}
+
+	.wrap {
+		max-width: 940px;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	.eyebrow {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 13px;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--color-accent);
+		margin: 0 0 18px;
+	}
+
+	h2 {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: clamp(28px, 3.6vw, 40px);
+		color: var(--color-text);
+		margin: 0 0 14px;
+	}
+
+	.subtitle {
+		font-family: var(--font-body);
+		font-size: 16px;
+		color: var(--color-muted);
+		margin: 0 0 40px;
+	}
+
+	.card {
+		text-align: left;
+		background: #fff;
+		border: 1px solid var(--color-divider);
+		border-radius: 24px;
+		box-shadow: var(--shadow-sm);
+		padding: 40px;
+	}
+
+	.step-caption {
+		margin: 0 0 18px;
+		font-family: var(--font-body);
+		font-weight: 600;
+		font-size: 14.5px;
+		color: var(--color-text);
+	}
+
+	.stepper {
+		display: flex;
+		align-items: center;
+		margin: 0 0 36px;
+	}
+
+	.stepper-item {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		flex: 0 0 auto;
+	}
+
+	.stepper-circle {
+		flex: 0 0 auto;
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 14px;
+		background: var(--color-accent-200);
+		color: var(--color-accent-800);
+	}
+
+	.stepper-item[data-state="done"] .stepper-circle {
+		background: var(--color-accent-300);
+		color: var(--color-accent-900);
+	}
+
+	.stepper-item[data-state="current"] .stepper-circle {
+		background: var(--color-accent-900);
+		color: #fff;
+	}
+
+	.stepper-label {
+		display: none;
+		font-family: var(--font-body);
+		font-size: 14px;
+		color: var(--color-muted);
+		white-space: nowrap;
+	}
+
+	@media (min-width: 600px) {
+		.stepper-label {
+			display: block;
+		}
+	}
+
+	.stepper-item[data-state="current"] .stepper-label,
+	.stepper-item[data-state="done"] .stepper-label {
+		color: var(--color-text);
+		font-weight: 600;
+	}
+
+	.stepper-line {
+		flex: 1 1 auto;
+		height: 2px;
+		background: var(--color-divider);
+		margin: 0 14px;
+	}
+
+	.stepper-line[data-state="done"] {
+		background: var(--color-accent-900);
+	}
+
+	.step-grid {
+		display: grid;
+		gap: 32px;
+	}
+
+	.form-col h3 {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 20px;
+		color: var(--color-text);
+		margin: 0 0 22px;
+	}
+
+	.field {
+		margin: 0 0 20px;
+	}
+
+	.field label,
+	.toggle-label {
+		display: block;
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 14.5px;
+		color: var(--color-text);
+		margin: 0 0 8px;
+	}
+
+	.field-help {
+		margin: 6px 0 0;
+		font-family: var(--font-body);
+		font-size: 13px;
+		line-height: 1.5;
+		color: var(--color-muted);
+	}
+
+	.field-help-top {
+		margin: -4px 0 8px;
+	}
+
+	.field input,
+	.field select,
+	.field textarea {
+		width: 100%;
+		background: var(--color-bg);
+		border: 1px solid var(--color-divider);
+		border-radius: 12px;
+		padding: 13px 16px;
+		color: var(--color-text);
+		font-family: var(--font-body);
+		font-size: 15.5px;
+		outline: none;
+	}
+
+	.field textarea {
+		resize: vertical;
+	}
+
+	.field input:focus,
+	.field select:focus,
+	.field textarea:focus {
+		border-color: var(--color-accent);
+	}
+
+	.field-unit {
+		display: flex;
+		align-items: stretch;
+		border: 1px solid var(--color-divider);
+		border-radius: 12px;
+		overflow: hidden;
+		background: var(--color-bg);
+	}
+
+	.field-unit input {
+		border: none;
+		border-radius: 0;
+		flex: 1;
+		background: transparent;
+	}
+
+	.field-unit .unit {
+		flex: 0 0 auto;
+		display: flex;
+		align-items: center;
+		padding: 0 16px;
+		font-family: var(--font-body);
+		font-size: 14px;
+		color: var(--color-muted);
+		background: var(--color-accent-100);
+		border-left: 1px solid var(--color-divider);
+		white-space: nowrap;
+	}
+
+	.pct-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 10px;
+		margin: 0 0 10px;
+	}
+
+	.pct-btn {
+		text-align: center;
+		border: 1.5px solid var(--color-divider);
+		border-radius: 12px;
+		padding: 14px 10px;
+		background: #fff;
+		cursor: pointer;
+	}
+
+	.pct-btn[aria-pressed="true"] {
+		border-color: var(--color-accent-900);
+	}
+
+	.pct-value {
+		display: block;
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 20px;
+		color: var(--color-text);
+	}
+
+	.pct-desc {
+		display: block;
+		font-family: var(--font-body);
+		font-size: 12.5px;
+		color: var(--color-muted);
+		margin-top: 4px;
+	}
+
+	.pct-custom-toggle {
+		width: 100%;
+		text-align: center;
+		border: 1.5px dashed var(--color-divider);
+		border-radius: 12px;
+		padding: 12px;
+		background: transparent;
+		font-family: var(--font-body);
+		font-size: 13.5px;
+		color: var(--color-accent-700);
+		cursor: pointer;
+	}
+
+	.field-custom {
+		margin-top: 14px;
+	}
+
+	.pill-toggle {
+		display: flex;
+		border: 1.5px solid var(--color-divider);
+		border-radius: 10px;
+		overflow: hidden;
+		max-width: 220px;
+	}
+
+	.pill-btn {
+		flex: 1;
+		font-family: var(--font-body);
+		font-weight: 600;
+		font-size: 14px;
+		padding: 12px 14px;
+		border: none;
+		background: #fff;
+		color: var(--color-text);
+		cursor: pointer;
+	}
+
+	.pill-toggle .pill-btn + .pill-btn {
+		border-left: 1.5px solid var(--color-divider);
+	}
+
+	.pill-btn[aria-pressed="true"] {
+		background: var(--color-accent-900);
+		color: #fff;
+	}
+
+	.form-error {
+		margin: 0 0 4px;
+		font-family: var(--font-body);
+		font-size: 14px;
+		line-height: 1.5;
+		color: #9a3412;
+		background: #fff3e8;
+		border: 1px solid #fed7aa;
+		border-radius: 10px;
+		padding: 12px 16px;
+	}
+
+	.info-col {
+		background: var(--color-accent-100);
+		border-radius: 18px;
+		padding: 28px 26px;
+	}
+
+	.info-col h4 {
+		margin: 0 0 18px;
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 17px;
+		color: var(--color-accent-900);
+	}
+
+	.info-list {
+		list-style: none;
+		margin: 0 0 20px;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+
+	.info-list li {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		font-family: var(--font-body);
+		font-size: 14.5px;
+		color: var(--color-text);
+	}
+
+	.info-icon {
+		flex: 0 0 auto;
+		width: 34px;
+		height: 34px;
+		border-radius: 10px;
+		background: #fff;
+		color: var(--color-accent-800);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.info-note {
+		display: flex;
+		align-items: flex-start;
+		gap: 8px;
+		margin: 0;
+		padding-top: 16px;
+		border-top: 1px solid var(--color-accent-300);
+		font-family: var(--font-body);
+		font-size: 13px;
+		line-height: 1.5;
+		color: var(--color-accent-700);
+	}
+
+	.info-note svg {
+		flex: 0 0 auto;
+		margin-top: 2px;
+	}
+
+	.bottom-row {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 16px;
+		margin-top: 32px;
+		padding-top: 24px;
+		border-top: 1px solid var(--color-divider);
+	}
+
+	.privacy-note {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		font-family: var(--font-body);
+		font-size: 13.5px;
+		color: var(--color-muted);
+		margin: 0;
+	}
+
+	.nav-buttons {
+		display: flex;
+		gap: 12px;
+		margin-left: auto;
+	}
+
+	.btn-back {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 14.5px;
+		color: var(--color-text);
+		background: transparent;
+		border: 1.5px solid var(--color-divider);
+		border-radius: 999px;
+		padding: 11px 22px;
+		cursor: pointer;
+		text-decoration: none;
+		display: inline-flex;
+		align-items: center;
+	}
+
+	.btn-back:hover {
+		border-color: var(--color-accent-300);
+	}
+
+	.btn-continue {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 14.5px;
+		color: #fff;
+		background: var(--color-accent-900);
+		border: none;
+		border-radius: 999px;
+		padding: 12px 24px;
+		cursor: pointer;
+		text-decoration: none;
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+	}
+
+	.btn-continue:hover {
+		background: var(--color-accent-800);
+	}
+
+	.card h3 {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 22px;
+		color: var(--color-text);
+		margin: 0 0 6px;
+	}
+
+	.result-tarea {
+		margin: 0 0 24px;
+		font-family: var(--font-body);
+		font-size: 14.5px;
+		color: var(--color-muted);
+	}
+
+	.result-tarea strong {
+		color: var(--color-accent-800);
+	}
+
+	.stat-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 14px;
+		margin: 0 0 28px;
+	}
+
+	.stat-card {
+		border: 1px solid var(--color-divider);
+		border-radius: 14px;
+		padding: 18px;
+		text-align: center;
+	}
+
+	.stat-primary {
+		border-color: var(--color-accent-900);
+		border-width: 2px;
+	}
+
+	.stat-value {
+		margin: 0 0 4px;
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 30px;
+		color: var(--color-accent-900);
+	}
+
+	.stat-label {
+		margin: 0;
+		font-family: var(--font-body);
+		font-size: 13px;
+		color: var(--color-muted);
+	}
+
+	.time-bar-box {
+		margin: 0 0 24px;
+	}
+
+	.time-bar-labels {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		gap: 10px;
+		margin: 0 0 10px;
+		font-family: var(--font-body);
+		font-size: 13px;
+		color: var(--color-muted);
+	}
+
+	.time-bar-labels strong {
+		color: var(--color-text);
+		font-family: var(--font-heading);
+	}
+
+	.time-bar-track {
+		height: 12px;
+		border-radius: 6px;
+		background: var(--color-accent-200);
+		overflow: hidden;
+	}
+
+	.time-bar-fill {
+		height: 100%;
+		width: 0%;
+		background: var(--color-accent-900);
+		border-radius: 6px;
+		transition: width 0.35s ease;
+	}
+
+	.valor-economico {
+		background: var(--color-accent-100);
+		border-radius: 16px;
+		padding: 20px 24px;
+		margin: 0 0 24px;
+	}
+
+	.valor-label {
+		margin: 0 0 6px;
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 15px;
+		color: var(--color-accent-800);
+	}
+
+	.valor-numbers {
+		margin: 0 0 10px;
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 22px;
+		color: var(--color-accent-900);
+	}
+
+	.valor-nota {
+		margin: 0;
+		font-family: var(--font-body);
+		font-size: 13px;
+		line-height: 1.5;
+		color: var(--color-accent-700);
+	}
+
+	.legal-note {
+		font-family: var(--font-body);
+		font-size: 13px;
+		line-height: 1.6;
+		color: var(--color-muted);
+	}
+
+	.fiscal-note {
+		margin: 24px 0 0;
+		font-family: var(--font-body);
+		font-size: 12.5px;
+		font-style: italic;
+		color: var(--color-muted);
+		text-align: center;
+	}
+
+	@media (min-width: 900px) {
+		.step-grid {
+			grid-template-columns: 1.4fr 1fr;
+		}
+
+		.stat-grid {
+			grid-template-columns: repeat(4, 1fr);
+		}
+	}
+</style>
+
+<script>
+	const section = document.querySelector<HTMLElement>("#simulador.estimador");
+	if (section) {
+		const stepViews = Array.from(section.querySelectorAll<HTMLElement>("[data-step]"));
+		const stepCaption = section.querySelector<HTMLElement>("[data-step-caption]");
+		const stepperItems = Array.from(section.querySelectorAll<HTMLElement>("[data-stepper-item]"));
+		const stepperLines = Array.from(section.querySelectorAll<HTMLElement>("[data-stepper-line]"));
+
+		const stepMeta = [
+			"Paso 1 de 3 · La tarea",
+			"Paso 2 de 3 · Tiempo y frecuencia",
+			"Paso 3 de 3 · Automatización",
+			"Resultado de la estimación",
+		];
+
+		let currentStep = 1;
+		let pctAutomatizable: number | null = null;
+		let mostrarCoste: "no" | "si" = "no";
+
+		function parseEsNumber(raw: string): number | null {
+			let s = raw.trim().replace(/€|%/g, "").replace(/\s/g, "");
+			if (!s) return null;
+			const hasComma = s.includes(",");
+			const hasDot = s.includes(".");
+			if (hasComma && hasDot) {
+				s = s.replace(/\./g, "").replace(",", ".");
+			} else if (hasComma) {
+				s = s.replace(",", ".");
+			} else if (hasDot) {
+				const parts = s.split(".");
+				const lastPart = parts[parts.length - 1];
+				if (parts.length > 1 && lastPart.length === 3) {
+					s = parts.join("");
+				}
+			}
+			const n = Number(s);
+			return Number.isFinite(n) ? n : null;
+		}
+
+		function formatEs(n: number, maxDecimals = 1): string {
+			return new Intl.NumberFormat("es-ES", { maximumFractionDigits: maxDecimals, useGrouping: true }).format(n);
+		}
+
+		function bindPillToggle(container: Element, onChange: (value: string) => void) {
+			const buttons = Array.from(container.querySelectorAll<HTMLButtonElement>(".pill-btn"));
+			buttons.forEach((btn) => {
+				btn.addEventListener("click", () => {
+					buttons.forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+					onChange(btn.dataset.value ?? "");
+				});
+			});
+		}
+
+		bindPillToggle(section.querySelector('[data-toggle="mostrar-coste"]')!, (value) => {
+			mostrarCoste = value === "si" ? "si" : "no";
+			const field = section.querySelector<HTMLElement>("[data-coste-field]");
+			if (field) field.hidden = mostrarCoste !== "si";
+		});
+
+		const pctButtons = Array.from(section.querySelectorAll<HTMLButtonElement>("[data-pct]"));
+		const pctCustomField = section.querySelector<HTMLElement>("[data-pct-custom-field]");
+		const pctCustomInput = section.querySelector<HTMLInputElement>("#est-pct-custom");
+		const pctCustomToggle = section.querySelector<HTMLButtonElement>("[data-pct-custom-toggle]");
+
+		pctButtons.forEach((btn) => {
+			btn.addEventListener("click", () => {
+				pctButtons.forEach((b) => b.setAttribute("aria-pressed", "false"));
+				btn.setAttribute("aria-pressed", "true");
+				pctAutomatizable = Number(btn.dataset.pct);
+				if (pctCustomInput) pctCustomInput.value = "";
+			});
+		});
+
+		pctCustomToggle?.addEventListener("click", () => {
+			if (!pctCustomField) return;
+			const isOpen = !pctCustomField.hidden;
+			pctCustomField.hidden = isOpen;
+			pctCustomToggle.setAttribute("aria-expanded", String(!isOpen));
+			if (!isOpen) {
+				pctButtons.forEach((b) => b.setAttribute("aria-pressed", "false"));
+				pctCustomInput?.focus();
+			}
+		});
+
+		pctCustomInput?.addEventListener("input", () => {
+			const val = parseEsNumber(pctCustomInput.value);
+			pctAutomatizable = val;
+		});
+
+		function showError(step: number, message: string) {
+			const el = section?.querySelector<HTMLElement>(`[data-error="${step}"]`);
+			if (!el) return;
+			el.textContent = message;
+			el.hidden = false;
+		}
+
+		function clearError(step: number) {
+			const el = section?.querySelector<HTMLElement>(`[data-error="${step}"]`);
+			if (!el) return;
+			el.hidden = true;
+			el.textContent = "";
+		}
+
+		function validateStep1(): boolean {
+			clearError(1);
+			const tipo = (section?.querySelector<HTMLSelectElement>("#est-tipo"))?.value;
+			const personas = parseEsNumber((section?.querySelector<HTMLInputElement>("#est-personas"))?.value ?? "");
+			if (!tipo) {
+				showError(1, "Selecciona el tipo de tarea que quieres analizar.");
+				return false;
+			}
+			if (personas === null) {
+				showError(1, "Indica al menos una persona implicada en la tarea.");
+				return false;
+			}
+			if (personas <= 0) {
+				showError(1, "Indica al menos una persona implicada en la tarea.");
+				return false;
+			}
+			if (!Number.isInteger(personas)) {
+				showError(1, "El número de personas debe ser un número entero.");
+				return false;
+			}
+			return true;
+		}
+
+		function validateStep2(): boolean {
+			clearError(2);
+			const frecuencia = parseEsNumber((section?.querySelector<HTMLInputElement>("#est-frecuencia"))?.value ?? "");
+			const tiempo = parseEsNumber((section?.querySelector<HTMLInputElement>("#est-tiempo"))?.value ?? "");
+			if (frecuencia === null || tiempo === null) {
+				showError(2, "Completa los datos de frecuencia y tiempo para realizar la estimación.");
+				return false;
+			}
+			if (frecuencia < 0 || tiempo < 0) {
+				showError(2, "Las cantidades no pueden ser negativas.");
+				return false;
+			}
+			if (frecuencia === 0) {
+				showError(2, "Si la tarea no se realiza actualmente, no existen horas mensuales que estimar.");
+				return false;
+			}
+			if (tiempo === 0) {
+				showError(2, "Indica cuánto tarda actualmente cada persona en completar la tarea.");
+				return false;
+			}
+			const personas = parseEsNumber((section?.querySelector<HTMLInputElement>("#est-personas"))?.value ?? "") ?? 1;
+			const horasActuales = (personas * frecuencia * tiempo) / 60;
+			if (horasActuales > personas * 200) {
+				showError(2, "Los datos introducidos equivalen a más horas de trabajo de las disponibles para el equipo durante el mes. Comprueba si el tiempo indicado corresponde a cada persona o al total del equipo.");
+				return false;
+			}
+			return true;
+		}
+
+		function validateStep3(): boolean {
+			clearError(3);
+			if (pctAutomatizable === null) {
+				showError(3, "Indica qué parte de la tarea crees que podría automatizarse.");
+				return false;
+			}
+			if (pctAutomatizable < 0 || pctAutomatizable > 100) {
+				showError(3, "El porcentaje automatizable debe estar entre 0 % y 100 %.");
+				return false;
+			}
+			if (pctAutomatizable === 100) {
+				const confirmado = window.confirm(
+					"Has indicado que el proceso podría funcionar sin tiempo de revisión, control ni gestión de excepciones. Confirma este dato únicamente si refleja realmente el proceso.",
+				);
+				if (!confirmado) return false;
+			}
+			if (mostrarCoste === "si") {
+				const coste = parseEsNumber((section?.querySelector<HTMLInputElement>("#est-coste"))?.value ?? "");
+				if (coste === null || coste < 0) {
+					showError(3, "Indica un coste por hora válido, o marca 'No' si no quieres estimarlo.");
+					return false;
+				}
+			}
+			return true;
+		}
+
+		function updateStepper(step: number) {
+			stepperItems.forEach((item) => {
+				const n = Number(item.dataset.stepperItem);
+				const circle = item.querySelector("[data-stepper-circle]");
+				if (n < step) {
+					item.dataset.state = "done";
+					if (circle) circle.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>';
+				} else if (n === step) {
+					item.dataset.state = "current";
+					if (circle) circle.textContent = String(n);
+				} else {
+					item.dataset.state = "";
+					if (circle) circle.textContent = String(n);
+				}
+			});
+			stepperLines.forEach((line) => {
+				const n = Number(line.dataset.stepperLine);
+				line.dataset.state = n < step ? "done" : "";
+			});
+		}
+
+		function goToStep(step: number) {
+			currentStep = step;
+			stepViews.forEach((view) => {
+				view.hidden = Number(view.dataset.step) !== step;
+			});
+			if (stepCaption) stepCaption.textContent = stepMeta[step - 1];
+			updateStepper(Math.min(step, 3));
+			const stepView = section?.querySelector<HTMLElement>(`[data-step="${step}"]`);
+			const heading = stepView?.querySelector<HTMLElement>("h3");
+			heading?.setAttribute("tabindex", "-1");
+			heading?.focus({ preventScroll: true });
+		}
+
+		function calcular() {
+			const personas = parseEsNumber((section?.querySelector<HTMLInputElement>("#est-personas"))?.value ?? "") ?? 0;
+			const frecuencia = parseEsNumber((section?.querySelector<HTMLInputElement>("#est-frecuencia"))?.value ?? "") ?? 0;
+			const tiempo = parseEsNumber((section?.querySelector<HTMLInputElement>("#est-tiempo"))?.value ?? "") ?? 0;
+			const pct = pctAutomatizable ?? 0;
+			const tipoSelect = section?.querySelector<HTMLSelectElement>("#est-tipo");
+			const tipoTexto = tipoSelect?.selectedOptions[0]?.textContent ?? "";
+
+			const hm = (personas * frecuencia * tiempo) / 60;
+			const ha = hm * (pct / 100);
+			const hr = hm - ha;
+			const haa = ha * 12;
+
+			const setText = (selector: string, value: string) => {
+				const el = section?.querySelector<HTMLElement>(selector);
+				if (el) el.textContent = value;
+			};
+
+			setText("[data-result-tarea]", tipoTexto);
+			setText("[data-result-ha]", formatEs(ha));
+			setText("[data-result-haa]", formatEs(haa));
+			setText("[data-result-hm]", formatEs(hm));
+			setText("[data-result-hr]", formatEs(hr));
+			setText("[data-result-hm-label]", `${formatEs(hm)} h`);
+			setText("[data-result-ha-label]", `${formatEs(ha)} h`);
+			setText("[data-result-hr-label]", `${formatEs(hr)} h`);
+
+			const fill = section?.querySelector<HTMLElement>("[data-time-bar-fill]");
+			if (fill) fill.style.width = hm > 0 ? `${(ha / hm) * 100}%` : "0%";
+
+			const valorBox = section?.querySelector<HTMLElement>("[data-valor-economico]");
+			let resumen = `He utilizado el estimador de automatización para analizar una tarea de ${tipoTexto.toLowerCase()}. Según los datos introducidos, consume aproximadamente ${formatEs(hm)} horas al mes y podría liberar unas ${formatEs(ha)} horas mensuales. Me gustaría revisar si el proceso puede automatizarse.`;
+
+			if (mostrarCoste === "si") {
+				const coste = parseEsNumber((section?.querySelector<HTMLInputElement>("#est-coste"))?.value ?? "") ?? 0;
+				const veM = ha * coste;
+				const veA = haa * coste;
+				setText("[data-result-ve-m]", formatEs(veM, 2));
+				setText("[data-result-ve-a]", formatEs(veA, 2));
+				setText("[data-result-coste-hora]", formatEs(coste, 2));
+				if (valorBox) valorBox.hidden = false;
+			} else if (valorBox) {
+				valorBox.hidden = true;
+			}
+
+			try {
+				sessionStorage.setItem("estimadorHorasResumen", resumen);
+			} catch {
+				/* sessionStorage no disponible: se omite el prellenado del formulario */
+			}
+		}
+
+		section.querySelectorAll<HTMLButtonElement>("[data-continue]").forEach((btn) => {
+			btn.addEventListener("click", () => {
+				const from = Number(btn.dataset.continue);
+				if (from === 1 && !validateStep1()) return;
+				if (from === 2 && !validateStep2()) return;
+				if (from === 3 && !validateStep3()) return;
+				if (from === 3) calcular();
+				goToStep(from + 1);
+			});
+		});
+
+		section.querySelectorAll<HTMLButtonElement>("[data-back]").forEach((btn) => {
+			btn.addEventListener("click", () => {
+				const from = Number(btn.dataset.back);
+				goToStep(from - 1);
+			});
+		});
+
+		section.querySelector<HTMLButtonElement>("[data-modificar]")?.addEventListener("click", () => {
+			goToStep(1);
+		});
+
+		section.querySelector<HTMLAnchorElement>("[data-cta-analizar]")?.addEventListener("click", () => {
+			const field = document.querySelector<HTMLElement>("#contacto [data-simulacion-field]");
+			const textarea = document.querySelector<HTMLTextAreaElement>("#contacto #datos-simulacion");
+			const resumen = sessionStorage.getItem("estimadorHorasResumen");
+			if (field && textarea && resumen && !textarea.value) {
+				textarea.value = resumen;
+				field.hidden = false;
+			}
+		});
+
+		goToStep(1);
+	}
+</script>

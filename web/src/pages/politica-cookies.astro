@@ -1,0 +1,133 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import LegalPage from "../components/LegalPage.astro";
+---
+
+<Layout
+	title="Política de cookies | Perucha y Asociados"
+	description="Información sobre las cookies y tecnologías de almacenamiento utilizadas en el sitio web de Perucha y Asociados."
+>
+	<Header />
+
+	<main>
+		<LegalPage eyebrow="Información legal" title="Política de cookies" lastUpdated="30 de julio de 2026">
+			<h2>1. Qué son las cookies</h2>
+			<p>
+				Las cookies y tecnologías similares son pequeños archivos o mecanismos de almacenamiento y
+				recuperación de información que pueden utilizarse en el dispositivo de la persona usuaria cuando
+				visita un sitio web.
+			</p>
+
+			<h2>2. Qué tecnologías utiliza este sitio</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>Nombre</th>
+						<th>Titular</th>
+						<th>Finalidad</th>
+						<th>Tipo</th>
+						<th>Duración</th>
+						<th>Categoría</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><code>pya_cookie_consent</code></td>
+						<td>Propia</td>
+						<td>Recordar tu elección sobre cookies para no volver a preguntarte en cada visita</td>
+						<td>localStorage</td>
+						<td>Hasta 24 meses o hasta que cambies tu elección</td>
+						<td>Necesaria</td>
+					</tr>
+					<tr>
+						<td><code>diagnosticoResumen</code></td>
+						<td>Propia</td>
+						<td>Trasladar el resultado del Diagnóstico rápido al formulario de contacto</td>
+						<td>sessionStorage</td>
+						<td>Hasta que se usa o se cierra la pestaña</td>
+						<td>Necesaria</td>
+					</tr>
+					<tr>
+						<td><code>calculadoraResumen</code></td>
+						<td>Propia</td>
+						<td>Trasladar el resultado de la Calculadora de punto de equilibrio al formulario de contacto</td>
+						<td>sessionStorage</td>
+						<td>Hasta que se usa o se cierra la pestaña</td>
+						<td>Necesaria</td>
+					</tr>
+					<tr>
+						<td><code>autonomoSociedadResumen</code></td>
+						<td>Propia</td>
+						<td>Trasladar el resultado del simulador Autónomo vs. sociedad al formulario de contacto</td>
+						<td>sessionStorage</td>
+						<td>Hasta que se usa o se cierra la pestaña</td>
+						<td>Necesaria</td>
+					</tr>
+					<tr>
+						<td><code>estimadorHorasResumen</code></td>
+						<td>Propia</td>
+						<td>Trasladar el resultado del Estimador de horas ahorradas al formulario de contacto</td>
+						<td>sessionStorage</td>
+						<td>Hasta que se usa o se cierra la pestaña</td>
+						<td>Necesaria</td>
+					</tr>
+					<tr>
+						<td colspan="6" class="pending">
+							Cookies analíticas: todavía no está activada ninguna herramienta de analítica en el
+							sitio. Cuando se active, esta tabla se actualizará con el nombre real de cada cookie,
+							su titular y su duración exacta antes de empezar a utilizarse.
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>
+				Ninguna de las herramientas interactivas del sitio (calculadoras, simuladores, diagnósticos) envía
+				los datos que introduces a ningún servidor mientras las estás utilizando: el cálculo se realiza en
+				tu propio navegador.
+			</p>
+
+			<h2>3. Cómo aceptar, rechazar o configurar</h2>
+			<p>
+				En tu primera visita te mostramos un aviso donde puedes <strong>aceptar</strong>,
+				<strong>rechazar</strong> o <strong>configurar</strong> las categorías opcionales. Las cookies
+				necesarias están siempre activas porque el sitio no puede funcionar correctamente sin ellas.
+			</p>
+			<p>
+				Puedes cambiar tu elección en cualquier momento desde el botón <strong>Configurar cookies</strong>,
+				disponible en el pie de todas las páginas del sitio.
+			</p>
+
+			<h2>4. Cómo retirar el consentimiento</h2>
+			<p>
+				Retirar el consentimiento es tan sencillo como otorgarlo: abre <strong>Configurar cookies</strong> y
+				desactiva la categoría que ya no quieras permitir. Al retirar una categoría:
+			</p>
+			<ul>
+				<li>Se impide que vuelva a activarse hasta que la aceptes de nuevo.</li>
+				<li>Se elimina, cuando es técnicamente posible, la información propia relacionada.</li>
+			</ul>
+
+			<h2>5. Categorías</h2>
+			<ul>
+				<li><strong>Necesarias:</strong> imprescindibles para el funcionamiento básico y la seguridad del sitio. No se pueden desactivar.</li>
+				<li><strong>Analíticas:</strong> nos ayudarían a entender de forma agregada cómo se usa la web. Desactivadas por defecto; actualmente no hay ninguna activa (ver sección 2).</li>
+			</ul>
+
+			<h2>6. Actualizaciones</h2>
+			<p>
+				Esta política se actualizará cuando cambien las tecnologías, finalidades, proveedores o plazos —
+				por ejemplo, al activar una herramienta de analítica.
+			</p>
+
+			<h2>7. Más información</h2>
+			<p>
+				El tratamiento de tus datos personales se explica con más detalle en la
+				<a href="/politica-privacidad">Política de privacidad</a>.
+			</p>
+		</LegalPage>
+	</main>
+
+	<Footer />
+</Layout>

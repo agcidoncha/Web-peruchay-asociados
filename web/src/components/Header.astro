@@ -1,0 +1,438 @@
+---
+interface Props {
+	active?: "finanzas-y-control" | "contabilidad-y-fiscalidad" | "digitalizacion-y-automatizacion";
+}
+
+const { active } = Astro.props;
+
+const areaLinks = [
+	{ href: "/finanzas-y-control", label: "Finanzas y Control", key: "finanzas-y-control" },
+	{ href: "/contabilidad-y-fiscalidad", label: "Contabilidad y Fiscalidad", key: "contabilidad-y-fiscalidad" },
+	{ href: "/digitalizacion-y-automatizacion", label: "Digitalización y Automatización", key: "digitalizacion-y-automatizacion" },
+];
+
+const tools = [
+	{
+		href: "/#diagnostico",
+		title: "Diagnóstico rápido",
+		text: "Evalúa en minutos el estado general de tu empresa.",
+		icon: '<path d="M12 12l3-3"></path><path d="M4.6 15A9 9 0 1 1 19.4 15"></path><path d="M12 5v2"></path>',
+	},
+	{
+		href: "/finanzas-y-control#simulador",
+		title: "Punto de equilibrio",
+		text: "Calcula cuántas ventas necesitas para cubrir tus costes.",
+		icon: '<path d="M12 3v18"></path><path d="M5 7l-2 5a3 3 0 0 0 6 0z"></path><path d="M19 7l-2 5a3 3 0 0 0 6 0z"></path><path d="M5 7h14"></path><path d="M8 21h8"></path>',
+	},
+	{
+		href: "/contabilidad-y-fiscalidad#simulador",
+		title: "Autónomo vs. sociedad",
+		text: "Compara la carga fiscal de cada forma de trabajar.",
+		icon: '<circle cx="9" cy="8" r="3"></circle><path d="M2 20c0-3.3 3-5 7-5s7 1.7 7 5"></path><path d="M17 8a3 3 0 1 1 0 6"></path><path d="M22 20c0-2.7-1.8-4.2-4-4.7"></path>',
+	},
+	{
+		href: "/digitalizacion-y-automatizacion#simulador",
+		title: "Horas ahorradas",
+		text: "Estima el tiempo que puedes recuperar automatizando.",
+		icon: '<circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path>',
+	},
+];
+---
+
+<header class="site-header">
+	<div class="bar">
+		<a href="/" class="logo">
+			<img src="/logo-pya.png" alt="Perucha y Asociados" width="120" height="63" />
+		</a>
+
+		<nav class="nav-desktop" aria-label="Áreas">
+			{areaLinks.map((link) => (
+				<a href={link.href} class:list={{ active: link.key === active }}>{link.label}</a>
+			))}
+		</nav>
+
+		<div class="actions-desktop">
+			<button type="button" class="tools-toggle" aria-haspopup="dialog" aria-expanded="false" aria-controls="tools-popup">
+				<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"></line><circle cx="9" cy="6" r="2" fill="currentColor" stroke="none"></circle><line x1="4" y1="12" x2="20" y2="12"></line><circle cx="16" cy="12" r="2" fill="currentColor" stroke="none"></circle><line x1="4" y1="18" x2="20" y2="18"></line><circle cx="11" cy="18" r="2" fill="currentColor" stroke="none"></circle></svg>
+				Simuladores
+			</button>
+			<a href="/#contacto" class="cta-desktop">
+				Hablemos
+				<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"></path><path d="M7 7h10v10"></path></svg>
+			</a>
+		</div>
+
+		<button type="button" class="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+			<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg>
+		</button>
+	</div>
+
+	<nav id="mobile-menu" class="nav-mobile" aria-label="Menú" hidden>
+		{areaLinks.map((link) => (
+			<a href={link.href} class:list={{ active: link.key === active }}>{link.label}</a>
+		))}
+		<p class="mobile-tools-label">Simuladores</p>
+		{tools.map((tool) => (
+			<a href={tool.href} class="mobile-tool-link">{tool.title}</a>
+		))}
+		<a href="/#contacto" class="cta-mobile">Hablemos</a>
+	</nav>
+</header>
+
+<div id="tools-popup" class="tools-popup" hidden>
+	<div class="tools-popup-backdrop" data-close></div>
+	<div class="tools-popup-panel" role="dialog" aria-label="Simuladores" aria-modal="true">
+		<div class="tools-popup-header">
+			<div>
+				<p class="eyebrow">Simuladores</p>
+				<h3>Elige una herramienta</h3>
+			</div>
+			<button type="button" class="tools-popup-close" aria-label="Cerrar" data-close>
+				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18"></path><path d="M6 6l12 12"></path></svg>
+			</button>
+		</div>
+		<div class="tools-popup-list">
+			{tools.map((tool) => (
+				<a href={tool.href} class="tool-link" data-close>
+					<span class="tool-icon" set:html={`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${tool.icon}</svg>`} />
+					<span class="tool-copy">
+						<span class="tool-title">{tool.title}</span>
+						<span class="tool-text">{tool.text}</span>
+					</span>
+				</a>
+			))}
+		</div>
+	</div>
+</div>
+
+<style>
+	.site-header {
+		position: sticky;
+		top: 0;
+		z-index: 40;
+		background: var(--color-white);
+		border-bottom: 1px solid var(--color-divider);
+	}
+
+	.bar {
+		max-width: 1180px;
+		margin: 0 auto;
+		padding: 0 24px;
+		height: 76px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 24px;
+	}
+
+	.logo {
+		display: flex;
+		align-items: center;
+	}
+
+	.logo img {
+		height: 34px;
+		width: auto;
+	}
+
+	.nav-desktop {
+		display: none;
+		align-items: center;
+		gap: 32px;
+	}
+
+	.nav-desktop a {
+		font-family: var(--font-body);
+		font-size: 15px;
+		color: var(--color-text);
+		text-decoration: none;
+		padding-bottom: 6px;
+		border-bottom: 2px solid transparent;
+	}
+
+	.nav-desktop a:hover {
+		color: var(--color-accent);
+	}
+
+	.nav-desktop a.active {
+		font-weight: 600;
+		color: var(--color-accent-800);
+		border-bottom-color: var(--color-accent);
+	}
+
+	.actions-desktop {
+		display: none;
+		align-items: center;
+		gap: 10px;
+	}
+
+	.tools-toggle {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		height: 42px;
+		font-family: var(--font-body);
+		font-weight: 600;
+		font-size: 14px;
+		color: var(--color-accent-900);
+		background: var(--color-accent-200);
+		border: none;
+		border-radius: 999px;
+		padding: 0 18px;
+		cursor: pointer;
+		white-space: nowrap;
+	}
+
+	.tools-toggle:hover {
+		background: var(--color-accent-300);
+	}
+
+	.cta-desktop {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		height: 42px;
+		font-family: var(--font-body);
+		font-weight: 600;
+		font-size: 14px;
+		color: #fff;
+		background: var(--color-accent-900);
+		border-radius: 999px;
+		padding: 0 20px;
+		text-decoration: none;
+		white-space: nowrap;
+	}
+
+	.cta-desktop:hover {
+		background: var(--color-accent-800);
+	}
+
+	.menu-toggle {
+		background: transparent;
+		border: 1px solid var(--color-divider);
+		border-radius: 10px;
+		width: 44px;
+		height: 44px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		color: var(--color-text);
+	}
+
+	.nav-mobile[hidden] {
+		display: none;
+	}
+
+	.nav-mobile {
+		border-top: 1px solid var(--color-divider);
+		padding: 20px 24px 28px;
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+	}
+
+	.nav-mobile a {
+		font-family: var(--font-body);
+		font-size: 16px;
+		color: var(--color-text);
+		text-decoration: none;
+		padding: 12px 0;
+		border-bottom: 1px solid var(--color-divider);
+	}
+
+	.nav-mobile a.active {
+		font-weight: 600;
+		color: var(--color-accent-800);
+	}
+
+	.mobile-tools-label {
+		margin: 16px 0 2px;
+		font-family: var(--font-body);
+		font-size: 12px;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--color-muted);
+	}
+
+	.mobile-tool-link {
+		font-size: 15px !important;
+		padding: 9px 0 !important;
+		border-bottom: none !important;
+		color: var(--color-muted) !important;
+	}
+
+	.cta-mobile {
+		margin-top: 14px;
+		text-align: center;
+		font-weight: 600;
+		color: #fff !important;
+		background: var(--color-accent-900);
+		border-radius: 999px;
+		border-bottom: none !important;
+		padding: 13px 0 !important;
+	}
+
+	@media (min-width: 900px) {
+		.nav-desktop,
+		.actions-desktop {
+			display: flex;
+		}
+
+		.menu-toggle,
+		.nav-mobile {
+			display: none;
+		}
+	}
+
+	.tools-popup[hidden] {
+		display: none;
+	}
+
+	.tools-popup {
+		position: fixed;
+		inset: 0;
+		z-index: 100;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 24px;
+	}
+
+	.tools-popup-backdrop {
+		position: absolute;
+		inset: 0;
+		background: rgba(31, 41, 55, 0.55);
+	}
+
+	.tools-popup-panel {
+		position: relative;
+		background: #fff;
+		border-radius: 24px;
+		border: 1px solid var(--color-divider);
+		box-shadow: var(--shadow-lg);
+		max-width: 480px;
+		width: 100%;
+		padding: 32px;
+	}
+
+	.tools-popup-header {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: 20px;
+	}
+
+	.eyebrow {
+		margin: 0 0 6px;
+		font-family: var(--font-body);
+		font-weight: 600;
+		font-size: 12px;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--color-accent-700);
+	}
+
+	.tools-popup-header h3 {
+		margin: 0;
+		font-family: var(--font-heading);
+		font-weight: var(--font-heading-weight);
+		font-size: 26px;
+		color: var(--color-text);
+	}
+
+	.tools-popup-close {
+		flex: 0 0 auto;
+		width: 38px;
+		height: 38px;
+		border-radius: 10px;
+		border: 1px solid var(--color-divider);
+		background: transparent;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		color: var(--color-text);
+	}
+
+	.tools-popup-list {
+		border-top: 1px solid var(--color-divider);
+		margin: 20px 0 0;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.tool-link {
+		display: flex;
+		align-items: center;
+		gap: 16px;
+		padding: 16px 0;
+		border-bottom: 1px solid var(--color-divider);
+		text-decoration: none;
+	}
+
+	.tool-link:last-child {
+		border-bottom: none;
+	}
+
+	.tool-icon {
+		width: 42px;
+		height: 42px;
+		border-radius: 12px;
+		background: var(--color-accent-100);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex: 0 0 auto;
+		color: var(--color-accent-800);
+	}
+
+	.tool-copy {
+		display: flex;
+		flex-direction: column;
+		gap: 3px;
+	}
+
+	.tool-title {
+		font-family: var(--font-heading);
+		font-weight: var(--font-heading-weight);
+		font-size: 16px;
+		color: var(--color-text);
+	}
+
+	.tool-text {
+		font-family: var(--font-body);
+		font-size: 13px;
+		color: var(--color-muted);
+	}
+</style>
+
+<script>
+	const menuToggle = document.querySelector(".menu-toggle");
+	const menu = document.querySelector("#mobile-menu");
+
+	menuToggle?.addEventListener("click", () => {
+		if (!menu) return;
+		menu.hidden = !menu.hidden;
+		menuToggle.setAttribute("aria-expanded", String(!menu.hidden));
+	});
+
+	const toolsToggle = document.querySelector(".tools-toggle");
+	const toolsPopup = document.querySelector("#tools-popup");
+
+	const closePopup = () => {
+		if (!toolsPopup) return;
+		toolsPopup.hidden = true;
+		toolsToggle?.setAttribute("aria-expanded", "false");
+	};
+
+	toolsToggle?.addEventListener("click", () => {
+		if (!toolsPopup) return;
+		toolsPopup.hidden = false;
+		toolsToggle.setAttribute("aria-expanded", "true");
+	});
+
+	toolsPopup?.querySelectorAll("[data-close]").forEach((el) => {
+		el.addEventListener("click", closePopup);
+	});
+</script>

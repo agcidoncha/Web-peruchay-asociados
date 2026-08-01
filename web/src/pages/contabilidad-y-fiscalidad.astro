@@ -1,0 +1,167 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Faq from "../components/Faq.astro";
+import ClosingCta from "../components/ClosingCta.astro";
+import AreaHero from "../components/AreaHero.astro";
+import TextIntro from "../components/TextIntro.astro";
+import NumberedServices from "../components/NumberedServices.astro";
+import Experience from "../components/contabilidad-y-fiscalidad/Experience.astro";
+import HowItWorks from "../components/contabilidad-y-fiscalidad/HowItWorks.astro";
+import AutonomoVsSociedad from "../components/contabilidad-y-fiscalidad/AutonomoVsSociedad.astro";
+
+const introParagraphs = [
+	"La contabilidad y la fiscalidad forman parte de la gestión diaria de cualquier empresa, pero cada empresa tiene necesidades diferentes, por eso ambos servicios pueden prestarse de forma conjunta o independiente, según la estructura, los recursos y las necesidades de cada organización.",
+	"Algunas requieren una gestión completa, otras sólo un área, resolver una incidencia o contar con apoyo especializado en diversos momentos.",
+];
+
+const services = [
+	{
+		n: "01",
+		title: "Gestión contable",
+		text: "Registramos y organizamos las operaciones económicas de la empresa de acuerdo con la normativa vigente. El alcance concreto se adapta a las características y necesidades de cada cliente.",
+		items: [
+			"Registro de las operaciones contables",
+			"Organización y mantenimiento de la información económica",
+			"Elaboración de los libros contables obligatorios",
+			"Preparación de la documentación contable oficial",
+			"Formulación de las cuentas anuales",
+			"Cumplimiento de las obligaciones contables",
+		],
+	},
+	{
+		n: "02",
+		title: "Gestión fiscal",
+		text: "Preparamos y presentamos las declaraciones tributarias correspondientes, velando por el cumplimiento de los plazos y de la normativa aplicable. Las obligaciones concretas dependen de la actividad, la forma jurídica y el régimen tributario.",
+		items: [
+			"Identificación de las obligaciones fiscales",
+			"Preparación y presentación de impuestos",
+			"Seguimiento de plazos tributarios",
+			"Revisión de la información para cada declaración",
+			"Atención de obligaciones fiscales periódicas",
+			"Coordinación entre contabilidad y fiscalidad",
+		],
+	},
+	{
+		n: "03",
+		title: "Revisión contable y fiscal",
+		text: "Revisamos la contabilidad o la situación fiscal existente para disponer de una visión independiente y detectar posibles incidencias. El alcance se define previamente según la documentación y el objetivo de la empresa.",
+		items: [
+			"Comprobar el estado de la información contable",
+			"Identificar errores, omisiones o datos a aclarar",
+			"Revisar el cumplimiento fiscal",
+			"Detectar oportunidades de mejora",
+			"Proponer las acciones necesarias",
+		],
+	},
+	{
+		n: "04",
+		title: "Optimización fiscal dentro del marco legal",
+		text: "Analizamos cada situación para identificar posibles mejoras y alternativas permitidas por la normativa vigente. No aplicamos soluciones genéricas: estudiamos las circunstancias concretas de la actividad, la forma jurídica y las obligaciones tributarias de la empresa, apoyando siempre las recomendaciones en la legislación aplicable.",
+		items: [],
+	},
+	{
+		n: "05",
+		title: "Servicios flexibles",
+		text: "La contabilidad y la fiscalidad pueden contratarse de forma conjunta o independiente.",
+		items: [
+			"Incorporar únicamente el servicio necesario",
+			"Complementar el trabajo de un equipo interno",
+			"Revisar un área concreta sin sustituir la gestión existente",
+			"Ampliar la colaboración según evolucionen las necesidades",
+		],
+	},
+];
+
+const faqCategories = ["Contabilidad", "Fiscalidad"];
+
+const faqs = [
+	{
+		cat: "Contabilidad",
+		q: "¿Qué incluye el servicio de contabilidad?",
+		a: "Incluye el registro de las operaciones económicas conforme a la normativa vigente, la elaboración de los libros contables obligatorios, la formulación de las cuentas anuales y el cumplimiento de las obligaciones contables de la empresa.",
+	},
+	{
+		cat: "Contabilidad",
+		q: "¿Puedo contratar únicamente la contabilidad o la fiscalidad?",
+		a: "Sí. Nuestros servicios son flexibles y pueden contratarse de forma independiente o conjunta, adaptándose a las necesidades de cada empresa.",
+	},
+	{
+		cat: "Contabilidad",
+		q: "¿Cuál es la diferencia entre contabilidad y fiscalidad?",
+		a: "La contabilidad registra y organiza la actividad económica de la empresa. La fiscalidad se ocupa del cumplimiento de las obligaciones tributarias y de analizar las alternativas permitidas por la normativa.",
+	},
+	{
+		cat: "Contabilidad",
+		q: "¿Podéis revisar la contabilidad o la fiscalidad que ya tengo?",
+		a: "Sí. Podemos realizar una revisión independiente para detectar posibles incidencias, identificar oportunidades de mejora y proponer las acciones que consideremos necesarias.",
+	},
+	{
+		cat: "Fiscalidad",
+		q: "¿Os encargáis de la presentación de impuestos?",
+		a: "Sí, cuando el servicio contratado incluye la gestión fiscal. Nos ocupamos de la preparación y presentación de las declaraciones tributarias correspondientes, velando por el cumplimiento de los plazos y de la normativa vigente.",
+	},
+	{
+		cat: "Fiscalidad",
+		q: "¿Podéis ayudarme a optimizar mi situación fiscal?",
+		a: "Sí. Analizamos cada situación para identificar posibles mejoras y oportunidades de optimización fiscal, siempre dentro del marco legal vigente.",
+	},
+	{
+		cat: "Fiscalidad",
+		q: "¿Qué experiencia tenéis en esta área?",
+		a: "El área de Contabilidad y Fiscalidad cuenta con el respaldo de más de treinta años de experiencia profesional en gestión contable, obligaciones tributarias y asesoramiento empresarial.",
+	},
+	{
+		cat: "Fiscalidad",
+		q: "¿Qué impuestos tengo que presentar como autónomo o empresa?",
+		a: "Depende de la actividad desarrollada, la forma jurídica y el régimen tributario aplicable. Analizamos cada caso para garantizar el cumplimiento de las obligaciones fiscales correspondientes.",
+	},
+];
+
+const faqSchema = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: faqs.map((faq) => ({
+		"@type": "Question",
+		name: faq.q,
+		acceptedAnswer: {
+			"@type": "Answer",
+			text: faq.a,
+		},
+	})),
+};
+---
+
+<Layout
+	title="Contabilidad y Fiscalidad en Madrid | Perucha y Asociados"
+	description="Gestión contable y fiscal para empresas y profesionales: contabilidad, presentación de impuestos, revisión y optimización fiscal dentro del marco legal."
+>
+	<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+	<Header active="contabilidad-y-fiscalidad" />
+
+	<main>
+		<AreaHero
+			eyebrow="Contabilidad y Fiscalidad"
+			title="Contabilidad rigurosa y gestión fiscal para tu empresa"
+			description="Organizamos la información contable, atendemos las obligaciones tributarias y analizamos cada situación para que la empresa cumpla con la normativa y puedas centrarte en tu negocio con tranquilidad."
+			ctaLabel="Cuéntanos qué necesita tu empresa"
+			photoLabel="Foto: gestión contable / oficina"
+			image="/images/hero-pages/contabilidad-y-fiscalidad-hero-page.webp"
+			imageAlt="Contabilidad y Fiscalidad — gestión contable y fiscal"
+		/>
+		<TextIntro paragraphs={introParagraphs} />
+		<NumberedServices title="¿Qué podemos hacer por tu empresa?" services={services} />
+		<Experience />
+		<HowItWorks />
+		<AutonomoVsSociedad />
+		<Faq categories={faqCategories} faqs={faqs} />
+		<ClosingCta
+			title="¿Necesitas revisar o mejorar la gestión contable y fiscal de tu empresa?"
+			text="Cuéntanos cuál es vuestra situación actual y qué servicio necesitáis. Estudiaremos el caso para definir una propuesta adaptada al alcance y a las obligaciones de la empresa."
+			ctaLabel="Hablar con nosotros"
+		/>
+	</main>
+
+	<Footer />
+</Layout>

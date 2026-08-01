@@ -1,0 +1,606 @@
+{
+  "borrador_sin_validar": true,
+  "nota": "BORRADOR de partida generado por investigación asistida en fuentes oficiales (julio de 2026). NO ha sido revisado ni firmado por un profesional fiscal de Perucha y Asociados. Conforme a la sección 26 del documento simulador-autonomo-vs-sociedad.md ('Comprobación objetiva de los cálculos'), este archivo no debe usarse en producción hasta que un profesional del área fiscal lo valide contra Renta WEB Open, Sociedades WEB Open y las tablas oficiales de la Seguridad Social, y hasta que se completen los huecos marcados como 'disponible: false' o 'verificado: false'. Mientras no se apruebe, el simulador no está listo para publicarse (sección 26).",
+  "anio_fiscal": 2025,
+  "anio_fiscal_nota": "Se ha usado el ejercicio 2025 por ser el año fiscal completo más reciente con normativa e importes oficiales cerrados y publicados en la fecha de esta investigación (30 de julio de 2026). El documento de especificación menciona 2026 como año de referencia editorial, pero ese ejercicio aún no tiene todos sus datos oficiales cerrados; deberá sustituirse este archivo por 2026.json en cuanto la configuración de ese ejercicio esté completa y validada (ver sección 27, actualización anual obligatoria).",
+  "fecha_ultima_revision": "2026-07-30",
+  "revisado_por_profesional_fiscal": false,
+  "revision_profesional_datos_fiscales": {
+    "revisado": true,
+    "revisado_por": "Mercedes Perucha Morando",
+    "fecha": "2026-07-30",
+    "alcance": "Revisión de los bloques de datos fiscales de este archivo (escala estatal y autonómicas del IRPF, escala del ahorro, mínimos personales y familiares estatales y autonómicos, tabla de cotización RETA, tipos del Impuesto sobre Sociedades): confirmados como correctos.",
+    "nota": "Esta revisión cubre únicamente los datos fiscales. Ver también 'revision_profesional_motor_calculo' para la revisión de la lógica."
+  },
+  "revision_profesional_motor_calculo": {
+    "revisado": true,
+    "revisado_por": "Mercedes Perucha Morando",
+    "fecha": "2026-07-30",
+    "alcance": "Revisión de la lógica de cálculo en web/src/lib/fiscal/motorAutonomoVsSociedad.ts (fórmulas del Escenario A — Autónomo y Escenario B — Sociedad limitada unipersonal, aplicación de mínimos, cotización RETA, Impuesto sobre Sociedades, tributación de dividendos y margen de prudencia): confirmada como correcta.",
+    "correccion_posterior_2026-07-31": "Tras esta revisión, la comparación en vivo contra Renta WEB Open (sección 26) detectó que el Escenario A no aplicaba la deducción por gastos de difícil justificación (art. 30.2ª RIRPF), lo que sobreestimaba el IRPF del autónomo en un 8,8% en el caso de prueba. Corregido en el motor (ver 'irpf.gastos_dificil_justificacion_estimacion_directa_simplificada'); el resultado corregido coincide al céntimo con Renta WEB Open. Esta corrección puntual no ha sido re-confirmada por el profesional fiscal — pendiente de repasar junto con el resto de 'revisado_por_profesional_fiscal'.",
+    "nota": "El campo 'revisado_por_profesional_fiscal' se mantiene en false porque aún falta completar la comparación del motor con Renta WEB Open y Sociedades WEB Open, y el resto de puntos listados en 'pendiente_antes_de_publicar'."
+  },
+  "fuentes_generales_partida": [
+    "https://sede.agenciatributaria.gob.es/Sede/impuesto-sobre-sociedades/que-base-imponible-se-determina-sociedades/tipo-impositivo.html",
+    "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-ayuda-presentacion/irpf-2025/8-cumplimentacion-irpf/8_4-cuota-integra/8_4_3-gravamen-base-liquidable-general/8_4_3_1-cuota-integra-estatal.html",
+    "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c15-calculo-impuesto-determinacion-cuotas-integras/gravamen-base-liquidable-general/gravamen-autonomico.html",
+    "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c05-rendimientos-capital-mobiliario.html",
+    "https://www.seg-social.es/wps/portal/wss/internet/Trabajadores/CotizacionRecaudacionTrabajadores/10721/10724/1320/1322",
+    "https://www.seg-social.es/wps/portal/wss/internet/Trabajadores/Afiliacion/10548/32825",
+    "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2025-3780"
+  ],
+
+  "irpf": {
+    "formato_escalas": "Cada escala es una lista ordenada de tramos {hasta, tipo}. 'hasta' es el límite superior de base liquidable (en euros) al que se aplica el tipo marginal 'tipo' (proporción, no porcentaje: 0.095 = 9,5%). El primer tramo empieza en 0. 'hasta': null significa 'en adelante', sin límite superior. El cálculo de la cuota es el habitual por tramos progresivos (no se aplica el tipo del último tramo alcanzado a toda la base).",
+
+    "escala_estatal_general": {
+      "anio": 2025,
+      "tramos": [
+        { "hasta": 12450, "tipo": 0.095 },
+        { "hasta": 20200, "tipo": 0.12 },
+        { "hasta": 35200, "tipo": 0.15 },
+        { "hasta": 60000, "tipo": 0.185 },
+        { "hasta": 300000, "tipo": 0.225 },
+        { "hasta": null, "tipo": 0.245 }
+      ],
+      "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-ayuda-presentacion/irpf-2025/8-cumplimentacion-irpf/8_4-cuota-integra/8_4_3-gravamen-base-liquidable-general/8_4_3_1-cuota-integra-estatal.html",
+      "verificado": true,
+      "verificado_nota": "Extraído directamente de la página oficial de la Agencia Tributaria (manual práctico Renta 2025). Coincide con el art. 63.1 Ley IRPF."
+    },
+
+    "escala_ahorro": {
+      "anio": 2025,
+      "nota": "La parte autonómica de la escala del ahorro es igual para las 17 comunidades autónomas de régimen común (no varía por territorio, a diferencia de la escala general). Ceuta y Melilla aplican también esta misma escala. Aplica a dividendos y otros rendimientos del capital mobiliario/ganancias que se integran en la base del ahorro.",
+      "tramo_estatal": {
+        "tramos": [
+          { "hasta": 6000, "tipo": 0.095 },
+          { "hasta": 50000, "tipo": 0.105 },
+          { "hasta": 200000, "tipo": 0.115 },
+          { "hasta": 300000, "tipo": 0.135 },
+          { "hasta": null, "tipo": 0.15 }
+        ],
+        "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c15-calculo-impuesto-determinacion-cuotas-integras/gravamen-base-liquidable-ahorro/gravamen-estatal.html"
+      },
+      "tramo_autonomico_comun": {
+        "tramos": [
+          { "hasta": 6000, "tipo": 0.095 },
+          { "hasta": 50000, "tipo": 0.105 },
+          { "hasta": 200000, "tipo": 0.115 },
+          { "hasta": 300000, "tipo": 0.135 },
+          { "hasta": null, "tipo": 0.15 }
+        ],
+        "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c15-calculo-impuesto-determinacion-cuotas-integras/gravamen-base-liquidable-ahorro/gravamen-autonomico.html"
+      },
+      "escala_combinada_estatal_mas_autonomico": {
+        "tramos": [
+          { "hasta": 6000, "tipo": 0.19 },
+          { "hasta": 50000, "tipo": 0.21 },
+          { "hasta": 200000, "tipo": 0.23 },
+          { "hasta": 300000, "tipo": 0.27 },
+          { "hasta": null, "tipo": 0.30 }
+        ],
+        "nota": "Suma directa de tramo estatal + tramo autonómico común, ya que ambos coinciden tramo a tramo para 2025."
+      },
+      "verificado": true
+    },
+
+    "escalas_autonomicas_generales": {
+      "nota": "Escala autonómica de la base liquidable general del IRPF 2025 (se suma a la escala estatal general anterior). Fuente primaria: subpáginas por comunidad del Manual Práctico Renta 2025 de la Agencia Tributaria. Todas las cifras fueron extraídas directamente de esas páginas oficiales y comprobadas por consistencia matemática interna (cuota acumulada de cada tramo recalculada y verificada contra el tramo siguiente).",
+      "andalucia": {
+        "tramos": [
+          { "hasta": 13000, "tipo": 0.095 },
+          { "hasta": 21100, "tipo": 0.12 },
+          { "hasta": 35200, "tipo": 0.15 },
+          { "hasta": 60000, "tipo": 0.185 },
+          { "hasta": null, "tipo": 0.225 }
+        ],
+        "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c15-calculo-impuesto-determinacion-cuotas-integras/gravamen-base-liquidable-general/gravamen-autonomico/comunidad-autonoma-andalucia.html",
+        "verificado": true
+      },
+      "aragon": {
+        "tramos": [
+          { "hasta": 13072.50, "tipo": 0.095 },
+          { "hasta": 21210, "tipo": 0.12 },
+          { "hasta": 36960, "tipo": 0.15 },
+          { "hasta": 52500, "tipo": 0.185 },
+          { "hasta": 60000, "tipo": 0.205 },
+          { "hasta": 80000, "tipo": 0.23 },
+          { "hasta": 90000, "tipo": 0.24 },
+          { "hasta": 130000, "tipo": 0.25 },
+          { "hasta": null, "tipo": 0.255 }
+        ],
+        "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c15-calculo-impuesto-determinacion-cuotas-integras/gravamen-base-liquidable-general/gravamen-autonomico/comunidad-autonoma-aragon.html",
+        "verificado": true
+      },
+      "asturias": {
+        "tramos": [
+          { "hasta": 12450, "tipo": 0.09 },
+          { "hasta": 17707.20, "tipo": 0.12 },
+          { "hasta": 33007.20, "tipo": 0.14 },
+          { "hasta": 53407.20, "tipo": 0.192 },
+          { "hasta": 70000, "tipo": 0.215 },
+          { "hasta": 90000, "tipo": 0.225 },
+          { "hasta": 175000, "tipo": 0.25 },
+          { "hasta": null, "tipo": 0.26 }
+        ],
+        "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c15-calculo-impuesto-determinacion-cuotas-integras/gravamen-base-liquidable-general/gravamen-autonomico/comunidad-autonoma-principado-asturias.html",
+        "verificado": true,
+        "nota": "CONFIRMADO (30 de julio de 2026): estos tramos corresponden efectivamente al ejercicio 2025, no a un adelanto de 2026. La página oficial de la Agencia Tributaria dice literalmente: 'Escala aplicable en el ejercicio 2025 por los contribuyentes residentes en dicho ejercicio en esta Comunidad Autónoma' y 'la Ley del Principado de Asturias 3/2025, de 19 de noviembre... ha modificado, en el período impositivo 2025, la escala autonómica'. La ley se publicó en el BOPA el 2 de diciembre de 2025 (BOE-A-2025-25707: https://www.boe.es/diario_boe/txt.php?id=BOE-A-2025-25707) pero sus efectos se aplican retroactivamente a todo el período impositivo 2025 (declaración que se presenta en 2026), no al ejercicio 2026."
+      },
+      "illes_balears": {
+        "tramos": [
+          { "hasta": 10000, "tipo": 0.09 },
+          { "hasta": 18000, "tipo": 0.1125 },
+          { "hasta": 30000, "tipo": 0.1425 },
+          { "hasta": 48000, "tipo": 0.175 },
+          { "hasta": 70000, "tipo": 0.19 },
+          { "hasta": 90000, "tipo": 0.2175 },
+          { "hasta": 120000, "tipo": 0.2275 },
+          { "hasta": 175000, "tipo": 0.2375 },
+          { "hasta": null, "tipo": 0.2475 }
+        ],
+        "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c15-calculo-impuesto-determinacion-cuotas-integras/gravamen-base-liquidable-general/gravamen-autonomico/comunidad-autonoma-illes-balears.html",
+        "verificado": true
+      },
+      "canarias": {
+        "tramos": [
+          { "hasta": 13748, "tipo": 0.09 },
+          { "hasta": 19422, "tipo": 0.115 },
+          { "hasta": 35924, "tipo": 0.14 },
+          { "hasta": 57566, "tipo": 0.185 },
+          { "hasta": 93268, "tipo": 0.235 },
+          { "hasta": 123745, "tipo": 0.25 },
+          { "hasta": null, "tipo": 0.26 }
+        ],
+        "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c15-calculo-impuesto-determinacion-cuotas-integras/gravamen-base-liquidable-general/gravamen-autonomico/comunidad-autonoma-canarias.html",
+        "verificado": true,
+        "nota": "CONFIRMADO (30 de julio de 2026): estos tramos corresponden efectivamente al ejercicio 2025, no a un adelanto de 2026, aunque la ley que los modifica se titule 'Presupuestos... para 2026'. La página oficial de la Agencia Tributaria dice literalmente que 'la disposición final undécima de la Ley 9/2025, de 23 de diciembre, de Presupuestos Generales de la Comunidad Autónoma de Canarias para el año 2026 (BOC 29-12-2025) ha modificado, para el período impositivo 2025, la escala autonómica' (deflactación de tramos del 2,1% con efectos retroactivos sobre 2025, distinta de las medidas ordinarias de presupuestos que rigen desde 2026). Fuente adicional: BOE-A-2026-7560 (https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-7560)."
+      },
+      "cantabria": {
+        "tramos": [
+          { "hasta": 13000, "tipo": 0.085 },
+          { "hasta": 21000, "tipo": 0.11 },
+          { "hasta": 35200, "tipo": 0.145 },
+          { "hasta": 60000, "tipo": 0.18 },
+          { "hasta": 90000, "tipo": 0.225 },
+          { "hasta": null, "tipo": 0.245 }
+        ],
+        "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c15-calculo-impuesto-determinacion-cuotas-integras/gravamen-base-liquidable-general/gravamen-autonomico/comunidad-autonoma-cantabria.html",
+        "verificado": true
+      },
+      "castilla_la_mancha": {
+        "tramos": [
+          { "hasta": 12450, "tipo": 0.095 },
+          { "hasta": 20200, "tipo": 0.12 },
+          { "hasta": 35200, "tipo": 0.15 },
+          { "hasta": 60000, "tipo": 0.185 },
+          { "hasta": null, "tipo": 0.225 }
+        ],
+        "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c15-calculo-impuesto-determinacion-cuotas-integras/gravamen-base-liquidable-general/gravamen-autonomico/comunidad-autonoma-castilla-mancha.html",
+        "verificado": true,
+        "nota": "Coincide exactamente con la escala estatal (Castilla-La Mancha no ha desviado su escala autonómica de la estatal en este ejercicio)."
+      },
+      "castilla_y_leon": {
+        "tramos": [
+          { "hasta": 12450, "tipo": 0.09 },
+          { "hasta": 20200, "tipo": 0.12 },
+          { "hasta": 35200, "tipo": 0.14 },
+          { "hasta": 53407.20, "tipo": 0.185 },
+          { "hasta": null, "tipo": 0.215 }
+        ],
+        "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c15-calculo-impuesto-determinacion-cuotas-integras/gravamen-base-liquidable-general/gravamen-autonomico/comunidad-castilla-leon.html",
+        "verificado": true
+      },
+      "cataluna": {
+        "tramos": [
+          { "hasta": 12500, "tipo": 0.095 },
+          { "hasta": 22000, "tipo": 0.125 },
+          { "hasta": 33000, "tipo": 0.16 },
+          { "hasta": 53000, "tipo": 0.19 },
+          { "hasta": 90000, "tipo": 0.215 },
+          { "hasta": 120000, "tipo": 0.235 },
+          { "hasta": 175000, "tipo": 0.245 },
+          { "hasta": null, "tipo": 0.255 }
+        ],
+        "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c15-calculo-impuesto-determinacion-cuotas-integras/gravamen-base-liquidable-general/gravamen-autonomico/comunidad-autonoma-cataluna.html",
+        "verificado": true
+      },
+      "extremadura": {
+        "tramos": [
+          { "hasta": 12450, "tipo": 0.08 },
+          { "hasta": 20200, "tipo": 0.10 },
+          { "hasta": 24200, "tipo": 0.16 },
+          { "hasta": 35200, "tipo": 0.175 },
+          { "hasta": 60000, "tipo": 0.21 },
+          { "hasta": 80200, "tipo": 0.235 },
+          { "hasta": 99200, "tipo": 0.24 },
+          { "hasta": 120200, "tipo": 0.245 },
+          { "hasta": null, "tipo": 0.25 }
+        ],
+        "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c15-calculo-impuesto-determinacion-cuotas-integras/gravamen-base-liquidable-general/gravamen-autonomico/comunidad-autonoma-extremadura.html",
+        "verificado": true
+      },
+      "galicia": {
+        "tramos": [
+          { "hasta": 12985.35, "tipo": 0.09 },
+          { "hasta": 21068.60, "tipo": 0.1165 },
+          { "hasta": 35200, "tipo": 0.149 },
+          { "hasta": 60000, "tipo": 0.184 },
+          { "hasta": null, "tipo": 0.225 }
+        ],
+        "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c15-calculo-impuesto-determinacion-cuotas-integras/gravamen-base-liquidable-general/gravamen-autonomico/comunidad-autonoma-galicia.html",
+        "verificado": true
+      },
+      "madrid": {
+        "tramos": [
+          { "hasta": 13362.22, "tipo": 0.085 },
+          { "hasta": 19004.63, "tipo": 0.107 },
+          { "hasta": 35425.68, "tipo": 0.128 },
+          { "hasta": 57320.40, "tipo": 0.174 },
+          { "hasta": null, "tipo": 0.205 }
+        ],
+        "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c15-calculo-impuesto-determinacion-cuotas-integras/gravamen-base-liquidable-general/gravamen-autonomico/comunidad-madrid.html",
+        "verificado": true
+      },
+      "region_de_murcia": {
+        "tramos": [
+          { "hasta": 12450, "tipo": 0.095 },
+          { "hasta": 20200, "tipo": 0.112 },
+          { "hasta": 34000, "tipo": 0.133 },
+          { "hasta": 60000, "tipo": 0.179 },
+          { "hasta": null, "tipo": 0.225 }
+        ],
+        "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c15-calculo-impuesto-determinacion-cuotas-integras/gravamen-base-liquidable-general/gravamen-autonomico/comunidad-autonoma-region-murcia.html",
+        "verificado": true
+      },
+      "la_rioja": {
+        "tramos": [
+          { "hasta": 12450, "tipo": 0.08 },
+          { "hasta": 20200, "tipo": 0.106 },
+          { "hasta": 35200, "tipo": 0.136 },
+          { "hasta": 40000, "tipo": 0.178 },
+          { "hasta": 50000, "tipo": 0.183 },
+          { "hasta": 60000, "tipo": 0.19 },
+          { "hasta": 120000, "tipo": 0.245 },
+          { "hasta": null, "tipo": 0.27 }
+        ],
+        "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c15-calculo-impuesto-determinacion-cuotas-integras/gravamen-base-liquidable-general/gravamen-autonomico/comunidad-autonoma-rioja.html",
+        "verificado": true
+      },
+      "comunitat_valenciana": {
+        "tramos": [
+          { "hasta": 12000, "tipo": 0.09 },
+          { "hasta": 22000, "tipo": 0.12 },
+          { "hasta": 32000, "tipo": 0.15 },
+          { "hasta": 42000, "tipo": 0.175 },
+          { "hasta": 52000, "tipo": 0.20 },
+          { "hasta": 62000, "tipo": 0.225 },
+          { "hasta": 72000, "tipo": 0.25 },
+          { "hasta": 100000, "tipo": 0.265 },
+          { "hasta": 150000, "tipo": 0.275 },
+          { "hasta": 200000, "tipo": 0.285 },
+          { "hasta": null, "tipo": 0.295 }
+        ],
+        "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c15-calculo-impuesto-determinacion-cuotas-integras/gravamen-base-liquidable-general/gravamen-autonomico/comunitat-valenciana.html",
+        "verificado": true
+      },
+      "ceuta": {
+        "tramos": [
+          { "hasta": 12450, "tipo": 0.095 },
+          { "hasta": 20200, "tipo": 0.12 },
+          { "hasta": 35200, "tipo": 0.15 },
+          { "hasta": 60000, "tipo": 0.185 },
+          { "hasta": null, "tipo": 0.225 }
+        ],
+        "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c15-calculo-impuesto-determinacion-cuotas-integras/gravamen-base-liquidable-general/gravamen-autonomico/especialidad-escala-autonomica-contribuyentes.html",
+        "verificado": true,
+        "nota": "Ceuta y Melilla no tienen asamblea legislativa propia con competencia sobre el IRPF cedido; se les aplica una escala especial (Disposición adicional trigésima segunda LIRPF) que en la práctica coincide con la escala estatal."
+      },
+      "melilla": {
+        "tramos": [
+          { "hasta": 12450, "tipo": 0.095 },
+          { "hasta": 20200, "tipo": 0.12 },
+          { "hasta": 35200, "tipo": 0.15 },
+          { "hasta": 60000, "tipo": 0.185 },
+          { "hasta": null, "tipo": 0.225 }
+        ],
+        "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c15-calculo-impuesto-determinacion-cuotas-integras/gravamen-base-liquidable-general/gravamen-autonomico/especialidad-escala-autonomica-contribuyentes.html",
+        "verificado": true,
+        "nota": "Misma escala especial que Ceuta (Disposición adicional trigésima segunda LIRPF)."
+      },
+      "pais_vasco": {
+        "disponible": false,
+        "motivo": "Territorio foral con normativa propia (Concierto Económico). No forma parte del alcance de este borrador. No debe usarse ninguna escala de otra comunidad como sustitución (ver sección 6 del documento del simulador).",
+        "fuente": null
+      },
+      "comunidad_foral_de_navarra": {
+        "disponible": false,
+        "motivo": "Territorio foral con normativa propia (Convenio Económico). No forma parte del alcance de este borrador. No debe usarse ninguna escala de otra comunidad como sustitución (ver sección 6 del documento del simulador).",
+        "fuente": null
+      }
+    },
+
+    "gastos_dificil_justificacion_estimacion_directa_simplificada": {
+      "descripcion": "En estimación directa simplificada, el conjunto de provisiones deducibles y gastos de difícil justificación se cuantifica aplicando un porcentaje sobre el rendimiento neto previo positivo (ingresos íntegros menos el resto de gastos deducibles, excluido este concepto), con un límite anual.",
+      "porcentaje": 0.05,
+      "limite_anual_euros": 2000,
+      "requisito_cifra_negocio_anterior_euros": 600000,
+      "fuente": "Art. 30.2ª del Reglamento del IRPF (RD 439/2007). https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/folleto-actividades-economicas/3-impuesto-sobre-renta-personas-fisicas/3_5-estimacion-directa-simplificada/3_5_2-calculo-rendimiento-neto.html",
+      "verificado": true,
+      "encontrado_2026-07-31": "Detectado al comparar el motor con Renta WEB Open (caso de prueba: Madrid, ingresos 40.000€, gastos 10.000€): el motor no aplicaba esta deducción y sobreestimaba el IRPF del escenario Autónomo en 345,96€ (8,8%) sobre un total de 4.275,48€. Corregido en motorAutonomoVsSociedad.ts."
+    },
+
+    "minimos_personales_y_familiares": {
+      "anio": 2025,
+      "ambito": "estatal",
+      "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c14-adecuacion-impuesto-circunstancias-personales/cuadro-resumen-minimo-personal-familiar.html",
+      "verificado": true,
+      "minimo_contribuyente": {
+        "general_euros": 5550,
+        "incremento_mayor_65_euros": 1150,
+        "incremento_adicional_mayor_75_euros": 1400,
+        "nota": "Los incrementos por edad son acumulativos: un contribuyente mayor de 75 años tiene 5.550 + 1.150 + 1.400 = 8.100 € de mínimo."
+      },
+      "minimo_por_descendientes_euros": {
+        "primero": 2400,
+        "segundo": 2700,
+        "tercero": 4000,
+        "cuarto_y_siguientes": 4500,
+        "incremento_menor_de_3_anos": 2800,
+        "nota": "El incremento por menor de 3 años se suma al importe que corresponda según el orden del descendiente."
+      },
+      "minimo_por_ascendientes_euros": {
+        "general_por_cada_ascendiente": 1150,
+        "incremento_adicional_mayor_75": 1400
+      },
+      "minimo_por_discapacidad_euros": {
+        "grado_igual_o_superior_33_por_ciento": 3000,
+        "grado_igual_o_superior_65_por_ciento": 9000,
+        "incremento_por_gastos_asistencia_o_movilidad_reducida": 3000,
+        "aplicable_a": "Contribuyente, ascendientes o descendientes que generen derecho a mínimo y tengan discapacidad reconocida."
+      },
+      "nota_variacion_autonomica": "Varias comunidades autónomas aprueban importes propios de mínimo personal y familiar (mayores o menores que el estatal) para calcular la cuota autonómica, distintos de los aquí recogidos, que solo son los estatales. Investigación completada: ver bloque 'irpf.minimos_autonomicos' para el detalle comunidad por comunidad."
+    },
+
+    "minimos_autonomicos": {
+      "anio": 2025,
+      "nota": "Mínimo personal y familiar PROPIO por comunidad autónoma (distinto del estatal), para calcular la CUOTA AUTONÓMICA del IRPF 2025. Investigado el 30 de julio de 2026 a partir de: (1) la página general de la Agencia Tributaria que enumera explícitamente qué comunidades han regulado importe propio para 2025 (https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c14-adecuacion-impuesto-circunstancias-personales/minimo-personal-familiar.html), que dice literalmente: 'la Comunidad Autónoma de Andalucía, Comunidad Autónoma del Principado de Asturias, Comunidad Autónoma de las Illes Balears, Comunidad Autónoma de Canarias, Comunidad Autónoma de Galicia, Comunidad de Madrid, Comunidad Autónoma de La Rioja y Comunitat Valenciana han regulado el importe del mínimo personal y familiar'; y (2) las subpáginas individuales por comunidad del cuadro comparativo (https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c14-adecuacion-impuesto-circunstancias-personales/minimo-autonomico-personal-familiar.html). Solo esas 8 comunidades tienen importe propio; el resto usa el mínimo estatal para el cálculo de su cuota autonómica.",
+      "andalucia": {
+        "usa_estatal": false,
+        "minimo_contribuyente": { "general_euros": 5790, "incremento_mayor_65_euros": 1200, "incremento_adicional_mayor_75_euros": 1460 },
+        "minimo_por_descendientes_euros": { "primero": 2510, "segundo": 2820, "tercero": 4170, "cuarto_y_siguientes": 4700, "incremento_menor_de_3_anos": 2920 },
+        "minimo_por_ascendientes_euros": { "general_por_cada_ascendiente": 1200, "incremento_adicional_mayor_75": 1460 },
+        "minimo_por_discapacidad_euros": { "grado_igual_o_superior_33_por_ciento": 3130, "grado_igual_o_superior_65_por_ciento": 9390, "incremento_por_gastos_asistencia_o_movilidad_reducida": 3130 },
+        "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c14-adecuacion-impuesto-circunstancias-personales/minimo-autonomico-personal-familiar/comunidad-autonoma-andalucia-importes-minimo-familiar.html",
+        "verificado": true
+      },
+      "asturias": {
+        "usa_estatal": false,
+        "minimo_contribuyente": { "general_euros": 6105, "incremento_mayor_65_euros": 1265, "incremento_adicional_mayor_75_euros": 1540 },
+        "minimo_por_descendientes_euros": { "primero": 2640, "segundo": 2970, "tercero": 4400, "cuarto_y_siguientes": 4950, "incremento_menor_de_3_anos": 3080 },
+        "minimo_por_ascendientes_euros": { "general_por_cada_ascendiente": 1265, "incremento_adicional_mayor_75": 1540 },
+        "minimo_por_discapacidad_euros": { "grado_igual_o_superior_33_por_ciento": 3300, "grado_igual_o_superior_65_por_ciento": 9900, "incremento_por_gastos_asistencia_o_movilidad_reducida": 3300 },
+        "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c14-adecuacion-impuesto-circunstancias-personales/minimo-autonomico-personal-familiar/comunidad-autonoma-principado-asturias.html",
+        "verificado": true,
+        "nota": "Importes propios elevados un 10% sobre el estatal (máximo permitido por la normativa estatal de cesión), aprobados por la Ley del Principado de Asturias 3/2025, de 19 de noviembre (BOPA 2 de diciembre de 2025)."
+      },
+      "illes_balears": {
+        "usa_estatal": false,
+        "minimo_contribuyente": { "general_euros": 5550, "nota": "El mínimo general del contribuyente (menor de 65) coincide con el estatal (5.550 €); Illes Balears solo eleva los incrementos por edad.", "incremento_mayor_65_euros": 1265, "incremento_adicional_mayor_75_euros": 1540 },
+        "minimo_por_descendientes_euros": { "primero": 2400, "segundo": 2970, "tercero": 4400, "cuarto_y_siguientes": 4950, "incremento_menor_de_3_anos": 2800, "nota": "El importe del primer descendiente (2.400 €) y el incremento por menor de 3 años (2.800 €) no aparecen modificados en la fuente oficial: coinciden con el estatal. El resto de descendientes sí tiene importe propio." },
+        "minimo_por_ascendientes_euros": { "general_por_cada_ascendiente": 1265, "incremento_adicional_mayor_75": 1540 },
+        "minimo_por_discapacidad_euros": { "grado_igual_o_superior_33_por_ciento": 3300, "grado_igual_o_superior_65_por_ciento": 9900, "incremento_por_gastos_asistencia_o_movilidad_reducida": 3300 },
+        "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c14-adecuacion-impuesto-circunstancias-personales/minimo-autonomico-personal-familiar/comunidad-autonoma-illes-balears.html",
+        "verificado": true
+      },
+      "canarias": {
+        "usa_estatal": false,
+        "minimo_contribuyente": { "general_euros": 5606, "incremento_mayor_65_euros": 1162, "incremento_adicional_mayor_75_euros": 1414 },
+        "minimo_por_descendientes_euros": { "primero": 2424, "segundo": 2727, "tercero": 4040, "cuarto_y_siguientes": 4545, "incremento_menor_de_3_anos": 2828 },
+        "minimo_por_ascendientes_euros": { "general_por_cada_ascendiente": 1162, "incremento_adicional_mayor_75": 1414 },
+        "minimo_por_discapacidad_euros": { "grado_igual_o_superior_33_por_ciento": 3030, "grado_igual_o_superior_65_por_ciento": 9090, "incremento_por_gastos_asistencia_o_movilidad_reducida": 3030 },
+        "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c14-adecuacion-impuesto-circunstancias-personales/minimo-autonomico-personal-familiar/comunidad-autonoma-canarias-minimo-ppf.html",
+        "verificado": true
+      },
+      "cantabria": {
+        "usa_estatal": true,
+        "nota": "No figura entre las 8 comunidades que la Agencia Tributaria cita como reguladoras de importe propio para 2025, y no tiene subpágina propia en el cuadro comparativo oficial; usa el mínimo estatal.",
+        "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c14-adecuacion-impuesto-circunstancias-personales/minimo-personal-familiar.html",
+        "verificado": true
+      },
+      "castilla_la_mancha": {
+        "usa_estatal": true,
+        "nota": "No figura entre las 8 comunidades que la Agencia Tributaria cita como reguladoras de importe propio para 2025, y no tiene subpágina propia en el cuadro comparativo oficial; usa el mínimo estatal.",
+        "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c14-adecuacion-impuesto-circunstancias-personales/minimo-personal-familiar.html",
+        "verificado": true
+      },
+      "castilla_y_leon": {
+        "usa_estatal": true,
+        "nota": "Tiene subpágina propia en el cuadro comparativo oficial, pero esa página confirma explícitamente que se establecen 'los mismos importes del mínimo del contribuyente, por descendientes y ascendientes y por discapacidad que fijan los artículos 57, 58, 59 y 60 de la Ley del IRPF'; es decir, iguales al estatal, sin desviación.",
+        "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c14-adecuacion-impuesto-circunstancias-personales/minimo-autonomico-personal-familiar/comunidad-castilla-leon-importes-minimo-familiar.html",
+        "verificado": true
+      },
+      "cataluna": {
+        "usa_estatal": true,
+        "nota": "Tiene subpágina propia en el cuadro comparativo oficial, pero esa página confirma explícitamente (art. 611-2 del Texto Refundido de tributos cedidos) que se establece 'el mismo importe del mínimo personal del contribuyente que fija el artículo 57 de la Ley del IRPF, con carácter general', sin incremento ni disminución; es decir, igual al estatal en todos los conceptos.",
+        "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c14-adecuacion-impuesto-circunstancias-personales/minimo-autonomico-personal-familiar/comunidad-autonoma-cataluna-importes-minimo-familiar.html",
+        "verificado": true
+      },
+      "extremadura": {
+        "usa_estatal": true,
+        "nota": "No figura entre las 8 comunidades que la Agencia Tributaria cita como reguladoras de importe propio para 2025, y no tiene subpágina propia en el cuadro comparativo oficial; usa el mínimo estatal.",
+        "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c14-adecuacion-impuesto-circunstancias-personales/minimo-personal-familiar.html",
+        "verificado": true
+      },
+      "galicia": {
+        "usa_estatal": false,
+        "minimo_contribuyente": { "general_euros": 5789, "incremento_mayor_65_euros": 1199, "incremento_adicional_mayor_75_euros": 1460 },
+        "minimo_por_descendientes_euros": { "primero": 2503, "segundo": 2816, "tercero": 4172, "cuarto_y_siguientes": 4694, "incremento_menor_de_3_anos": 2920 },
+        "minimo_por_ascendientes_euros": { "general_por_cada_ascendiente": 1199, "incremento_adicional_mayor_75": 1460 },
+        "minimo_por_discapacidad_euros": { "grado_igual_o_superior_33_por_ciento": 3129, "grado_igual_o_superior_65_por_ciento": 9387, "incremento_por_gastos_asistencia_o_movilidad_reducida": 3129 },
+        "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c14-adecuacion-impuesto-circunstancias-personales/minimo-autonomico-personal-familiar/comunidad-autonoma-galicia-importes-minimo-familiar.html",
+        "verificado": true
+      },
+      "madrid": {
+        "usa_estatal": false,
+        "minimo_contribuyente": { "general_euros": 5956.65, "incremento_mayor_65_euros": 1234.26, "incremento_adicional_mayor_75_euros": 1502.58 },
+        "minimo_por_descendientes_euros": { "primero": 2575.85, "segundo": 2897.83, "tercero": 4400, "cuarto_y_siguientes": 4950, "incremento_menor_de_3_anos": 3005.16 },
+        "minimo_por_ascendientes_euros": { "general_por_cada_ascendiente": 1234.26, "incremento_adicional_mayor_75": 1502.58 },
+        "minimo_por_discapacidad_euros": { "grado_igual_o_superior_33_por_ciento": 3219.81, "grado_igual_o_superior_65_por_ciento": 9659.44, "incremento_por_gastos_asistencia_o_movilidad_reducida": 3219.81 },
+        "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c14-adecuacion-impuesto-circunstancias-personales/minimo-autonomico-personal-familiar/comunidad-madrid-importes-minimo-personal-familiar.html",
+        "verificado": true
+      },
+      "region_de_murcia": {
+        "usa_estatal": true,
+        "nota": "No figura entre las 8 comunidades que la Agencia Tributaria cita como reguladoras de importe propio para 2025, y no tiene subpágina propia en el cuadro comparativo oficial; usa el mínimo estatal.",
+        "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c14-adecuacion-impuesto-circunstancias-personales/minimo-personal-familiar.html",
+        "verificado": true
+      },
+      "la_rioja": {
+        "usa_estatal": false,
+        "nota": "Importe propio SOLO para el mínimo por discapacidad de descendientes (art. 31 bis de la Ley 10/2017 de La Rioja); el resto de conceptos (mínimo del contribuyente, descendientes sin discapacidad, ascendientes, y el incremento por gastos de asistencia dentro de discapacidad) coincide con el estatal, según indica expresamente la fuente: 'la cuantía del concepto gastos de asistencia no se modifica'.",
+        "minimo_contribuyente": { "usa_estatal": true },
+        "minimo_por_descendientes_euros": { "usa_estatal": true },
+        "minimo_por_ascendientes_euros": { "usa_estatal": true },
+        "minimo_por_discapacidad_de_descendientes_euros": { "grado_igual_o_superior_33_por_ciento": 3300, "grado_igual_o_superior_65_por_ciento": 9900, "incremento_por_gastos_asistencia_o_movilidad_reducida": 3000 },
+        "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c14-adecuacion-impuesto-circunstancias-personales/minimo-autonomico-personal-familiar/comunidad-autonoma-rioja.html",
+        "verificado": true
+      },
+      "comunitat_valenciana": {
+        "usa_estatal": false,
+        "minimo_contribuyente": { "general_euros": 6105, "incremento_mayor_65_euros": 1265, "incremento_adicional_mayor_75_euros": 1540 },
+        "minimo_por_descendientes_euros": { "primero": 2640, "segundo": 2970, "tercero": 4400, "cuarto_y_siguientes": 4950, "incremento_menor_de_3_anos": 3080 },
+        "minimo_por_ascendientes_euros": { "general_por_cada_ascendiente": 1265, "incremento_adicional_mayor_75": 1540 },
+        "minimo_por_discapacidad_euros": { "grado_igual_o_superior_33_por_ciento": 3300, "grado_igual_o_superior_65_por_ciento": 9900, "incremento_por_gastos_asistencia_o_movilidad_reducida": 3300 },
+        "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c14-adecuacion-impuesto-circunstancias-personales/minimo-autonomico-personal-familiar/comunitat-valenciana-importes-minimo-personal-familiar.html",
+        "verificado": true
+      },
+      "ceuta": {
+        "usa_estatal": true,
+        "nota": "Ceuta no tiene asamblea legislativa propia con competencia sobre el IRPF cedido (Disposición adicional trigésima segunda LIRPF); no aparece entre las comunidades con importe propio, usa el mínimo estatal.",
+        "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c14-adecuacion-impuesto-circunstancias-personales/minimo-personal-familiar.html",
+        "verificado": true
+      },
+      "melilla": {
+        "usa_estatal": true,
+        "nota": "Melilla no tiene asamblea legislativa propia con competencia sobre el IRPF cedido (Disposición adicional trigésima segunda LIRPF); no aparece entre las comunidades con importe propio, usa el mínimo estatal.",
+        "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c14-adecuacion-impuesto-circunstancias-personales/minimo-personal-familiar.html",
+        "verificado": true
+      },
+      "aragon": {
+        "usa_estatal": true,
+        "nota": "No figura entre las 8 comunidades que la Agencia Tributaria cita como reguladoras de importe propio para 2025, y no tiene subpágina propia en el cuadro comparativo oficial; usa el mínimo estatal. NOTA: a diferencia del resto de comunidades de este grupo, Aragón sí tiene una escala autonómica general muy distinta de la estatal (ver 'escalas_autonomicas_generales.aragon'); esto es coherente, ya que la escala de gravamen y el mínimo personal/familiar son dos parámetros independientes que cada comunidad puede regular por separado.",
+        "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c14-adecuacion-impuesto-circunstancias-personales/minimo-personal-familiar.html",
+        "verificado": true
+      }
+    }
+  },
+
+  "cotizacion_reta": {
+    "anio": 2025,
+    "fuente_principal": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2025-3780",
+    "fuente_secundaria_verificacion": "https://www.cuotaautonomo.com/tramos-cotizacion",
+    "verificado": true,
+    "verificado_nota": "Tabla obtenida de la Orden PJC/178/2025, de 25 de febrero (BOE), y contrastada con una fuente secundaria independiente; ambas coinciden en los importes de base mínima y máxima por tramo.",
+    "base_maxima_mensual_general_euros": 4909.50,
+    "tramos": [
+      { "tabla": "reducida", "tramo": 1, "rendimiento_neto_mensual_hasta": 670, "base_minima_mensual": 653.59, "base_maxima_mensual": 718.94 },
+      { "tabla": "reducida", "tramo": 2, "rendimiento_neto_mensual_desde": 670, "rendimiento_neto_mensual_hasta": 900, "base_minima_mensual": 718.95, "base_maxima_mensual": 900.00 },
+      { "tabla": "reducida", "tramo": 3, "rendimiento_neto_mensual_desde": 900, "rendimiento_neto_mensual_hasta": 1166.70, "base_minima_mensual": 849.67, "base_maxima_mensual": 1166.70 },
+      { "tabla": "general", "tramo": 4, "rendimiento_neto_mensual_desde": 1166.70, "rendimiento_neto_mensual_hasta": 1300, "base_minima_mensual": 950.98, "base_maxima_mensual": 1300.00 },
+      { "tabla": "general", "tramo": 5, "rendimiento_neto_mensual_desde": 1300, "rendimiento_neto_mensual_hasta": 1500, "base_minima_mensual": 960.78, "base_maxima_mensual": 1500.00 },
+      { "tabla": "general", "tramo": 6, "rendimiento_neto_mensual_desde": 1500, "rendimiento_neto_mensual_hasta": 1700, "base_minima_mensual": 960.78, "base_maxima_mensual": 1700.00 },
+      { "tabla": "general", "tramo": 7, "rendimiento_neto_mensual_desde": 1700, "rendimiento_neto_mensual_hasta": 1850, "base_minima_mensual": 1143.79, "base_maxima_mensual": 1850.00 },
+      { "tabla": "general", "tramo": 8, "rendimiento_neto_mensual_desde": 1850, "rendimiento_neto_mensual_hasta": 2030, "base_minima_mensual": 1209.15, "base_maxima_mensual": 2030.00 },
+      { "tabla": "general", "tramo": 9, "rendimiento_neto_mensual_desde": 2030, "rendimiento_neto_mensual_hasta": 2330, "base_minima_mensual": 1274.51, "base_maxima_mensual": 2330.00 },
+      { "tabla": "general", "tramo": 10, "rendimiento_neto_mensual_desde": 2330, "rendimiento_neto_mensual_hasta": 2760, "base_minima_mensual": 1356.21, "base_maxima_mensual": 2760.00 },
+      { "tabla": "general", "tramo": 11, "rendimiento_neto_mensual_desde": 2760, "rendimiento_neto_mensual_hasta": 3190, "base_minima_mensual": 1437.91, "base_maxima_mensual": 3190.00 },
+      { "tabla": "general", "tramo": 12, "rendimiento_neto_mensual_desde": 3190, "rendimiento_neto_mensual_hasta": 3620, "base_minima_mensual": 1519.61, "base_maxima_mensual": 3620.00 },
+      { "tabla": "general", "tramo": 13, "rendimiento_neto_mensual_desde": 3620, "rendimiento_neto_mensual_hasta": 4050, "base_minima_mensual": 1601.31, "base_maxima_mensual": 4050.00 },
+      { "tabla": "general", "tramo": 14, "rendimiento_neto_mensual_desde": 4050, "rendimiento_neto_mensual_hasta": 6000, "base_minima_mensual": 1732.03, "base_maxima_mensual": 4909.50 },
+      { "tabla": "general", "tramo": 15, "rendimiento_neto_mensual_desde": 6000, "base_minima_mensual": 1928.10, "base_maxima_mensual": 4909.50 }
+    ],
+    "tipos_cotizacion_2025": {
+      "contingencias_comunes_pct": 28.30,
+      "contingencias_profesionales_pct": 1.30,
+      "contingencias_profesionales_desglose": {
+        "incapacidad_temporal_pct": 0.66,
+        "incapacidad_permanente_muerte_supervivencia_pct": 0.64
+      },
+      "cese_de_actividad_pct": 0.90,
+      "formacion_profesional_pct": 0.10,
+      "mecanismo_equidad_intergeneracional_mei_pct": 0.80,
+      "total_aproximado_pct": 31.40,
+      "nota": "El total se aplica sobre la base de cotización elegida dentro del tramo (no sobre el rendimiento neto directamente). La cuota mensual mínima orientativa de cada tramo es aproximadamente base_minima_mensual × 31,40%, salvo bonificaciones (tarifa plana u otras) que este simulador no calcula (ver sección 11 del documento del simulador: 'Bonificaciones de Seguridad Social' queda fuera de alcance)."
+    },
+    "control_efectivo_socios_administradores": {
+      "fuente_legal": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724 (Real Decreto Legislativo 8/2015, texto refundido LGSS, art. 305.2.b)",
+      "fuente_secundaria_verificacion": "https://www.iberley.es/legislacion/articulo-305-tr-ley-general-seguridad-social-lgss",
+      "verificado": true,
+      "resumen": "Los socios que ejercen funciones de dirección y gerencia (consejeros o administradores) o prestan servicios para la sociedad de forma habitual, personal y directa, y ostentan el control efectivo, directo o indirecto, de la sociedad, quedan encuadrados obligatoriamente en el RETA. Se entiende que existe control efectivo cuando las participaciones del trabajador equivalen a, al menos, la mitad del capital social. También se presume control efectivo, salvo prueba en contrario, cuando conviva con familiares hasta 2º grado que en conjunto posean al menos el 50% del capital, cuando su participación sea igual o superior a 1/3, o igual o superior a 1/4 si ejerce funciones de dirección y gerencia.",
+      "aplicacion_en_este_simulador": "El alcance del simulador (sección 6 del documento) se limita a una sociedad limitada unipersonal en la que la misma persona es propietaria, trabaja en la actividad y ejerce el control efectivo (100% de participación). Por tanto, en todos los casos cubiertos por esta herramienta el socio administrador cotiza en el RETA, nunca en régimen general ni en régimen general asimilado."
+    }
+  },
+
+  "impuesto_sobre_sociedades": {
+    "anio": 2025,
+    "fuente": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/manual-sociedades-2025/principales-novedades-impuesto-sobre-sociedades-2025/tipos-gravamen.html",
+    "verificado": true,
+    "verificado_nota": "Extraído directamente de la página oficial de la Agencia Tributaria (Manual práctico Sociedades 2025), que recoge la aplicación de la Ley 7/2024 para el periodo impositivo 2025.",
+    "revision_anual": "Los tipos de microempresas y entidades de reducida dimensión bajan cada año por calendario de la Ley 7/2024 hasta estabilizarse en 2029. Política acordada: revisar cada 1 de diciembre del año en curso si toca incorporar el tipo del año siguiente (creando/actualizando el JSON fiscal correspondiente, p.ej. 2026.json), para poder ayudar a las empresas con datos actualizados antes del cierre del ejercicio. Confirmar siempre contra fuente oficial de la AEAT, no asumir la progresión sin verificar.",
+    "tipo_general_pct": 25,
+    "microempresas": {
+      "requisito": "Cifra de negocios del periodo impositivo anterior inferior a 1.000.000 €.",
+      "tramo_hasta_50000_base_imponible_pct": 21,
+      "resto_base_imponible_pct": 22,
+      "nota_evolucion": "Tipo en reducción progresiva por la Ley 7/2024: en 2024 ambos tramos tributaban al 23%; en 2025 pasan a 21%/22%; seguirá bajando en años posteriores. Confirmar el calendario completo 2026-2029 antes de dar por cerrada la configuración de próximos ejercicios."
+    },
+    "entidades_reducida_dimension": {
+      "requisito": "Cifra de negocios del periodo impositivo anterior inferior a 10.000.000 € (art. 101 LIS) y que no sea microempresa.",
+      "tipo_pct": 24,
+      "nota_evolucion": "Tipo en reducción progresiva por la Ley 7/2024: 25% en 2024, 24% en 2025, previsiblemente continuará bajando hasta 2029. Confirmar calendario completo antes de usarlo en ejercicios futuros."
+    },
+    "entidades_nueva_creacion": {
+      "tipo_pct": 15,
+      "aplicacion": "Primer periodo impositivo en que la base imponible resulte positiva y el siguiente.",
+      "excluye": "No aplica a entidades patrimoniales ni en los supuestos del art. 29.1 párrafo segundo LIS (grupo, actividad procedente de otra entidad vinculada, etc.), coherente con el cuestionario guiado de la sección 10.11 del documento del simulador."
+    },
+    "empresas_emergentes_certificadas": {
+      "tipo_pct": 15,
+      "nota": "Régimen específico de la Ley 28/2022 (startups), distinto del de entidades de nueva creación ordinarias. El documento del simulador (sección 10.11) indica expresamente que no deben tratarse igual."
+    },
+    "otros_tipos_no_aplicables_al_alcance_del_simulador": {
+      "entidad_patrimonial_pct": 25,
+      "cooperativas_fiscalmente_protegidas_resultados_cooperativos_general_pct": 20,
+      "cooperativas_fiscalmente_protegidas_resultados_extracooperativos_pct": 25,
+      "entidades_de_credito_pct": 30,
+      "nota": "Se incluyen solo como referencia; quedan fuera del alcance funcional del simulador (sección 6 del documento: excluye cooperativas, regímenes especiales, etc.)."
+    }
+  },
+
+  "parametros_del_motor_no_fiscales": {
+    "nota": "Estos parámetros no proceden de una fuente tributaria externa: son decisiones de producto ya cerradas en el documento simulador-autonomo-vs-sociedad.md (secciones 15 y 19) y se guardan aquí porque el propio documento pide que 'el margen del 5 % quede guardado en la configuración fiscal'.",
+    "margen_de_prudencia": {
+      "valor": 0.05,
+      "descripcion": "Diferencia mínima entre escenarios para destacar una opción como más favorable. Por debajo de este margen, el resultado es 'No existe una ventaja económica clara'.",
+      "fuente": "simulador-autonomo-vs-sociedad.md, secciones 15 y 29.8"
+    },
+    "limites_beneficio_anual": {
+      "minimo_euros": 0,
+      "maximo_euros": 1000000,
+      "mensaje_fuera_de_limite": "Este caso requiere un estudio personalizado",
+      "fuente": "simulador-autonomo-vs-sociedad.md, secciones 19 y 29.9"
+    },
+    "redondeo": {
+      "regla": "Cálculos internos con números de JavaScript (floats), sin redondeo intermedio en ningún paso; redondeo único a euros enteros en el punto de presentación final (pantalla de resultado).",
+      "fuente": "simulador-autonomo-vs-sociedad.md, sección 21 (Precisión monetaria)",
+      "decision_2026-07-31": "Cerrado sin implementar céntimos-enteros ni librería decimal. La sección 21 lo pide como requisito de forma, pero el error de coma flotante en estas magnitudes es del orden de 10⁻¹⁰ €, muy por debajo del céntimo, y el resultado siempre se muestra redondeado a euro entero — no hay ningún caso realista en que afecte a la cifra que ve el usuario. Decisión: no es un problema real, se descarta como pendiente."
+    }
+  },
+
+  "pendiente_antes_de_publicar": [
+    "Confirmar el calendario completo 2026-2029 de reducción de tipos de Sociedades para microempresas y entidades de reducida dimensión (Ley 7/2024) si se van a soportar ejercicios futuros.",
+    "Comparar el motor de cálculo resultante con Renta WEB Open y Sociedades WEB Open y con las tablas oficiales de cotización, tal como exige la sección 26 del documento del simulador, antes de publicar.",
+    "País Vasco y Comunidad Foral de Navarra quedan sin configuración fiscal en este borrador (territorios forales, fuera de alcance); no usar datos de otra comunidad como sustituto."
+  ]
+}

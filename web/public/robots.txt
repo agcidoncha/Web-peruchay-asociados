@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://peruchayasociados.com/sitemap-index.xml

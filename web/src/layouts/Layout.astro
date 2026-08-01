@@ -1,0 +1,120 @@
+---
+import CookieBanner from "../components/CookieBanner.astro";
+import CookieSettings from "../components/CookieSettings.astro";
+
+interface Props {
+	title: string;
+	description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<meta name="generator" content={Astro.generator} />
+
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={new URL(Astro.url.pathname, Astro.site)} />
+		<meta property="og:image" content={new URL("/logo-pya.png", Astro.site)} />
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={new URL("/logo-pya.png", Astro.site)} />
+
+		<style is:global>
+			@font-face {
+				font-family: "Cormorant Garamond";
+				font-style: normal;
+				font-weight: 400 700;
+				font-display: swap;
+				src: url("/fonts/cormorant-garamond-variable.woff2") format("woff2");
+			}
+
+			@font-face {
+				font-family: "Lora";
+				font-style: normal;
+				font-weight: 400 700;
+				font-display: swap;
+				src: url("/fonts/lora-variable.woff2") format("woff2");
+			}
+
+			:root {
+				--color-bg: #faf9fe;
+				--color-surface: #f6f7fb;
+				--color-white: #ffffff;
+				--color-text: #1f2937;
+				--color-muted: #6b7280;
+
+				--color-accent: #70698a;
+				--color-accent-light: #c4b5fd;
+				--color-accent-dark: #3d3752;
+				--color-divider: rgba(31, 41, 55, 0.12);
+
+				/* Rampa completa tal como está definida en el diseño aprobado (Home.dc.html) */
+				--color-accent-100: #f4f2fa;
+				--color-accent-200: #ece5f8;
+				--color-accent-300: #c4b5fd;
+				--color-accent-600: #8a82a8;
+				--color-accent-700: #4a4460;
+				--color-accent-800: #3d3752;
+				--color-accent-900: #2a2636;
+
+				--shadow-sm: 0 1px 3px rgba(31, 41, 55, 0.08);
+				--shadow-md: 0 6px 16px rgba(31, 41, 55, 0.1);
+				--shadow-lg: 0 12px 28px rgba(31, 41, 55, 0.14);
+
+				--font-body: "Lora", Georgia, serif;
+				--font-heading: "Cormorant Garamond", Georgia, serif;
+				--font-heading-weight: 600;
+			}
+
+			html {
+				scroll-behavior: smooth;
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				margin: 0;
+				background: var(--color-bg);
+				color: var(--color-text);
+				font-family: var(--font-body);
+			}
+
+			img {
+				max-width: 100%;
+				display: block;
+			}
+		</style>
+	</head>
+	<body>
+		<slot />
+		<CookieBanner />
+		<CookieSettings />
+
+		<script>
+			import { hasAnalyticsConsent, CONSENT_UPDATED_EVENT } from "../lib/cookieConsent";
+			import { loadAnalyticsIfConsented } from "../lib/analyticsLoader";
+
+			loadAnalyticsIfConsented(hasAnalyticsConsent());
+			window.addEventListener(CONSENT_UPDATED_EVENT, () => {
+				loadAnalyticsIfConsented(hasAnalyticsConsent());
+			});
+		</script>
+	</body>
+</html>

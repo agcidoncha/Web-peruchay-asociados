@@ -1,0 +1,156 @@
+---
+const areas = [
+	{
+		href: "/finanzas-y-control",
+		title: "Finanzas y Control",
+		text: "Información, análisis y control para conocer mejor el negocio y tomar decisiones con fundamento.",
+		image: "/images/cards/finanzas-y-control.webp",
+	},
+	{
+		href: "/contabilidad-y-fiscalidad",
+		title: "Contabilidad y Fiscalidad",
+		text: "Gestión contable y fiscal rigurosa, con el respaldo de más de 30 años de experiencia profesional.",
+		image: "/images/cards/contabilidad-y-fiscalidad.webp",
+	},
+	{
+		href: "/digitalizacion-y-automatizacion",
+		title: "Digitalización y Automatización",
+		text: "Tecnología, desarrollo digital y automatización de procesos para trabajar de forma más eficiente.",
+		image: "/images/cards/digitalizacion-y-automatizacion.webp",
+	},
+];
+---
+
+<section id="areas" class="areas">
+	<div class="wrap">
+		<h2>¿En qué podemos ayudarte?</h2>
+		<div class="grid">
+			{areas.map((area) => (
+				<a href={area.href} class="card">
+					<div class="photo">
+						<img src={area.image} alt={`Ilustración del área ${area.title}`} width="1000" height="560" loading="lazy" />
+					</div>
+					<div class="body">
+						<h3>{area.title}</h3>
+						<p>{area.text}</p>
+						<div class="link-wrap">
+							<span class="link">Conocer el área</span>
+						</div>
+					</div>
+				</a>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.areas {
+		padding: 72px 24px;
+		background: var(--color-surface);
+	}
+
+	.wrap {
+		max-width: 1180px;
+		margin: 0 auto;
+	}
+
+	h2 {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: clamp(26px, 3.6vw, 38px);
+		text-align: center;
+		color: var(--color-text);
+		margin: 0 0 44px;
+	}
+
+	.grid {
+		display: grid;
+		gap: 24px;
+	}
+
+	.card {
+		text-decoration: none;
+		color: inherit;
+		background: #fff;
+		border-radius: 20px;
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		box-shadow: 0 1px 3px rgba(31, 41, 55, 0.08);
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
+	}
+
+	.card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 12px 24px rgba(31, 41, 55, 0.12);
+	}
+
+	.photo {
+		width: 100%;
+		height: 220px;
+		overflow: hidden;
+	}
+
+	.photo img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.3s ease;
+	}
+
+	.card:hover .photo img {
+		transform: scale(1.045);
+	}
+
+	.body {
+		padding: 24px 22px;
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+	}
+
+	h3 {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 19px;
+		line-height: 1.3;
+		color: var(--color-text);
+		margin: 0 0 10px;
+	}
+
+	.body p {
+		font-family: var(--font-body);
+		font-size: 15px;
+		line-height: 1.55;
+		color: var(--color-muted);
+		margin: 0 0 20px;
+		flex: 1;
+	}
+
+	.link-wrap {
+		border-top: 1px solid var(--color-divider);
+		padding-top: 20px;
+	}
+
+	.link {
+		display: inline-flex;
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 14px;
+		color: var(--color-accent-dark);
+		border: 1.5px solid var(--color-accent-dark);
+		border-radius: 999px;
+		padding: 9px 20px;
+	}
+
+	.card:hover .link {
+		background: var(--color-accent-dark);
+		color: #fff;
+	}
+
+	@media (min-width: 900px) {
+		.grid {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+</style>

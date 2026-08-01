@@ -1,0 +1,385 @@
+---
+const slides = [
+	{ title: "Finanzas y Control", image: "/images/hero/finanzas-y-control.webp", href: "/finanzas-y-control" },
+	{ title: "Contabilidad y Fiscalidad", image: "/images/hero/contabilidad-y-fiscalidad.webp", href: "/contabilidad-y-fiscalidad" },
+	{ title: "Digitalización y Automatización", image: "/images/hero/digitalizacion-y-automatizacion.webp", href: "/digitalizacion-y-automatizacion" },
+];
+---
+
+<section id="inicio" class="hero">
+	<div class="wrap">
+		<div class="content">
+			<span class="eyebrow">Áreas</span>
+			<h1>Soluciones para tu empresa.</h1>
+			<p class="subtitle">
+				Experiencia en control de gestión, planificación y análisis financiero, contabilidad y
+				fiscalidad, digitalización y automatización, adaptada a las necesidades de cada empresa.
+			</p>
+			<div class="ctas">
+				<a href="#contacto" class="btn-primary">
+					Hablemos
+					<span class="btn-icon">
+						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"></path><path d="M7 7h10v10"></path></svg>
+					</span>
+				</a>
+				<a href="#areas" class="btn-secondary">
+					Ver áreas
+					<span class="btn-icon btn-icon-light">
+						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 5v14l11-7z"></path></svg>
+					</span>
+				</a>
+			</div>
+			<div class="trust">
+				<span class="trust-item">
+					<span class="trust-icon">
+						<svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-900)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>
+					</span>
+					Más de 30 años de experiencia
+				</span>
+				<span class="trust-item">
+					<span class="trust-icon">
+						<svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-900)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>
+					</span>
+					Trato cercano
+				</span>
+				<span class="trust-item">
+					<span class="trust-icon">
+						<svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-900)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>
+					</span>
+					Rigor profesional
+				</span>
+			</div>
+		</div>
+
+		<div class="carousel">
+			<a class="frame" href={slides[0].href} aria-label={`Conocer el área ${slides[0].title}`}>
+				{slides.map((slide, i) => (
+					<div class:list={["slide", { active: i === 0 }]} data-title={slide.title} data-href={slide.href}>
+						<img src={slide.image} alt={`Ilustración del área ${slide.title}`} width="1254" height="1254" loading="eager" fetchpriority={i === 0 ? "high" : "low"} />
+					</div>
+				))}
+				<div class="overlay"></div>
+				<div class="label-wrap">
+					<span class="label" data-slide-label>
+						{slides[0].title}
+						<svg class="label-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"></path><path d="M7 7h10v10"></path></svg>
+					</span>
+				</div>
+			</a>
+			<div class="dots">
+				{slides.map((_, i) => (
+					<button type="button" class:list={["dot", { active: i === 0 }]} data-dot={i} aria-label={`Ir a la diapositiva ${i + 1}`}></button>
+				))}
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.hero {
+		background: var(--color-accent-100);
+	}
+
+	.wrap {
+		max-width: 1180px;
+		margin: 0 auto;
+		padding: 56px 24px;
+		display: grid;
+		gap: 40px;
+	}
+
+	.eyebrow {
+		display: inline-block;
+		font-family: var(--font-body);
+		font-size: 13px;
+		color: var(--color-accent-800);
+		background: #fff;
+		padding: 6px 14px;
+		border-radius: 8px;
+		margin: 0 0 20px;
+	}
+
+	h1 {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: clamp(32px, 6vw, 56px);
+		line-height: 1.08;
+		letter-spacing: -0.01em;
+		text-transform: uppercase;
+		color: var(--color-accent-900);
+		margin: 0 0 22px;
+	}
+
+	.subtitle {
+		font-family: var(--font-body);
+		font-size: 17px;
+		line-height: 1.6;
+		color: var(--color-accent-700);
+		max-width: 520px;
+		margin: 0 0 30px;
+	}
+
+	.ctas {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 14px;
+	}
+
+	.btn-primary,
+	.btn-secondary {
+		display: inline-flex;
+		align-items: center;
+		gap: 16px;
+		font-family: var(--font-body);
+		font-weight: 600;
+		font-size: 15px;
+		padding: 6px 6px 6px 24px;
+		border-radius: 999px;
+		text-decoration: none;
+	}
+
+	.btn-icon {
+		width: 38px;
+		height: 38px;
+		border-radius: 50%;
+		background: #fff;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: var(--color-accent-900);
+		flex: 0 0 auto;
+	}
+
+	.btn-icon-light {
+		background: var(--color-accent-100);
+	}
+
+	.btn-primary {
+		color: #fff;
+		background: var(--color-accent-900);
+	}
+
+	.btn-primary:hover {
+		background: var(--color-accent-800);
+	}
+
+	.btn-secondary {
+		color: var(--color-accent-900);
+		background: transparent;
+		border: 1.5px solid var(--color-accent-300);
+	}
+
+	.btn-secondary:hover {
+		background: var(--color-accent-100);
+	}
+
+	.trust {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 14px;
+		width: fit-content;
+		max-width: 100%;
+		background: var(--color-surface);
+		border-radius: 10px;
+		padding: 16px 22px;
+		margin-top: 32px;
+	}
+
+	.trust-item {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		font-family: var(--font-body);
+		font-size: 13.5px;
+		color: var(--color-accent-900);
+	}
+
+	.trust-icon {
+		width: 16px;
+		height: 16px;
+		border-radius: 50%;
+		background: var(--color-accent-300);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex: 0 0 auto;
+	}
+
+	.frame {
+		position: relative;
+		display: block;
+		aspect-ratio: 1 / 1;
+		width: 100%;
+		border-radius: 24px;
+		overflow: hidden;
+		background: var(--color-accent-800);
+		box-shadow: var(--shadow-md);
+		text-decoration: none;
+		color: inherit;
+	}
+
+	.slide {
+		position: absolute;
+		inset: 0;
+		display: none;
+		overflow: hidden;
+	}
+
+	.slide.active {
+		display: block;
+	}
+
+	.slide img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transform: scale(1);
+		transition: transform 0.5s ease;
+	}
+
+	.frame:hover .slide.active img {
+		transform: scale(1.045);
+	}
+
+	.overlay {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(0deg, rgba(42, 38, 54, 0.28) 0%, rgba(42, 38, 54, 0.16) 16%, rgba(42, 38, 54, 0.06) 34%, transparent 58%);
+		pointer-events: none;
+		opacity: 0.85;
+		transition: opacity 0.3s ease;
+	}
+
+	.frame:hover .overlay {
+		opacity: 1;
+	}
+
+	.label-wrap {
+		position: absolute;
+		left: 24px;
+		bottom: 24px;
+		right: 24px;
+	}
+
+	.label {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 13px;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		color: #fff;
+		background: rgba(42, 38, 54, 0.62);
+		border: 1px solid rgba(255, 255, 255, 0.3);
+		backdrop-filter: blur(6px);
+		-webkit-backdrop-filter: blur(6px);
+		padding: 8px 16px;
+		border-radius: 999px;
+		box-shadow: 0 2px 10px rgba(42, 38, 54, 0.18);
+		transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+	}
+
+	.frame:hover .label {
+		background: rgba(42, 38, 54, 0.78);
+		border-color: rgba(255, 255, 255, 0.5);
+		transform: translateY(-2px);
+	}
+
+	.label-arrow {
+		flex: 0 0 auto;
+		opacity: 0;
+		transform: translate(-4px, 4px);
+		transition: opacity 0.3s ease, transform 0.3s ease;
+	}
+
+	.frame:hover .label-arrow {
+		opacity: 1;
+		transform: translate(0, 0);
+	}
+
+	.dots {
+		display: flex;
+		justify-content: center;
+		gap: 8px;
+		margin-top: 24px;
+	}
+
+	.dot {
+		position: relative;
+		width: 9px;
+		height: 9px;
+		border-radius: 5px;
+		background: transparent;
+		border: 1.5px solid var(--color-accent-600);
+		cursor: pointer;
+		padding: 0;
+		transition: width 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+	}
+
+	.dot::before {
+		content: "";
+		position: absolute;
+		inset: -15px;
+	}
+
+	.dot:hover {
+		border-color: var(--color-accent-900);
+	}
+
+	.dot.active {
+		width: 24px;
+		background: var(--color-accent-900);
+		border-color: var(--color-accent-900);
+	}
+
+	@media (min-width: 900px) {
+		.wrap {
+			grid-template-columns: 1.05fr 0.95fr;
+			align-items: center;
+			padding: 88px 24px;
+		}
+	}
+</style>
+
+<script>
+	const carousel = document.querySelector(".carousel");
+	if (carousel) {
+		const frame = carousel.querySelector(".frame");
+		const slides = Array.from(carousel.querySelectorAll(".slide"));
+		const dots = Array.from(carousel.querySelectorAll(".dot"));
+		const label = carousel.querySelector("[data-slide-label]");
+		const labelArrow = label?.querySelector(".label-arrow");
+		let current = 0;
+
+		const goTo = (index) => {
+			slides[current]?.classList.remove("active");
+			dots[current]?.classList.remove("active");
+			current = index;
+			slides[current]?.classList.add("active");
+			dots[current]?.classList.add("active");
+			const title = slides[current]?.getAttribute("data-title") ?? "";
+			const href = slides[current]?.getAttribute("data-href");
+			if (label) {
+				label.textContent = title;
+				if (labelArrow) label.appendChild(labelArrow);
+			}
+			if (frame && href) {
+				frame.setAttribute("href", href);
+				frame.setAttribute("aria-label", `Conocer el área ${title}`);
+			}
+		};
+
+		dots.forEach((dot, i) => {
+			dot.addEventListener("click", (e) => {
+				e.preventDefault();
+				goTo(i);
+			});
+		});
+
+		setInterval(() => {
+			goTo((current + 1) % slides.length);
+		}, 5000);
+	}
+</script>

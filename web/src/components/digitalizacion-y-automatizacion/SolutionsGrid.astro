@@ -1,0 +1,103 @@
+---
+const solutions = [
+	{
+		title: "Proyecto completo",
+		text: "Análisis, diseño, desarrollo, puesta en marcha y documentación.",
+	},
+	{
+		title: "Proyecto puntual",
+		text: "Resolución de una necesidad concreta con un alcance definido.",
+	},
+	{
+		title: "Colaboración con equipos internos",
+		text: "Apoyo especializado para marketing, administración, operaciones o tecnología.",
+	},
+	{
+		title: "Mejora de sistemas existentes",
+		text: "Revisión y evolución de una solución que ya está en funcionamiento.",
+	},
+	{
+		title: "Prototipo o prueba de concepto",
+		text: "Validación de una idea antes de realizar una inversión mayor.",
+	},
+];
+---
+
+<section class="solutions">
+	<div class="wrap">
+		<h2>Soluciones creadas para cada necesidad</h2>
+		<p class="subtitle">No partimos de un paquete cerrado. El alcance se adapta a la necesidad real de cada empresa.</p>
+		<div class="grid">
+			{solutions.map((solution) => (
+				<div class="card">
+					<h4>{solution.title}</h4>
+					<p>{solution.text}</p>
+				</div>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.solutions {
+		padding: 88px 24px;
+		background: var(--color-bg);
+	}
+
+	.wrap {
+		max-width: 1180px;
+		margin: 0 auto;
+	}
+
+	h2 {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: clamp(24px, 3.2vw, 34px);
+		text-align: center;
+		color: var(--color-text);
+		margin: 0 0 16px;
+	}
+
+	.subtitle {
+		font-family: var(--font-body);
+		font-size: 16px;
+		line-height: 1.6;
+		color: var(--color-muted);
+		text-align: center;
+		max-width: 680px;
+		margin: 0 auto 48px;
+	}
+
+	.grid {
+		display: grid;
+		gap: 18px;
+	}
+
+	.card {
+		background: var(--color-surface);
+		border-radius: 16px;
+		padding: 24px 22px;
+	}
+
+	.card h4 {
+		margin: 0 0 8px;
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 16.5px;
+		color: var(--color-text);
+	}
+
+	.card p {
+		margin: 0;
+		font-family: var(--font-body);
+		font-size: 14px;
+		line-height: 1.55;
+		color: var(--color-muted);
+	}
+
+	@media (min-width: 700px) {
+		.grid {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+</style>

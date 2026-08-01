@@ -1,0 +1,331 @@
+---
+---
+
+<div id="cookie-settings-backdrop" class="cookie-modal-backdrop" data-close hidden></div>
+<div id="cookie-settings" class="cookie-modal" role="dialog" aria-modal="true" aria-labelledby="cookie-settings-title" aria-describedby="cookie-settings-desc" hidden>
+	<div class="modal-panel">
+		<div class="modal-header">
+			<h2 id="cookie-settings-title">Configurar cookies</h2>
+			<button type="button" class="modal-close" aria-label="Cerrar" data-close>
+				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18"></path><path d="M6 6l12 12"></path></svg>
+			</button>
+		</div>
+
+		<p id="cookie-settings-desc" class="modal-desc">
+			Puedes decidir qué categorías permites. Las cookies necesarias están siempre activas porque permiten el
+			funcionamiento y la seguridad de la web. Las demás categorías permanecen desactivadas hasta que las
+			aceptes.
+		</p>
+
+		<div class="category">
+			<div class="category-header">
+				<span class="category-title">Necesarias</span>
+				<span class="category-locked">Siempre activas</span>
+			</div>
+			<p class="category-desc">
+				Permiten el funcionamiento básico, la seguridad y el recuerdo de tus preferencias. No pueden
+				desactivarse desde este panel.
+			</p>
+		</div>
+
+		<div class="category">
+			<div class="category-header">
+				<span class="category-title" id="cat-analytics-label">Analíticas</span>
+				<label class="toggle">
+					<input type="checkbox" id="cat-analytics" aria-labelledby="cat-analytics-label" />
+					<span class="toggle-track" aria-hidden="true"><span class="toggle-thumb"></span></span>
+				</label>
+			</div>
+			<p class="category-desc">Nos ayudan a comprender de forma agregada cómo se utiliza la web para mejorarla.</p>
+		</div>
+
+		<div class="modal-actions">
+			<button type="button" class="btn-outline" data-cookie-reject-all>Rechazar todas</button>
+			<button type="button" class="btn-outline" data-cookie-save>Guardar selección</button>
+			<button type="button" class="btn-solid" data-cookie-accept-all>Aceptar todas</button>
+		</div>
+	</div>
+</div>
+
+<style>
+	.cookie-modal-backdrop {
+		position: fixed;
+		inset: 0;
+		z-index: 100;
+		max-width: 100vw;
+		box-sizing: border-box;
+		background: rgba(31, 41, 55, 0.55);
+	}
+
+	.cookie-modal-backdrop[hidden] {
+		display: none;
+	}
+
+	.cookie-modal {
+		position: fixed;
+		inset: 0;
+		z-index: 101;
+		max-width: 100vw;
+		box-sizing: border-box;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 24px;
+	}
+
+	.cookie-modal[hidden] {
+		display: none;
+	}
+
+	.modal-panel {
+		position: relative;
+		background: #fff;
+		border-radius: 24px;
+		border: 1px solid var(--color-divider);
+		box-shadow: var(--shadow-lg);
+		max-width: 520px;
+		width: 100%;
+		max-height: 90vh;
+		overflow-y: auto;
+		padding: 32px;
+	}
+
+	.modal-header {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: 20px;
+		margin: 0 0 16px;
+	}
+
+	.modal-header h2 {
+		margin: 0;
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 24px;
+		color: var(--color-text);
+	}
+
+	.modal-close {
+		flex: 0 0 auto;
+		width: 36px;
+		height: 36px;
+		border-radius: 10px;
+		border: 1px solid var(--color-divider);
+		background: transparent;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		color: var(--color-text);
+	}
+
+	.modal-desc {
+		font-family: var(--font-body);
+		font-size: 14px;
+		line-height: 1.6;
+		color: var(--color-muted);
+		margin: 0 0 24px;
+	}
+
+	.category {
+		border-top: 1px solid var(--color-divider);
+		padding: 18px 0;
+	}
+
+	.category-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 16px;
+		margin: 0 0 6px;
+	}
+
+	.category-title {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 15.5px;
+		color: var(--color-text);
+	}
+
+	.category-locked {
+		font-family: var(--font-body);
+		font-size: 12.5px;
+		color: var(--color-accent-700);
+		background: var(--color-accent-100);
+		padding: 4px 10px;
+		border-radius: 999px;
+	}
+
+	.category-desc {
+		margin: 0;
+		font-family: var(--font-body);
+		font-size: 13.5px;
+		line-height: 1.55;
+		color: var(--color-muted);
+	}
+
+	.toggle {
+		position: relative;
+		display: inline-flex;
+		cursor: pointer;
+	}
+
+	.toggle input {
+		position: absolute;
+		opacity: 0;
+		width: 1px;
+		height: 1px;
+	}
+
+	.toggle-track {
+		width: 42px;
+		height: 24px;
+		border-radius: 999px;
+		background: var(--color-divider);
+		display: inline-flex;
+		align-items: center;
+		padding: 3px;
+		transition: background 0.2s ease;
+	}
+
+	.toggle-thumb {
+		width: 18px;
+		height: 18px;
+		border-radius: 50%;
+		background: #fff;
+		box-shadow: 0 1px 2px rgba(31, 41, 55, 0.3);
+		transition: transform 0.2s ease;
+	}
+
+	.toggle input:checked + .toggle-track {
+		background: var(--color-accent-900);
+	}
+
+	.toggle input:checked + .toggle-track .toggle-thumb {
+		transform: translateX(18px);
+	}
+
+	.toggle input:focus-visible + .toggle-track {
+		outline: 2px solid var(--color-accent);
+		outline-offset: 2px;
+	}
+
+	.modal-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		margin-top: 24px;
+		padding-top: 20px;
+		border-top: 1px solid var(--color-divider);
+	}
+
+	.btn-outline,
+	.btn-solid {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 13.5px;
+		border-radius: 999px;
+		padding: 10px 18px;
+		cursor: pointer;
+	}
+
+	.btn-outline {
+		background: transparent;
+		border: 1.5px solid var(--color-divider);
+		color: var(--color-text);
+	}
+
+	.btn-outline:hover {
+		border-color: var(--color-accent-300);
+	}
+
+	.btn-solid {
+		background: var(--color-accent-900);
+		border: 1.5px solid var(--color-accent-900);
+		color: #fff;
+	}
+
+	.btn-solid:hover {
+		background: var(--color-accent-800);
+	}
+</style>
+
+<script>
+	import { getConsent, saveConsent, OPEN_SETTINGS_EVENT } from "../lib/cookieConsent";
+
+	const backdrop = document.querySelector<HTMLElement>("#cookie-settings-backdrop");
+	const modal = document.querySelector<HTMLElement>("#cookie-settings");
+	const analyticsToggle = document.querySelector<HTMLInputElement>("#cat-analytics");
+	let lastFocused: HTMLElement | null = null;
+
+	function focusableElements(): HTMLElement[] {
+		if (!modal) return [];
+		return Array.from(
+			modal.querySelectorAll<HTMLElement>('button, [href], input, [tabindex]:not([tabindex="-1"])'),
+		).filter((el) => !el.hasAttribute("disabled"));
+	}
+
+	function openModal() {
+		if (!modal || !backdrop) return;
+		lastFocused = document.activeElement as HTMLElement;
+		const consent = getConsent();
+		if (analyticsToggle) analyticsToggle.checked = consent?.analytics === true;
+		backdrop.hidden = false;
+		modal.hidden = false;
+		document.addEventListener("keydown", onKeydown);
+		const first = focusableElements()[0];
+		first?.focus();
+	}
+
+	function closeModal() {
+		if (!modal || !backdrop) return;
+		modal.hidden = true;
+		backdrop.hidden = true;
+		document.removeEventListener("keydown", onKeydown);
+		lastFocused?.focus();
+	}
+
+	function onKeydown(event: KeyboardEvent) {
+		if (event.key === "Escape") {
+			event.preventDefault();
+			closeModal();
+			return;
+		}
+		if (event.key === "Tab") {
+			const items = focusableElements();
+			if (items.length === 0) return;
+			const first = items[0];
+			const last = items[items.length - 1];
+			if (event.shiftKey && document.activeElement === first) {
+				event.preventDefault();
+				last.focus();
+			} else if (!event.shiftKey && document.activeElement === last) {
+				event.preventDefault();
+				first.focus();
+			}
+		}
+	}
+
+	window.addEventListener(OPEN_SETTINGS_EVENT, openModal);
+
+	document.querySelectorAll("[data-close]").forEach((el) => {
+		el.addEventListener("click", closeModal);
+	});
+
+	document.querySelector("[data-cookie-reject-all]")?.addEventListener("click", () => {
+		saveConsent({ analytics: false });
+		closeModal();
+	});
+
+	document.querySelector("[data-cookie-accept-all]")?.addEventListener("click", () => {
+		saveConsent({ analytics: true });
+		if (analyticsToggle) analyticsToggle.checked = true;
+		closeModal();
+	});
+
+	document.querySelector("[data-cookie-save]")?.addEventListener("click", () => {
+		saveConsent({ analytics: analyticsToggle?.checked ?? false });
+		closeModal();
+	});
+</script>

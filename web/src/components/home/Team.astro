@@ -1,0 +1,92 @@
+---
+const profiles = [
+	{
+		role: "Finanzas y Control · Perfil senior especializado",
+		text: "Aporta una visión global del negocio, combinando experiencia, capacidad analítica y un enfoque práctico para acompañar a las empresas en sus decisiones económicas y financieras.",
+	},
+	{
+		role: "Contabilidad y Fiscalidad · Perfil senior especializado",
+		text: "Una trayectoria consolidada acompañando la evolución de empresas, con un enfoque práctico y cercano, resolviendo con criterio las necesidades del día a día de cada empresa.",
+	},
+	{
+		role: "Digitalización y Automatización · Perfil senior especializado",
+		text: "Combina una sólida trayectoria profesional con una formación continua en tecnologías emergentes, aportando una visión interdisciplinar para identificar oportunidades de mejora e incorporar soluciones con impacto real en las empresas.",
+	},
+	{
+		role: "Apoyo a la Gestión · Perfil transversal",
+		text: "Complementa la experiencia del equipo con una visión abierta al aprendizaje continuo y a la evolución de las metodologías de gestión, colaborando de forma transversal en los proyectos.",
+	},
+];
+---
+
+<section id="equipo" class="team" hidden>
+	<div class="wrap">
+		<h2>Equipo</h2>
+		<div class="grid">
+			{profiles.map((profile) => (
+				<div class="card">
+					<p class="role">{profile.role}</p>
+					<p class="text">{profile.text}</p>
+				</div>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.team[hidden] {
+		display: none;
+	}
+
+	.team {
+		padding: 72px 24px;
+		background: var(--color-bg);
+	}
+
+	.wrap {
+		max-width: 1180px;
+		margin: 0 auto;
+	}
+
+	h2 {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: clamp(26px, 3.6vw, 38px);
+		text-align: center;
+		color: var(--color-text);
+		margin: 0 0 44px;
+	}
+
+	.grid {
+		display: grid;
+		gap: 20px;
+	}
+
+	.card {
+		background: #fff;
+		border: 1px solid var(--color-divider);
+		border-radius: 18px;
+		padding: 26px 24px;
+	}
+
+	.role {
+		font-family: var(--font-body);
+		font-size: 13px;
+		color: var(--color-accent);
+		margin: 0 0 12px;
+	}
+
+	.text {
+		font-family: var(--font-body);
+		font-size: 14.5px;
+		line-height: 1.55;
+		color: var(--color-muted);
+		margin: 0;
+	}
+
+	@media (min-width: 700px) {
+		.grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+</style>

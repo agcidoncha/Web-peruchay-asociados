@@ -1,0 +1,1349 @@
+---
+---
+
+<section id="simulador" class="avs">
+	<div class="wrap">
+		<p class="eyebrow">Simulador orientativo</p>
+		<h2>¿Autónomo o sociedad?</h2>
+		<p class="subtitle" data-step-subtitle>Compara ambos escenarios con los datos básicos de tu actividad.</p>
+		<p class="disclaimer">Esta herramienta ofrece una estimación simplificada. No constituye asesoramiento fiscal, contable, laboral o mercantil y no sustituye el estudio de tu situación personal.</p>
+
+		<div class="card">
+			<div class="top-row">
+				<span data-step-label>Paso 1 de 4 · Tu actividad</span>
+				<span data-step-percent>25 % completado</span>
+			</div>
+			<div class="progress-track">
+				<div class="progress-fill" data-progress-fill></div>
+			</div>
+
+			<!-- Paso 1 — Actividad -->
+			<div data-step="1" class="step-view">
+				<div class="step-grid">
+					<div class="form-col">
+						<h3>Cuéntanos cómo funciona tu actividad</h3>
+
+						<div class="field">
+							<label for="avs-comunidad">Comunidad autónoma de residencia fiscal</label>
+							<select id="avs-comunidad" name="comunidad" aria-describedby="avs-comunidad-help">
+								<option value="" selected disabled>Selecciona una comunidad</option>
+								<option value="andalucia">Andalucía</option>
+								<option value="aragon">Aragón</option>
+								<option value="asturias">Principado de Asturias</option>
+								<option value="baleares">Illes Balears</option>
+								<option value="canarias">Canarias</option>
+								<option value="cantabria">Cantabria</option>
+								<option value="castilla-la-mancha">Castilla-La Mancha</option>
+								<option value="castilla-y-leon">Castilla y León</option>
+								<option value="cataluna">Cataluña</option>
+								<option value="ceuta">Ceuta</option>
+								<option value="extremadura">Extremadura</option>
+								<option value="galicia">Galicia</option>
+								<option value="madrid">Comunidad de Madrid</option>
+								<option value="melilla">Melilla</option>
+								<option value="murcia">Región de Murcia</option>
+								<option value="la-rioja">La Rioja</option>
+								<option value="valencia">Comunitat Valenciana</option>
+								<option value="navarra" disabled>Comunidad Foral de Navarra (próximamente)</option>
+								<option value="pais-vasco" disabled>País Vasco (próximamente)</option>
+							</select>
+							<p class="field-help" id="avs-comunidad-help">Necesaria para calcular correctamente el tramo autonómico del IRPF.</p>
+						</div>
+
+						<div class="field">
+							<label for="avs-ingresos">Facturación anual</label>
+							<input type="text" inputmode="decimal" id="avs-ingresos" placeholder="80.000 €" autocomplete="off" aria-describedby="avs-ingresos-help" />
+							<p class="field-help" id="avs-ingresos-help">Importe anual aproximado, sin IVA.</p>
+						</div>
+
+						<div class="field">
+							<label for="avs-gastos">Gastos deducibles anuales</label>
+							<input type="text" inputmode="decimal" id="avs-gastos" placeholder="25.000 €" autocomplete="off" aria-describedby="avs-gastos-help" />
+							<p class="field-help" id="avs-gastos-help">Gastos necesarios para la actividad, sin impuestos ni cuota de autónomos.</p>
+						</div>
+
+						<div class="field">
+							<span class="toggle-label" id="avs-otros-label">¿Recibes otros ingresos personales?</span>
+							<div class="pill-toggle" role="group" aria-labelledby="avs-otros-label" data-toggle="otros-ingresos">
+								<button type="button" class="pill-btn" data-value="no" aria-pressed="true">No</button>
+								<button type="button" class="pill-btn" data-value="si" aria-pressed="false">Sí</button>
+							</div>
+						</div>
+
+						<div class="field" data-otros-ingresos-importe hidden>
+							<label for="avs-otros-importe">Importe bruto anual aproximado</label>
+							<input type="text" inputmode="decimal" id="avs-otros-importe" placeholder="0 €" autocomplete="off" />
+						</div>
+
+						<p class="form-error" data-error="1" role="alert" hidden></p>
+					</div>
+
+					<div class="info-col">
+						<h4>¿Qué vamos a comparar?</h4>
+						<ul class="info-list">
+							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6"></path><path d="M9 17l6-6"></path><circle cx="9.5" cy="10.5" r="0.6" fill="currentColor"></circle><circle cx="14.5" cy="15.5" r="0.6" fill="currentColor"></circle></svg></span>Impuestos y cotizaciones</li>
+							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V7l7-4 7 4v14"></path><path d="M3 21h18"></path><path d="M9 9h1"></path><path d="M14 9h1"></path><path d="M9 13h1"></path><path d="M14 13h1"></path><path d="M9 17h1"></path><path d="M14 17h1"></path></svg></span>Costes de mantener una sociedad</li>
+							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4 4-6 8-6s8 2 8 6"></path></svg></span>Dinero disponible para ti</li>
+							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h12a1 1 0 0 1 1 1v3"></path><path d="M3 7v11a2 2 0 0 0 2 2h14a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1h-4a2 2 0 0 0 0 4h5"></path></svg></span>Dinero que permanecería en la empresa</li>
+						</ul>
+						<p class="info-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8h.01"></path><path d="M11 11.5h1v4.5h1"></path></svg>El resultado será orientativo y no sustituye una revisión profesional.</p>
+					</div>
+				</div>
+
+				<div class="bottom-row">
+					<p class="privacy-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>Tus datos no se guardan.</p>
+					<div class="nav-buttons">
+						<button type="button" class="btn-continue" data-continue="1">Continuar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></button>
+					</div>
+				</div>
+			</div>
+
+			<!-- Paso 2 — Situación personal -->
+			<div data-step="2" class="step-view" hidden>
+				<div class="step-grid">
+					<div class="form-col">
+						<h3>Cuéntanos tu situación personal</h3>
+
+						<div class="field-row">
+							<div class="field">
+								<label for="avs-edad">Edad</label>
+								<input type="text" inputmode="numeric" id="avs-edad" placeholder="42 años" autocomplete="off" />
+							</div>
+							<div class="field">
+								<label for="avs-civil">Estado civil</label>
+								<select id="avs-civil">
+									<option value="" selected disabled>Selecciona una opción</option>
+									<option value="soltero">Soltero/a</option>
+									<option value="casado">Casado/a</option>
+									<option value="pareja-hecho">Pareja de hecho</option>
+									<option value="separado">Separado/a o divorciado/a</option>
+									<option value="viudo">Viudo/a</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="field-row">
+							<div class="field">
+								<label for="avs-hijos">Número de hijos</label>
+								<select id="avs-hijos">
+									<option value="0" selected>0</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5 o más</option>
+								</select>
+							</div>
+							<div class="field" data-edades-hijos hidden>
+								<label for="avs-edades-hijos">Edades de los hijos</label>
+								<input type="text" id="avs-edades-hijos" placeholder="7 y 12 años" autocomplete="off" aria-describedby="avs-edades-hijos-help" />
+								<p class="field-help" id="avs-edades-hijos-help">Indica la edad de cada hijo.</p>
+							</div>
+						</div>
+
+						<div class="field-row">
+							<div class="field" data-hijo-discapacidad hidden>
+								<span class="toggle-label" id="avs-hijo-discapacidad-label">¿Algún hijo tiene discapacidad?</span>
+								<div class="pill-toggle" role="group" aria-labelledby="avs-hijo-discapacidad-label" data-toggle="hijo-discapacidad">
+									<button type="button" class="pill-btn" data-value="no" aria-pressed="true">No</button>
+									<button type="button" class="pill-btn" data-value="si" aria-pressed="false">Sí</button>
+								</div>
+							</div>
+							<div class="field">
+								<span class="toggle-label" id="avs-discapacidad-label">¿Tienes una discapacidad reconocida?</span>
+								<div class="pill-toggle" role="group" aria-labelledby="avs-discapacidad-label" data-toggle="discapacidad">
+									<button type="button" class="pill-btn" data-value="no" aria-pressed="true">No</button>
+									<button type="button" class="pill-btn" data-value="si" aria-pressed="false">Sí</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="field-row">
+							<div class="field">
+								<label for="avs-ascendientes">Ascendientes a cargo</label>
+								<select id="avs-ascendientes" aria-describedby="avs-ascendientes-help">
+									<option value="0" selected>0</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3 o más</option>
+								</select>
+								<p class="field-help" id="avs-ascendientes-help">Padres, abuelos u otros familiares.</p>
+							</div>
+							<div class="field">
+								<span class="toggle-label" id="avs-declaracion-label">Tipo de declaración</span>
+								<div class="pill-toggle" role="group" aria-labelledby="avs-declaracion-label" data-toggle="declaracion">
+									<button type="button" class="pill-btn" data-value="individual" aria-pressed="true">Individual</button>
+									<button type="button" class="pill-btn" data-value="conjunta" aria-pressed="false">Conjunta</button>
+								</div>
+								<p class="field-help">Elige cómo presentarás tu declaración de la renta.</p>
+							</div>
+						</div>
+
+						<div class="field">
+							<label for="avs-dinero-personal">Dinero que necesitas para uso personal al año</label>
+							<input type="text" inputmode="decimal" id="avs-dinero-personal" placeholder="36.000 €" autocomplete="off" aria-describedby="avs-dinero-personal-help" />
+							<p class="field-help" id="avs-dinero-personal-help">Cantidad aproximada para tu estilo de vida.</p>
+						</div>
+
+						<p class="form-error" data-error="2" role="alert" hidden></p>
+					</div>
+
+					<div class="info-col">
+						<h4>¿Por qué te preguntamos esto?</h4>
+						<ul class="info-list">
+							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6"></path><path d="M9 17l6-6"></path></svg></span>Aproximar el IRPF</li>
+							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"></circle><path d="M2 20c0-3.3 3-5 7-5s7 1.7 7 5"></path><path d="M17 8a3 3 0 1 1 0 6"></path><path d="M22 20c0-2.7-1.8-4.2-4-4.7"></path></svg></span>Aplicar mínimos personales y familiares</li>
+							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="3"></circle><circle cx="17" cy="9" r="3"></circle><path d="M3 19c0-3 2.5-4.5 6-4.5s6 1.5 6 4.5"></path></svg></span>Comparar declaración individual o conjunta</li>
+							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h12a1 1 0 0 1 1 1v3"></path><path d="M3 7v11a2 2 0 0 0 2 2h14a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1h-4a2 2 0 0 0 0 4h5"></path></svg></span>Calcular el dinero disponible para ti</li>
+						</ul>
+						<p class="info-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8h.01"></path><path d="M11 11.5h1v4.5h1"></path></svg>Solo pedimos los datos necesarios para realizar la estimación.</p>
+					</div>
+				</div>
+
+				<div class="bottom-row">
+					<p class="privacy-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>Tus datos no se guardan.</p>
+					<div class="nav-buttons">
+						<button type="button" class="btn-back" data-back="2">Volver</button>
+						<button type="button" class="btn-continue" data-continue="2">Continuar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></button>
+					</div>
+				</div>
+			</div>
+
+			<!-- Paso 3 — Sociedad -->
+			<div data-step="3" class="step-view" hidden>
+				<div class="step-grid">
+					<div class="form-col">
+						<h3>Configura el escenario de sociedad</h3>
+
+						<div class="field">
+							<span class="toggle-label" id="avs-retirada-label">¿Cómo retirarías el dinero?</span>
+							<div class="pill-toggle pill-toggle-3" role="group" aria-labelledby="avs-retirada-label" data-toggle="retirada">
+								<button type="button" class="pill-btn" data-value="retribucion" aria-pressed="false">Retribución</button>
+								<button type="button" class="pill-btn" data-value="dividendos" aria-pressed="false">Dividendos</button>
+								<button type="button" class="pill-btn" data-value="combinacion" aria-pressed="false">Combinación</button>
+							</div>
+						</div>
+
+						<div class="field">
+							<label for="avs-costes">Costes adicionales anuales de la sociedad</label>
+							<input type="text" inputmode="decimal" id="avs-costes" placeholder="3.000 €" autocomplete="off" aria-describedby="avs-costes-help" />
+							<p class="field-help" id="avs-costes-help">Gestoría, contabilidad, obligaciones mercantiles y otros costes.</p>
+						</div>
+
+						<div class="checklist-box">
+							<p class="checklist-title">Comprobación guiada del tipo reducido del 15 %</p>
+							<p class="checklist-subtitle">Responde para comprobar si podría aplicarse a una entidad de nueva creación.</p>
+
+							<div class="checklist-rows" data-checklist>
+								<div class="checklist-row" data-check-row="0">
+									<span>¿La sociedad todavía no existe o acaba de constituirse?</span>
+									<div class="pill-toggle pill-toggle-sm" role="group" aria-label="La sociedad todavía no existe o acaba de constituirse" data-check="0">
+										<button type="button" class="pill-btn" data-value="si" aria-pressed="false">Sí</button>
+										<button type="button" class="pill-btn" data-value="no" aria-pressed="false">No</button>
+									</div>
+								</div>
+								<div class="checklist-row" data-check-row="1">
+									<span>¿Realizará una actividad económica real?</span>
+									<div class="pill-toggle pill-toggle-sm" role="group" aria-label="Realizará una actividad económica real" data-check="1">
+										<button type="button" class="pill-btn" data-value="si" aria-pressed="false">Sí</button>
+										<button type="button" class="pill-btn" data-value="no" aria-pressed="false">No</button>
+									</div>
+								</div>
+								<div class="checklist-row" data-check-row="2">
+									<span>¿La actividad procede de otra empresa vinculada?</span>
+									<div class="pill-toggle pill-toggle-sm" role="group" aria-label="La actividad procede de otra empresa vinculada" data-check="2">
+										<button type="button" class="pill-btn" data-value="si" aria-pressed="false">Sí</button>
+										<button type="button" class="pill-btn" data-value="no" aria-pressed="false">No</button>
+									</div>
+								</div>
+								<div class="checklist-row" data-check-row="3">
+									<span>¿Has realizado personalmente esta misma actividad durante el último año?</span>
+									<div class="pill-toggle pill-toggle-sm" role="group" aria-label="Has realizado personalmente esta misma actividad durante el último año" data-check="3">
+										<button type="button" class="pill-btn" data-value="si" aria-pressed="false">Sí</button>
+										<button type="button" class="pill-btn" data-value="no" aria-pressed="false">No</button>
+									</div>
+								</div>
+								<div class="checklist-row" data-check-row="4">
+									<span>¿Tendrías más del 50 % de la sociedad?</span>
+									<div class="pill-toggle pill-toggle-sm" role="group" aria-label="Tendrías más del 50 por ciento de la sociedad" data-check="4">
+										<button type="button" class="pill-btn" data-value="si" aria-pressed="false">Sí</button>
+										<button type="button" class="pill-btn" data-value="no" aria-pressed="false">No</button>
+									</div>
+								</div>
+								<div class="checklist-row" data-check-row="5">
+									<span>¿Se dedicará principalmente a gestionar patrimonio?</span>
+									<div class="pill-toggle pill-toggle-sm" role="group" aria-label="Se dedicará principalmente a gestionar patrimonio" data-check="5">
+										<button type="button" class="pill-btn" data-value="si" aria-pressed="false">Sí</button>
+										<button type="button" class="pill-btn" data-value="no" aria-pressed="false">No</button>
+									</div>
+								</div>
+								<div class="checklist-row" data-check-row="6">
+									<span>¿Formará parte de un grupo empresarial?</span>
+									<div class="pill-toggle pill-toggle-sm" role="group" aria-label="Formará parte de un grupo empresarial" data-check="6">
+										<button type="button" class="pill-btn" data-value="si" aria-pressed="false">Sí</button>
+										<button type="button" class="pill-btn" data-value="no" aria-pressed="false">No</button>
+									</div>
+								</div>
+							</div>
+
+							<p class="checklist-result" data-checklist-result hidden></p>
+						</div>
+
+						<p class="form-error" data-error="3" role="alert" hidden></p>
+					</div>
+
+					<div class="info-col">
+						<h4>¿Qué comprobamos?</h4>
+						<ul class="info-list">
+							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h12a1 1 0 0 1 1 1v3"></path><path d="M3 7v11a2 2 0 0 0 2 2h14a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1h-4a2 2 0 0 0 0 4h5"></path></svg></span>Cómo recibirías el dinero</li>
+							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V7l7-4 7 4v14"></path><path d="M3 21h18"></path></svg></span>Costes de mantener la sociedad</li>
+							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span>Beneficio que quedaría en la empresa</li>
+							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v4H4z"></path><path d="M4 4l8 8 8-8"></path></svg></span>Posible aplicación del tipo reducido</li>
+						</ul>
+						<p class="info-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8h.01"></path><path d="M11 11.5h1v4.5h1"></path></svg>Crear una sociedad nueva no garantiza por sí solo el tipo reducido.</p>
+					</div>
+				</div>
+
+				<div class="bottom-row">
+					<p class="privacy-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>Tus datos no se guardan.</p>
+					<div class="nav-buttons">
+						<button type="button" class="btn-back" data-back="3">Volver</button>
+						<button type="button" class="btn-continue" data-continue="3">Ver resultado <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></button>
+					</div>
+				</div>
+			</div>
+
+			<!-- Paso 4 — Resultado -->
+			<div data-step="4" class="step-view" hidden>
+				<p class="draft-warning">
+					<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"></path><path d="M12 17h.01"></path><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path></svg>
+					Este cálculo usa una configuración fiscal en borrador (ejercicio 2025), con simplificaciones
+					señaladas más abajo, todavía sin la revisión del área fiscal de Perucha y Asociados. No debe
+					considerarse un resultado definitivo.
+				</p>
+
+				<div data-result-content>
+					<div class="result-headline">
+						<p class="result-headline-title" data-result-title></p>
+						<p class="result-headline-text" data-result-text></p>
+					</div>
+
+					<div class="result-columns">
+						<div class="result-card">
+							<h4>Autónomo</h4>
+							<div class="result-row"><span>Dinero personal disponible</span><strong data-r-auto-disponible></strong></div>
+							<div class="result-row"><span>Impuestos y cotizaciones</span><strong data-r-auto-carga></strong></div>
+							<div class="result-row"><span>Costes adicionales</span><strong data-r-auto-costes></strong></div>
+						</div>
+						<div class="result-card">
+							<h4>Sociedad</h4>
+							<div class="result-row"><span>Dinero personal disponible</span><strong data-r-soc-disponible></strong></div>
+							<div class="result-row"><span>Impuestos y cotizaciones</span><strong data-r-soc-carga></strong></div>
+							<div class="result-row"><span>Costes adicionales</span><strong data-r-soc-costes></strong></div>
+							<div class="result-row"><span>Dinero que queda en la empresa</span><strong data-r-soc-retenido></strong></div>
+						</div>
+					</div>
+
+					<div class="result-porque">
+						<p class="result-porque-title">¿Por qué?</p>
+						<ul data-result-porque></ul>
+					</div>
+
+					<p class="result-nota-retenido">
+						Este dinero pertenece a la sociedad. Si se retira posteriormente, puede generar nueva tributación.
+					</p>
+
+					<details class="simplificaciones">
+						<summary>Simplificaciones aplicadas en este cálculo</summary>
+						<ul>
+							<li>Se aplican los mínimos personales y familiares propios de cada comunidad autónoma cuando existen (8 de las 17 los tienen para 2025); el resto usa el mínimo estatal.</li>
+							<li>El Impuesto sobre Sociedades usa el tipo general (25 %) o el reducido de nueva creación (15 %); no distingue aún microempresa o entidad de reducida dimensión, que dependen de la cifra de negocio del ejercicio anterior.</li>
+							<li>En "Combinación" (retribución y dividendos), el reparto se ha simplificado al 50 % / 50 %.</li>
+							<li>No se aplica la reducción por declaración conjunta ni los incrementos de mínimo por ascendientes mayores de 75 años o hijos menores de 3 años.</li>
+						</ul>
+					</details>
+				</div>
+
+				<div data-result-unavailable hidden>
+					<div class="result-pending">
+						<div class="result-pending-icon">
+							<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+						</div>
+						<h3>Tu situación necesita una revisión más específica</h3>
+						<p>
+							Tu comunidad autónoma o territorio todavía no tiene una configuración fiscal disponible en
+							este simulador, así que no puede compararse correctamente con esta herramienta sencilla.
+						</p>
+					</div>
+				</div>
+
+				<p class="legal-note">
+					Resultado orientativo y no vinculante. Esta simulación se basa en los datos introducidos y en la
+					normativa configurada en la fecha indicada. No sustituye un estudio fiscal personalizado. La
+					conveniencia de trabajar como autónomo o mediante una sociedad depende también de circunstancias
+					personales, jurídicas y empresariales.
+				</p>
+
+				<div class="bottom-row">
+					<p class="privacy-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>Tus datos no se guardan.</p>
+					<div class="nav-buttons">
+						<button type="button" class="btn-back" data-modificar>Modificar datos</button>
+						<a class="btn-continue" data-cta-revision href="/#contacto">Solicitar una revisión</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.avs {
+		padding: 88px 24px;
+		background: var(--color-bg);
+	}
+
+	.wrap {
+		max-width: 940px;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	.eyebrow {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 13px;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--color-accent);
+		margin: 0 0 18px;
+	}
+
+	h2 {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: clamp(28px, 3.6vw, 40px);
+		color: var(--color-text);
+		margin: 0 0 14px;
+	}
+
+	.subtitle {
+		font-family: var(--font-body);
+		font-size: 16px;
+		color: var(--color-muted);
+		margin: 0 0 10px;
+	}
+
+	.disclaimer {
+		font-family: var(--font-body);
+		font-size: 13px;
+		font-style: italic;
+		color: var(--color-accent-700);
+		margin: 0 0 40px;
+	}
+
+	.card {
+		text-align: left;
+		background: #fff;
+		border: 1px solid var(--color-divider);
+		border-radius: 24px;
+		box-shadow: var(--shadow-sm);
+		padding: 40px;
+	}
+
+	.top-row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		font-family: var(--font-body);
+		margin: 0 0 14px;
+	}
+
+	.top-row [data-step-label] {
+		font-weight: 600;
+		color: var(--color-text);
+		font-size: 15px;
+	}
+
+	.top-row [data-step-percent] {
+		color: var(--color-muted);
+		font-size: 14px;
+	}
+
+	.progress-track {
+		height: 6px;
+		border-radius: 3px;
+		background: var(--color-accent-200);
+		overflow: hidden;
+		margin: 0 0 32px;
+	}
+
+	.progress-fill {
+		height: 100%;
+		width: 25%;
+		border-radius: 3px;
+		background: var(--color-accent);
+		transition: width 0.35s ease;
+	}
+
+	.step-grid {
+		display: grid;
+		gap: 32px;
+	}
+
+	.form-col h3 {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 20px;
+		color: var(--color-text);
+		margin: 0 0 22px;
+	}
+
+	.field {
+		margin: 0 0 20px;
+	}
+
+	.field-row {
+		display: grid;
+		gap: 20px;
+		margin: 0 0 20px;
+	}
+
+	.field-row .field {
+		margin: 0;
+	}
+
+	.field label,
+	.toggle-label {
+		display: block;
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 14.5px;
+		color: var(--color-text);
+		margin: 0 0 8px;
+	}
+
+	.field-help {
+		margin: 6px 0 0;
+		font-family: var(--font-body);
+		font-size: 13px;
+		line-height: 1.5;
+		color: var(--color-muted);
+	}
+
+	.field input,
+	.field select {
+		width: 100%;
+		background: var(--color-bg);
+		border: 1px solid var(--color-divider);
+		border-radius: 12px;
+		padding: 13px 16px;
+		color: var(--color-text);
+		font-family: var(--font-body);
+		font-size: 15.5px;
+		outline: none;
+	}
+
+	.field input:focus,
+	.field select:focus {
+		border-color: var(--color-accent);
+	}
+
+	.pill-toggle {
+		display: flex;
+		border: 1.5px solid var(--color-divider);
+		border-radius: 10px;
+		overflow: hidden;
+	}
+
+	.pill-toggle-3 {
+		flex-wrap: wrap;
+	}
+
+	.pill-btn {
+		flex: 1;
+		font-family: var(--font-body);
+		font-weight: 600;
+		font-size: 14px;
+		padding: 12px 14px;
+		border: none;
+		background: #fff;
+		color: var(--color-text);
+		cursor: pointer;
+	}
+
+	.pill-toggle .pill-btn + .pill-btn {
+		border-left: 1.5px solid var(--color-divider);
+	}
+
+	.pill-btn[aria-pressed="true"] {
+		background: var(--color-accent-900);
+		color: #fff;
+	}
+
+	.pill-toggle-sm {
+		flex: 0 0 auto;
+		width: 128px;
+	}
+
+	.checklist-box {
+		margin: 4px 0 20px;
+		background: var(--color-accent-100);
+		border-radius: 16px;
+		padding: 22px 24px;
+	}
+
+	.checklist-title {
+		margin: 0 0 4px;
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 15.5px;
+		color: var(--color-text);
+	}
+
+	.checklist-subtitle {
+		margin: 0 0 18px;
+		font-family: var(--font-body);
+		font-size: 13.5px;
+		color: var(--color-accent-700);
+	}
+
+	.checklist-rows {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	.checklist-row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 16px;
+		background: #fff;
+		border-radius: 10px;
+		padding: 10px 14px;
+	}
+
+	.checklist-row span {
+		font-family: var(--font-body);
+		font-size: 14px;
+		color: var(--color-text);
+	}
+
+	.checklist-result {
+		margin: 16px 0 0;
+		background: #fff;
+		border-radius: 10px;
+		padding: 12px 16px;
+		font-family: var(--font-body);
+		font-weight: 600;
+		font-size: 14px;
+		color: var(--color-accent-800);
+	}
+
+	.form-error {
+		margin: 0 0 4px;
+		font-family: var(--font-body);
+		font-size: 14px;
+		line-height: 1.5;
+		color: #9a3412;
+		background: #fff3e8;
+		border: 1px solid #fed7aa;
+		border-radius: 10px;
+		padding: 12px 16px;
+	}
+
+	.info-col {
+		background: var(--color-accent-100);
+		border-radius: 18px;
+		padding: 28px 26px;
+	}
+
+	.info-col h4 {
+		margin: 0 0 18px;
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 17px;
+		color: var(--color-accent-900);
+	}
+
+	.info-list {
+		list-style: none;
+		margin: 0 0 20px;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+
+	.info-list li {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		font-family: var(--font-body);
+		font-size: 14.5px;
+		color: var(--color-text);
+	}
+
+	.info-icon {
+		flex: 0 0 auto;
+		width: 34px;
+		height: 34px;
+		border-radius: 10px;
+		background: #fff;
+		color: var(--color-accent-800);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.info-note {
+		display: flex;
+		align-items: flex-start;
+		gap: 8px;
+		margin: 0;
+		padding-top: 16px;
+		border-top: 1px solid var(--color-accent-300);
+		font-family: var(--font-body);
+		font-size: 13px;
+		line-height: 1.5;
+		color: var(--color-accent-700);
+	}
+
+	.info-note svg {
+		flex: 0 0 auto;
+		margin-top: 2px;
+	}
+
+	.bottom-row {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 16px;
+		margin-top: 32px;
+		padding-top: 24px;
+		border-top: 1px solid var(--color-divider);
+	}
+
+	.privacy-note {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		font-family: var(--font-body);
+		font-size: 13.5px;
+		color: var(--color-muted);
+		margin: 0;
+	}
+
+	.nav-buttons {
+		display: flex;
+		gap: 12px;
+		margin-left: auto;
+	}
+
+	.btn-back {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 14.5px;
+		color: var(--color-text);
+		background: transparent;
+		border: 1.5px solid var(--color-divider);
+		border-radius: 999px;
+		padding: 11px 22px;
+		cursor: pointer;
+		text-decoration: none;
+		display: inline-flex;
+		align-items: center;
+	}
+
+	.btn-back:hover {
+		border-color: var(--color-accent-300);
+	}
+
+	.btn-continue {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 14.5px;
+		color: #fff;
+		background: var(--color-accent-900);
+		border: none;
+		border-radius: 999px;
+		padding: 12px 24px;
+		cursor: pointer;
+		text-decoration: none;
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+	}
+
+	.btn-continue:hover {
+		background: var(--color-accent-800);
+	}
+
+	.btn-continue:disabled {
+		background: var(--color-accent-300);
+		cursor: not-allowed;
+	}
+
+	.draft-warning {
+		display: flex;
+		align-items: flex-start;
+		gap: 10px;
+		margin: 0 0 28px;
+		padding: 14px 18px;
+		background: #fff3e8;
+		border: 1px solid #fed7aa;
+		border-radius: 12px;
+		font-family: var(--font-body);
+		font-size: 13.5px;
+		line-height: 1.55;
+		color: #9a3412;
+	}
+
+	.draft-warning svg {
+		flex: 0 0 auto;
+		margin-top: 2px;
+	}
+
+	.result-headline {
+		text-align: center;
+		background: var(--color-accent-100);
+		border-radius: 16px;
+		padding: 22px 24px;
+		margin: 0 0 28px;
+	}
+
+	.result-headline-title {
+		margin: 0 0 6px;
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 22px;
+		color: var(--color-accent-900);
+	}
+
+	.result-headline-text {
+		margin: 0;
+		font-family: var(--font-body);
+		font-size: 14.5px;
+		color: var(--color-accent-700);
+	}
+
+	.result-columns {
+		display: grid;
+		gap: 20px;
+		margin: 0 0 28px;
+	}
+
+	.result-card {
+		border: 1px solid var(--color-divider);
+		border-radius: 16px;
+		padding: 22px 24px;
+	}
+
+	.result-card h4 {
+		margin: 0 0 14px;
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 13px;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: var(--color-accent-800);
+	}
+
+	.result-card .result-row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 12px;
+		font-family: var(--font-body);
+		font-size: 14.5px;
+		color: var(--color-text);
+		border-top: 1px solid var(--color-divider);
+		padding: 12px 0;
+	}
+
+	.result-card .result-row:first-of-type {
+		border-top: none;
+		padding-top: 0;
+	}
+
+	.result-card .result-row strong {
+		font-family: var(--font-heading);
+		font-size: 15.5px;
+		color: var(--color-accent-900);
+	}
+
+	.result-porque {
+		background: var(--color-bg);
+		border-radius: 14px;
+		padding: 20px 24px;
+		margin: 0 0 16px;
+	}
+
+	.result-porque-title {
+		margin: 0 0 10px;
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 16px;
+		color: var(--color-text);
+	}
+
+	.result-porque ul {
+		margin: 0;
+		padding-left: 20px;
+		font-family: var(--font-body);
+		font-size: 14px;
+		line-height: 1.6;
+		color: var(--color-muted);
+	}
+
+	.result-nota-retenido {
+		margin: 0 0 24px;
+		font-family: var(--font-body);
+		font-size: 13px;
+		font-style: italic;
+		color: var(--color-muted);
+	}
+
+	.simplificaciones {
+		margin: 0 0 28px;
+		font-family: var(--font-body);
+		font-size: 13.5px;
+		color: var(--color-muted);
+	}
+
+	.simplificaciones summary {
+		cursor: pointer;
+		font-weight: 600;
+		color: var(--color-accent-800);
+	}
+
+	.simplificaciones ul {
+		margin: 12px 0 0;
+		padding-left: 20px;
+		line-height: 1.6;
+	}
+
+	.result-pending {
+		text-align: center;
+		padding: 12px 12px 28px;
+	}
+
+	.result-pending-icon {
+		width: 64px;
+		height: 64px;
+		border-radius: 50%;
+		background: var(--color-accent-900);
+		color: #fff;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0 auto 20px;
+	}
+
+	.result-pending h3 {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 24px;
+		color: var(--color-text);
+		margin: 0 0 14px;
+	}
+
+	.result-pending p {
+		font-family: var(--font-body);
+		font-size: 15px;
+		line-height: 1.65;
+		color: var(--color-muted);
+		max-width: 560px;
+		margin: 0 auto 10px;
+	}
+
+	.result-pending-note {
+		font-weight: 600;
+		color: var(--color-accent-800) !important;
+	}
+
+	.legal-note {
+		font-family: var(--font-body);
+		font-size: 12.5px;
+		line-height: 1.6;
+		font-style: italic;
+		color: var(--color-muted);
+		max-width: 640px;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	@media (min-width: 640px) {
+		.field-row {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+
+	@media (min-width: 900px) {
+		.step-grid {
+			grid-template-columns: 1.4fr 1fr;
+		}
+
+		.result-columns {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+</style>
+
+<script>
+	import { calcular, comunidadDisponible, type Comunidad, type EntradaSimulador } from "../../lib/fiscal/motorAutonomoVsSociedad";
+
+	type PillGroup = "otros-ingresos" | "hijo-discapacidad" | "discapacidad" | "declaracion" | "retirada";
+
+	const section = document.querySelector<HTMLElement>("#simulador.avs");
+	if (section) {
+		const stepViews = Array.from(section.querySelectorAll<HTMLElement>("[data-step]"));
+		const stepLabel = section.querySelector<HTMLElement>("[data-step-label]");
+		const stepPercent = section.querySelector<HTMLElement>("[data-step-percent]");
+		const stepSubtitle = section.querySelector<HTMLElement>("[data-step-subtitle]");
+		const progressFill = section.querySelector<HTMLElement>("[data-progress-fill]");
+
+		const stepMeta = [
+			{ label: "Paso 1 de 4 · Tu actividad", subtitle: "Compara ambos escenarios con los datos básicos de tu actividad." },
+			{ label: "Paso 2 de 4 · Tu situación personal", subtitle: "Compara ambos escenarios con tu situación personal y familiar." },
+			{ label: "Paso 3 de 4 · Sociedad", subtitle: "Define cómo funcionaría el escenario de sociedad." },
+			{ label: "Paso 4 de 4 · Resultado", subtitle: "" },
+		];
+
+		let currentStep = 1;
+
+		const pillGroups: Record<PillGroup, string> = {
+			"otros-ingresos": "no",
+			"hijo-discapacidad": "no",
+			discapacidad: "no",
+			declaracion: "individual",
+			retirada: "",
+		};
+
+		const checklist: (boolean | null)[] = [null, null, null, null, null, null, null];
+		let tipoReducidoResultado: "quince" | "no" | "revision" = "revision";
+
+		function bindPillToggle(container: Element, onChange: (value: string) => void) {
+			const buttons = Array.from(container.querySelectorAll<HTMLButtonElement>(".pill-btn"));
+			buttons.forEach((btn) => {
+				btn.addEventListener("click", () => {
+					buttons.forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+					onChange(btn.dataset.value ?? "");
+				});
+			});
+		}
+
+		section.querySelectorAll<HTMLElement>("[data-toggle]").forEach((group) => {
+			const key = group.dataset.toggle as PillGroup;
+			bindPillToggle(group, (value) => {
+				pillGroups[key] = value;
+				if (key === "otros-ingresos") {
+					const field = section.querySelector<HTMLElement>("[data-otros-ingresos-importe]");
+					if (field) field.hidden = value !== "si";
+				}
+			});
+		});
+
+		section.querySelectorAll<HTMLElement>("[data-check]").forEach((group) => {
+			const idx = Number(group.dataset.check);
+			bindPillToggle(group, (value) => {
+				checklist[idx] = value === "si";
+				evaluateChecklist();
+			});
+		});
+
+		const hijosSelect = section.querySelector<HTMLSelectElement>("#avs-hijos");
+		hijosSelect?.addEventListener("change", () => {
+			const hasHijos = Number(hijosSelect.value) > 0;
+			const edadesField = section.querySelector<HTMLElement>("[data-edades-hijos]");
+			const discapacidadField = section.querySelector<HTMLElement>("[data-hijo-discapacidad]");
+			if (edadesField) edadesField.hidden = !hasHijos;
+			if (discapacidadField) discapacidadField.hidden = !hasHijos;
+		});
+
+		function evaluateChecklist() {
+			const result = section?.querySelector<HTMLElement>("[data-checklist-result]");
+			if (!result) return;
+			if (checklist.some((v) => v === null)) {
+				result.hidden = true;
+				return;
+			}
+			const [nueva, actividadReal, vinculada, mismaActividad, mayoritario, patrimonial, grupo] = checklist as boolean[];
+			result.hidden = false;
+			if (nueva && actividadReal && !vinculada && !mismaActividad && mayoritario && !patrimonial && !grupo) {
+				tipoReducidoResultado = "quince";
+				result.textContent = "Resultado provisional: podría aplicar el 15 %.";
+			} else if (!nueva || !actividadReal || vinculada || mismaActividad || patrimonial) {
+				tipoReducidoResultado = "no";
+				result.textContent = "Resultado provisional: no parece cumplir los requisitos.";
+			} else {
+				tipoReducidoResultado = "revision";
+				result.textContent = "Resultado provisional: la aplicación del tipo reducido necesita revisión profesional.";
+			}
+		}
+
+		function parseEsNumber(raw: string): number | null {
+			let s = raw.trim().replace(/€/g, "").replace(/\s/g, "");
+			if (!s) return null;
+			const hasComma = s.includes(",");
+			const hasDot = s.includes(".");
+			if (hasComma && hasDot) {
+				s = s.replace(/\./g, "").replace(",", ".");
+			} else if (hasComma) {
+				s = s.replace(",", ".");
+			} else if (hasDot) {
+				const parts = s.split(".");
+				const lastPart = parts[parts.length - 1];
+				if (parts.length > 1 && lastPart.length === 3) {
+					s = parts.join("");
+				}
+			}
+			const n = Number(s);
+			return Number.isFinite(n) ? n : null;
+		}
+
+		function showError(step: number, message: string) {
+			const el = section?.querySelector<HTMLElement>(`[data-error="${step}"]`);
+			if (!el) return;
+			el.textContent = message;
+			el.hidden = false;
+		}
+
+		function clearError(step: number) {
+			const el = section?.querySelector<HTMLElement>(`[data-error="${step}"]`);
+			if (!el) return;
+			el.hidden = true;
+			el.textContent = "";
+		}
+
+		function validateStep1(): boolean {
+			clearError(1);
+			const comunidad = (section?.querySelector<HTMLSelectElement>("#avs-comunidad"))?.value;
+			const ingresos = parseEsNumber((section?.querySelector<HTMLInputElement>("#avs-ingresos"))?.value ?? "");
+			const gastos = parseEsNumber((section?.querySelector<HTMLInputElement>("#avs-gastos"))?.value ?? "");
+			const otrosImporte = pillGroups["otros-ingresos"] === "si" ? parseEsNumber((section?.querySelector<HTMLInputElement>("#avs-otros-importe"))?.value ?? "") : 0;
+
+			if (!comunidad) {
+				showError(1, "Selecciona tu comunidad autónoma de residencia fiscal.");
+				return false;
+			}
+			if (ingresos === null || gastos === null) {
+				showError(1, "Completa los datos necesarios para realizar la comparación.");
+				return false;
+			}
+			if (ingresos < 0 || gastos < 0) {
+				showError(1, "Los ingresos no pueden ser negativos.");
+				return false;
+			}
+			if (ingresos > 1000000) {
+				showError(1, "Este caso requiere un estudio personalizado.");
+				return false;
+			}
+			if (gastos >= ingresos) {
+				showError(1, "Con los datos introducidos no existe un beneficio positivo que permita realizar esta comparación. Podemos revisar tu situación de forma personalizada.");
+				return false;
+			}
+			if (pillGroups["otros-ingresos"] === "si" && (otrosImporte === null || otrosImporte < 0)) {
+				showError(1, "Indica un importe válido de otros ingresos personales.");
+				return false;
+			}
+			return true;
+		}
+
+		function beneficioPrevio(): number {
+			const ingresos = parseEsNumber((section?.querySelector<HTMLInputElement>("#avs-ingresos"))?.value ?? "") ?? 0;
+			const gastos = parseEsNumber((section?.querySelector<HTMLInputElement>("#avs-gastos"))?.value ?? "") ?? 0;
+			return ingresos - gastos;
+		}
+
+		function validateStep2(): boolean {
+			clearError(2);
+			const edad = parseEsNumber((section?.querySelector<HTMLInputElement>("#avs-edad"))?.value ?? "");
+			const civil = (section?.querySelector<HTMLSelectElement>("#avs-civil"))?.value;
+			const dineroPersonal = parseEsNumber((section?.querySelector<HTMLInputElement>("#avs-dinero-personal"))?.value ?? "");
+
+			if (edad === null || !civil || dineroPersonal === null) {
+				showError(2, "Completa los datos necesarios para realizar la comparación.");
+				return false;
+			}
+			if (edad < 16 || edad > 100) {
+				showError(2, "Revisa la edad introducida.");
+				return false;
+			}
+			if (dineroPersonal < 0) {
+				showError(2, "Los costes no pueden ser negativos.");
+				return false;
+			}
+			if (dineroPersonal > beneficioPrevio()) {
+				showError(2, "La cantidad que deseas retirar supera el resultado disponible de la sociedad. Reduce el importe o revisa los datos.");
+				return false;
+			}
+			return true;
+		}
+
+		function validateStep3(): boolean {
+			clearError(3);
+			const costes = parseEsNumber((section?.querySelector<HTMLInputElement>("#avs-costes"))?.value ?? "");
+			if (!pillGroups.retirada) {
+				showError(3, "Indica cómo retirarías el dinero.");
+				return false;
+			}
+			if (costes === null) {
+				showError(3, "Completa los datos necesarios para realizar la comparación.");
+				return false;
+			}
+			if (costes < 0) {
+				showError(3, "Los costes no pueden ser negativos.");
+				return false;
+			}
+			if (checklist.some((v) => v === null)) {
+				showError(3, "Responde a las 7 preguntas de la comprobación guiada del tipo reducido.");
+				return false;
+			}
+			return true;
+		}
+
+		function goToStep(step: number) {
+			currentStep = step;
+			stepViews.forEach((view) => {
+				view.hidden = Number(view.dataset.step) !== step;
+			});
+			const meta = stepMeta[step - 1];
+			if (stepLabel) stepLabel.textContent = meta.label;
+			if (stepPercent) stepPercent.textContent = `${step * 25} % completado`;
+			if (progressFill) progressFill.style.width = `${step * 25}%`;
+			if (stepSubtitle) stepSubtitle.textContent = meta.subtitle;
+			const stepView = section?.querySelector<HTMLElement>(`[data-step="${step}"]`);
+			const headings = Array.from(stepView?.querySelectorAll<HTMLElement>("h3") ?? []);
+			const heading = headings.find((h) => h.offsetParent !== null) ?? stepView;
+			heading?.setAttribute("tabindex", "-1");
+			heading?.focus({ preventScroll: true });
+		}
+
+		function formatEs(n: number): string {
+			return new Intl.NumberFormat("es-ES", { maximumFractionDigits: 0, useGrouping: true }).format(n);
+		}
+
+		function renderResultado() {
+			if (!section) return;
+			const comunidad = (section.querySelector<HTMLSelectElement>("#avs-comunidad"))?.value as Comunidad;
+			const content = section.querySelector<HTMLElement>("[data-result-content]");
+			const unavailable = section.querySelector<HTMLElement>("[data-result-unavailable]");
+
+			if (!comunidad || !comunidadDisponible(comunidad)) {
+				if (content) content.hidden = true;
+				if (unavailable) unavailable.hidden = false;
+				return;
+			}
+
+			const input: EntradaSimulador = {
+				comunidad,
+				ingresos: parseEsNumber((section.querySelector<HTMLInputElement>("#avs-ingresos"))?.value ?? "") ?? 0,
+				gastos: parseEsNumber((section.querySelector<HTMLInputElement>("#avs-gastos"))?.value ?? "") ?? 0,
+				otrosIngresos:
+					pillGroups["otros-ingresos"] === "si"
+						? (parseEsNumber((section.querySelector<HTMLInputElement>("#avs-otros-importe"))?.value ?? "") ?? 0)
+						: 0,
+				edad: parseEsNumber((section.querySelector<HTMLInputElement>("#avs-edad"))?.value ?? "") ?? 0,
+				hijos: Number((section.querySelector<HTMLSelectElement>("#avs-hijos"))?.value ?? "0"),
+				hijoDiscapacidad: pillGroups["hijo-discapacidad"] === "si",
+				discapacidad: pillGroups.discapacidad === "si",
+				ascendientes: Number((section.querySelector<HTMLSelectElement>("#avs-ascendientes"))?.value ?? "0"),
+				dineroPersonal: parseEsNumber((section.querySelector<HTMLInputElement>("#avs-dinero-personal"))?.value ?? "") ?? 0,
+				retirada: (pillGroups.retirada || "combinacion") as EntradaSimulador["retirada"],
+				costesAdicionales: parseEsNumber((section.querySelector<HTMLInputElement>("#avs-costes"))?.value ?? "") ?? 0,
+				tipoReducido: tipoReducidoResultado,
+			};
+
+			const resultado = calcular(input);
+			if (!resultado) {
+				if (content) content.hidden = true;
+				if (unavailable) unavailable.hidden = false;
+				return;
+			}
+
+			if (content) content.hidden = false;
+			if (unavailable) unavailable.hidden = true;
+
+			const setText = (selector: string, value: string) => {
+				const el = section.querySelector<HTMLElement>(selector);
+				if (el) el.textContent = value;
+			};
+
+			setText("[data-result-title]", resultado.tituloResultado);
+			setText("[data-result-text]", resultado.textoResultado);
+
+			setText("[data-r-auto-disponible]", `${formatEs(resultado.autonomo.dineroPersonalDisponible)} €`);
+			setText("[data-r-auto-carga]", `${formatEs(resultado.autonomo.cotizaciones + resultado.autonomo.irpf)} €`);
+			setText("[data-r-auto-costes]", `${formatEs(resultado.autonomo.costesAdicionales)} €`);
+
+			setText("[data-r-soc-disponible]", `${formatEs(resultado.sociedad.dineroPersonalDisponible)} €`);
+			setText(
+				"[data-r-soc-carga]",
+				`${formatEs(resultado.sociedad.cotizaciones + resultado.sociedad.irpf + resultado.sociedad.impuestoSociedades)} €`,
+			);
+			setText("[data-r-soc-costes]", `${formatEs(resultado.sociedad.costesAdicionales)} €`);
+			setText("[data-r-soc-retenido]", `${formatEs(resultado.sociedad.dineroQuePermaneceEnEmpresa ?? 0)} €`);
+
+			const porqueList = section.querySelector<HTMLElement>("[data-result-porque]");
+			if (porqueList) {
+				porqueList.innerHTML = "";
+				resultado.porQue.forEach((texto) => {
+					const li = document.createElement("li");
+					li.textContent = texto;
+					porqueList.appendChild(li);
+				});
+			}
+		}
+
+		section.querySelectorAll<HTMLButtonElement>("[data-continue]").forEach((btn) => {
+			btn.addEventListener("click", () => {
+				const from = Number(btn.dataset.continue);
+				if (from === 1 && !validateStep1()) return;
+				if (from === 2 && !validateStep2()) return;
+				if (from === 3 && !validateStep3()) return;
+				if (from === 3) {
+					renderResultado();
+					storeResumen();
+				}
+				goToStep(from + 1);
+			});
+		});
+
+		section.querySelectorAll<HTMLButtonElement>("[data-back]").forEach((btn) => {
+			btn.addEventListener("click", () => {
+				const from = Number(btn.dataset.back);
+				goToStep(from - 1);
+			});
+		});
+
+		section.querySelector<HTMLButtonElement>("[data-modificar]")?.addEventListener("click", () => {
+			goToStep(1);
+		});
+
+		function storeResumen() {
+			try {
+				sessionStorage.setItem(
+					"autonomoSociedadResumen",
+					"He utilizado el simulador Autónomo vs. Sociedad y me gustaría revisar mi situación.",
+				);
+			} catch {
+				/* sessionStorage no disponible: se omite el prellenado del formulario */
+			}
+		}
+
+		section.querySelector<HTMLAnchorElement>("[data-cta-revision]")?.addEventListener("click", () => {
+			storeResumen();
+			const field = document.querySelector<HTMLElement>("#contacto [data-simulacion-field]");
+			const textarea = document.querySelector<HTMLTextAreaElement>("#contacto #datos-simulacion");
+			const resumen = sessionStorage.getItem("autonomoSociedadResumen");
+			if (field && textarea && resumen && !textarea.value) {
+				textarea.value = resumen;
+				field.hidden = false;
+			}
+		});
+
+		goToStep(1);
+	}
+</script>

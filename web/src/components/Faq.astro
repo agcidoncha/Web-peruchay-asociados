@@ -1,0 +1,262 @@
+---
+interface FaqItem {
+	cat: string;
+	q: string;
+	a: string;
+}
+
+interface Props {
+	categories: string[];
+	faqs: FaqItem[];
+}
+
+const { categories, faqs } = Astro.props;
+---
+
+<section id="faq" class="faq">
+	<div class="wrap">
+		<div class="intro">
+			<p class="eyebrow">FAQ</p>
+			<h2>Preguntas frecuentes</h2>
+
+			<div class="call-card">
+				<img src="/logo-pya.png" alt="Perucha y Asociados" width="100" height="52" />
+				<h3>Reserva una llamada de 15 min</h3>
+				<p>Si tienes alguna duda, reserva una llamada de 15 minutos con nosotros antes de empezar.</p>
+				<a href="/#contacto" class="call-cta">Reservar llamada</a>
+			</div>
+		</div>
+
+		<div class="content">
+			<div class="tabs" role="tablist">
+				{categories.map((cat, i) => (
+					<button
+						type="button"
+						class="tab"
+						role="tab"
+						aria-selected={i === 0 ? "true" : "false"}
+						data-cat={cat}
+					>
+						{cat}
+					</button>
+				))}
+			</div>
+
+			<div class="items">
+				{faqs.map((item) => (
+					<div class="item" data-cat={item.cat} hidden={item.cat !== categories[0]}>
+						<button type="button" class="q" aria-expanded="false">
+							<span>{item.q}</span>
+							<svg class="icon-plus" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+							<svg class="icon-close" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18"></path><path d="M6 6l12 12"></path></svg>
+						</button>
+						<p class="a" hidden>{item.a}</p>
+					</div>
+				))}
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.faq {
+		padding: 72px 24px;
+		background: var(--color-bg);
+	}
+
+	.wrap {
+		max-width: 1180px;
+		margin: 0 auto;
+	}
+
+	.intro {
+		margin: 0 0 32px;
+	}
+
+	.call-card {
+		margin-top: 32px;
+		background: #fff;
+		border: 1px solid var(--color-divider);
+		border-radius: 20px;
+		padding: 30px 28px;
+	}
+
+	.call-card img {
+		margin: 0 0 20px;
+	}
+
+	.call-card h3 {
+		font-family: var(--font-heading);
+		font-weight: var(--font-heading-weight);
+		font-size: 22px;
+		color: var(--color-text);
+		margin: 0 0 10px;
+	}
+
+	.call-card p {
+		font-family: var(--font-body);
+		font-size: 14.5px;
+		line-height: 1.55;
+		color: var(--color-muted);
+		margin: 0 0 24px;
+	}
+
+	.call-cta {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-family: var(--font-heading);
+		font-weight: var(--font-heading-weight);
+		font-size: 15px;
+		color: #fff;
+		background: var(--color-accent-800);
+		padding: 14px 24px;
+		border-radius: 999px;
+		text-decoration: none;
+	}
+
+	.call-cta:hover {
+		background: var(--color-accent-900);
+	}
+
+	.eyebrow {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 14px;
+		color: var(--color-accent-700);
+		margin: 0 0 14px;
+	}
+
+	h2 {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: clamp(26px, 4vw, 38px);
+		line-height: 1.1;
+		color: var(--color-text);
+		margin: 0;
+	}
+
+	.tabs {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		margin: 0 0 20px;
+	}
+
+	.tab {
+		font-family: var(--font-body);
+		font-size: 14px;
+		font-weight: 600;
+		padding: 9px 18px;
+		border-radius: 999px;
+		cursor: pointer;
+		border: 1.5px solid var(--color-divider);
+		color: var(--color-text);
+		background: #fff;
+	}
+
+	.tab[aria-selected="true"] {
+		border-color: var(--color-accent-dark);
+		background: var(--color-accent-dark);
+		color: #fff;
+	}
+
+	.items {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+
+	.item {
+		background: #fff;
+		border: 1px solid var(--color-divider);
+		border-radius: 16px;
+		padding: 22px 24px;
+	}
+
+	.q {
+		width: 100%;
+		background: transparent;
+		border: none;
+		padding: 0;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 20px;
+		cursor: pointer;
+		text-align: left;
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 16.5px;
+		color: var(--color-text);
+	}
+
+	.q .icon-close {
+		display: none;
+	}
+
+	.q[aria-expanded="true"] .icon-plus {
+		display: none;
+	}
+
+	.q[aria-expanded="true"] .icon-close {
+		display: block;
+	}
+
+	.q svg {
+		flex: 0 0 auto;
+		color: var(--color-accent-dark);
+	}
+
+	.a {
+		margin: 16px 0 0;
+		font-family: var(--font-body);
+		font-size: 15px;
+		line-height: 1.6;
+		color: var(--color-muted);
+	}
+
+	@media (min-width: 900px) {
+		.wrap {
+			display: grid;
+			grid-template-columns: 0.8fr 1.2fr;
+			gap: 40px;
+			align-items: start;
+		}
+
+		.intro {
+			margin: 0;
+		}
+	}
+</style>
+
+<script>
+	const sections = document.querySelectorAll(".faq");
+
+	sections.forEach((section) => {
+		section.querySelectorAll(".tab").forEach((tab) => {
+			tab.addEventListener("click", () => {
+				const cat = tab.getAttribute("data-cat");
+
+				section.querySelectorAll(".tab").forEach((t) => t.setAttribute("aria-selected", String(t === tab)));
+
+				section.querySelectorAll(".item").forEach((item) => {
+					const match = item.getAttribute("data-cat") === cat;
+					item.hidden = !match;
+				});
+			});
+		});
+
+		section.querySelectorAll(".q").forEach((btn) => {
+			btn.addEventListener("click", () => {
+				const isOpen = btn.getAttribute("aria-expanded") === "true";
+				btn.setAttribute("aria-expanded", String(!isOpen));
+				const answer = btn.nextElementSibling;
+				if (answer) answer.hidden = isOpen;
+			});
+		});
+	});
+</script>

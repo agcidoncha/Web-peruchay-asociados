@@ -1,52 +1,125 @@
 ---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Faq from "../components/Faq.astro";
+import Hero from "../components/home/Hero.astro";
+import Areas from "../components/home/Areas.astro";
+import Diagnostico from "../components/home/Diagnostico.astro";
+import TeamTransition from "../components/home/TeamTransition.astro";
+import Team from "../components/home/Team.astro";
+import Contact from "../components/home/Contact.astro";
 
+const faqCategories = ["Información general", "Colaboración y contratación"];
+
+const faqs = [
+	{
+		cat: "Información general",
+		q: "¿Cómo empieza la colaboración?",
+		a: "El primer paso es conocer la situación de la empresa, sus necesidades y los objetivos que quiere alcanzar. A partir de esa primera conversación definimos el alcance del proyecto y proponemos la solución que mejor se adapte a cada caso.",
+	},
+	{
+		cat: "Información general",
+		q: "¿Tengo que contratar todos los servicios?",
+		a: "No. Puedes contratar únicamente el servicio que necesites: Control de Gestión, Planificación y Análisis Financiero, Contabilidad, Fiscalidad, Digitalización o Automatización. También es posible combinar varios servicios cuando el proyecto lo requiera.",
+	},
+	{
+		cat: "Información general",
+		q: "¿Trabajáis con empresas de cualquier sector?",
+		a: "Sí. Adaptamos nuestra metodología de trabajo a las características de cada empresa, independientemente de su actividad, tamaño u organización.",
+	},
+	{
+		cat: "Información general",
+		q: "¿Cómo es la comunicación durante el proyecto?",
+		a: "La comunicación es directa, clara y orientada a la toma de decisiones. La frecuencia y el formato de las reuniones se adaptan a las necesidades de cada proyecto.",
+	},
+	{
+		cat: "Información general",
+		q: "¿Dónde estáis ubicados?",
+		a: "Perucha y Asociados presta servicios a empresas y profesionales de toda la Comunidad de Madrid. Trabajamos de forma telemática, presencial o mediante un modelo híbrido, adaptándonos a las necesidades de cada proyecto. Cuando es necesario, nos desplazamos a las instalaciones del cliente para ofrecer un servicio más cercano y eficaz.",
+	},
+	{
+		cat: "Colaboración y contratación",
+		q: "¿Cómo puedo solicitar un presupuesto?",
+		a: "Puedes ponerte en contacto con nosotros a través del formulario de la web, por teléfono o por correo electrónico. Tras una primera conversación para conocer tu empresa y tus necesidades, prepararemos una propuesta adaptada a tu proyecto.",
+	},
+	{
+		cat: "Colaboración y contratación",
+		q: "¿La primera reunión tiene algún coste?",
+		a: "La primera toma de contacto tiene como objetivo conocer tu empresa, entender tus necesidades y valorar cómo podemos ayudarte. A partir de esa información te indicaremos la solución que mejor se adapte a tu situación.",
+	},
+	{
+		cat: "Colaboración y contratación",
+		q: "¿Cómo calculáis el precio de vuestros servicios?",
+		a: "Cada empresa es diferente. El presupuesto se elabora teniendo en cuenta el alcance del proyecto, el volumen de trabajo, la complejidad de los servicios contratados y el nivel de acompañamiento requerido. Nuestro objetivo es ofrecer una propuesta personalizada y ajustada a las necesidades reales de cada cliente.",
+	},
+	{
+		cat: "Colaboración y contratación",
+		q: "¿Trabajáis con cuotas mensuales o por proyectos?",
+		a: "Depende del servicio contratado. Algunos servicios, como la contabilidad, la fiscalidad o el control de gestión, suelen prestarse de forma periódica mediante una cuota mensual. Otros, como la digitalización o la automatización de procesos, se desarrollan habitualmente como proyectos con un alcance previamente definido.",
+	},
+	{
+		cat: "Colaboración y contratación",
+		q: "¿Puedo ampliar los servicios más adelante?",
+		a: "Sí. Muchos clientes comienzan contratando un único servicio y, a medida que evolucionan sus necesidades, incorporan nuevas áreas de colaboración. Nuestra forma de trabajar es flexible y se adapta al crecimiento de cada empresa.",
+	},
+	{
+		cat: "Colaboración y contratación",
+		q: "¿Firmáis acuerdos de confidencialidad?",
+		a: "Sí. Toda la información de nuestros clientes se trata con absoluta confidencialidad. Cuando el proyecto lo requiere, podemos formalizar un acuerdo de confidencialidad (NDA) para ofrecer mayores garantías y proteger la información compartida durante la colaboración.",
+	},
+	{
+		cat: "Colaboración y contratación",
+		q: "¿Cómo es el proceso de incorporación como cliente?",
+		a: "Comenzamos con una reunión inicial para conocer la empresa, sus necesidades y objetivos. A continuación, definimos el alcance del servicio, presentamos una propuesta personalizada y, una vez aceptada, planificamos la puesta en marcha del proyecto para que la incorporación sea ágil y ordenada.",
+	},
+	{
+		cat: "Colaboración y contratación",
+		q: "¿Existe un periodo mínimo de permanencia?",
+		a: "Depende del tipo de servicio contratado. Los servicios recurrentes se regulan mediante las condiciones acordadas con cada cliente, mientras que los proyectos tienen una duración vinculada a los objetivos y al alcance definidos en la propuesta.",
+	},
+];
+
+const structuredData = {
+	"@context": "https://schema.org",
+	"@type": "ProfessionalService",
+	name: "Perucha y Asociados",
+	telephone: "+34639003817",
+	url: "https://peruchayasociados.com",
+};
+
+const faqSchema = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: faqs.map((faq) => ({
+		"@type": "Question",
+		name: faq.q,
+		acceptedAnswer: {
+			"@type": "Answer",
+			text: faq.a,
+		},
+	})),
+};
 ---
 
-<html lang="es">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Perucha y Asociados — Muy pronto</title>
-		<style>
-			* { box-sizing: border-box; }
-			html, body {
-				margin: 0;
-				height: 100%;
-				background: #3d3752;
-				color: #ffffff;
-				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-			}
-			.wrap {
-				min-height: 100vh;
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				justify-content: center;
-				text-align: center;
-				padding: 32px;
-			}
-			h1 {
-				font-size: clamp(2rem, 6vw, 3.4rem);
-				font-weight: 500;
-				line-height: 1.15;
-				letter-spacing: -0.01em;
-				margin: 0 0 20px;
-				max-width: 16ch;
-			}
-			p {
-				font-size: clamp(1rem, 2.4vw, 1.25rem);
-				color: #c4b5fd;
-				margin: 0;
-			}
-		</style>
-	</head>
-	<body>
-		<div class="wrap">
-			<h1>Estamos construyendo algo nuevo.</h1>
-			<p>Muy pronto, la nueva web de Perucha y Asociados.</p>
-		</div>
-	</body>
-</html>
+<Layout
+	title="Perucha y Asociados — Control de gestión, contabilidad y digitalización para empresas"
+	description="Control de gestión y análisis financiero, contabilidad y fiscalidad, digitalización y automatización para empresas. Más de 30 años de experiencia profesional en la Comunidad de Madrid."
+>
+	<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+	<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+	<Header />
+
+	<main>
+		<Hero />
+		<Areas />
+		<Diagnostico />
+		<TeamTransition />
+		<Team />
+		<Faq categories={faqCategories} faqs={faqs} />
+		<Contact />
+	</main>
+
+	<Footer />
+</Layout>
