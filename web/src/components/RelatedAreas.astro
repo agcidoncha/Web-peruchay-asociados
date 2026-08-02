@@ -109,4 +109,10 @@ const { title, areas } = Astro.props;
 			grid-template-columns: repeat(var(--cols, 2), 1fr);
 		}
 	}
+
+	@media (max-width: 599px) {
+		.related-areas {
+			padding: 25px 15px;
+		}
+	}
 </style>
