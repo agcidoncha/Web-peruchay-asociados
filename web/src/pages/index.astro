@@ -11,8 +11,6 @@ import Team from "../components/home/Team.astro";
 import Contact from "../components/home/Contact.astro";
 import IconLinkList from "../components/IconLinkList.astro";
 
-const year = new Date().getFullYear();
-
 const faqCategories = ["Información general", "Colaboración y contratación"];
 
 const faqs = [
@@ -228,24 +226,7 @@ const simuladores = [
 		</div>
 	</main>
 
-	<div class="desktop-only">
-		<Footer />
-	</div>
-
-	<footer class="mobile-only footer-lab">
-		<nav class="footer-areas" aria-label="Áreas">
-			<a href="/finanzas-y-control">Finanzas y Control</a>
-			<a href="/contabilidad-y-fiscalidad">Contabilidad y Fiscalidad</a>
-			<a href="/digitalizacion-y-automatizacion">Digitalización y Automatización</a>
-		</nav>
-		<nav class="footer-legal" aria-label="Legal">
-			<a href="/aviso-legal">Aviso legal</a>
-			<a href="/politica-privacidad">Política de privacidad</a>
-			<a href="/politica-cookies">Política de cookies</a>
-			<button type="button" class="footer-legal-btn" data-open-cookie-settings>Configurar cookies</button>
-		</nav>
-		<p class="footer-copyright">© {year} Perucha y Asociados</p>
-	</footer>
+	<Footer />
 </Layout>
 
 <style>
@@ -387,66 +368,9 @@ const simuladores = [
 	.contacto-teaser .btn-teaser:hover {
 		background: var(--color-accent-800);
 	}
-
-	.footer-lab {
-		background: var(--color-accent-900);
-		padding: 32px 15px;
-		text-align: center;
-	}
-
-	.footer-areas,
-	.footer-legal {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-		gap: 6px 14px;
-		margin: 0 0 16px;
-		padding-bottom: 16px;
-		border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-	}
-
-	.footer-legal {
-		border-bottom: none;
-		margin-bottom: 16px;
-	}
-
-	.footer-areas a,
-	.footer-legal a,
-	.footer-legal-btn {
-		font-family: var(--font-body);
-		font-size: 13px;
-		color: rgba(255, 255, 255, 0.75);
-		text-decoration: none;
-	}
-
-	.footer-legal-btn {
-		background: none;
-		border: none;
-		padding: 0;
-		cursor: pointer;
-	}
-
-	.footer-areas a:hover,
-	.footer-legal a:hover,
-	.footer-legal-btn:hover {
-		color: #fff;
-	}
-
-	.footer-copyright {
-		font-family: var(--font-body);
-		font-size: 12px;
-		color: rgba(255, 255, 255, 0.4);
-		margin: 0;
-	}
 </style>
 
 <script>
-	import { OPEN_SETTINGS_EVENT } from "../lib/cookieConsent";
-
-	document.querySelector("[data-open-cookie-settings]")?.addEventListener("click", () => {
-		window.dispatchEvent(new CustomEvent(OPEN_SETTINGS_EVENT));
-	});
-
 	const MOBILE_QUERY = "(max-width: 599px)";
 
 	function toggle(buttonSelector: string, panelId: string) {

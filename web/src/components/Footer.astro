@@ -8,36 +8,55 @@ const areaLinks = [
 const year = new Date().getFullYear();
 ---
 
-<footer class="site-footer">
-	<div class="grid">
-		<div>
-			<p class="name">Perucha y Asociados</p>
-			<p class="nap"><a class="phone" href="tel:+34639003817">639 00 38 17</a></p>
-			<p class="tagline">Tu visión, nuestra dedicación.</p>
+<div class="desktop-only">
+	<footer class="site-footer">
+		<div class="grid">
+			<div>
+				<p class="name">Perucha y Asociados</p>
+				<p class="nap"><a class="phone" href="tel:+34639003817">639 00 38 17</a></p>
+				<p class="tagline">Tu visión, nuestra dedicación.</p>
+			</div>
+			<nav aria-label="Áreas">
+				<p class="col-title">Áreas</p>
+				{areaLinks.map((link) => (
+					<a href={link.href}>{link.label}</a>
+				))}
+			</nav>
 		</div>
-		<nav aria-label="Áreas">
-			<p class="col-title">Áreas</p>
-			{areaLinks.map((link) => (
-				<a href={link.href}>{link.label}</a>
-			))}
-		</nav>
-	</div>
-	<div class="bottom">
-		<span>© {year} Perucha y Asociados</span>
-		<nav class="legal-links" aria-label="Legal">
-			<a href="/aviso-legal">Aviso legal</a>
-			<a href="/politica-privacidad">Política de privacidad</a>
-			<a href="/politica-cookies">Política de cookies</a>
-			<button type="button" class="legal-btn" data-open-cookie-settings>Configurar cookies</button>
-		</nav>
-	</div>
+		<div class="bottom">
+			<span>© {year} Perucha y Asociados</span>
+			<nav class="legal-links" aria-label="Legal">
+				<a href="/aviso-legal">Aviso legal</a>
+				<a href="/politica-privacidad">Política de privacidad</a>
+				<a href="/politica-cookies">Política de cookies</a>
+				<button type="button" class="legal-btn" data-open-cookie-settings>Configurar cookies</button>
+			</nav>
+		</div>
+	</footer>
+</div>
+
+<footer class="mobile-only footer-lab">
+	<nav class="footer-areas" aria-label="Áreas">
+		{areaLinks.map((link) => (
+			<a href={link.href}>{link.label}</a>
+		))}
+	</nav>
+	<nav class="footer-legal" aria-label="Legal">
+		<a href="/aviso-legal">Aviso legal</a>
+		<a href="/politica-privacidad">Política de privacidad</a>
+		<a href="/politica-cookies">Política de cookies</a>
+		<button type="button" class="footer-legal-btn" data-open-cookie-settings>Configurar cookies</button>
+	</nav>
+	<p class="footer-copyright">© {year} Perucha y Asociados</p>
 </footer>
 
 <script>
 	import { OPEN_SETTINGS_EVENT } from "../lib/cookieConsent";
 
-	document.querySelector("[data-open-cookie-settings]")?.addEventListener("click", () => {
-		window.dispatchEvent(new CustomEvent(OPEN_SETTINGS_EVENT));
+	document.querySelectorAll("[data-open-cookie-settings]").forEach((button) => {
+		button.addEventListener("click", () => {
+			window.dispatchEvent(new CustomEvent(OPEN_SETTINGS_EVENT));
+		});
 	});
 </script>
 
@@ -165,6 +184,71 @@ const year = new Date().getFullYear();
 			flex-direction: row;
 			justify-content: space-between;
 			text-align: left;
+		}
+	}
+
+	.mobile-only {
+		display: none;
+	}
+
+	.footer-lab {
+		background: var(--color-accent-900);
+		padding: 32px 15px;
+		text-align: center;
+	}
+
+	.footer-areas,
+	.footer-legal {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 6px 14px;
+		margin: 0 0 16px;
+		padding-bottom: 16px;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+	}
+
+	.footer-legal {
+		border-bottom: none;
+		margin-bottom: 16px;
+	}
+
+	.footer-areas a,
+	.footer-legal a,
+	.footer-legal-btn {
+		font-family: var(--font-body);
+		font-size: 13px;
+		color: rgba(255, 255, 255, 0.75);
+		text-decoration: none;
+	}
+
+	.footer-legal-btn {
+		background: none;
+		border: none;
+		padding: 0;
+		cursor: pointer;
+	}
+
+	.footer-areas a:hover,
+	.footer-legal a:hover,
+	.footer-legal-btn:hover {
+		color: #fff;
+	}
+
+	.footer-copyright {
+		font-family: var(--font-body);
+		font-size: 12px;
+		color: rgba(255, 255, 255, 0.4);
+		margin: 0;
+	}
+
+	@media (max-width: 599px) {
+		.desktop-only {
+			display: none;
+		}
+
+		.mobile-only {
+			display: block;
 		}
 	}
 </style>
