@@ -9,6 +9,7 @@ import ProcessSteps from "../components/ProcessSteps.astro";
 import Pillars from "../components/finanzas-y-control/Pillars.astro";
 import Calculadora from "../components/finanzas-y-control/Calculadora.astro";
 import RelatedAreas from "../components/RelatedAreas.astro";
+import SimulatorOverlay from "../components/SimulatorOverlay.astro";
 
 const steps = [
 	{
@@ -140,7 +141,20 @@ const faqSchema = {
 			steps={steps}
 			closing="Adaptamos el nivel de análisis a las necesidades reales de cada empresa. Desde informes periódicos hasta apoyo puntual para decisiones concretas, sin necesidad de incorporar un controller en plantilla."
 		/>
-		<Calculadora />
+		<section class="mobile-only simulador-teaser">
+			<div class="wrap">
+				<h2>Calcula tu punto de equilibrio</h2>
+				<p>Descubre cuántas ventas necesitas para cubrir tus costes.</p>
+				<button type="button" class="btn-teaser" data-open-overlay="simulador-overlay" aria-expanded="false" aria-controls="simulador-overlay">
+					Abrir simulador
+					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+				</button>
+			</div>
+		</section>
+
+		<SimulatorOverlay id="simulador-overlay" ariaLabel="Calculadora de punto de equilibrio" openHash="simulador">
+			<Calculadora />
+		</SimulatorOverlay>
 		<Faq categories={faqCategories} faqs={faqs} />
 		<RelatedAreas
 			title="¿Necesitas también apoyo contable o fiscal?"
@@ -161,3 +175,60 @@ const faqSchema = {
 
 	<Footer />
 </Layout>
+
+<style>
+	.mobile-only {
+		display: none;
+	}
+
+	@media (max-width: 599px) {
+		.mobile-only {
+			display: block;
+		}
+	}
+
+	.simulador-teaser {
+		padding: 25px 15px;
+		text-align: center;
+		background: var(--color-accent-100);
+	}
+
+	.simulador-teaser .wrap {
+		max-width: 480px;
+		margin: 0 auto;
+	}
+
+	.simulador-teaser h2 {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: clamp(22px, 3vw, 28px);
+		color: var(--color-text);
+		margin: 0 0 10px;
+	}
+
+	.simulador-teaser p {
+		font-family: var(--font-body);
+		font-size: 15px;
+		color: var(--color-muted);
+		margin: 0 0 20px;
+	}
+
+	.btn-teaser {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 15px;
+		color: #fff;
+		background: var(--color-accent-900);
+		border: none;
+		padding: 14px 26px;
+		border-radius: 999px;
+		cursor: pointer;
+	}
+
+	.btn-teaser:hover {
+		background: var(--color-accent-800);
+	}
+</style>

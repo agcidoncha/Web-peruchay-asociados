@@ -10,6 +10,7 @@ import TeamTransition from "../components/home/TeamTransition.astro";
 import Team from "../components/home/Team.astro";
 import Contact from "../components/home/Contact.astro";
 import IconLinkList from "../components/IconLinkList.astro";
+import SimulatorOverlay from "../components/SimulatorOverlay.astro";
 
 const faqCategories = ["Información general", "Colaboración y contratación"];
 
@@ -177,7 +178,7 @@ const simuladores = [
 					<div class="teaser-text">
 						<h2>¿Qué necesita tu empresa?</h2>
 						<p>Responde unas preguntas y descubre qué área puede ayudarte.</p>
-						<button type="button" class="btn-teaser" data-open-diagnostico aria-expanded="false" aria-controls="diagnostico-panel">
+						<button type="button" class="btn-teaser" data-open-overlay="diagnostico-overlay" aria-expanded="false" aria-controls="diagnostico-overlay">
 							Empezar diagnóstico
 							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
 						</button>
@@ -190,10 +191,10 @@ const simuladores = [
 			<Areas />
 		</div>
 
-		<!-- Diagnóstico real: se usa tanto en escritorio (siempre visible) como en mobile (plegable) -->
-		<div id="diagnostico-panel" class="diagnostico-wrap">
+		<!-- Diagnóstico real: se usa tanto en escritorio (siempre visible) como en mobile (overlay a pantalla completa) -->
+		<SimulatorOverlay id="diagnostico-overlay" ariaLabel="Diagnóstico rápido" openHash="diagnostico">
 			<Diagnostico />
-		</div>
+		</SimulatorOverlay>
 
 		<div class="desktop-only">
 			<TeamTransition />
@@ -213,17 +214,23 @@ const simuladores = [
 			<div class="wrap">
 				<h2>¿No sabes por dónde empezar?</h2>
 				<p>Cuéntanos tu situación y te orientamos sin compromiso.</p>
-				<button type="button" class="btn-teaser" data-open-contacto aria-expanded="false" aria-controls="contacto-panel">
+				<button type="button" class="btn-teaser" data-open-overlay="contacto-overlay" aria-expanded="false" aria-controls="contacto-overlay">
 					Cuéntanos tu caso
 					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
 				</button>
 			</div>
 		</section>
 
-		<!-- Contacto real: se usa tanto en escritorio (siempre visible) como en mobile (plegable) -->
-		<div id="contacto-panel" class="contacto-wrap">
+		<!-- Contacto real: se usa tanto en escritorio (siempre visible) como en mobile (overlay a pantalla completa) -->
+		<SimulatorOverlay
+			id="contacto-overlay"
+			ariaLabel="Contacto"
+			openHash="contacto"
+			autoOpenEvent="contacto:prellenado"
+			autoOpenFlag="__contactoPrellenado"
+		>
 			<Contact />
-		</div>
+		</SimulatorOverlay>
 	</main>
 
 	<Footer />
@@ -235,7 +242,7 @@ const simuladores = [
 	 * bloques exclusivos de mobile. Solo por debajo de 600px se invierte: se ocultan los
 	 * bloques de escritorio y se muestran los de mobile. Diagnóstico y Contacto NO tienen
 	 * "mobile-only"/"desktop-only": es el mismo componente en los dos casos, solo cambia
-	 * si puede plegarse (ver .diagnostico-wrap/.contacto-wrap).
+	 * si se muestra inline o como overlay (ver SimulatorOverlay.astro).
 	 */
 	.mobile-only {
 		display: none;
@@ -248,11 +255,6 @@ const simuladores = [
 
 		.mobile-only {
 			display: block;
-		}
-
-		.diagnostico-wrap[hidden],
-		.contacto-wrap[hidden] {
-			display: none;
 		}
 	}
 
@@ -370,71 +372,3 @@ const simuladores = [
 	}
 </style>
 
-<script>
-	const MOBILE_QUERY = "(max-width: 599px)";
-
-	function toggle(buttonSelector: string, panelId: string) {
-		const button = document.querySelector<HTMLButtonElement>(buttonSelector);
-		const panel = document.getElementById(panelId);
-		if (!button || !panel) return;
-
-		function open() {
-			panel!.hidden = false;
-			button!.setAttribute("aria-expanded", "true");
-		}
-
-		function close() {
-			panel!.hidden = true;
-			button!.setAttribute("aria-expanded", "false");
-		}
-
-		// Solo se pliega en mobile; en escritorio el panel siempre está visible.
-		if (window.matchMedia(MOBILE_QUERY).matches) {
-			close();
-		}
-
-		button.addEventListener("click", () => {
-			const isOpen = button.getAttribute("aria-expanded") === "true";
-			if (isOpen) {
-				close();
-			} else {
-				open();
-				panel.scrollIntoView({ behavior: "smooth", block: "start" });
-			}
-		});
-
-		return { open, close };
-	}
-
-	toggle("[data-open-diagnostico]", "diagnostico-panel");
-	const contactoToggle = toggle("[data-open-contacto]", "contacto-panel");
-
-	// El botón "Hablemos" del menú (móvil) debe abrir esta misma caja de contacto,
-	// en vez de navegar a /#contacto. En escritorio no hace falta interceptarlo:
-	// el contacto ya está siempre visible ahí.
-	if (window.matchMedia(MOBILE_QUERY).matches) {
-		document.querySelectorAll<HTMLAnchorElement>('a[href="/#contacto"]').forEach((link) => {
-			link.addEventListener("click", (event) => {
-				event.preventDefault();
-				contactoToggle?.open();
-				document.getElementById("contacto-panel")?.scrollIntoView({ behavior: "smooth", block: "start" });
-			});
-		});
-	}
-
-	// Si un simulador (de esta misma página o de otra) ha dejado datos prellenados,
-	// Contact.astro avisa con este evento para que abramos la caja automáticamente en mobile.
-	// El script de Contact.astro puede ejecutarse antes de que este listener quede
-	// registrado, así que además comprobamos la bandera directamente al cargar.
-	function abrirContactoPrellenado() {
-		if (!window.matchMedia(MOBILE_QUERY).matches) return;
-		contactoToggle?.open();
-		document.getElementById("contacto-panel")?.scrollIntoView({ behavior: "smooth", block: "start" });
-	}
-
-	window.addEventListener("contacto:prellenado", abrirContactoPrellenado);
-
-	if ((window as unknown as { __contactoPrellenado?: boolean }).__contactoPrellenado) {
-		abrirContactoPrellenado();
-	}
-</script>

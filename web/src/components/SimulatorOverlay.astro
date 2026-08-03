@@ -1,0 +1,201 @@
+---
+interface Props {
+	id: string;
+	ariaLabel: string;
+	/** Hash (sin "#") que, en mobile, abre este overlay automáticamente al cargar o al navegar. */
+	openHash?: string;
+	/** Nombre de un CustomEvent global que, al dispararse, abre este overlay (p. ej. prellenado de un formulario). */
+	autoOpenEvent?: string;
+	/** Nombre de un flag en window que, si es true al cargar, abre este overlay. */
+	autoOpenFlag?: string;
+}
+
+const { id, ariaLabel, openHash, autoOpenEvent, autoOpenFlag } = Astro.props;
+---
+
+<div
+	id={id}
+	class="simulator-overlay"
+	data-simulator-overlay
+	data-open-hash={openHash}
+	data-auto-open-event={autoOpenEvent}
+	data-auto-open-flag={autoOpenFlag}
+>
+	<div class="simulator-overlay-backdrop" data-overlay-close></div>
+	<div class="simulator-overlay-panel" role="dialog" aria-modal="true" aria-label={ariaLabel}>
+		<button type="button" class="simulator-overlay-close" aria-label="Cerrar" data-overlay-close>
+			<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+				><path d="M18 6L6 18"></path><path d="M6 6l12 12"></path></svg
+			>
+		</button>
+		<div class="simulator-overlay-content">
+			<slot />
+		</div>
+	</div>
+</div>
+
+<style>
+	/* En escritorio este componente es transparente: el simulador se ve inline, igual que siempre. */
+	.simulator-overlay-backdrop,
+	.simulator-overlay-close {
+		display: none;
+	}
+
+	@media (max-width: 599px) {
+		.simulator-overlay {
+			position: fixed;
+			inset: 0;
+			z-index: 90;
+		}
+
+		.simulator-overlay[hidden] {
+			display: none;
+		}
+
+		.simulator-overlay-backdrop {
+			display: block;
+			position: absolute;
+			inset: 0;
+			background: rgba(31, 41, 55, 0.55);
+		}
+
+		.simulator-overlay-panel {
+			position: absolute;
+			inset: 0;
+			overflow-y: auto;
+			-webkit-overflow-scrolling: touch;
+			background: var(--color-bg);
+			padding-top: 56px;
+		}
+
+		.simulator-overlay-close {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			position: fixed;
+			top: 12px;
+			right: 12px;
+			z-index: 91;
+			width: 40px;
+			height: 40px;
+			border-radius: 999px;
+			border: 1px solid var(--color-divider);
+			background: #fff;
+			color: var(--color-text);
+			cursor: pointer;
+		}
+	}
+</style>
+
+<script>
+	const MOBILE_QUERY = "(max-width: 599px)";
+	const isMobile = () => window.matchMedia(MOBILE_QUERY).matches;
+
+	const overlays = Array.from(document.querySelectorAll<HTMLElement>("[data-simulator-overlay]"));
+
+	// Overlay que se abrió automáticamente por el hash con el que se cargó la página
+	// (es decir, se llegó desde un enlace en otra página, no desde un botón de esta misma página).
+	let arrivedViaCrossPageLink: HTMLElement | null = null;
+
+	function referrerUrl(): URL | null {
+		if (!document.referrer) return null;
+		try {
+			const url = new URL(document.referrer);
+			return url.origin === window.location.origin ? url : null;
+		} catch {
+			return null;
+		}
+	}
+
+	function setBodyScrollLock(locked: boolean) {
+		document.body.style.overflow = locked ? "hidden" : "";
+	}
+
+	function openOverlay(overlay: HTMLElement) {
+		if (!isMobile()) return;
+		// Solo un overlay abierto a la vez: si hay otro abierto (p. ej. Diagnóstico), se cierra.
+		overlays.forEach((other) => {
+			if (other !== overlay) other.hidden = true;
+		});
+		overlay.hidden = false;
+		setBodyScrollLock(true);
+		document.querySelectorAll<HTMLElement>(`[data-open-overlay="${overlay.id}"]`).forEach((btn) => {
+			btn.setAttribute("aria-expanded", "true");
+		});
+	}
+
+	function closeOverlay(overlay: HTMLElement) {
+		// Si se llegó a esta página siguiendo un enlace desde otra (p. ej. un simulador
+		// listado en la Home), al cerrar se vuelve a esa página de origen en vez de dejar
+		// ver la página de destino, que la persona nunca eligió visitar.
+		if (overlay === arrivedViaCrossPageLink) {
+			arrivedViaCrossPageLink = null;
+			const referrer = referrerUrl();
+			if (referrer) {
+				window.location.href = referrer.href;
+				return;
+			}
+		}
+
+		overlay.hidden = true;
+		setBodyScrollLock(false);
+		document.querySelectorAll<HTMLElement>(`[data-open-overlay="${overlay.id}"]`).forEach((btn) => {
+			btn.setAttribute("aria-expanded", "false");
+		});
+		// Limpia el hash para que un refresco no reabra el overlay recién cerrado.
+		if (overlay.dataset.openHash && window.location.hash === `#${overlay.dataset.openHash}`) {
+			history.replaceState(null, "", window.location.pathname + window.location.search);
+		}
+	}
+
+	overlays.forEach((overlay) => {
+		// En escritorio el simulador siempre está visible inline; en mobile arranca oculto.
+		if (isMobile()) overlay.hidden = true;
+
+		overlay.querySelectorAll<HTMLElement>("[data-overlay-close]").forEach((btn) => {
+			btn.addEventListener("click", () => closeOverlay(overlay));
+		});
+	});
+
+	document.querySelectorAll<HTMLElement>("[data-open-overlay]").forEach((btn) => {
+		const targetId = btn.getAttribute("data-open-overlay");
+		const overlay = overlays.find((el) => el.id === targetId);
+		if (!overlay) return;
+		btn.addEventListener("click", () => openOverlay(overlay));
+	});
+
+	document.addEventListener("keydown", (event) => {
+		if (event.key !== "Escape") return;
+		const openOne = overlays.find((el) => !el.hidden);
+		if (openOne) closeOverlay(openOne);
+	});
+
+	// Abre el overlay correspondiente si la URL trae su hash (al cargar o al navegar
+	// dentro de la misma página, p. ej. desde el menú del header).
+	function openByHash(isInitialLoad: boolean) {
+		const hash = window.location.hash.replace("#", "");
+		if (!hash) return;
+		const overlay = overlays.find((el) => el.dataset.openHash === hash);
+		if (!overlay) return;
+		openOverlay(overlay);
+		// Solo la apertura que viene con la carga inicial de la página cuenta como
+		// "se llegó desde otra página"; un hashchange posterior es navegación local.
+		if (isInitialLoad && referrerUrl()) arrivedViaCrossPageLink = overlay;
+	}
+
+	window.addEventListener("hashchange", () => openByHash(false));
+	openByHash(true);
+
+	// Permite abrir un overlay desde fuera (p. ej. cuando Contact.astro prellena el
+	// formulario tras una simulación) sin depender del hash.
+	overlays.forEach((overlay) => {
+		const eventName = overlay.dataset.autoOpenEvent;
+		if (eventName) {
+			window.addEventListener(eventName, () => openOverlay(overlay));
+		}
+		const flagName = overlay.dataset.autoOpenFlag;
+		if (flagName && (window as unknown as Record<string, boolean>)[flagName]) {
+			openOverlay(overlay);
+		}
+	});
+</script>
