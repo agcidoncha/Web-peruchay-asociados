@@ -184,9 +184,6 @@ const simuladores = [
 							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
 						</button>
 					</div>
-					<div class="teaser-visual" aria-hidden="true">
-						<img src="/images/hero/digitalizacion-y-automatizacion.webp" alt="" width="200" height="200" loading="lazy" />
-					</div>
 				</div>
 			</div>
 		</section>
@@ -245,6 +242,7 @@ const simuladores = [
 			<a href="/aviso-legal">Aviso legal</a>
 			<a href="/politica-privacidad">Política de privacidad</a>
 			<a href="/politica-cookies">Política de cookies</a>
+			<button type="button" class="footer-legal-btn" data-open-cookie-settings>Configurar cookies</button>
 		</nav>
 		<p class="footer-copyright">© {year} Perucha y Asociados</p>
 	</footer>
@@ -336,21 +334,6 @@ const simuladores = [
 		margin: 0 0 20px;
 	}
 
-	.teaser-visual {
-		margin-top: 20px;
-		border-radius: 14px;
-		overflow: hidden;
-		line-height: 0;
-	}
-
-	.teaser-visual img {
-		width: 100%;
-		height: auto;
-		aspect-ratio: 1 / 1;
-		object-fit: cover;
-		display: block;
-	}
-
 	.contacto-teaser {
 		padding: 25px 15px;
 		text-align: center;
@@ -428,15 +411,24 @@ const simuladores = [
 	}
 
 	.footer-areas a,
-	.footer-legal a {
+	.footer-legal a,
+	.footer-legal-btn {
 		font-family: var(--font-body);
 		font-size: 13px;
 		color: rgba(255, 255, 255, 0.75);
 		text-decoration: none;
 	}
 
+	.footer-legal-btn {
+		background: none;
+		border: none;
+		padding: 0;
+		cursor: pointer;
+	}
+
 	.footer-areas a:hover,
-	.footer-legal a:hover {
+	.footer-legal a:hover,
+	.footer-legal-btn:hover {
 		color: #fff;
 	}
 
@@ -449,6 +441,12 @@ const simuladores = [
 </style>
 
 <script>
+	import { OPEN_SETTINGS_EVENT } from "../lib/cookieConsent";
+
+	document.querySelector("[data-open-cookie-settings]")?.addEventListener("click", () => {
+		window.dispatchEvent(new CustomEvent(OPEN_SETTINGS_EVENT));
+	});
+
 	const MOBILE_QUERY = "(max-width: 599px)";
 
 	function toggle(buttonSelector: string, panelId: string) {
