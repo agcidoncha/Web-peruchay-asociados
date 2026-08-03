@@ -97,6 +97,12 @@
 			textarea.value = sessionStorage.getItem(key) ?? "";
 			field.hidden = false;
 			sessionStorage.removeItem(key);
+			// Aviso para páginas que envuelven este formulario en una caja plegable
+			// (ver lab-home-mobile.astro): así saben que deben abrirla automáticamente.
+			// Se deja también una bandera persistente porque este script puede ejecutarse
+			// antes de que esa página registre su listener del evento.
+			(window as unknown as { __contactoPrellenado?: boolean }).__contactoPrellenado = true;
+			window.dispatchEvent(new CustomEvent("contacto:prellenado"));
 		}
 	} catch {
 		/* sessionStorage no disponible: se omite el prellenado */
@@ -375,10 +381,33 @@
 	}
 
 	.field-checkbox input {
+		appearance: none;
+		-webkit-appearance: none;
 		margin-top: 3px;
+		padding: 0;
 		width: 16px;
 		height: 16px;
 		flex: 0 0 auto;
+		border: 1.5px solid var(--color-divider);
+		border-radius: 4px;
+		background: #fff;
+		cursor: pointer;
+	}
+
+	.field-checkbox input:checked {
+		background: var(--color-accent-900);
+		border-color: var(--color-accent-900);
+	}
+
+	.field-checkbox input:checked::after {
+		content: "";
+		display: block;
+		width: 4px;
+		height: 8px;
+		margin: 1px auto 0;
+		border: solid #fff;
+		border-width: 0 2px 2px 0;
+		transform: rotate(45deg);
 	}
 
 	.field-checkbox label {

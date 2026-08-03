@@ -1,0 +1,174 @@
+---
+interface Item {
+	href: string;
+	title: string;
+	text?: string;
+	linkLabel?: string;
+	icon: string;
+}
+
+interface Props {
+	title: string;
+	items: Item[];
+	variant?: "light" | "dark";
+}
+
+const { title, items, variant = "light" } = Astro.props;
+---
+
+<section class:list={["icon-link-list", variant]}>
+	<div class="wrap">
+		<h2>{title}</h2>
+		<div class="rows">
+			{items.map((item) => (
+				<a href={item.href} class="row">
+					<span class="icon" set:html={`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${item.icon}</svg>`} />
+					<span class="body">
+						<span class="row-title">{item.title}</span>
+						{item.text && <span class="row-text">{item.text}</span>}
+						{item.linkLabel && <span class="row-link">{item.linkLabel}</span>}
+					</span>
+					<svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg>
+				</a>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.icon-link-list {
+		padding: 48px 24px;
+	}
+
+	.icon-link-list.light {
+		background: #fff;
+	}
+
+	.icon-link-list.dark {
+		background: var(--color-accent-900);
+	}
+
+	.wrap {
+		max-width: 680px;
+		margin: 0 auto;
+	}
+
+	h2 {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: clamp(22px, 3vw, 28px);
+		margin: 0 0 20px;
+	}
+
+	.light h2 {
+		color: var(--color-text);
+	}
+
+	.dark h2 {
+		color: #fff;
+	}
+
+	.rows {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.row {
+		display: flex;
+		align-items: center;
+		gap: 14px;
+		padding: 18px 0;
+		text-decoration: none;
+		border-top: 1px solid var(--color-divider);
+	}
+
+	.dark .row {
+		border-top-color: rgba(255, 255, 255, 0.14);
+	}
+
+	.row:first-child {
+		border-top: none;
+	}
+
+	.icon {
+		flex: 0 0 auto;
+		width: 40px;
+		height: 40px;
+		border-radius: 10px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.light .icon {
+		background: var(--color-accent-100);
+		color: var(--color-accent-800);
+	}
+
+	.dark .icon {
+		background: rgba(255, 255, 255, 0.1);
+		color: #fff;
+	}
+
+	.body {
+		flex: 1 1 auto;
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		min-width: 0;
+	}
+
+	.row-title {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 16px;
+	}
+
+	.light .row-title {
+		color: var(--color-text);
+	}
+
+	.dark .row-title {
+		color: #fff;
+	}
+
+	.row-text {
+		font-family: var(--font-body);
+		font-size: 13.5px;
+		line-height: 1.45;
+	}
+
+	.light .row-text {
+		color: var(--color-muted);
+	}
+
+	.dark .row-text {
+		color: rgba(255, 255, 255, 0.65);
+	}
+
+	.row-link {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 13.5px;
+	}
+
+	.light .row-link {
+		color: var(--color-accent-800);
+	}
+
+	.dark .row-link {
+		color: var(--color-accent-300);
+	}
+
+	.chevron {
+		flex: 0 0 auto;
+	}
+
+	.light .chevron {
+		color: var(--color-muted);
+	}
+
+	.dark .chevron {
+		color: rgba(255, 255, 255, 0.5);
+	}
+</style>

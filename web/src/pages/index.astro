@@ -9,6 +9,9 @@ import Diagnostico from "../components/home/Diagnostico.astro";
 import TeamTransition from "../components/home/TeamTransition.astro";
 import Team from "../components/home/Team.astro";
 import Contact from "../components/home/Contact.astro";
+import IconLinkList from "../components/IconLinkList.astro";
+
+const year = new Date().getFullYear();
 
 const faqCategories = ["Información general", "Colaboración y contratación"];
 
@@ -100,6 +103,54 @@ const faqSchema = {
 		},
 	})),
 };
+
+// Mismos datos que Areas.astro, presentados aquí en formato de lista (solo para mobile).
+const areasList = [
+	{
+		href: "/finanzas-y-control",
+		title: "Finanzas y Control",
+		text: "Información, análisis y control para tomar decisiones con fundamento.",
+		linkLabel: "Conocer el área",
+		icon: '<path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path>',
+	},
+	{
+		href: "/contabilidad-y-fiscalidad",
+		title: "Contabilidad y Fiscalidad",
+		text: "Gestión contable y fiscal rigurosa, con el respaldo de más de 30 años de experiencia.",
+		linkLabel: "Conocer el área",
+		icon: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6"></path><path d="M9 13h6"></path><path d="M9 17h6"></path>',
+	},
+	{
+		href: "/digitalizacion-y-automatizacion",
+		title: "Digitalización y Automatización",
+		text: "Tecnología y automatización de procesos para trabajar de forma más eficiente.",
+		linkLabel: "Conocer el área",
+		icon: '<circle cx="6" cy="6" r="2.5"></circle><circle cx="18" cy="6" r="2.5"></circle><circle cx="12" cy="18" r="2.5"></circle><path d="M8.2 7.2L12 15.5"></path><path d="M15.8 7.2L12 15.5"></path><path d="M8.5 6h7"></path>',
+	},
+];
+
+// Mismos enlaces que la lista "tools" de Header.astro (solo para mobile; el Diagnóstico rápido
+// es aquí su propia caja, no forma parte de esta lista).
+const simuladores = [
+	{
+		href: "/finanzas-y-control#simulador",
+		title: "Calcula tu punto de equilibrio",
+		linkLabel: "Abrir simulador",
+		icon: '<path d="M12 3v18"></path><path d="M5 7l-2 5a3 3 0 0 0 6 0z"></path><path d="M19 7l-2 5a3 3 0 0 0 6 0z"></path><path d="M5 7h14"></path><path d="M8 21h8"></path>',
+	},
+	{
+		href: "/contabilidad-y-fiscalidad#simulador",
+		title: "Autónomo o sociedad",
+		linkLabel: "Abrir simulador",
+		icon: '<circle cx="9" cy="8" r="3"></circle><path d="M2 20c0-3.3 3-5 7-5s7 1.7 7 5"></path><path d="M17 8a3 3 0 1 1 0 6"></path><path d="M22 20c0-2.7-1.8-4.2-4-4.7"></path>',
+	},
+	{
+		href: "/digitalizacion-y-automatizacion#simulador",
+		title: "Horas que podrás ahorrar",
+		linkLabel: "Abrir simulador",
+		icon: '<circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path>',
+	},
+];
 ---
 
 <Layout
@@ -112,14 +163,356 @@ const faqSchema = {
 	<Header />
 
 	<main>
-		<Hero />
-		<Areas />
-		<Diagnostico />
-		<TeamTransition />
-		<Team />
-		<Faq categories={faqCategories} faqs={faqs} />
-		<Contact />
+		<!-- Escritorio: Hero con carrusel, botones y avales -->
+		<div class="desktop-only">
+			<Hero />
+		</div>
+
+		<!-- Mobile: Hero simplificado + caja del diagnóstico -->
+		<section class="mobile-only hero-lab">
+			<div class="wrap">
+				<p class="eyebrow">Asesoría para empresas</p>
+				<h1>Soluciones para tu empresa.</h1>
+				<p class="subtitle">Control de gestión, contabilidad, fiscalidad y digitalización adaptados a cada empresa.</p>
+
+				<div class="diagnostico-teaser">
+					<div class="teaser-text">
+						<h2>¿Qué necesita tu empresa?</h2>
+						<p>Responde unas preguntas y descubre qué área puede ayudarte.</p>
+						<button type="button" class="btn-teaser" data-open-diagnostico aria-expanded="false" aria-controls="diagnostico-panel">
+							Empezar diagnóstico
+							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+						</button>
+					</div>
+					<div class="teaser-visual" aria-hidden="true">
+						<img src="/images/hero/digitalizacion-y-automatizacion.webp" alt="" width="200" height="200" loading="lazy" />
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<div class="desktop-only">
+			<Areas />
+		</div>
+
+		<!-- Diagnóstico real: se usa tanto en escritorio (siempre visible) como en mobile (plegable) -->
+		<div id="diagnostico-panel" class="diagnostico-wrap">
+			<Diagnostico />
+		</div>
+
+		<div class="desktop-only">
+			<TeamTransition />
+			<Team />
+		</div>
+
+		<div class="mobile-only">
+			<IconLinkList title="¿En qué podemos ayudarte?" items={areasList} variant="light" />
+			<IconLinkList title="Simuladores para tu empresa" items={simuladores} variant="dark" />
+		</div>
+
+		<div class="desktop-only">
+			<Faq categories={faqCategories} faqs={faqs} />
+		</div>
+
+		<section class="mobile-only contacto-teaser">
+			<div class="wrap">
+				<h2>¿No sabes por dónde empezar?</h2>
+				<p>Cuéntanos tu situación y te orientamos sin compromiso.</p>
+				<button type="button" class="btn-teaser" data-open-contacto aria-expanded="false" aria-controls="contacto-panel">
+					Cuéntanos tu caso
+					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+				</button>
+			</div>
+		</section>
+
+		<!-- Contacto real: se usa tanto en escritorio (siempre visible) como en mobile (plegable) -->
+		<div id="contacto-panel" class="contacto-wrap">
+			<Contact />
+		</div>
 	</main>
 
-	<Footer />
+	<div class="desktop-only">
+		<Footer />
+	</div>
+
+	<footer class="mobile-only footer-lab">
+		<nav class="footer-areas" aria-label="Áreas">
+			<a href="/finanzas-y-control">Finanzas y Control</a>
+			<a href="/contabilidad-y-fiscalidad">Contabilidad y Fiscalidad</a>
+			<a href="/digitalizacion-y-automatizacion">Digitalización y Automatización</a>
+		</nav>
+		<nav class="footer-legal" aria-label="Legal">
+			<a href="/aviso-legal">Aviso legal</a>
+			<a href="/politica-privacidad">Política de privacidad</a>
+			<a href="/politica-cookies">Política de cookies</a>
+		</nav>
+		<p class="footer-copyright">© {year} Perucha y Asociados</p>
+	</footer>
 </Layout>
+
+<style>
+	/*
+	 * En escritorio esta página se ve exactamente igual que siempre: se ocultan todos los
+	 * bloques exclusivos de mobile. Solo por debajo de 600px se invierte: se ocultan los
+	 * bloques de escritorio y se muestran los de mobile. Diagnóstico y Contacto NO tienen
+	 * "mobile-only"/"desktop-only": es el mismo componente en los dos casos, solo cambia
+	 * si puede plegarse (ver .diagnostico-wrap/.contacto-wrap).
+	 */
+	.mobile-only {
+		display: none;
+	}
+
+	@media (max-width: 599px) {
+		.desktop-only {
+			display: none;
+		}
+
+		.mobile-only {
+			display: block;
+		}
+
+		.diagnostico-wrap[hidden],
+		.contacto-wrap[hidden] {
+			display: none;
+		}
+	}
+
+	.hero-lab {
+		padding: 25px 15px 40px;
+		background: var(--color-accent-100);
+	}
+
+	.hero-lab .wrap {
+		max-width: 480px;
+		margin: 0 auto;
+	}
+
+	.eyebrow {
+		font-family: var(--font-body);
+		font-size: 12px;
+		font-weight: 600;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--color-accent);
+		margin: 0 0 12px;
+	}
+
+	h1 {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: clamp(30px, 8vw, 38px);
+		line-height: 1.1;
+		color: var(--color-text);
+		margin: 0 0 14px;
+	}
+
+	.subtitle {
+		font-family: var(--font-body);
+		font-size: 15px;
+		line-height: 1.55;
+		color: var(--color-muted);
+		margin: 0 0 24px;
+	}
+
+	.diagnostico-teaser {
+		background: var(--color-accent-900);
+		border-radius: 20px;
+		padding: 24px;
+	}
+
+	.teaser-text h2 {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 20px;
+		color: #fff;
+		margin: 0 0 8px;
+	}
+
+	.teaser-text p {
+		font-family: var(--font-body);
+		font-size: 14px;
+		line-height: 1.5;
+		color: rgba(255, 255, 255, 0.7);
+		margin: 0 0 20px;
+	}
+
+	.teaser-visual {
+		margin-top: 20px;
+		border-radius: 14px;
+		overflow: hidden;
+		line-height: 0;
+	}
+
+	.teaser-visual img {
+		width: 100%;
+		height: auto;
+		aspect-ratio: 1 / 1;
+		object-fit: cover;
+		display: block;
+	}
+
+	.contacto-teaser {
+		padding: 25px 15px;
+		text-align: center;
+		background: var(--color-accent-100);
+	}
+
+	.contacto-teaser .wrap {
+		max-width: 480px;
+		margin: 0 auto;
+	}
+
+	.contacto-teaser h2 {
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: clamp(22px, 3vw, 28px);
+		color: var(--color-text);
+		margin: 0 0 10px;
+	}
+
+	.contacto-teaser p {
+		font-family: var(--font-body);
+		font-size: 15px;
+		color: var(--color-muted);
+		margin: 0 0 20px;
+	}
+
+	.btn-teaser {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 15px;
+		color: var(--color-accent-900);
+		background: var(--color-accent-200);
+		border: none;
+		padding: 14px 26px;
+		border-radius: 999px;
+		cursor: pointer;
+	}
+
+	.btn-teaser:hover {
+		background: #fff;
+	}
+
+	.contacto-teaser .btn-teaser {
+		color: #fff;
+		background: var(--color-accent-900);
+	}
+
+	.contacto-teaser .btn-teaser:hover {
+		background: var(--color-accent-800);
+	}
+
+	.footer-lab {
+		background: var(--color-accent-900);
+		padding: 32px 15px;
+		text-align: center;
+	}
+
+	.footer-areas,
+	.footer-legal {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 6px 14px;
+		margin: 0 0 16px;
+		padding-bottom: 16px;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+	}
+
+	.footer-legal {
+		border-bottom: none;
+		margin-bottom: 16px;
+	}
+
+	.footer-areas a,
+	.footer-legal a {
+		font-family: var(--font-body);
+		font-size: 13px;
+		color: rgba(255, 255, 255, 0.75);
+		text-decoration: none;
+	}
+
+	.footer-areas a:hover,
+	.footer-legal a:hover {
+		color: #fff;
+	}
+
+	.footer-copyright {
+		font-family: var(--font-body);
+		font-size: 12px;
+		color: rgba(255, 255, 255, 0.4);
+		margin: 0;
+	}
+</style>
+
+<script>
+	const MOBILE_QUERY = "(max-width: 599px)";
+
+	function toggle(buttonSelector: string, panelId: string) {
+		const button = document.querySelector<HTMLButtonElement>(buttonSelector);
+		const panel = document.getElementById(panelId);
+		if (!button || !panel) return;
+
+		function open() {
+			panel!.hidden = false;
+			button!.setAttribute("aria-expanded", "true");
+		}
+
+		function close() {
+			panel!.hidden = true;
+			button!.setAttribute("aria-expanded", "false");
+		}
+
+		// Solo se pliega en mobile; en escritorio el panel siempre está visible.
+		if (window.matchMedia(MOBILE_QUERY).matches) {
+			close();
+		}
+
+		button.addEventListener("click", () => {
+			const isOpen = button.getAttribute("aria-expanded") === "true";
+			if (isOpen) {
+				close();
+			} else {
+				open();
+				panel.scrollIntoView({ behavior: "smooth", block: "start" });
+			}
+		});
+
+		return { open, close };
+	}
+
+	toggle("[data-open-diagnostico]", "diagnostico-panel");
+	const contactoToggle = toggle("[data-open-contacto]", "contacto-panel");
+
+	// El botón "Hablemos" del menú (móvil) debe abrir esta misma caja de contacto,
+	// en vez de navegar a /#contacto. En escritorio no hace falta interceptarlo:
+	// el contacto ya está siempre visible ahí.
+	if (window.matchMedia(MOBILE_QUERY).matches) {
+		document.querySelectorAll<HTMLAnchorElement>('a[href="/#contacto"]').forEach((link) => {
+			link.addEventListener("click", (event) => {
+				event.preventDefault();
+				contactoToggle?.open();
+				document.getElementById("contacto-panel")?.scrollIntoView({ behavior: "smooth", block: "start" });
+			});
+		});
+	}
+
+	// Si un simulador (de esta misma página o de otra) ha dejado datos prellenados,
+	// Contact.astro avisa con este evento para que abramos la caja automáticamente en mobile.
+	// El script de Contact.astro puede ejecutarse antes de que este listener quede
+	// registrado, así que además comprobamos la bandera directamente al cargar.
+	function abrirContactoPrellenado() {
+		if (!window.matchMedia(MOBILE_QUERY).matches) return;
+		contactoToggle?.open();
+		document.getElementById("contacto-panel")?.scrollIntoView({ behavior: "smooth", block: "start" });
+	}
+
+	window.addEventListener("contacto:prellenado", abrirContactoPrellenado);
+
+	if ((window as unknown as { __contactoPrellenado?: boolean }).__contactoPrellenado) {
+		abrirContactoPrellenado();
+	}
+</script>
