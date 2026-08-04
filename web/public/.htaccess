@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# El hosting sirve el sitio detrás de Varnish, y al añadir automáticamente la
+# barra final a una URL sin ella, Apache construye la redirección con
+# http:// en vez de https:// (no reconoce el protocolo original de la
+# petición). Esta regla se adelanta y genera siempre la versión https://
+# correcta, sin depender de que Apache sepa qué protocolo usó el visitante.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.+[^/])$ https://%{HTTP_HOST}/$1/ [R=301,L,QSA]
