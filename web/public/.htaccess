@@ -1,5 +1,10 @@
 RewriteEngine On
 
+# Quien entra directamente por http:// (enlace antiguo, marcador...) se sube
+# a https://. Varnish informa del protocolo original con X-Forwarded-Proto.
+RewriteCond %{HTTP:X-Forwarded-Proto} http$
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
 # El hosting sirve el sitio detrás de Varnish, y al añadir automáticamente la
 # barra final a una URL sin ella, Apache construye la redirección con
 # http:// en vez de https:// (no reconoce el protocolo original de la
@@ -7,3 +12,9 @@ RewriteEngine On
 # correcta, sin depender de que Apache sepa qué protocolo usó el visitante.
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.+[^/])$ https://%{HTTP_HOST}/$1/ [R=301,L,QSA]
+
+# El navegador recuerda que este dominio siempre va por https://, incluso
+# en la primera visita de alguien nuevo.
+<IfModule mod_headers.c>
+	Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+</IfModule>
