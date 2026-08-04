@@ -92,16 +92,38 @@ const { id, ariaLabel, openHash, autoOpenEvent, autoOpenFlag } = Astro.props;
 	const isMobile = () => window.matchMedia(MOBILE_QUERY).matches;
 
 	const overlays = Array.from(document.querySelectorAll<HTMLElement>("[data-simulator-overlay]"));
+	const RETURN_TO_KEY = "simulatorOverlayReturnTo";
 
 	// Overlay que se abrió automáticamente por el hash con el que se cargó la página
 	// (es decir, se llegó desde un enlace en otra página, no desde un botón de esta misma página).
 	let arrivedViaCrossPageLink: HTMLElement | null = null;
+	let returnToUrl: string | null = null;
 
-	function referrerUrl(): URL | null {
-		if (!document.referrer) return null;
+	// No usamos document.referrer: en este hosting una redirección del servidor
+	// (barra final) hace que el navegador la pierda, aunque la navegación sea interna.
+	// En su lugar guardamos nosotros mismos la página de origen justo antes de salir de ella.
+	document.addEventListener("click", (event) => {
+		const link = (event.target as HTMLElement)?.closest?.("a[href]") as HTMLAnchorElement | null;
+		if (!link) return;
+		let url: URL;
 		try {
-			const url = new URL(document.referrer);
-			return url.origin === window.location.origin ? url : null;
+			url = new URL(link.href, window.location.href);
+		} catch {
+			return;
+		}
+		if (url.origin !== window.location.origin || !url.hash || url.pathname === window.location.pathname) return;
+		try {
+			sessionStorage.setItem(RETURN_TO_KEY, window.location.href);
+		} catch {
+			/* sessionStorage no disponible */
+		}
+	});
+
+	function consumeReturnToUrl(): string | null {
+		try {
+			const value = sessionStorage.getItem(RETURN_TO_KEY);
+			sessionStorage.removeItem(RETURN_TO_KEY);
+			return value;
 		} catch {
 			return null;
 		}
@@ -130,9 +152,8 @@ const { id, ariaLabel, openHash, autoOpenEvent, autoOpenFlag } = Astro.props;
 		// ver la página de destino, que la persona nunca eligió visitar.
 		if (overlay === arrivedViaCrossPageLink) {
 			arrivedViaCrossPageLink = null;
-			const referrer = referrerUrl();
-			if (referrer) {
-				window.location.href = referrer.href;
+			if (returnToUrl) {
+				window.location.href = returnToUrl;
 				return;
 			}
 		}
@@ -180,7 +201,13 @@ const { id, ariaLabel, openHash, autoOpenEvent, autoOpenFlag } = Astro.props;
 		openOverlay(overlay);
 		// Solo la apertura que viene con la carga inicial de la página cuenta como
 		// "se llegó desde otra página"; un hashchange posterior es navegación local.
-		if (isInitialLoad && referrerUrl()) arrivedViaCrossPageLink = overlay;
+		if (isInitialLoad) {
+			const stored = consumeReturnToUrl();
+			if (stored) {
+				arrivedViaCrossPageLink = overlay;
+				returnToUrl = stored;
+			}
+		}
 	}
 
 	window.addEventListener("hashchange", () => openByHash(false));
