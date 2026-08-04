@@ -5,6 +5,13 @@
   "anio_fiscal_nota": "Se ha usado el ejercicio 2025 por ser el año fiscal completo más reciente con normativa e importes oficiales cerrados y publicados en la fecha de esta investigación (30 de julio de 2026). El documento de especificación menciona 2026 como año de referencia editorial, pero ese ejercicio aún no tiene todos sus datos oficiales cerrados; deberá sustituirse este archivo por 2026.json en cuanto la configuración de ese ejercicio esté completa y validada (ver sección 27, actualización anual obligatoria).",
   "fecha_ultima_revision": "2026-07-30",
   "revisado_por_profesional_fiscal": false,
+  "publicado_como_estimacion_orientativa": {
+    "decision": true,
+    "decidido_por": "Ángel Cidoncha",
+    "fecha": "2026-08-05",
+    "alcance": "El simulador se publica de cara al usuario como una estimación orientativa (con aviso e invitación a contactar con Perucha y Asociados para un cálculo preciso), sin esperar a que se complete la revisión profesional fiscal completa. Esta es una decisión de producto/negocio, no una revisión técnica: 'revisado_por_profesional_fiscal' se mantiene en false a propósito porque los puntos de 'pendiente_antes_de_publicar' siguen sin resolver.",
+    "nota": "El aviso interno 'borrador_sin_validar' de este archivo sigue siendo cierto y no debe eliminarse ni darse por bueno solo porque el mensaje visible al usuario haya cambiado de tono."
+  },
   "revision_profesional_datos_fiscales": {
     "revisado": true,
     "revisado_por": "Mercedes Perucha Morando",
