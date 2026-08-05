@@ -7,6 +7,8 @@
 		<h2>¿Cuánto tiempo podría recuperar tu equipo?</h2>
 		<p class="subtitle">Analiza una tarea manual y repetitiva para estimar cuánto tiempo podría liberarse al automatizar parte del proceso.</p>
 
+		<div class="info-col-mobile-slot" data-info-slot></div>
+
 		<div class="card">
 			<p class="step-caption" data-step-caption>Paso 1 de 3 · La tarea</p>
 			<div class="stepper" data-stepper>
@@ -66,14 +68,19 @@
 					</div>
 
 					<div class="info-col">
-						<h4>¿Qué vamos a calcular?</h4>
-						<ul class="info-list">
-							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span>Tiempo manual actual</li>
-							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"></path><path d="M3 4v5h5"></path><path d="M12 7v5l3 2"></path></svg></span>Horas que podrían recuperarse</li>
-							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4 4-6 8-6s8 2 8 6"></path></svg></span>Tiempo que seguiría siendo humano</li>
-							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M7 15l4-4 3 3 5-6"></path></svg></span>Proyección mensual y anual</li>
-						</ul>
-						<p class="info-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8h.01"></path><path d="M11 11.5h1v4.5h1"></path></svg>El resultado será orientativo y dependerá del proceso, sus excepciones y las herramientas utilizadas.</p>
+						<button type="button" class="info-toggle" data-info-toggle aria-expanded="true" aria-controls="est-info-1">
+							¿Qué vamos a calcular?
+							<svg class="info-toggle-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
+						</button>
+						<div class="info-body" id="est-info-1" data-info-body>
+							<ul class="info-list">
+								<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span>Tiempo manual actual</li>
+								<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"></path><path d="M3 4v5h5"></path><path d="M12 7v5l3 2"></path></svg></span>Horas que podrían recuperarse</li>
+								<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4 4-6 8-6s8 2 8 6"></path></svg></span>Tiempo que seguiría siendo humano</li>
+								<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M7 15l4-4 3 3 5-6"></path></svg></span>Proyección mensual y anual</li>
+							</ul>
+							<p class="info-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8h.01"></path><path d="M11 11.5h1v4.5h1"></path></svg>El resultado será orientativo y dependerá del proceso, sus excepciones y las herramientas utilizadas.</p>
+						</div>
 					</div>
 				</div>
 
@@ -113,14 +120,19 @@
 					</div>
 
 					<div class="info-col">
-						<h4>¿Qué vamos a calcular?</h4>
-						<ul class="info-list">
-							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span>Tiempo manual actual</li>
-							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"></path><path d="M3 4v5h5"></path><path d="M12 7v5l3 2"></path></svg></span>Horas que podrían recuperarse</li>
-							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4 4-6 8-6s8 2 8 6"></path></svg></span>Tiempo que seguiría siendo humano</li>
-							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M7 15l4-4 3 3 5-6"></path></svg></span>Proyección mensual y anual</li>
-						</ul>
-						<p class="info-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8h.01"></path><path d="M11 11.5h1v4.5h1"></path></svg>El resultado será orientativo y dependerá del proceso, sus excepciones y las herramientas utilizadas.</p>
+						<button type="button" class="info-toggle" data-info-toggle aria-expanded="true" aria-controls="est-info-2">
+							¿Qué vamos a calcular?
+							<svg class="info-toggle-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
+						</button>
+						<div class="info-body" id="est-info-2" data-info-body>
+							<ul class="info-list">
+								<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span>Tiempo manual actual</li>
+								<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"></path><path d="M3 4v5h5"></path><path d="M12 7v5l3 2"></path></svg></span>Horas que podrían recuperarse</li>
+								<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4 4-6 8-6s8 2 8 6"></path></svg></span>Tiempo que seguiría siendo humano</li>
+								<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M7 15l4-4 3 3 5-6"></path></svg></span>Proyección mensual y anual</li>
+							</ul>
+							<p class="info-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8h.01"></path><path d="M11 11.5h1v4.5h1"></path></svg>El resultado será orientativo y dependerá del proceso, sus excepciones y las herramientas utilizadas.</p>
+						</div>
 					</div>
 				</div>
 
@@ -191,13 +203,18 @@
 					</div>
 
 					<div class="info-col">
-						<h4>Antes de calcular</h4>
-						<ul class="info-list">
-							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8h.01"></path><path d="M11 11.5h1v4.5h1"></path></svg></span>El porcentaje es una estimación, no una garantía.</li>
-							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4 4-6 8-6s8 2 8 6"></path></svg></span>Las revisiones y excepciones seguirán necesitando intervención humana.</li>
-							<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M8 12h8"></path><path d="M12 8v8"></path></svg></span>El coste por hora es opcional.</li>
-						</ul>
-						<p class="info-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8h.01"></path><path d="M11 11.5h1v4.5h1"></path></svg>No mostramos el 100 % como opción rápida porque normalmente siguen existiendo controles y excepciones.</p>
+						<button type="button" class="info-toggle" data-info-toggle aria-expanded="true" aria-controls="est-info-3">
+							Antes de calcular
+							<svg class="info-toggle-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
+						</button>
+						<div class="info-body" id="est-info-3" data-info-body>
+							<ul class="info-list">
+								<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8h.01"></path><path d="M11 11.5h1v4.5h1"></path></svg></span>El porcentaje es una estimación, no una garantía.</li>
+								<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4 4-6 8-6s8 2 8 6"></path></svg></span>Las revisiones y excepciones seguirán necesitando intervención humana.</li>
+								<li><span class="info-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M8 12h8"></path><path d="M12 8v8"></path></svg></span>El coste por hora es opcional.</li>
+							</ul>
+							<p class="info-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8h.01"></path><path d="M11 11.5h1v4.5h1"></path></svg>No mostramos el 100 % como opción rápida porque normalmente siguen existiendo controles y excepciones.</p>
+						</div>
 					</div>
 				</div>
 
@@ -586,12 +603,33 @@
 		padding: 28px 26px;
 	}
 
-	.info-col h4 {
+	/* Vacío en escritorio (el JS solo mueve las cajas .info-col aquí en mobile). */
+	.info-col-mobile-slot:empty {
+		display: none;
+	}
+
+	.info-toggle {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 8px;
+		width: 100%;
 		margin: 0 0 18px;
+		padding: 0;
+		border: none;
+		background: none;
 		font-family: var(--font-heading);
 		font-weight: 600;
 		font-size: 17px;
 		color: var(--color-accent-900);
+		text-align: left;
+		cursor: default;
+	}
+
+	.info-toggle-icon {
+		display: none;
+		flex: 0 0 auto;
+		transition: transform 0.2s ease;
 	}
 
 	.info-list {
@@ -861,6 +899,36 @@
 		.card {
 			padding: 20px;
 		}
+
+		.bottom-row {
+			flex-direction: column-reverse;
+			align-items: flex-start;
+		}
+
+		.nav-buttons {
+			align-self: flex-end;
+			margin-left: 0;
+		}
+
+		.info-toggle {
+			cursor: pointer;
+		}
+
+		.info-toggle-icon {
+			display: block;
+		}
+
+		.info-toggle[aria-expanded="false"] .info-toggle-icon {
+			transform: rotate(-90deg);
+		}
+
+		.info-body[hidden] {
+			display: none;
+		}
+
+		.info-col-mobile-slot:not(:empty) {
+			margin-bottom: 24px;
+		}
 	}
 </style>
 
@@ -1066,11 +1134,33 @@
 			});
 		}
 
+		const MOBILE_QUERY = "(max-width: 599px)";
+		const infoSlot = section?.querySelector<HTMLElement>("[data-info-slot]");
+
+		// En mobile, la caja de información de cada paso no tiene sentido enterrada debajo
+		// del formulario, así que se traslada arriba del todo, justo debajo del subtítulo.
+		// En escritorio no se toca: se queda donde está, junto al formulario de cada paso.
+		function moveInfoColToSlot(step: number) {
+			if (!infoSlot || !window.matchMedia(MOBILE_QUERY).matches) return;
+			const current = infoSlot.querySelector<HTMLElement>(".info-col");
+			if (current) {
+				const homeStep = current.dataset.homeStep;
+				const homeGrid = section?.querySelector<HTMLElement>(`[data-step="${homeStep}"] .step-grid`);
+				homeGrid?.appendChild(current);
+			}
+			const infoCol = section?.querySelector<HTMLElement>(`[data-step="${step}"] .info-col`);
+			if (infoCol) {
+				infoCol.dataset.homeStep = String(step);
+				infoSlot.appendChild(infoCol);
+			}
+		}
+
 		function goToStep(step: number) {
 			currentStep = step;
 			stepViews.forEach((view) => {
 				view.hidden = Number(view.dataset.step) !== step;
 			});
+			moveInfoColToSlot(step);
 			if (stepCaption) stepCaption.textContent = stepMeta[step - 1];
 			updateStepper(Math.min(step, 3));
 			const stepView = section?.querySelector<HTMLElement>(`[data-step="${step}"]`);
@@ -1162,6 +1252,22 @@
 				field.hidden = false;
 			}
 		});
+
+		// En mobile, las cajas de información de cada paso empiezan plegadas para que el
+		// formulario quede más a la vista; en escritorio se quedan igual que siempre, visibles.
+		if (window.matchMedia(MOBILE_QUERY).matches) {
+			section.querySelectorAll<HTMLButtonElement>("[data-info-toggle]").forEach((toggle) => {
+				const body = document.getElementById(toggle.getAttribute("aria-controls") ?? "");
+				if (!body) return;
+				body.hidden = true;
+				toggle.setAttribute("aria-expanded", "false");
+				toggle.addEventListener("click", () => {
+					const isOpen = toggle.getAttribute("aria-expanded") === "true";
+					toggle.setAttribute("aria-expanded", String(!isOpen));
+					body.hidden = isOpen;
+				});
+			});
+		}
 
 		goToStep(1);
 	}

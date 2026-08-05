@@ -29,7 +29,7 @@ En mobile, priorizar que el usuario llegue rápido a la acción (leer lo esencia
 
 - **`AutonomoVsSociedad.astro`** — **Hecho (2026-08-05).** La columna "info-col" de cada paso ("¿Qué vamos a comparar?" / "¿Por qué te preguntamos esto?" / "¿Qué comprobamos?") ahora es un acordeón colapsado por defecto en mobile. Se implementó distinto a como se proponía aquí: en vez de quedarse plegada en su sitio original (debajo del formulario de cada paso), se traslada por JS a una posición fija justo debajo del disclaimer y por encima de la tarjeta del simulador, cambiando de contenido según el paso activo — así el usuario la ve antes de entrar en el formulario, no después. Escritorio sin cambios (la caja sigue junto al formulario, siempre visible). También se redujo su padding vertical en mobile.
 - **`Calculadora.astro`** — Propuesta: el bloque de los 3 conceptos ("¿Qué es el punto de equilibrio?", etc.) pasa a un acordeón "¿Qué significan estos términos?" cerrado por defecto en mobile, ya que aparece siempre después del resultado y no es imprescindible para usar la calculadora.
-- **`EstimadorHoras.astro`** — **Propuesta: sin cambios adicionales.** Ya tiene su adaptación mobile (stepper simplificado).
+- **`EstimadorHoras.astro`** — **Hecho (2026-08-05).** Además del stepper simplificado que ya tenía, también tenía el mismo problema de la "info-col" que `AutonomoVsSociedad.astro` (bloque "¿Qué vamos a calcular?" / "Antes de calcular" enterrado debajo del formulario en mobile). Se corrigió con el mismo patrón: acordeón colapsado, trasladado por JS a una posición fija encima de la tarjeta del simulador, cambiando de contenido según el paso activo. Escritorio sin cambios.
 
 ## Resumen de prioridad que propongo
 
