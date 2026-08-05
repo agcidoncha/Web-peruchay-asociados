@@ -1,61 +1,50 @@
 # Notificaciones por email del formulario de contacto
 
+**Estado: cerrado e implementado (2026-08-05).**
+
 ## Objetivo
 
-Cuando alguien envía el formulario de contacto (`web/public/contacto.php`), hoy los datos solo se guardan en la tabla `contactos_web` de MariaDB — nadie recibe ningún aviso. Se añadirán dos envíos automáticos:
+Cuando alguien envía el formulario de contacto (`web/public/contacto.php`), además de guardarse en la tabla `contactos_web` de MariaDB, se envían dos avisos automáticos:
 
-1. **A `info@peruchayasociados.com`** — aviso interno de que ha entrado un mensaje nuevo, con todos los datos del formulario.
+1. **A `info@peruchayasociados.com`** — aviso interno con todos los datos del formulario.
 2. **Al email que ha introducido el cliente** — confirmación de que su mensaje se ha recibido correctamente.
 
-## Decisión técnica: método de envío
+## Método de envío
 
-**Decidido:** SMTP autenticado con **PHPMailer**, usando una cuenta de correo real del hosting (ej. `info@peruchayasociados.com` o una cuenta técnica dedicada). Se descarta la función `mail()` nativa de PHP por su alta probabilidad de acabar en spam en hosting compartido sin configuración SPF/DKIM adecuada.
+SMTP autenticado con **PHPMailer v6.9.1**, archivos sueltos en `web/public/lib/phpmailer/` (sin Composer). Plantillas HTML en `web/public/lib/email-templates.php`.
 
-### Lo que esto implica
+**Credenciales** en `config.php` del servidor (nunca en el repo): `smtp_host`, `smtp_port`, `smtp_user`, `smtp_pass`, `smtp_from_name`, `smtp_to`. Hosting real: Dinahosting/Dinaserver — host `peruchayasociados-com.correoseguro.dinaserver.com`, puerto 465 (SSL). Ojo: `mail.peruchayasociados.com` NO funciona (error de certificado, el hosting usa un certificado compartido `*.correoseguro.dinaserver.com`).
 
-- **Nuevas credenciales necesarias** en `config.php` (nunca en el chat, nunca en git): host SMTP, puerto, usuario, contraseña de la cuenta de correo remitente. El usuario deberá rellenar `config.php` en el servidor a mano, igual que hizo con las credenciales de base de datos.
-- **Nueva dependencia PHP**: PHPMailer no es una función nativa, hay que incorporar la librería. Como el proyecto no usa Composer todavía para el backend PHP, la opción más simple es descargar los archivos de PHPMailer (`src/PHPMailer.php`, `src/SMTP.php`, `src/Exception.php`) y colocarlos directamente en `web/public/lib/phpmailer/`, sin gestor de dependencias. Alternativa: añadir `composer install` como paso del workflow de GitHub Actions antes del despliegue FTP, subiendo la carpeta `vendor/`. **Pendiente de decidir cuál de las dos.**
-
-## Qué contendrá cada email
+## Qué contiene cada email
 
 ### Email interno (a info@peruchayasociados.com)
 
-- Asunto: algo como `Nuevo mensaje de contacto — [nombre del cliente]`.
-- Cuerpo: todos los campos del formulario (nombre, empresa, email, teléfono, mensaje, datos de simulación si los hay, si adjuntó archivo).
-- **Pendiente de decidir:** ¿se adjunta el archivo subido directamente al email, o solo se menciona que existe y hay que ir a buscarlo al servidor?
+- Asunto: `Nuevo mensaje de contacto — [nombre del cliente]`.
+- Cuerpo: nombre, empresa, email, teléfono, mensaje, datos de la simulación (si el formulario llegó prellenado desde un simulador), nombre del archivo adjunto (si lo hay) y fecha.
+- El archivo adjunto se reenvía directamente como adjunto del email (no solo se menciona).
 
 ### Email de confirmación al cliente
 
-- Asunto: algo como `Hemos recibido tu mensaje — Perucha y Asociados`.
-- Cuerpo: texto breve confirmando la recepción, sin repetir todos sus datos personales (por privacidad, no reenviarle su propio teléfono/mensaje tal cual salvo que se decida lo contrario). **Pendiente de redactar el texto exacto y de decidir si se incluye un resumen de lo enviado.**
-- Remitente visible: `info@peruchayasociados.com` (o el nombre "Perucha y Asociados").
+- Asunto: `Hemos recibido tu mensaje — Perucha y Asociados`.
+- Cuerpo: texto breve de confirmación, tarjeta "Resumen" (nombre, empresa, email, teléfono), tarjeta "Resultado de tu simulación" (solo si venía de un simulador), tarjeta "Plazo de respuesta" (24-48 h laborables) y tarjeta "Contacto" (639 00 38 17).
+- Remitente visible: "Perucha & Asociados" (`info@peruchayasociados.com`).
 
-## Campos disponibles hoy en el formulario
+## Compatibilidad entre clientes de correo
 
-(`web/src/components/home/Contact.astro`, enviados a `contacto.php`)
+Las plantillas usan **estilos 100% inline** (`style=""` en cada elemento), sin ningún `<style>` en el `<head>`: la app de Gmail (Android/iOS) ignora esos bloques y el email se veía sin diseño. También se añadieron los ajustes estándar para:
 
-- `nombre` (obligatorio)
-- `empresa` (opcional)
-- `email` (obligatorio)
-- `telefono` (opcional)
-- `datos_simulacion` (oculto, se prellena solo si viene de un simulador)
-- `mensaje` (obligatorio)
-- `archivo` (opcional, adjunto)
+- **Outlook de escritorio** (motor Word): atributos `width`/`bgcolor` además de CSS, comentarios condicionales `<!--[if mso]-->` para forzar el ancho de la tabla, `mso-line-height-rule:exactly`.
+- **Apple Mail**: `meta name="x-apple-disable-message-reformatting"`.
 
-## Comportamiento ante fallos
+Verificado por el usuario en Gmail Android, Outlook y Apple Mail tras el ajuste — se ve correctamente en los tres.
 
-**Pendiente de decidir:** si el guardado en base de datos funciona pero el envío de email falla (ej. SMTP caído), ¿qué debe ver el usuario?
+## Comportamiento ante fallo de envío
 
-- Opción A: el formulario muestra igualmente "Mensaje enviado" (el dato ya está a salvo en la base de datos, el email es secundario) y el fallo de envío solo se registra en el log del servidor.
-- Opción B: se considera un fallo parcial y se avisa de algún modo al usuario.
+**Decidido:** si el guardado en base de datos funciona pero el envío de email falla (SMTP caído, credenciales incorrectas, etc.), el formulario muestra igualmente "Mensaje enviado" — el dato ya está a salvo en la base de datos, el email es una notificación secundaria. El fallo solo se registra en el log de errores de PHP del servidor (`error_log`, buscar por `contacto.php:`).
 
-Recomendación por defecto: Opción A — el email es una notificación, no el medio de guardado real; no se debe bloquear ni alarmar al usuario por un fallo de SMTP que no depende de él.
+## Historial de la implementación
 
-## Pendiente antes de implementar
-
-1. Elegir cuenta de correo remitente y conseguir sus credenciales SMTP (usuario, contraseña, host, puerto, si usa SSL/TLS).
-2. Decidir cómo se incorpora PHPMailer (archivos sueltos vs. Composer en el workflow).
-3. Redactar el texto exacto del email de confirmación al cliente.
-4. Decidir si el archivo adjunto se reenvía por email o no.
-5. Confirmar el comportamiento ante fallo de envío (ver sección anterior).
-6. Implementar, probar en local con una cuenta SMTP de pruebas, y verificar en producción con un envío real antes de darlo por cerrado.
+- 2026-08-05: implementación inicial (PHPMailer + plantillas + integración en `contacto.php`).
+- 2026-08-05: detectado y corregido fallo de conexión SMTP (hostname incorrecto, ver arriba).
+- 2026-08-05: añadida tarjeta "Resultado de tu simulación" al email del cliente (antes solo estaba en el interno).
+- 2026-08-05: reescritas las plantillas con estilos inline tras detectar que se veían sin diseño en Gmail Android.
