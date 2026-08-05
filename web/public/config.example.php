@@ -9,4 +9,11 @@ return [
 	'db_name' => 'pya',
 	'db_user' => 'TU_USUARIO_DE_BASE_DE_DATOS',
 	'db_pass' => 'TU_CONTRASEÑA_DE_BASE_DE_DATOS',
+
+	'smtp_host' => 'mail.peruchayasociados.com',
+	'smtp_port' => 587,
+	'smtp_user' => 'info@peruchayasociados.com',
+	'smtp_pass' => 'TU_CONTRASEÑA_DE_LA_CUENTA_DE_CORREO',
+	'smtp_from_name' => 'Perucha & Asociados',
+	'smtp_to' => 'info@peruchayasociados.com',
 ];

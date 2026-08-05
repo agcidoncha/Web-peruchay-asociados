@@ -1,7 +1,75 @@
 <?php
 declare(strict_types=1);
 
+require_once __DIR__ . '/lib/phpmailer/Exception.php';
+require_once __DIR__ . '/lib/phpmailer/PHPMailer.php';
+require_once __DIR__ . '/lib/phpmailer/SMTP.php';
+require_once __DIR__ . '/lib/email-templates.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception as PHPMailerException;
+
 header('Content-Type: application/json; charset=utf-8');
+
+/**
+ * Envía el email interno (a smtp_to) y la confirmación al cliente.
+ * Cualquier fallo se registra en el log del servidor sin interrumpir la respuesta al usuario.
+ */
+function enviarEmailsContacto(array $config, array $datos): void
+{
+	if (empty($config['smtp_host'] ?? null)) {
+		error_log('contacto.php: envío de email omitido, faltan claves smtp_* en config.php');
+		return;
+	}
+
+	try {
+		$mail = new PHPMailer(true);
+		$mail->isSMTP();
+		$mail->Host = $config['smtp_host'];
+		$mail->Port = (int) $config['smtp_port'];
+		$mail->SMTPAuth = true;
+		$mail->Username = $config['smtp_user'];
+		$mail->Password = $config['smtp_pass'];
+		$mail->SMTPSecure = ((int) $config['smtp_port']) === 465 ? 'ssl' : 'tls';
+		$mail->CharSet = 'UTF-8';
+		$mail->setFrom($config['smtp_user'], $config['smtp_from_name'] ?? 'Perucha & Asociados');
+
+		// --- Email interno ---
+		$mail->addAddress($config['smtp_to']);
+		$mail->addReplyTo($datos['email'], $datos['nombre']);
+		if (!empty($datos['archivo_ruta']) && is_file($datos['archivo_ruta'])) {
+			$mail->addAttachment($datos['archivo_ruta'], $datos['archivo_nombre_original'] ?? 'adjunto');
+		}
+		$mail->isHTML(true);
+		$mail->Subject = 'Nuevo mensaje de contacto — ' . $datos['nombre'];
+		$mail->Body = emailPlantillaInterna($datos);
+		$mail->send();
+	} catch (PHPMailerException $e) {
+		error_log('contacto.php: fallo al enviar email interno — ' . $e->getMessage());
+	}
+
+	try {
+		$mailCliente = new PHPMailer(true);
+		$mailCliente->isSMTP();
+		$mailCliente->Host = $config['smtp_host'];
+		$mailCliente->Port = (int) $config['smtp_port'];
+		$mailCliente->SMTPAuth = true;
+		$mailCliente->Username = $config['smtp_user'];
+		$mailCliente->Password = $config['smtp_pass'];
+		$mailCliente->SMTPSecure = ((int) $config['smtp_port']) === 465 ? 'ssl' : 'tls';
+		$mailCliente->CharSet = 'UTF-8';
+		$mailCliente->setFrom($config['smtp_user'], $config['smtp_from_name'] ?? 'Perucha & Asociados');
+
+		// --- Confirmación al cliente ---
+		$mailCliente->addAddress($datos['email'], $datos['nombre']);
+		$mailCliente->isHTML(true);
+		$mailCliente->Subject = 'Hemos recibido tu mensaje — Perucha y Asociados';
+		$mailCliente->Body = emailPlantillaCliente($datos);
+		$mailCliente->send();
+	} catch (PHPMailerException $e) {
+		error_log('contacto.php: fallo al enviar email de confirmación al cliente — ' . $e->getMessage());
+	}
+}
 
 function responder(int $status, bool $success, string $message, array $extra = []): never
 {
@@ -150,5 +218,20 @@ try {
 	error_log('contacto.php: error de base de datos — ' . $e->getMessage());
 	responder(500, false, 'No se ha podido guardar tu mensaje. Inténtalo de nuevo en unos minutos.');
 }
+
+// --- Envío de emails (interno + confirmación al cliente) ---
+// Un fallo aquí no debe impedir la respuesta de éxito: el dato ya está a salvo en la base de datos.
+enviarEmailsContacto($config, [
+	'nombre' => $nombre,
+	'empresa' => $empresa,
+	'email' => $email,
+	'telefono' => $telefono,
+	'mensaje' => $mensaje,
+	'datos_simulacion' => $datosSimulacion,
+	'archivo_nombre_original' => $archivo['name'] ?? null,
+	'archivo_ruta' => $archivoNombreGuardado !== null ? ($uploadsDir . '/' . $archivoNombreGuardado) : null,
+	'fecha' => (new DateTimeImmutable())->format('d/m/Y H:i'),
+	'telefono_contacto' => '639 00 38 17',
+]);
 
 responder(200, true, 'Mensaje enviado. Te responderemos a la mayor brevedad.');
