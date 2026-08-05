@@ -122,6 +122,17 @@ function emailPlantillaCliente(array $datos): string
 	$telefonoCliente = emailEscapar($datos['telefono'] ?: '—');
 	$telefonoContacto = emailEscapar($datos['telefono_contacto']);
 
+	$tarjetaSimulacion = '';
+	if (!empty($datos['datos_simulacion'])) {
+		$datosSimulacionHtml = nl2br(emailEscapar($datos['datos_simulacion']), false);
+		$tarjetaSimulacion = <<<HTML
+			<div class="card">
+				<p class="card-title">Resultado de tu simulación</p>
+				<p class="card-text">{$datosSimulacionHtml}</p>
+			</div>
+		HTML;
+	}
+
 	return <<<HTML
 		<!DOCTYPE html>
 		<html lang="es">
@@ -151,6 +162,8 @@ function emailPlantillaCliente(array $datos): string
 											<strong>Teléfono:</strong> {$telefonoCliente}
 										</p>
 									</div>
+
+									{$tarjetaSimulacion}
 
 									<div class="card">
 										<p class="card-title">Plazo de respuesta</p>
