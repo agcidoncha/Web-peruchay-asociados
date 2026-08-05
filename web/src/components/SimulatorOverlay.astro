@@ -23,7 +23,8 @@ const { id, ariaLabel, openHash, autoOpenEvent, autoOpenFlag } = Astro.props;
 >
 	<div class="simulator-overlay-backdrop" data-overlay-close></div>
 	<div class="simulator-overlay-panel" role="dialog" aria-modal="true" aria-label={ariaLabel}>
-		<button type="button" class="simulator-overlay-close" aria-label="Cerrar" data-overlay-close>
+		<button type="button" class="simulator-overlay-close" data-overlay-close>
+			<span>Cerrar</span>
 			<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
 				><path d="M18 6L6 18"></path><path d="M6 6l12 12"></path></svg
 			>
@@ -71,17 +72,19 @@ const { id, ariaLabel, openHash, autoOpenEvent, autoOpenFlag } = Astro.props;
 		.simulator-overlay-close {
 			display: flex;
 			align-items: center;
-			justify-content: center;
+			gap: 6px;
 			position: fixed;
 			top: 12px;
 			right: 12px;
 			z-index: 91;
-			width: 40px;
 			height: 40px;
+			padding: 0 16px 0 18px;
 			border-radius: 999px;
 			border: 1px solid var(--color-divider);
 			background: #fff;
 			color: var(--color-text);
+			font-family: var(--font-body);
+			font-size: 13.5px;
 			cursor: pointer;
 		}
 	}
