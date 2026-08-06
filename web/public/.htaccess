@@ -1,5 +1,5 @@
 RewriteEngine On
-# (redeploy 2026-08-06: segundo reintento, el anterior falló por infraestructura de GitHub Actions)
+# (redeploy 2026-08-06: tercer intento, tras borrar el .ftp-deploy-sync-state.json atascado en el servidor)
 
 # Quien entra directamente por http:// (enlace antiguo, marcador...) se sube
 # a https://. Varnish informa del protocolo original con X-Forwarded-Proto.
