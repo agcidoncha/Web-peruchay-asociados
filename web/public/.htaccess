@@ -18,3 +18,40 @@ RewriteRule ^(.+[^/])$ https://%{HTTP_HOST}/$1/ [R=301,L,QSA]
 <IfModule mod_headers.c>
 	Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
 </IfModule>
+
+# Caché de archivos estáticos, sin la cual el navegador los vuelve a descargar
+# en cada visita (detectado por PageSpeed Insights, ~900 KiB de ahorro).
+<IfModule mod_expires.c>
+	ExpiresActive On
+
+	# CSS/JS generados por Astro llevan un hash en el nombre del archivo
+	# (ej. index.Chz8CzJi.css): si el contenido cambia, el nombre cambia con él,
+	# así que es seguro cachearlos "para siempre".
+	<FilesMatch "\.(css|js)$">
+		ExpiresDefault "access plus 1 year"
+	</FilesMatch>
+
+	# Imágenes, fuentes e iconos mantienen siempre el mismo nombre de archivo,
+	# así que se cachean un tiempo moderado en vez de "para siempre": si algún
+	# día se sustituye una imagen sin cambiarle el nombre, los visitantes
+	# recurrentes tardarán como mucho este tiempo en ver la nueva.
+	<FilesMatch "\.(webp|jpe?g|png|svg|ico|woff2?)$">
+		ExpiresDefault "access plus 1 month"
+	</FilesMatch>
+
+	# El HTML de cada página cambia con cada despliegue; caché corta para que
+	# los cambios de contenido se vean pronto sin depender de que el visitante
+	# recargue forzado.
+	<FilesMatch "\.html$">
+		ExpiresDefault "access plus 1 hour"
+	</FilesMatch>
+</IfModule>
+
+<IfModule mod_headers.c>
+	<FilesMatch "\.(css|js)$">
+		Header set Cache-Control "public, max-age=31536000, immutable"
+	</FilesMatch>
+	<FilesMatch "\.(webp|jpe?g|png|svg|ico|woff2?)$">
+		Header set Cache-Control "public, max-age=2592000"
+	</FilesMatch>
+</IfModule>
