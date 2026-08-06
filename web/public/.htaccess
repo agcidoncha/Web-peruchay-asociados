@@ -1,4 +1,5 @@
 RewriteEngine On
+# (redeploy 2026-08-06: forzar reintento tras timeout FTP del despliegue anterior)
 
 # Quien entra directamente por http:// (enlace antiguo, marcador...) se sube
 # a https://. Varnish informa del protocolo original con X-Forwarded-Proto.
